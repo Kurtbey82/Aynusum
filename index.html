@@ -1,177 +1,139 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>İyi Ki Doğdun Aynuşum... 🤍</title>
-<style>
-/* Genel Tasarım */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background-color: #fcefe6; color: #4a3728; overflow-x: hidden; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi Ki Doğdun Aynuşum... 🤍</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fcefe6; color: #4a3728; overflow-x: hidden; }
+        
+        /* Şifre Ekranı */
+        #lock-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999; padding: 20px; text-align: center;
+        }
+        .lock-box {
+            background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 450px; width: 100%;
+        }
+        .lock-box h1 { font-size: 1.8rem; margin-bottom: 15px; color: #d3687c; }
+        .lock-box p { font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5; color: #666; }
+        .lock-box input {
+            width: 100%; padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 25px;
+            margin-bottom: 15px; font-size: 1rem; text-align: center; outline: none;
+        }
+        .lock-box button {
+            background: #d3687c; color: white; border: none; padding: 12px 30px;
+            border-radius: 25px; font-size: 1rem; cursor: pointer; width: 100%; font-weight: bold;
+        }
+        .error-msg { color: #cc0000; font-size: 0.85rem; margin-top: 15px; display: none; font-weight: bold; }
 
-/* Şifre Ekranı Stilleri */
-#lock-screen {
-position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-display: flex; flex-direction: column; align-items: center; justify-content: center;
-z-index: 9999; transition: opacity 0.8s ease; padding: 20px; text-align: center;
-}
-.lock-box {
-background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 20px;
-box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 450px; width: 100%;
-}
-.lock-box h1 { font-size: 1.8rem; margin-bottom: 15px; color: #d3687c; }
-.lock-box p { font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5; color: #666; }
-.lock-box input {
-width: 100%; padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 25px;
-margin-bottom: 15px; font-size: 1rem; text-align: center; outline: none; transition: 0.3s;
-}
-.lock-box input:focus { border-color: #d3687c; }
-.lock-box button {
-background: #d3687c; color: white; border: none; padding: 12px 30px;
-border-radius: 25px; font-size: 1rem; cursor: pointer; transition: 0.3s; width: 100%;
-}
-.lock-box button:hover { background: #b85265; }
-.error-msg { color: #cc0000; font-size: 0.85rem; margin-top: 10px; display: none; }
+        /* Ana İçerik */
+        #main-content { display: none; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        .timer-section {
+            background: white; border-radius: 20px; padding: 30px; text-align: center;
+            margin-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .timer-section h2 { font-size: 1.4rem; margin-bottom: 15px; color: #b85265; }
+        #countdown { font-size: 1.4rem; font-weight: bold; color: #4a3728; letter-spacing: 1px; line-height: 1.6; }
 
-/* Ana İçerik Stilleri (Giriş Yapılınca Açılacak) */
-#main-content { display: none; opacity: 0; transition: opacity 1s ease; }
-.container { max-width: 800px; margin: 0 auto; padding: 20px; }
-
-/* Sayaç Alanı */
-.timer-section {
-background: white; border-radius: 20px; padding: 30px; text-align: center;
-margin-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-.timer-section h2 { font-size: 1.4rem; margin-bottom: 15px; color: #b85265; }
-#countdown { font-size: 1.4rem; font-weight: bold; color: #4a3728; letter-spacing: 1px; line-height: 1.6; }
-
-/* Anılar ve Yazılar Ekranı */
-.story-section { background: white; border-radius: 20px; padding: 40px; margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.story-section h2 { color: #d3687c; margin-bottom: 20px; border-bottom: 2px solid #fcefe6; padding-bottom: 10px; }
-.story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; }
-
-/* Şehirlere Özel Başlıklar ve Kartlar */
-.city-title { color: #a65261; font-size: 1.3rem; margin-top: 25px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-.memory-card {
-background: #fff5f0; border-left: 5px solid #d3687c; padding: 25px;
-margin-top: 15px; border-radius: 0 15px 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-}
-.memory-card p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; color: #555; font-style: italic; }
-</style>
+        .story-section { background: white; border-radius: 20px; padding: 40px; margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .story-section h2 { color: #d3687c; margin-bottom: 20px; border-bottom: 2px solid #fcefe6; padding-bottom: 10px; }
+        .story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; }
+        
+        .city-title { color: #a65261; font-size: 1.3rem; margin-top: 25px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; font-weight: bold; }
+        .memory-card {
+            background: #fff5f0; border-left: 5px solid #d3687c; padding: 25px;
+            margin-top: 15px; border-radius: 0 15px 15px 0;
+        }
+        .memory-card p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; color: #555; font-style: italic; }
+    </style>
 </head>
 <body>
 
-<!-- 1. ŞİFRE EKRANI (KAPAK) -->
-<div id="lock-screen">
-<div class="lock-box">
-<h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
-<p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
-<input type="password" id="password-input" placeholder="Şifremiz: İlk buluşma tarihimiz (GGAAYYYY)...">
-<button onclick="checkPassword()">Anılarımızı Aç ✨</button>
-<p id="error-message" class="error-msg">Şifre doğru değil Aynuşum, tekrar dene... 😉</p>
-</div>
-</div>
+    <div id="lock-screen">
+        <div class="lock-box">
+            <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
+            <p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
+            <input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
+            <button onclick="checkPassword()">Anılarımızı Aç ✨</button>
+            <p id="error-message" class="error-msg">Şifre doğru değil Aynuşum, tekrar dene... 😉</p>
+        </div>
+    </div>
 
-<!-- 2. ANA İÇERİK (ŞİFRE DOĞRUYSA GÖRÜNECEK) -->
-<div id="main-content">
-<div class="container">
+    <div id="main-content">
+        <div class="container">
+            
+            <div class="timer-section">
+                <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
+                <div id="countdown">Hesaplanıyor...</div>
+            </div>
 
-<!-- Sayaç Bölümü -->
-<div class="timer-section">
-<h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
-<div id="countdown">Hesaplanıyor...</div>
-</div>
+            <div class="story-section">
+                <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
+                <p> Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız. </p>
+                <p> 11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. </p>
+                <p> Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın... </p>
+            </div>
 
-<!-- Doğum Günü Mektubu -->
-<div class="story-section">
-<h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
-<p>
-Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.
-</p>
-<p>
-11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. Seninle geçen her dakika, ömrümün en huzurlu zaman dilimi oldu.
-</p>
-<p>
-Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın...
-</p>
-</div>
+            <div class="story-section">
+                <h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
+                <p>Yollar ne kadar uzasa da, geçtiğimiz her şehirde bizim izimiz, her sokağında yankılanan gülüşlerimiz kaldı. İşte o unutulmaz anılarımız:</p>
+                
+                <div class="city-title">📍 Isparta Anılarımız</div>
+                <div class="memory-card">
+                    <p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel anıyı, gittiğiniz o özel yeri veya o güne ait unutulmaz bir hatırayı ekleyebilirsiniz sevgilim..."</p>
+                </div>
 
-<!-- Şehre Özel Anılar Bölümü -->
-<div class="story-section">
-<h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
-<p>Yollar ne kadar uzasa da, geçtiğimiz her şehirde bizim izimiz, her sokağında yankılanan gülüşlerimiz kaldı. İşte o unutulmaz anılarımız:</p>
+                <div class="city-title">📍 Mersin Anılarımız</div>
+                <div class="memory-card">
+                    <p>"Buraya Mersin'de deniz kenarında, arabada veya gezip tozduğunuz bir yerde yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
+                </div>
 
-<!-- ISPARTA -->
-<div class="city-title">📍 Isparta Anılarımız</div>
-<div class="memory-card">
-<p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel anıyı, gittiğiniz o özel yeri veya o güne ait unutulmaz bir hatırayı ekleyebilirsiniz sevgilim..."</p>
-</div>
+                <div class="city-title">📍 Hatay Anılarımız</div>
+                <div class="memory-card">
+                    <p>"Buraya da Hatay'ın o güzel sokaklarında, paylaştığınız lezzetlerde veya birlikte vakit geçirmekten en çok keyif aldığınız o özel köşede biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
+                </div>
+            </div>
 
-<!-- MERSİN -->
-<div class="city-title">📍 Mersin Anılarımız</div>
-<div class="memory-card">
-<p>"Buraya Mersin'de deniz kenarında, arabada veya gezip tozduğunuz bir yerde yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
-</div>
+        </div>
+    </div>
 
-<!-- HATAY -->
-<div class="city-title">📍 Hatay Anılarımız</div>
-<div class="memory-card">
-<p>"Buraya da Hatay'ın o güzel sokaklarında, paylaştığınız lezzetlerde veya birlikte vakit geçirmekten en çok keyif aldığınız o özel köşede biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
-</div>
-</div>
+    <script>
+        function checkPassword() {
+            var input = document.getElementById("password-input").value.trim();
+            
+            if (input === "04102025") {
+                document.getElementById("lock-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+                startTimer();
+            } else {
+                document.getElementById("error-message").style.display = "block";
+                document.getElementById("password-input").value = "";
+            }
+        }
 
-</div>
-</div>
+        function startTimer() {
+            var startDate = new Date("2025-09-11T00:00:00").getTime();
+            
+            setInterval(function() {
+                var now = new Date().getTime();
+                var difference = now - startDate;
 
-<script>
-// --- AYARLAR ---
-const DOGRU_SIFRE = '04102025'; // Şifreniz tam olarak istendiği gibi ayarlandı.
-const ILISKI_BASLANGIC_TARIHI = "2025-09-11T00:00:00"; // İlişki başlangıç tarihiniz tam olarak yerleştirildi.
+                var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-// --- ŞİFRE KONTROLÜ ---
-function checkPassword() {
-const input = document.getElementById("password-input").value.trim();
-const lockScreen = document.getElementById("lock-screen");
-const mainContent = document.getElementById("main-content");
-const errorMsg = document.getElementById("error-message");
-
-if (input === DOGRU_SIFRE) {
-lockScreen.style.opacity = "0";
-setTimeout(() => {
-lockScreen.style.display = "none";
-mainContent.style.display = "block";
-setTimeout(() => { mainContent.style.opacity = "1"; }, 50);
-}, 800);
-startTimer();
-} else {
-errorMsg.style.display = "block";
-document.getElementById("password-input").value = "";
-}
-}
-
-// Enter tuşu desteği
-document.getElementById("password-input").addEventListener("keypress", function(event) {
-if (event.key === "Enter") { checkPassword(); }
-});
-
-// --- DİNAMİK ZAMAN SAYACI ---
-function startTimer() {
-const startDate = new Date(ILISKI_BASLANGIC_TARIHI).getTime();
-
-setInterval(() => {
-const now = new Date().getTime();
-const difference = now - startDate;
-
-const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-document.getElementById("countdown").innerHTML =
-${days} Gün, ${hours} Saat, ${minutes} Dakika, ${seconds} Saniye ❤️;
-}, 1000);
-}
-</script>
+                document.getElementById("countdown").innerHTML = 
+                    days + " Gün, " + hours + " Saat, " + minutes + " Dakika, " + seconds + " Saniye ❤️";
+            }, 1000);
+        }
+    </script>
 </body>
 </html>

@@ -35,9 +35,21 @@
         #main-content { display: none; }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         
+        /* Yeni Kapak Sayfası Bölümü */
+        .cover-section {
+            background: white; border-radius: 20px; padding: 20px; text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px;
+        }
+        .cover-photo {
+            width: 100%; max-height: 450px; object-fit: cover; border-radius: 15px;
+            border: 5px solid #fff0f2; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .cover-title { font-size: 1.8rem; color: #d3687c; margin-top: 20px; font-weight: bold; }
+        .cover-subtitle { font-size: 1.1rem; color: #776254; margin-top: 5px; font-style: italic; }
+
         .timer-section {
             background: white; border-radius: 20px; padding: 30px; text-align: center;
-            margin-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         .timer-section h2 { font-size: 1.4rem; margin-bottom: 15px; color: #b85265; }
         #countdown { font-size: 1.4rem; font-weight: bold; color: #4a3728; letter-spacing: 1px; line-height: 1.6; }
@@ -106,7 +118,6 @@
 </head>
 <body>
 
-    <!-- 1. ŞİFRE EKRANI -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
@@ -117,136 +128,10 @@
         </div>
     </div>
 
-    <!-- 2. ANA İÇERİK -->
     <div id="main-content">
         <div class="container">
             
-            <div class="timer-section">
-                <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
-                <div id="countdown">Hesaplanıyor...</div>
-            </div>
-
-            <div class="story-section">
-                <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
-                <p> Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız. </p>
-                <p> 11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. </p>
-                <p> Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın... </p>
-            </div>
-
-            <!-- ŞEHİR FOTOĞRAFLARI BÖLÜMÜ -->
-            <div class="story-section">
-                <h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
-                <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
-                
-                <!-- ISPARTA -->
-                <div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız (Tıkla ✨)</div>
-                <div class="memory-card">
-                    <p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel hatırayı yazabilirsiniz sevgilim..."</p>
-                    <div id="isparta-gallery" class="photo-gallery">
-                        <img src="isparta1.jpg" alt="Isparta 1">
-                        <img src="isparta2.jpg" alt="Isparta 2">
-                        <img src="isparta3.jpg" alt="Isparta 3">
-                        <img src="isparta4.jpg" alt="Isparta 4">
-                        <img src="isparta5.jpg" alt="Isparta 5">
-                        <img src="isparta6.jpg" alt="Isparta 6">
-                        <img src="isparta7.jpg" alt="Isparta 7">
-                        <img src="isparta8.jpg" alt="Isparta 8">
-                        <img src="isparta9.jpg" alt="Isparta 9">
-                        <img src="isparta10.jpg" alt="Isparta 10">
-                        <img src="isparta11.jpg" alt="Isparta 11">
-                        <img src="isparta12.jpg" alt="Isparta 12">
-                        <img src="isparta13.jpg" alt="Isparta 13">
-                    </div>
-                </div>
-
-                <!-- MERSİN -->
-                <div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız (Tıkla ✨)</div>
-                <div class="memory-card">
-                    <p>"Buraya Mersin'de yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
-                    <div id="mersin-gallery" class="photo-gallery">
-                        <img src="mersin1.jpg" alt="Mersin 1">
-                        <img src="mersin2.jpg" alt="Mersin 2">
-                        <img src="mersin3.jpg" alt="Mersin 3">
-                        <img src="mersin4.jpg" alt="Mersin 4">
-                    </div>
-                </div>
-
-                <!-- HATAY -->
-                <div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız (Tıkla ✨)</div>
-                <div class="memory-card">
-                    <p>"Buraya da Hatay'da biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
-                    <div id="hatay-gallery" class="photo-gallery">
-                        <img src="hatay1.jpg" alt="Hatay 1">
-                        <img src="hatay2.jpg" alt="Hatay 2">
-                        <img src="hatay3.jpg" alt="Hatay 3">
-                        <img src="hatay4.jpg" alt="Hatay 4">
-                    </div>
-                </div>
-            </div>
-
-            <!-- VİDEOLARIMIZ BÖLÜMÜ -->
-            <div class="story-section">
-                <h2>Bizim Videolarımız 🎥</h2>
-                <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Başlığa tıklayarak Isparta'da çektiğimiz güzel videoları izleyebilirsin Aynuşum!)</p>
-                
-                <div class="video-menu-title" onclick="toggleSection('video-list', 'flex')">🎬 Videolarımızı Listele (Tıkla ❤️)</div>
-                
-                <div id="video-list" class="video-gallery">
-                    <a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">
-                        ❤️ Isparta Anısı - Video 1 <span>▶ Delta</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">
-                        ❤️ Isparta Anısı - Video 2 <span>▶ Delta</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">
-                        ❤️ Isparta Anısı - Video 3 <span>▶ Delta</span>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        function checkPassword() {
-            var input = document.getElementById("password-input").value.trim();
-            
-            if (input === "04102025") {
-                document.getElementById("lock-screen").style.display = "none";
-                document.getElementById("main-content").style.display = "block";
-                startTimer();
-            } else {
-                document.getElementById("error-message").style.display = "block";
-                document.getElementById("password-input").value = "";
-            }
-        }
-
-        function startTimer() {
-            var startDate = new Date("2025-09-11T00:00:00").getTime();
-            
-            setInterval(function() {
-                var now = new Date().getTime();
-                var difference = now - startDate;
-
-                var days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById("countdown").innerHTML = 
-                    days + " Gün, " + hours + " Saat, " + minutes + " Dakika, " + seconds + " Saniye ❤️";
-            }, 1000);
-        }
-
-        // Bölümleri açıp kapatan genel fonksiyon
-        function toggleSection(elementId, displayType) {
-            var element = document.getElementById(elementId);
-            if (element.style.display === "none" || element.style.display === "") {
-                element.style.display = displayType;
-            } else {
-                element.style.display = "none";
-            }
-        }
-    </script>
-</body>
-</html>
+            <div class="cover-section">
+                <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
+                <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
+                <div class="cover-subtitle

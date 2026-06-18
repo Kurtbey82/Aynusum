@@ -8,7 +8,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #fcefe6; color: #4a3728; overflow-x: hidden; }
         
-        /* Şifre Ekranı */
         #lock-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
@@ -31,11 +30,9 @@
         }
         .error-msg { color: #cc0000; font-size: 0.85rem; margin-top: 15px; display: none; font-weight: bold; }
 
-        /* Ana İçerik */
         #main-content { display: none; }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         
-        /* Kapak Sayfası Bölümü */
         .cover-section {
             background: white; border-radius: 20px; padding: 20px; text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px;
@@ -58,7 +55,6 @@
         .story-section h2 { color: #d3687c; margin-bottom: 20px; border-bottom: 2px solid #fcefe6; padding-bottom: 10px; }
         .story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; }
         
-        /* Şehir ve Video Başlıkları */
         .city-title, .video-menu-title { 
             color: #a65261; font-size: 1.3rem; margin-top: 25px; margin-bottom: 15px; 
             display: flex; align-items: center; gap: 8px; font-weight: bold; cursor: pointer;
@@ -72,7 +68,6 @@
         }
         .memory-card p { font-size: 1rem; line-height: 1.7; margin-bottom: 15px; color: #555; font-style: italic; }
 
-        /* Fotoğraf Galerisi Alanı */
         .photo-gallery { 
             display: none; 
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
@@ -88,7 +83,6 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
         }
 
-        /* Video Butonları Düzeni */
         .video-gallery {
             display: none;
             flex-direction: column;
@@ -118,10 +112,148 @@
 </head>
 <body>
 
+    <!-- 1. ŞİFRE EKRANI -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
             <p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
             <input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
-            <button id="submit-btn">Anılarimizi Aç ✨</button>
-            <p id="error-message" class="error-msg">Şifre doğru değil Aynuşum,
+            <button onclick="kontrolEt()">Anılarımızı Aç ✨</button>
+            <p id="error-message" class="error-msg">Şifre doğru değil Aynuşum, tekrar dene... 😉</p>
+        </div>
+    </div>
+
+    <!-- 2. ANA İÇERİK -->
+    <div id="main-content">
+        <div class="container">
+            
+            <!-- KAPAK SAYFASI -->
+            <div class="cover-section">
+                <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
+                <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
+                <div class="cover-subtitle">İyi ki doğdun, iyi ki hayatımdasın.</div>
+            </div>
+            
+            <div class="timer-section">
+                <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
+                <div id="countdown">Hesaplanıyor...</div>
+            </div>
+
+            <div class="story-section">
+                <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
+                <p> Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız. </p>
+                <p> 11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. </p>
+                <p> Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın... </p>
+            </div>
+
+            <!-- ŞEHİR FOTOĞRAFLARI BÖLÜMÜ -->
+            <div class="story-section">
+                <h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
+                <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
+                
+                <!-- ISPARTA -->
+                <div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız (Tıkla ✨)</div>
+                <div class="memory-card">
+                    <p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel hatırayı yazabilirsiniz sevgilim..."</p>
+                    <div id="isparta-gallery" class="photo-gallery">
+                        <img src="isparta1.jpg" alt="Isparta 1">
+                        <img src="isparta2.jpg" alt="Isparta 2">
+                        <img src="isparta3.jpg" alt="Isparta 3">
+                        <img src="isparta4.jpg" alt="Isparta 4">
+                        <img src="isparta5.jpg" alt="Isparta 5">
+                        <img src="isparta6.jpg" alt="Isparta 6">
+                        <img src="isparta7.jpg" alt="Isparta 7">
+                        <img src="isparta8.jpg" alt="Isparta 8">
+                        <img src="isparta9.jpg" alt="Isparta 9">
+                        <img src="isparta10.jpg" alt="Isparta 10">
+                        <img src="isparta11.jpg" alt="Isparta 11">
+                        <img src="isparta12.jpg" alt="Isparta 12">
+                        <img src="isparta13.jpg" alt="Isparta 13">
+                    </div>
+                </div>
+
+                <!-- MERSİN -->
+                <div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız (Tıkla ✨)</div>
+                <div class="memory-card">
+                    <p>"Buraya Mersin'de yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
+                    <div id="mersin-gallery" class="photo-gallery">
+                        <img src="mersin1.jpg" alt="Mersin 1">
+                        <img src="mersin2.jpg" alt="Mersin 2">
+                        <img src="mersin3.jpg" alt="Mersin 3">
+                        <img src="mersin4.jpg" alt="Mersin 4">
+                    </div>
+                </div>
+
+                <!-- HATAY -->
+                <div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız (Tıkla ✨)</div>
+                <div class="memory-card">
+                    <p>"Buraya da Hatay'da biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
+                    <div id="hatay-gallery" class="photo-gallery">
+                        <img src="hatay1.jpg" alt="Hatay 1">
+                        <img src="hatay2.jpg" alt="Hatay 2">
+                        <img src="hatay3.jpg" alt="Hatay 3">
+                        <img src="hatay4.jpg" alt="Hatay 4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- VİDEOLARIMIZ BÖLÜMÜ -->
+            <div class="story-section">
+                <h2>Bizim Videolarımız 🎥</h2>
+                <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Başlığa tıklayarak Isparta'da çektiğimiz güzel videoları izleyebilirsin Aynuşum!)</p>
+                
+                <div class="video-menu-title" onclick="toggleSection('video-list', 'flex')">🎬 Videolarımızı Listele (Tıkla ❤️)</div>
+                
+                <div id="video-list" class="video-gallery">
+                    <a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">
+                        ❤️ Isparta Anısı - Video 1 <span>▶ İzle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">
+                        ❤️ Isparta Anısı - Video 2 <span>▶ İzle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">
+                        ❤️ Isparta Anısı - Video 3 <span>▶ İzle</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function kontrolEt() {
+            var sarki = document.getElementById("password-input").value.trim();
+            if (sarki === "04102025") {
+                document.getElementById("lock-screen").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+                zamanlayiciyiBaslat();
+            } else {
+                document.getElementById("error-message").style.display = "block";
+                document.getElementById("password-input").value = "";
+            }
+        }
+
+        function zamanlayiciyiBaslat() {
+            var baslangic = new Date("2025-09-11T00:00:00").getTime();
+            setInterval(function() {
+                var simdi = new Date().getTime();
+                var fark = simdi - baslangic;
+                var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+                var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+                var saniye = Math.floor((fark % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = gun + " Gün, " + saat + " Saat, " + dakika + " Dakika, " + saniye + " Saniye ❤️";
+            }, 1000);
+        }
+
+        function toggleSection(id, tip) {
+            var el = document.getElementById(id);
+            if (el.style.display === "none" || el.style.display === "") {
+                el.style.display = tip;
+            } else {
+                el.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

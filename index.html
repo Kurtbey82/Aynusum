@@ -108,11 +108,20 @@
             box-shadow: 0 6px 20px rgba(211, 104, 124, 0.4);
         }
         .video-btn span { font-size: 1.2rem; }
+
+        /* Yeni Eklenen Telif Hakkı (Footer) Kısmı */
+        .footer-section {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #8c7665;
+            border-top: 1px dashed #e0c9b8;
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1. ŞİFRE EKRANI -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
@@ -123,11 +132,9 @@
         </div>
     </div>
 
-    <!-- 2. ANA İÇERİK -->
     <div id="main-content">
         <div class="container">
             
-            <!-- KAPAK SAYFASI -->
             <div class="cover-section">
                 <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
                 <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
@@ -146,12 +153,10 @@
                 <p> Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın... </p>
             </div>
 
-            <!-- ŞEHİR FOTOĞRAFLARI BÖLÜMÜ -->
             <div class="story-section">
                 <h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
                 <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
                 
-                <!-- ISPARTA -->
                 <div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız (Tıkla ✨)</div>
                 <div class="memory-card">
                     <p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel hatırayı yazabilirsiniz sevgilim..."</p>
@@ -172,7 +177,6 @@
                     </div>
                 </div>
 
-                <!-- MERSİN -->
                 <div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız (Tıkla ✨)</div>
                 <div class="memory-card">
                     <p>"Buraya Mersin'de yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
@@ -184,7 +188,6 @@
                     </div>
                 </div>
 
-                <!-- HATAY -->
                 <div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız (Tıkla ✨)</div>
                 <div class="memory-card">
                     <p>"Buraya da Hatay'da biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
@@ -197,7 +200,6 @@
                 </div>
             </div>
 
-            <!-- VİDEOLARIMIZ BÖLÜMÜ -->
             <div class="story-section">
                 <h2>Bizim Videolarımız 🎥</h2>
                 <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Başlığa tıklayarak Isparta'da çektiğimiz güzel videoları izleyebilirsin Aynuşum!)</p>
@@ -215,6 +217,10 @@
                         ❤️ Isparta Anısı - Video 3 <span>▶ İzle</span>
                     </a>
                 </div>
+            </div>
+
+            <div class="footer-section">
+                © Tüm hakları saklıdır Mehmet ve Aynur ❤️
             </div>
 
         </div>

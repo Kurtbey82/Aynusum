@@ -1,342 +1,351 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İyi Ki Doğdun Aynuşum... 🤍</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        body { 
-            background: #120c1f; 
-            background: linear-gradient(135deg, #120c1f 0%, #1a0f2e 50%, #0b0714 100%);
-            color: #f3f0f5; 
-            overflow-x: hidden; 
-        }
-        
-        /* Şifre Ekranı (Modern & Heyecan Verici) */
-        #lock-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #2d124d 0%, #0c0517 100%);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 9999; padding: 20px; text-align: center;
-        }
-        .lock-box {
-            background: rgba(255, 255, 255, 0.04); 
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px; border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(211, 104, 124, 0.1); 
-            max-width: 450px; width: 100%;
-        }
-        .lock-box h1 { font-size: 1.9rem; margin-bottom: 15px; color: #ff6584; text-shadow: 0 0 10px rgba(255, 101, 132, 0.3); }
-        .lock-box p { font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; color: #b9b3c2; }
-        .lock-box input {
-            width: 100%; padding: 14px 20px; 
-            background: rgba(255, 255, 255, 0.06);
-            border: 2px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 50px; color: white;
-            margin-bottom: 20px; font-size: 1rem; text-align: center; outline: none;
-            transition: all 0.3s;
-        }
-        .lock-box input:focus {
-            border-color: #ff6584;
-            box-shadow: 0 0 15px rgba(255, 101, 132, 0.4);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .lock-box button {
-            background: linear-gradient(90deg, #ff6584 0%, #ff477e 100%); 
-            color: white; border: none; padding: 14px 30px;
-            border-radius: 50px; font-size: 1.05rem; cursor: pointer; width: 100%; font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 71, 126, 0.4); transition: all 0.3s;
-        }
-        .lock-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(255, 71, 126, 0.6);
-        }
-        .error-msg { color: #ff4757; font-size: 0.9rem; margin-top: 15px; display: none; font-weight: bold; text-shadow: 0 0 5px rgba(255,71,87,0.3); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İyi Ki Doğdun Aynuşum... 🤍</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
 
-        /* Ana İçerik Bölümü */
-        #main-content { display: none; }
-        .container { max-width: 850px; margin: 0 auto; padding: 30px 20px; }
-        
-        /* Modern Cam Efekti Kart Yapısı (Glassmorphism) */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 24px; padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
-            margin-bottom: 35px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        /* Kapak Tasarımı */
-        .cover-section { text-align: center; padding: 25px; }
-        .cover-photo {
-            width: 100%; max-height: 480px; object-fit: cover; border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255, 101, 132, 0.1);
-        }
-        .cover-title { font-size: 2rem; color: #ff6584; margin-top: 25px; font-weight: bold; text-shadow: 0 0 10px rgba(255, 101, 132, 0.2); }
-        .cover-subtitle { font-size: 1.1rem; color: #a29bb0; margin-top: 8px; font-style: italic; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
 
-        /* Yeni Canlı Göz Alıcı Zaman Sayacı */
-        .timer-section h2 { font-size: 1.3rem; margin-bottom: 20px; color: #ff8fa3; text-align: center; letter-spacing: 0.5px; }
-        .countdown-container {
-            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
-        }
-        .time-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px; padding: 12px; min-width: 85px; text-align: center;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.02);
-        }
-        .time-box .num {
-            font-size: 1.7rem; font-weight: 800; color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        .time-box .label {
-            font-size: 0.75rem; color: #ff6584; text-transform: uppercase; font-weight: bold; margin-top: 2px;
-        }
+body {
+background: #0f081d;
+background: linear-gradient(135deg, #0f081d 0%, #1b0b2e 50%, #06030a 100%);
+color: #f3f0f5;
+overflow-x: hidden;
+position: relative;
+}
 
-        /* Hikaye Bölümü */
-        .story-section h2 { color: #ff6584; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.5rem; }
-        .story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; color: #ded9e6; }
-        
-        /* Modern Şehir & Video Buton Menüleri */
-        .city-title, .video-menu-title { 
-            font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; 
-            display: flex; align-items: center; justify-content: space-between;
-            font-weight: bold; cursor: pointer;
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 16px 20px; border-radius: 16px; transition: all 0.3s;
-            color: #fff;
-        }
-        .city-title:hover, .video-menu-title:hover { 
-            background: rgba(255, 101, 132, 0.12); 
-            border-color: rgba(255, 101, 132, 0.3);
-            transform: scale(1.01);
-        }
-        .city-title::after { content: '✨'; font-size: 1rem; }
-        
-        .memory-card {
-            background: rgba(0, 0, 0, 0.2); border-left: 4px solid #ff477e; padding: 20px;
-            margin-top: 5px; border-radius: 0 16px 16px 0; margin-bottom: 20px;
-        }
-        .memory-card p { font-size: 1rem; line-height: 1.7; margin-bottom: 15px; color: #c4bdcc; font-style: italic; }
+/* Arka Plandaki Uçuşan Kalpler Animasyonu */
+.hearts-bg {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+pointer-events: none; z-index: 1; overflow: hidden;
+}
+.heart-particle {
+position: absolute; bottom: -10%; color: rgba(255, 101, 132, 0.2);
+font-size: 1.5rem; animation: floatUp 8s linear infinite;
+}
+@keyframes floatUp {
+0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+10% { opacity: 1; }
+90% { opacity: 1; }
+100% { transform: translateY(-120vh) translateX(50px) rotate(360deg); opacity: 0; }
+}
 
-        /* Modern Fotoğraf Galerisi */
-        .photo-gallery { 
-            display: none; 
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
-            gap: 14px; 
-            margin-top: 20px; 
-        }
-        .photo-gallery img { 
-            width: 100%; 
-            height: 190px; 
-            object-fit: cover; 
-            border-radius: 14px; 
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            transition: transform 0.3s;
-        }
-        .photo-gallery img:hover {
-            transform: scale(1.04);
-            border-color: #ff6584;
-        }
+/* Şifre Ekranı */
+#lock-screen {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: radial-gradient(circle at center, #25093f 0%, #05020a 100%);
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+z-index: 9999; padding: 20px; text-align: center;
+}
+.lock-box {
+background: rgba(255, 255, 255, 0.03);
+backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+padding: 40px 25px; border-radius: 28px;
+box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 40px rgba(255, 101, 132, 0.15);
+max-width: 450px; width: 100%; z-index: 2;
+}
+.lock-box h1 { font-size: 1.8rem; margin-bottom: 15px; color: #ff6584; text-shadow: 0 0 15px rgba(255, 101, 132, 0.4); }
+.lock-box p { font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; color: #b9b3c2; }
+.lock-box input {
+width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05);
+border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 50px; color: white;
+margin-bottom: 20px; font-size: 1rem; text-align: center; outline: none; transition: all 0.3s;
+}
+.lock-box input:focus { border-color: #ff6584; box-shadow: 0 0 15px rgba(255, 101, 132, 0.4); }
+.lock-box button {
+background: linear-gradient(90deg, #ff6584 0%, #ff477e 100%);
+color: white; border: none; padding: 14px 30px; border-radius: 50px;
+font-size: 1.05rem; cursor: pointer; width: 100%; font-weight: bold;
+box-shadow: 0 4px 20px rgba(255, 71, 126, 0.4); transition: all 0.3s;
+}
+.lock-box button:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255, 71, 126, 0.6); }
+.error-msg { color: #ff4757; font-size: 0.95rem; margin-top: 15px; display: none; font-weight: bold; line-height: 1.4; }
 
-        /* Modern Video Butonları Düzeni */
-        .video-gallery {
-            display: none; flex-direction: column; gap: 15px; margin-top: 20px;
-        }
-        .video-btn {
-            display: flex; align-items: center; justify-content: space-between;
-            background: linear-gradient(90deg, rgba(255,101,132,0.15) 0%, rgba(166,193,238,0.15) 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff; text-decoration: none; padding: 18px 25px; border-radius: 16px;
-            font-weight: bold; font-size: 1.05rem; transition: all 0.3s;
-        }
-        .video-btn:hover {
-            background: linear-gradient(90deg, #ff6584 0%, #ff477e 100%);
-            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.4);
-            transform: translateY(-2px);
-        }
-        .video-btn span { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+/* Ana İçerik */
+#main-content { display: none; position: relative; z-index: 2; }
+.container { max-width: 850px; margin: 0 auto; padding: 30px 20px; }
 
-        /* Telif Hakkı (Footer) */
-        .footer-section {
-            text-align: center; padding: 40px 20px 10px 20px; margin-top: 20px;
-            font-size: 0.9rem; color: #7f778a; letter-spacing: 0.5px;
-        }
-    </style>
+.glass-panel {
+background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 24px; padding: 35px;
+box-shadow: 0 15px 35px rgba(0,0,0,0.4); margin-bottom: 35px;
+}
+
+/* Kapak Alanı ve Eğlenceli Hover */
+.cover-section { text-align: center; position: relative; }
+.img-container { position: relative; display: inline-block; width: 100%; border-radius: 20px; overflow: hidden; }
+.cover-photo {
+width: 100%; max-height: 480px; object-fit: cover; transition: transform 0.5s;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.img-container:hover .cover-photo { transform: scale(1.03); }
+.cover-title { font-size: 2.2rem; color: #ff6584; margin-top: 25px; font-weight: bold; text-shadow: 0 0 15px rgba(255, 101, 132, 0.3); }
+.cover-subtitle { font-size: 1.1rem; color: #a29bb0; margin-top: 8px; font-style: italic; }
+
+/* Zaman Sayacı */
+.timer-section h2 { font-size: 1.3rem; margin-bottom: 20px; color: #ff8fa3; text-align: center; }
+.countdown-container { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.time-box {
+background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 16px; padding: 15px; min-width: 90px; text-align: center;
+}
+.time-box .num { font-size: 1.8rem; font-weight: 800; color: #fff; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
+.time-box .label { font-size: 0.75rem; color: #ff6584; text-transform: uppercase; font-weight: bold; margin-top: 4px; }
+
+/* Sıradışı Bölüm 1: Şans Kurabiyesi / Mehmet'ten Notlar */
+.cookie-btn {
+background: linear-gradient(45deg, #ae52de 0%, #ff477e 100%);
+color: white; border: none; padding: 12px 25px; border-radius: 50px;
+font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 15px;
+transition: 0.3s; box-shadow: 0 5px 15px rgba(174, 82, 222, 0.4);
+}
+.cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(174, 82, 222, 0.6); }
+#cookie-text { font-size: 1.1rem; margin-top: 20px; font-style: italic; color: #ffbcbc; min-height: 40px; font-weight: bold; }
+
+/* Sıradışı Bölüm 2: Eğlenceli Mini Test */
+.quiz-option {
+background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+padding: 12px 20px; border-radius: 12px; margin: 10px 0; cursor: pointer;
+transition: 0.3s; text-align: left; font-weight: 500;
+}
+.quiz-option:hover { background: rgba(255, 101, 132, 0.15); border-color: #ff6584; }
+#quiz-result { margin-top: 15px; font-weight: bold; color: #50fa7b; }
+
+/* Hikaye, Şehirler ve Videolar */
+.story-section h2 { color: #ff6584; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; color: #ded9e6; }
+
+.city-title, .video-menu-title {
+font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;
+font-weight: bold; cursor: pointer; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255,255,255,0.08);
+padding: 16px 20px; border-radius: 16px; transition: all 0.3s; color: #fff;
+}
+.city-title:hover, .video-menu-title:hover { background: rgba(255, 101, 132, 0.12); border-color: rgba(255, 101, 132, 0.3); }
+
+.memory-card { background: rgba(0, 0, 0, 0.2); border-left: 4px solid #ff477e; padding: 20px; border-radius: 0 16px 16px 0; margin-bottom: 20px; }
+
+.photo-gallery { display: none; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 20px; }
+.photo-gallery img { width: 100%; height: 190px; object-fit: cover; border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
+.photo-gallery img:hover { transform: scale(1.05); border-color: #ff6584; }
+
+.video-gallery { display: none; flex-direction: column; gap: 15px; margin-top: 20px; }
+.video-btn {
+display: flex; align-items: center; justify-content: space-between;
+background: linear-gradient(90deg, rgba(255,101,132,0.12) 0%, rgba(166,193,238,0.12) 100%);
+border: 1px solid rgba(255,255,255,0.08); color: #fff; text-decoration: none; padding: 18px 25px; border-radius: 16px; font-weight: bold; transition: 0.3s;
+}
+.video-btn:hover { background: linear-gradient(90deg, #ff6584 0%, #ff477e 100%); transform: translateY(-2px); }
+.video-btn span { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+
+.footer-section { text-align: center; padding: 40px 20px 10px 20px; font-size: 0.9rem; color: #7f778a; }
+</style>
 </head>
 <body>
 
-    <!-- 1. ŞİFRE EKRANI -->
-    <div id="lock-screen">
-        <div class="lock-box">
-            <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
-            <p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
-            <input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
-            <button onclick="kontrolEt()">Anılarımızı Aç ✨</button>
-            <p id="error-message" class="error-msg">Şifre doğru değil Aynuşum, tekrar dene... 😉</p>
-        </div>
-    </div>
+<!-- Arka Plandaki Uçuşan Kalpler Efekti -->
+<div class="hearts-bg" id="hearts-container"></div>
 
-    <!-- 2. ANA İÇERİK -->
-    <div id="main-content">
-        <div class="container">
-            
-            <!-- KAPAK SAYFASI -->
-            <div class="glass-panel cover-section">
-                <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
-                <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
-                <div class="cover-subtitle">İyi ki doğdun, iyi ki hayatımdasın.</div>
-            </div>
-            
-            <!-- GELİŞMİŞ NEON ZAMAN SAYACI -->
-            <div class="glass-panel timer-section">
-                <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
-                <div class="countdown-container">
-                    <div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
-                    <div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
-                    <div class="time-box"><div class="num" id="t-dakika">00</div><div class="label">Dk</div></div>
-                    <div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
-                </div>
-            </div>
+<!-- 1. ŞİFRE EKRANI -->
+<div id="lock-screen">
+<div class="lock-box">
+<h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
+<p>Bugün senin günün Aynuşum. Kalbimin gizli odasını açmak ve şehirler arası yolculuk yapmak için şifreyi girmelisin...</p>
+<input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
+<button onclick="kontrolEt()">Anılarımızı Aç ✨</button>
+<p id="error-message" class="error-msg"></p>
+</div>
+</div>
 
-            <!-- HİKAYE METNİ -->
-            <div class="glass-panel story-section">
-                <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
-                <p> Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız. </p>
-                <p> 11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. </p>
-                <p> Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın... </p>
-            </div>
+<!-- 2. ANA İÇERİK -->
+<div id="main-content">
+<div class="container">
 
-            <!-- ŞEHİR FOTOĞRAFLARI BÖLÜMÜ -->
-            <div class="glass-panel story-section">
-                <h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
-                <p style="font-size: 0.9rem; color: #a29bb0; margin-bottom: 15px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
-                
-                <!-- ISPARTA -->
-                <div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız</div>
-                <div class="memory-card">
-                    <p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel hatırayı yazabilirsiniz sevgilim..."</p>
-                    <div id="isparta-gallery" class="photo-gallery">
-                        <img src="isparta1.jpg" alt="Isparta 1">
-                        <img src="isparta2.jpg" alt="Isparta 2">
-                        <img src="isparta3.jpg" alt="Isparta 3">
-                        <img src="isparta4.jpg" alt="Isparta 4">
-                        <img src="isparta5.jpg" alt="Isparta 5">
-                        <img src="isparta6.jpg" alt="Isparta 6">
-                        <img src="isparta7.jpg" alt="Isparta 7">
-                        <img src="isparta8.jpg" alt="Isparta 8">
-                        <img src="isparta9.jpg" alt="Isparta 9">
-                        <img src="isparta10.jpg" alt="Isparta 10">
-                        <img src="isparta11.jpg" alt="Isparta 11">
-                        <img src="isparta12.jpg" alt="Isparta 12">
-                        <img src="isparta13.jpg" alt="Isparta 13">
-                    </div>
-                </div>
+<!-- KAPAK SAYFASI -->
+<div class="glass-panel cover-section">
+<div class="img-container">
+<img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
+</div>
+<div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
+<div class="cover-subtitle">İyi ki doğdun, iyi ki hayatımdasın.</div>
+</div>
 
-                <!-- MERSİN -->
-                <div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız</div>
-                <div class="memory-card">
-                    <p>"Buraya Mersin'de yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
-                    <div id="mersin-gallery" class="photo-gallery">
-                        <img src="mersin1.jpg" alt="Mersin 1">
-                        <img src="mersin2.jpg" alt="Mersin 2">
-                        <img src="mersin3.jpg" alt="Mersin 3">
-                        <img src="mersin4.jpg" alt="Mersin 4">
-                    </div>
-                </div>
+<!-- NEON ZAMAN SAYACI -->
+<div class="glass-panel timer-section">
+<h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
+<div class="countdown-container">
+<div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
+<div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
+<div class="time-box"><div class="num" id="t-dakika">00</div><div class="label">Dk</div></div>
+<div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
+</div>
+</div>
 
-                <!-- HATAY -->
-                <div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız</div>
-                <div class="memory-card">
-                    <p>"Buraya da Hatay'da biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
-                    <div id="hatay-gallery" class="photo-gallery">
-                        <img src="hatay1.jpg" alt="Hatay 1">
-                        <img src="hatay2.jpg" alt="Hatay 2">
-                        <img src="hatay3.jpg" alt="Hatay 3">
-                        <img src="hatay4.jpg" alt="Hatay 4">
-                    </div>
-                </div>
-            </div>
+<!-- SIRADIŞI BÖLÜM: MEHMET'TEN SÜRPRİZ NOTLAR -->
+<div class="glass-panel text-center" style="text-align: center;">
+<h2>🔮 Aynuşum'un Şans Kurabiyesi</h2>
+<p>Butona her bastığında benden sana tamamen rastgele tatlı bir mesaj belirecek!</p>
+<button class="cookie-btn" onclick="notUret()">Kurabiyeyi Kır 🍪</button>
+<p id="cookie-text">Umut dolu, aşk dolu bir kurabiye seni bekliyor...</p>
+</div>
 
-            <!-- VİDEOLARIMIZ BÖLÜMÜ -->
-            <div class="glass-panel story-section">
-                <h2>Bizim Videolarımız 🎥</h2>
-                <p style="font-size: 0.9rem; color: #a29bb0; margin-bottom: 15px;">(Başlığa tıklayarak Isparta'da çektiğimiz güzel videoları izleyebilirsin Aynuşum!)</p>
-                
-                <div class="video-menu-title" onclick="toggleSection('video-list', 'flex')">🎬 Videolarımızı Listele</div>
-                
-                <div id="video-list" class="video-gallery">
-                    <a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">
-                        ❤️ Isparta Anısı - Video 1 <span>▶ İzle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">
-                        ❤️ Isparta Anısı - Video 2 <span>▶ İzle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">
-                        ❤️ Isparta Anısı - Video 3 <span>▶ İzle</span>
-                    </a>
-                </div>
-            </div>
+<!-- HİKAYE METNİ -->
+<div class="glass-panel story-section">
+<h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
+<p> Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız. </p>
+<p> 11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. </p>
+</div>
 
-            <!-- TÜM HAKLARI SAKLIDIR KISMI -->
-            <div class="footer-section">
-                © Tüm hakları saklıdır Mehmet ve Aynur ❤️
-            </div>
+<!-- SIRADIŞI BÖLÜM: EĞLENCELİ TEST -->
+<div class="glass-panel text-center" id="quiz-panel">
+<h2>🧐 Aynuşum'un Küçük İlişki Testi</h2>
+<p id="quiz-question">Soru: Mehmet en çok neyi yaparken mutlu olur?</p>
+<div id="quiz-options-container">
+<div class="quiz-option" onclick="cevapKontrol(true)">A) Aynur'un gözlerinin içine bakıp elini tutarken 🥰</div>
+<div class="quiz-option" onclick="cevapKontrol(false)">B) Excel'de devasa tabloları filtrelerken 📊</div>
+<div class="quiz-option" onclick="cevapKontrol(false)">C) İş güvenliği yönetmeliği okurken 📋</div>
+</div>
+<p id="quiz-result"></p>
+</div>
 
-        </div>
-    </div>
+<!-- ŞEHİR FOTOĞRAFLARI BÖLÜMÜ -->
+<div class="glass-panel story-section">
+<h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
+<p style="font-size: 0.9rem; color: #a29bb0; margin-bottom: 15px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
 
-    <script>
-        function kontrolEt() {
-            var sarki = document.getElementById("password-input").value.trim();
-            if (sarki === "04102025") {
-                document.getElementById("lock-screen").style.display = "none";
-                document.getElementById("main-content").style.display = "block";
-                zamanlayiciyiBaslat();
-            } else {
-                document.getElementById("error-message").style.display = "block";
-                document.getElementById("password-input").value = "";
-            }
-        }
+<div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız</div>
+<div class="memory-card">
+<p>"Isparta'nın o güzel havasında, yan yana attığımız her adım dün gibi aklımda sevgilim..."</p>
+<div id="isparta-gallery" class="photo-gallery">
+<img src="isparta1.jpg" alt="Isparta 1"><img src="isparta2.jpg" alt="Isparta 2"><img src="isparta3.jpg" alt="Isparta 3"><img src="isparta4.jpg" alt="Isparta 4"><img src="isparta5.jpg" alt="Isparta 5"><img src="isparta6.jpg" alt="Isparta 6"><img src="isparta7.jpg" alt="Isparta 7"><img src="isparta8.jpg" alt="Isparta 8"><img src="isparta9.jpg" alt="Isparta 9"><img src="isparta10.jpg" alt="Isparta 10"><img src="isparta11.jpg" alt="Isparta 11"><img src="isparta12.jpg" alt="Isparta 12"><img src="isparta13.jpg" alt="Isparta 13">
+</div>
+</div>
 
-        function zamanlayiciyiBaslat() {
-            var baslangic = new Date("2025-09-11T00:00:00").getTime();
-            setInterval(function() {
-                var simdi = new Date().getTime();
-                var fark = simdi - baslangic;
-                
-                var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
-                var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
-                var saniye = Math.floor((fark % (1000 * 60)) / 1000);
-                
-                // Kutucukları güncelle
-                document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
-                document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
-                document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
-                document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
-            }, 1000);
-        }
+<div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız</div>
+<div class="memory-card">
+<p>"Mersin sahilinde, arabada seninle zamanı durdurduğumuz o anlar benim en büyük huzurum..."</p>
+<div id="mersin-gallery" class="photo-gallery">
+<img src="mersin1.jpg" alt="Mersin 1"><img src="mersin2.jpg" alt="Mersin 2"><img src="mersin3.jpg" alt="Mersin 3"><img src="mersin4.jpg" alt="Mersin 4">
+</div>
+</div>
 
-        function toggleSection(id, tip) {
-            var el = document.getElementById(id);
-            if (el.style.display === "none" || el.style.display === "") {
-                el.style.display = tip;
-            } else {
-                el.style.display = "none";
-            }
-        }
-    </script>
+<div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız</div>
+<div class="memory-card">
+<p>"Kendi memleketimde, benim dünyam olan seninle yeni hatıralar biriktirmek..."</p>
+<div id="hatay-gallery" class="photo-gallery">
+<img src="hatay1.jpg" alt="Hatay 1"><img src="hatay2.jpg" alt="Hatay 2"><img src="hatay3.jpg" alt="Hatay 3"><img src="hatay4.jpg" alt="Hatay 4">
+</div>
+</div>
+</div>
+
+<!-- VİDEOLARIMIZ BÖLÜMÜ -->
+<div class="glass-panel story-section">
+<h2>Bizim Videolarımız 🎥</h2>
+<div class="video-menu-title" onclick="toggleSection('video-list', 'flex')">🎬 Videolarımızı Listele</div>
+<div id="video-list" class="video-gallery">
+<a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 1 <span>▶ İzle</span></a>
+<a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 2 <span>▶ İzle</span></a>
+<a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 3 <span>▶ İzle</span></a>
+</div>
+</div>
+
+<div class="footer-section">© Tüm hakları saklıdır Mehmet ve Aynur ❤️</div>
+</div>
+</div>
+
+<script>
+// Yanlış şifre denemelerinde çıkacak tatlı tehdit/ipucu mesajları
+var hataMesajlari = [
+"Şifre doğru değil Aynuşum, tekrar dene... 😉",
+"Mehmet'i ne kadar seviyorsun? Bi' daha düşün bakalım! 🤔",
+"Şifreyi unuttuysan hemen WhatsApp'tan Mehmet'e sarılma emojisi at! 📲",
+"İpucu: Hayatımızın en güzel başlangıç tarihi... 📅",
+"Bu şifreyi sadece gerçek Aynuşum bilebilir! 🕵️‍♀️"
+ ];
+
+// Şans kurabiyesi sözleri
+var notlar = [
+"Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
+"Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
+"İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
+"Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
+"İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
+ ];
+
+function kontrolEt() {
+var input = document.getElementById("password-input").value.trim();
+if (input === "04102025") {
+document.getElementById("lock-screen").style.display = "none";
+document.getElementById("main-content").style.display = "block";
+zamanlayiciyiBaslat();
+kalpYagmuruBaslat();
+} else {
+var rastgeleHata = hataMesajlari[Math.floor(Math.random() * hataMesajlari.length)];
+var errEl = document.getElementById("error-message");
+errEl.innerText = rastgeleHata;
+errEl.style.display = "block";
+document.getElementById("password-input").value = "";
+}
+}
+
+function zamanlayiciyiBaslat() {
+var baslangic = new Date("2025-09-11T00:00:00").getTime();
+setInterval(function() {
+var simdi = new Date().getTime();
+var fark = simdi - baslangic;
+var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+var saniye = Math.floor((fark % (1000 * 60)) / 1000);
+
+document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
+document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
+document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
+document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
+}, 1000);
+}
+
+function kalpYagmuruBaslat() {
+var container = document.getElementById("hearts-container");
+setInterval(function() {
+var heart = document.createElement("div");
+heart.classList.add("heart-particle");
+heart.innerHTML = "❤️";
+heart.style.left = Math.random() * 100 + "%";
+heart.style.fontSize = (Math.random() * 1.5 + 1) + "rem";
+heart.style.animationDuration = (Math.random() * 4 + 5) + "s";
+container.appendChild(heart);
+setTimeout(function() { heart.remove(); }, 8000);
+}, 600);
+}
+
+function notUret() {
+var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
+document.getElementById("cookie-text").innerText = rastgeleNot;
+}
+
+function cevapKontrol(dogruMu) {
+var res = document.getElementById("quiz-result");
+if(dogruMu) {
+res.innerHTML = "Doğru Cevap! 🎉 Zaten aksini seçemezdin ki, seni çok seviyorum! ❤️";
+res.style.color = "#50fa7b";
+} else {
+res.innerHTML = "Yanlış! 🧐 Ciddi misin? Mehmet sence bunu mu seçerdi, bi' daha dene!";
+res.style.color = "#ff4757";
+}
+}
+
+function toggleSection(id, tip) {
+var el = document.getElementById(id);
+if (el.style.display === "none" || el.style.display === "") {
+el.style.display = tip;
+} else {
+el.style.display = "none";
+}
+}
+</script>
 </body>
 </html>

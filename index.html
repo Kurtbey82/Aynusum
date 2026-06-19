@@ -5,123 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İyi Ki Doğdun Aynuşum... 🤍</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #fcefe6; color: #4a3728; overflow-x: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
+        body { 
+            background: #120c1f; 
+            background: linear-gradient(135deg, #120c1f 0%, #1a0f2e 50%, #0b0714 100%);
+            color: #f3f0f5; 
+            overflow-x: hidden; 
+        }
+        
+        /* Şifre Ekranı (Modern & Heyecan Verici) */
         #lock-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            background: radial-gradient(circle at center, #2d124d 0%, #0c0517 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 9999; padding: 20px; text-align: center;
         }
         .lock-box {
-            background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 450px; width: 100%;
+            background: rgba(255, 255, 255, 0.04); 
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 30px; border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(211, 104, 124, 0.1); 
+            max-width: 450px; width: 100%;
         }
-        .lock-box h1 { font-size: 1.8rem; margin-bottom: 15px; color: #d3687c; }
-        .lock-box p { font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5; color: #666; }
+        .lock-box h1 { font-size: 1.9rem; margin-bottom: 15px; color: #ff6584; text-shadow: 0 0 10px rgba(255, 101, 132, 0.3); }
+        .lock-box p { font-size: 0.95rem; margin-bottom: 25px; line-height: 1.6; color: #b9b3c2; }
         .lock-box input {
-            width: 100%; padding: 12px 20px; border: 2px solid #e0e0e0; border-radius: 25px;
-            margin-bottom: 15px; font-size: 1rem; text-align: center; outline: none;
+            width: 100%; padding: 14px 20px; 
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 50px; color: white;
+            margin-bottom: 20px; font-size: 1rem; text-align: center; outline: none;
+            transition: all 0.3s;
+        }
+        .lock-box input:focus {
+            border-color: #ff6584;
+            box-shadow: 0 0 15px rgba(255, 101, 132, 0.4);
+            background: rgba(255, 255, 255, 0.1);
         }
         .lock-box button {
-            background: #d3687c; color: white; border: none; padding: 12px 30px;
-            border-radius: 25px; font-size: 1rem; cursor: pointer; width: 100%; font-weight: bold;
+            background: linear-gradient(90deg, #ff6584 0%, #ff477e 100%); 
+            color: white; border: none; padding: 14px 30px;
+            border-radius: 50px; font-size: 1.05rem; cursor: pointer; width: 100%; font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 71, 126, 0.4); transition: all 0.3s;
         }
-        .error-msg { color: #cc0000; font-size: 0.85rem; margin-top: 15px; display: none; font-weight: bold; }
+        .lock-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 71, 126, 0.6);
+        }
+        .error-msg { color: #ff4757; font-size: 0.9rem; margin-top: 15px; display: none; font-weight: bold; text-shadow: 0 0 5px rgba(255,71,87,0.3); }
 
+        /* Ana İçerik Bölümü */
         #main-content { display: none; }
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 850px; margin: 0 auto; padding: 30px 20px; }
         
-        .cover-section {
-            background: white; border-radius: 20px; padding: 20px; text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px;
+        /* Modern Cam Efekti Kart Yapısı (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 24px; padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            margin-bottom: 35px;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        
+        /* Kapak Tasarımı */
+        .cover-section { text-align: center; padding: 25px; }
         .cover-photo {
-            width: 100%; max-height: 450px; object-fit: cover; border-radius: 15px;
-            border: 5px solid #fff0f2; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%; max-height: 480px; object-fit: cover; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255, 101, 132, 0.1);
         }
-        .cover-title { font-size: 1.8rem; color: #d3687c; margin-top: 20px; font-weight: bold; }
-        .cover-subtitle { font-size: 1.1rem; color: #776254; margin-top: 5px; font-style: italic; }
+        .cover-title { font-size: 2rem; color: #ff6584; margin-top: 25px; font-weight: bold; text-shadow: 0 0 10px rgba(255, 101, 132, 0.2); }
+        .cover-subtitle { font-size: 1.1rem; color: #a29bb0; margin-top: 8px; font-style: italic; }
 
-        .timer-section {
-            background: white; border-radius: 20px; padding: 30px; text-align: center;
-            margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        /* Yeni Canlı Göz Alıcı Zaman Sayacı */
+        .timer-section h2 { font-size: 1.3rem; margin-bottom: 20px; color: #ff8fa3; text-align: center; letter-spacing: 0.5px; }
+        .countdown-container {
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
         }
-        .timer-section h2 { font-size: 1.4rem; margin-bottom: 15px; color: #b85265; }
-        #countdown { font-size: 1.4rem; font-weight: bold; color: #4a3728; letter-spacing: 1px; line-height: 1.6; }
+        .time-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px; padding: 12px; min-width: 85px; text-align: center;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.02);
+        }
+        .time-box .num {
+            font-size: 1.7rem; font-weight: 800; color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .time-box .label {
+            font-size: 0.75rem; color: #ff6584; text-transform: uppercase; font-weight: bold; margin-top: 2px;
+        }
 
-        .story-section { background: white; border-radius: 20px; padding: 40px; margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .story-section h2 { color: #d3687c; margin-bottom: 20px; border-bottom: 2px solid #fcefe6; padding-bottom: 10px; }
-        .story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; }
+        /* Hikaye Bölümü */
+        .story-section h2 { color: #ff6584; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.5rem; }
+        .story-section p { line-height: 1.8; font-size: 1.05rem; margin-bottom: 20px; color: #ded9e6; }
         
+        /* Modern Şehir & Video Buton Menüleri */
         .city-title, .video-menu-title { 
-            color: #a65261; font-size: 1.3rem; margin-top: 25px; margin-bottom: 15px; 
-            display: flex; align-items: center; gap: 8px; font-weight: bold; cursor: pointer;
-            background: #fff0f2; padding: 12px; border-radius: 10px; transition: 0.3s;
+            font-size: 1.2rem; margin-top: 20px; margin-bottom: 10px; 
+            display: flex; align-items: center; justify-content: space-between;
+            font-weight: bold; cursor: pointer;
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 16px 20px; border-radius: 16px; transition: all 0.3s;
+            color: #fff;
         }
-        .city-title:hover, .video-menu-title:hover { background: #ffdadd; }
+        .city-title:hover, .video-menu-title:hover { 
+            background: rgba(255, 101, 132, 0.12); 
+            border-color: rgba(255, 101, 132, 0.3);
+            transform: scale(1.01);
+        }
+        .city-title::after { content: '✨'; font-size: 1rem; }
         
         .memory-card {
-            background: #fff5f0; border-left: 5px solid #d3687c; padding: 25px;
-            margin-top: 5px; border-radius: 0 15px 15px 0; margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.2); border-left: 4px solid #ff477e; padding: 20px;
+            margin-top: 5px; border-radius: 0 16px 16px 0; margin-bottom: 20px;
         }
-        .memory-card p { font-size: 1rem; line-height: 1.7; margin-bottom: 15px; color: #555; font-style: italic; }
+        .memory-card p { font-size: 1rem; line-height: 1.7; margin-bottom: 15px; color: #c4bdcc; font-style: italic; }
 
+        /* Modern Fotoğraf Galerisi */
         .photo-gallery { 
             display: none; 
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
-            gap: 12px; 
+            gap: 14px; 
             margin-top: 20px; 
         }
         .photo-gallery img { 
             width: 100%; 
-            height: 180px; 
+            height: 190px; 
             object-fit: cover; 
-            border-radius: 12px; 
-            border: 3px solid white; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            border-radius: 14px; 
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.04);
+            border-color: #ff6584;
         }
 
+        /* Modern Video Butonları Düzeni */
         .video-gallery {
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
+            display: none; flex-direction: column; gap: 15px; margin-top: 20px;
         }
         .video-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-            color: white;
-            text-decoration: none;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.05rem;
-            box-shadow: 0 4px 15px rgba(211, 104, 124, 0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex; align-items: center; justify-content: space-between;
+            background: linear-gradient(90deg, rgba(255,101,132,0.15) 0%, rgba(166,193,238,0.15) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; text-decoration: none; padding: 18px 25px; border-radius: 16px;
+            font-weight: bold; font-size: 1.05rem; transition: all 0.3s;
         }
         .video-btn:hover {
+            background: linear-gradient(90deg, #ff6584 0%, #ff477e 100%);
+            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.4);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(211, 104, 124, 0.4);
         }
-        .video-btn span { font-size: 1.2rem; }
+        .video-btn span { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
 
-        /* Yeni Eklenen Telif Hakkı (Footer) Kısmı */
+        /* Telif Hakkı (Footer) */
         .footer-section {
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #8c7665;
-            border-top: 1px dashed #e0c9b8;
+            text-align: center; padding: 40px 20px 10px 20px; margin-top: 20px;
+            font-size: 0.9rem; color: #7f778a; letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
+    <!-- 1. ŞİFRE EKRANI -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
@@ -132,32 +188,43 @@
         </div>
     </div>
 
+    <!-- 2. ANA İÇERİK -->
     <div id="main-content">
         <div class="container">
             
-            <div class="cover-section">
+            <!-- KAPAK SAYFASI -->
+            <div class="glass-panel cover-section">
                 <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
                 <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
                 <div class="cover-subtitle">İyi ki doğdun, iyi ki hayatımdasın.</div>
             </div>
             
-            <div class="timer-section">
+            <!-- GELİŞMİŞ NEON ZAMAN SAYACI -->
+            <div class="glass-panel timer-section">
                 <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
-                <div id="countdown">Hesaplanıyor...</div>
+                <div class="countdown-container">
+                    <div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
+                    <div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
+                    <div class="time-box"><div class="num" id="t-dakika">00</div><div class="label">Dk</div></div>
+                    <div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
+                </div>
             </div>
 
-            <div class="story-section">
+            <!-- HİKAYE METNİ -->
+            <div class="glass-panel story-section">
                 <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
                 <p> Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız. </p>
                 <p> 11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım. </p>
                 <p> Yeni yaşında da yan yana, el ele, yepyeni şehirlerde harika hatıralar biriktirmek dileğiyle. Doğum günün kutlu olsun her şeyim, iyi ki varsın... </p>
             </div>
 
-            <div class="story-section">
+            <!-- ŞEHİR FOTOĞRAFLARI BÖLÜMÜ -->
+            <div class="glass-panel story-section">
                 <h2>Şehir Şehir Bizim Hikayemiz 🗺️</h2>
-                <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
+                <p style="font-size: 0.9rem; color: #a29bb0; margin-bottom: 15px;">(Şehir başlıklarına tıklayarak o günkü fotoğraflarımızı görebilirsin Aynuşum!)</p>
                 
-                <div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız (Tıkla ✨)</div>
+                <!-- ISPARTA -->
+                <div class="city-title" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız</div>
                 <div class="memory-card">
                     <p>"Buraya Isparta'da birlikte geçirdiğiniz en güzel hatırayı yazabilirsiniz sevgilim..."</p>
                     <div id="isparta-gallery" class="photo-gallery">
@@ -177,7 +244,8 @@
                     </div>
                 </div>
 
-                <div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız (Tıkla ✨)</div>
+                <!-- MERSİN -->
+                <div class="city-title" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız</div>
                 <div class="memory-card">
                     <p>"Buraya Mersin'de yaşadığınız o tatlı hikayeyi yazabilirsiniz sevgilim..."</p>
                     <div id="mersin-gallery" class="photo-gallery">
@@ -188,7 +256,8 @@
                     </div>
                 </div>
 
-                <div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız (Tıkla ✨)</div>
+                <!-- HATAY -->
+                <div class="city-title" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız</div>
                 <div class="memory-card">
                     <p>"Buraya da Hatay'da biriktirdiğiniz anıyı yazabilirsiniz sevgilim..."</p>
                     <div id="hatay-gallery" class="photo-gallery">
@@ -200,11 +269,12 @@
                 </div>
             </div>
 
-            <div class="story-section">
+            <!-- VİDEOLARIMIZ BÖLÜMÜ -->
+            <div class="glass-panel story-section">
                 <h2>Bizim Videolarımız 🎥</h2>
-                <p style="font-size: 0.95rem; color: #888; margin-bottom: 10px;">(Başlığa tıklayarak Isparta'da çektiğimiz güzel videoları izleyebilirsin Aynuşum!)</p>
+                <p style="font-size: 0.9rem; color: #a29bb0; margin-bottom: 15px;">(Başlığa tıklayarak Isparta'da çektiğimiz güzel videoları izleyebilirsin Aynuşum!)</p>
                 
-                <div class="video-menu-title" onclick="toggleSection('video-list', 'flex')">🎬 Videolarımızı Listele (Tıkla ❤️)</div>
+                <div class="video-menu-title" onclick="toggleSection('video-list', 'flex')">🎬 Videolarımızı Listele</div>
                 
                 <div id="video-list" class="video-gallery">
                     <a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">
@@ -219,6 +289,7 @@
                 </div>
             </div>
 
+            <!-- TÜM HAKLARI SAKLIDIR KISMI -->
             <div class="footer-section">
                 © Tüm hakları saklıdır Mehmet ve Aynur ❤️
             </div>
@@ -244,11 +315,17 @@
             setInterval(function() {
                 var simdi = new Date().getTime();
                 var fark = simdi - baslangic;
+                
                 var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
                 var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
                 var saniye = Math.floor((fark % (1000 * 60)) / 1000);
-                document.getElementById("countdown").innerHTML = gun + " Gün, " + saat + " Saat, " + dakika + " Dakika, " + saniye + " Saniye ❤️";
+                
+                // Kutucukları güncelle
+                document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
+                document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
+                document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
+                document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
             }, 1000);
         }
 

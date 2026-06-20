@@ -1,503 +1,529 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>İyi Ki Doğdun Aynuşum... 🤍</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi Ki Doğdun Aynuşum... 🤍</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background: #fff5f7; 
+            background: linear-gradient(135deg, #ffeef2 0%, #fff5f7 50%, #f3e9fa 100%);
+            color: #3a2e3d; 
+            overflow-x: hidden; 
+            position: relative;
+            min-height: 100vh;
+            font-size: 1.25rem; /* Büyük fontlar */
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        /* GELİŞMİŞ EMOLİ EFEKT SİSTEMİ */
+        .effect-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; overflow: hidden; display: none;
+        }
+        
+        .floating-emoji {
+            position: absolute;
+            bottom: -60px;
+            font-size: var(--size);
+            animation: floatUpReal var(--duration) linear infinite;
+            opacity: 0;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+        }
 
-body {
-background: #fff5f7;
-background: linear-gradient(135deg, #ffeef2 0%, #fff5f7 50%, #f3e9fa 100%);
-color: #3a2e3d;
-overflow-x: hidden;
-position: relative;
-min-height: 100vh;
-font-size: 1.2rem; /* Genel yazı boyutu büyütüldü */
-}
+        @keyframes floatUpReal {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.9; }
+            100% { transform: translateY(-125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
+        }
+        
+        /* 1. ŞİFRE EKRANI */
+        #lock-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ffdeee 0%, #e8dbfc 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10000; padding: 20px; text-align: center;
+        }
+        .lock-box {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.6); padding: 50px 40px; border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(231, 166, 194, 0.4); max-width: 500px; width: 100%;
+        }
+        .lock-box h1 { font-size: 2.2rem; margin-bottom: 20px; color: #ff477e; font-weight: 800; line-height: 1.3; }
+        .lock-box p { color: #524355; font-size: 1.15rem; margin: 20px 0 30px 0; line-height: 1.7; font-weight: 500; }
+        .lock-box input {
+            width: 100%; padding: 18px 25px; background: white;
+            border: 2.5px solid #ffd0dd; border-radius: 50px; color: #3a2e3d;
+            margin-bottom: 25px; font-size: 1.2rem; text-align: center; outline: none;
+            transition: all 0.3s; font-weight: bold;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+        }
+        .lock-box input:focus { border-color: #ff477e; box-shadow: 0 0 15px rgba(255,71,126,0.25); }
+        .lock-box button {
+            background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%); color: white; border: none; padding: 16px 35px;
+            border-radius: 50px; font-size: 1.25rem; cursor: pointer; width: 100%; font-weight: bold;
+            box-shadow: 0 6px 20px rgba(255, 71, 126, 0.35); transition: all 0.3s;
+        }
+        .lock-box button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 71, 126, 0.45); }
+        .error-msg { color: #de354c; font-size: 1.15rem; margin-top: 20px; display: none; font-weight: bold; line-height: 1.5; }
 
-/* GELİŞMİŞ EFEKT SİSTEMİ */
-.effect-container {
-position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-pointer-events: none; z-index: 9999; overflow: hidden; display: none;
-}
+        /* GÜVENLİ ÇIKIŞ BUTONU */
+        .logout-btn {
+            position: fixed; top: 20px; right: 20px; z-index: 998;
+            background: rgba(255, 255, 255, 0.95); border: 2px solid #ffd0dd;
+            color: #ff477e; padding: 12px 24px; border-radius: 30px; font-weight: bold;
+            cursor: pointer; font-size: 1.05rem; transition: all 0.3s;
+            display: none; backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        .logout-btn:hover { background: #ff477e; color: white; transform: translateY(-2px); }
 
-.floating-emoji {
-position: absolute;
-bottom: -60px;
-font-size: var(--size);
-animation: floatUpReal var(--duration) linear infinite;
-opacity: 0;
-filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
-}
+        /* ANA KONTEYNER */
+        #main-content { display: none; }
+        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px 50px 20px; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 32px; padding: 45px; margin-bottom: 40px;
+            box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
+        }
+        
+        .cover-section { text-align: center; }
+        .cover-photo { width: 100%; max-height: 520px; object-fit: cover; border-radius: 24px; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+        .cover-title { font-size: 2.5rem; color: #ff477e; margin-top: 30px; font-weight: 800; line-height: 1.4; }
 
-@keyframes floatUpReal {
-0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
-15% { opacity: 0.9; }
-85% { opacity: 0.9; }
-100% { transform: translateY(-125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
-}
+        .timer-section h2 { font-size: 1.6rem; margin-bottom: 25px; color: #9c3c6b; text-align: center; font-weight: 700; }
+        .countdown-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .time-box { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; min-width: 110px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.02); }
+        .time-box .num { font-size: 2.3rem; font-weight: 800; color: #ff477e; line-height: 1; }
+        .time-box .label { font-size: 1rem; color: #7d6585; font-weight: bold; margin-top: 6px; }
 
-/* 1. ŞİFRE EKRANI */
-#lock-screen {
-position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-background: linear-gradient(135deg, #ffdeee 0%, #e8dbfc 100%);
-display: flex; flex-direction: column; align-items: center; justify-content: center;
-z-index: 10000; padding: 20px; text-align: center;
-}
-.lock-box {
-background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-border: 2px solid rgba(255, 255, 255, 0.6); padding: 50px 40px; border-radius: 30px;
-box-shadow: 0 25px 50px rgba(231, 166, 194, 0.4); max-width: 500px; width: 100%;
-}
-.lock-box h1 { font-size: 2.2rem; margin-bottom: 20px; color: #ff477e; font-weight: 800; line-height: 1.3; }
-.lock-box p { color: #524355; font-size: 1.15rem; margin: 20px 0 30px 0; line-height: 1.7; font-weight: 500; }
-.lock-box input {
-width: 100%; padding: 18px 25px; background: white;
-border: 2.5px solid #ffd0dd; border-radius: 50px; color: #3a2e3d;
-margin-bottom: 25px; font-size: 1.2rem; text-align: center; outline: none;
-transition: all 0.3s; font-weight: bold;
-box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
-}
-.lock-box input:focus { border-color: #ff477e; box-shadow: 0 0 15px rgba(255,71,126,0.25); }
-.lock-box button {
-background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%); color: white; border: none; padding: 16px 35px;
-border-radius: 50px; font-size: 1.25rem; cursor: pointer; width: 100%; font-weight: bold;
-box-shadow: 0 6px 20px rgba(255, 71, 126, 0.35); transition: all 0.3s;
-}
-.lock-box button:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 71, 126, 0.45); }
-.error-msg { color: #de354c; font-size: 1.15rem; margin-top: 20px; display: none; font-weight: bold; line-height: 1.5; }
+        .story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
+        .story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
 
-/* GÜVENLİ ÇIKIŞ BUTONU */
-.logout-btn {
-position: fixed; top: 20px; right: 20px; z-index: 998;
-background: rgba(255, 255, 255, 0.95); border: 2px solid #ffd0dd;
-color: #ff477e; padding: 12px 24px; border-radius: 30px; font-weight: bold;
-cursor: pointer; font-size: 1.05rem; transition: all 0.3s;
-display: none; backdrop-filter: blur(5px);
-box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-}
-.logout-btn:hover { background: #ff477e; color: white; transform: translateY(-2px); }
+        /* MENÜ KUTUCUKLARI */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 40px; }
+        .menu-card {
+            background: white; border: 2px solid #ffe3eb; border-radius: 28px; padding: 40px 25px;
+            text-align: center; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(236, 213, 224, 0.4);
+        }
+        .menu-card:hover {
+            transform: translateY(-8px); background: #fff1f4;
+            border-color: #ffb3c6; box-shadow: 0 15px 30px rgba(255, 71, 126, 0.18);
+        }
+        .menu-card .icon { font-size: 3.2rem; margin-bottom: 15px; display: block; }
+        .menu-card .title { font-size: 1.3rem; font-weight: bold; color: #3a2e3d; }
+ /* ALT SAYFALAR / MODALLAR */
+        .sub-page {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1000; padding: 40px 20px; overflow-y: auto;
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+        .sub-page-content {
+            max-width: 800px; margin: 40px auto; background: rgba(255, 255, 255, 0.98);
+            border: 2px solid #ffe3eb; border-radius: 36px; padding: 50px 40px;
+            box-shadow: 0 25px 60px rgba(231, 166, 194, 0.4); position: relative; z-index: 1001;
+            font-size: 1.25rem; color: #483b4d;
+        }
+        .close-btn {
+            background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%);
+            color: white; border: none; padding: 14px 35px; border-radius: 50px;
+            font-weight: bold; cursor: pointer; margin-top: 40px; box-shadow: 0 6px 18px rgba(255, 71, 126, 0.25);
+            font-size: 1.15rem; transition: all 0.2s;
+        }
+        .close-btn:hover { transform: scale(1.05); }
 
-/* ANA KONTEYNER */
-#main-content { display: none; }
-.container { max-width: 900px; margin: 0 auto; padding: 100px 20px 50px 20px; }
+        /* KOCAMAN SÖZ SAYFASI (ŞANS KURABİYESİ İÇİN) */
+        #cookie-text-page {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2000; background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            align-items: center; justify-content: center; padding: 30px; text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .cookie-speech-box {
+            max-width: 750px; width: 100%; padding: 40px;
+        }
+        .huge-cookie-text {
+            font-size: 2.6rem; font-weight: 800; color: #802f6b; line-height: 1.6;
+            margin-bottom: 50px; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
 
-.glass-panel {
-background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 32px; padding: 45px; margin-bottom: 40px;
-box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
-}
+        /* LIGHTBOX - TAM EKRAN FOTOĞRAF GÖRÜNTÜLEYİCİ */
+        #image-viewer {
+            display: none; position: fixed; z-index: 10005; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.95); backdrop-filter: blur(12px); align-items: center; justify-content: center;
+        }
+        #image-viewer img {
+            max-width: 95%; max-height: 90vh; border-radius: 15px; box-shadow: 0 0 40px rgba(255,255,255,0.25);
+        }
+        .close-viewer {
+            position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; font-weight: bold; cursor: pointer; z-index: 10006;
+        }
 
-.cover-section { text-align: center; }
-.cover-photo { width: 100%; max-height: 520px; object-fit: cover; border-radius: 24px; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
-.cover-title { font-size: 2.5rem; color: #ff477e; margin-top: 30px; font-weight: 800; line-height: 1.4; }
+        /* MENÜ DETAY ELEMANLARI */
+        .cookie-btn { background: #b062de; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(176,98,222,0.35); font-size: 1.2rem; transition: all 0.2s; }
+        .cookie-btn:hover { transform: scale(1.05); }
+        .quiz-option { background: white; border: 2.5px solid #f0e6f2; padding: 18px; border-radius: 20px; margin: 16px 0; cursor: pointer; text-align: left; transition: all 0.2s; color: #483b4d; font-weight: 600; font-size: 1.2rem; }
+        .quiz-option:hover { background: #fff1f4; border-color: #ff477e; color: #ff477e; }
+        
+        .city-title-tab { font-size: 1.3rem; margin: 22px 0 10px 0; font-weight: bold; background: white; border: 2px solid #f0e6f2; padding: 16px; border-radius: 20px; cursor: pointer; display: flex; justify-content: space-between; color: #3a2e3d; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .city-title-tab:hover { background: #fff5f7; border-color: #ffb3c6; }
+        .photo-gallery { display: none; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; padding: 5px; }
+        .photo-gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; border: 4px solid white; box-shadow: 0 5px 12px rgba(0,0,0,0.06); cursor: zoom-in; transition: transform 0.3s; }
+        .photo-gallery img:hover { transform: scale(1.05); }
+        .memory-card { background: #fffbfa; border-left: 5px solid #ff477e; padding: 22px; border-radius: 0 20px 20px 0; margin-bottom: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.01); }
+        .memory-card p { font-size: 1.2rem; line-height: 1.8; }
 
-.timer-section h2 { font-size: 1.6rem; margin-bottom: 25px; color: #9c3c6b; text-align: center; font-weight: 700; }
-.countdown-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.time-box { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; min-width: 110px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.02); }
-.time-box .num { font-size: 2.3rem; font-weight: 800; color: #ff477e; line-height: 1; }
-.time-box .label { font-size: 1rem; color: #7d6585; font-weight: bold; margin-top: 6px; }
-
-.story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
-.story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
-
-/* MENÜ KUTUCUKLARI */
-.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 40px; }
-.menu-card {
-background: white; border: 2px solid #ffe3eb; border-radius: 28px; padding: 40px 25px;
-text-align: center; cursor: pointer; transition: all 0.3s ease;
-box-shadow: 0 6px 20px rgba(236, 213, 224, 0.4);
-}
-.menu-card:hover {
-transform: translateY(-8px); background: #fff1f4;
-border-color: #ffb3c6; box-shadow: 0 15px 30px rgba(255, 71, 126, 0.18);
-}
-.menu-card .icon { font-size: 3.2rem; margin-bottom: 15px; display: block; }
-.menu-card .title { font-size: 1.3rem; font-weight: bold; color: #3a2e3d; }
-
-/* BÜYÜTÜLMÜŞ ALT SAYFALAR / MODALLAR */
-.sub-page {
-display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-z-index: 1000; padding: 40px 20px; overflow-y: auto;
-backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-animation: fadeIn 0.4s ease forwards;
-}
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
-.sub-page-content {
-max-width: 800px; margin: 40px auto; background: rgba(255, 255, 255, 0.98);
-border: 2px solid #ffe3eb; border-radius: 36px; padding: 50px 40px;
-box-shadow: 0 25px 60px rgba(231, 166, 194, 0.4); position: relative; z-index: 1001;
-font-size: 1.25rem; color: #483b4d;
-}
-.close-btn {
-background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%);
-color: white; border: none; padding: 14px 35px; border-radius: 50px;
-font-weight: bold; cursor: pointer; margin-top: 40px; box-shadow: 0 6px 18px rgba(255, 71, 126, 0.25);
-font-size: 1.15rem; transition: all 0.2s;
-}
-.close-btn:hover { transform: scale(1.05); }
-
-/* YENİ SÖZ SAYFASI (ŞANS KURABİYESİ İÇİN) */
-#cookie-text-page {
-display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-z-index: 2000; background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
-align-items: center; justify-content: center; padding: 30px; text-align: center;
-animation: fadeIn 0.3s ease;
-}
-.cookie-speech-box {
-max-width: 750px; width: 100%; padding: 40px;
-}
-.huge-cookie-text {
-font-size: 2.2rem; font-weight: 700; color: #802f6b; line-height: 1.6;
-margin-bottom: 50px; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.02);
-}
- /* DETAY ELEMENTLERİ */
-.cookie-btn { background: #b062de; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(176,98,222,0.35); font-size: 1.2rem; transition: all 0.2s; }
-.cookie-btn:hover { transform: scale(1.05); }
-.quiz-option { background: white; border: 2.5px solid #f0e6f2; padding: 18px; border-radius: 20px; margin: 16px 0; cursor: pointer; text-align: left; transition: all 0.2s; color: #483b4d; font-weight: 600; font-size: 1.2rem; }
-.quiz-option:hover { background: #fff1f4; border-color: #ff477e; color: #ff477e; }
-
-.city-title-tab { font-size: 1.3rem; margin: 22px 0 10px 0; font-weight: bold; background: white; border: 2px solid #f0e6f2; padding: 16px; border-radius: 20px; cursor: pointer; display: flex; justify-content: space-between; color: #3a2e3d; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-.city-title-tab:hover { background: #fff5f7; border-color: #ffb3c6; }
-.photo-gallery { display: none; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; padding: 5px; }
-.photo-gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; border: 4px solid white; box-shadow: 0 5px 12px rgba(0,0,0,0.06); }
-.memory-card { background: #fffbfa; border-left: 5px solid #ff477e; padding: 22px; border-radius: 0 20px 20px 0; margin-bottom: 15px; box-shadow: inset 0 0 10px rgba(0,0,0,0.01); }
-.memory-card p { font-size: 1.2rem; line-height: 1.8; }
-
-.video-gallery { display: flex; flex-direction: column; gap: 15px; }
-.video-btn { display: flex; align-items: center; justify-content: space-between; background: white; border: 2px solid #ffe3eb; color: #483b4d; text-decoration: none; padding: 20px 25px; border-radius: 22px; font-weight: bold; box-shadow: 0 5px 12px rgba(0,0,0,0.02); transition: all 0.2s; font-size: 1.2rem; }
-.video-btn:hover { background: #ff477e; color: white; border-color: #ff477e; }
-</style>
+        .video-gallery { display: flex; flex-direction: column; gap: 15px; }
+        .video-btn { display: flex; align-items: center; justify-content: space-between; background: white; border: 2px solid #ffe3eb; color: #483b4d; text-decoration: none; padding: 20px 25px; border-radius: 22px; font-weight: bold; box-shadow: 0 5px 12px rgba(0,0,0,0.02); transition: all 0.2s; font-size: 1.2rem; }
+        .video-btn:hover { background: #ff477e; color: white; border-color: #ff477e; }
+    </style>
 </head>
 <body>
 
-<!-- Gelişmiş Efekt Ekranı -->
-<div class="effect-container" id="global-effects"></div>
+    <div class="effect-container" id="global-effects"></div>
 
-<!-- GÜVENLİ ÇIKIŞ BUTONU -->
-<button class="logout-btn" id="logout-button" onclick="guvenliCikis()">🔒 Güvenli Çıkış</button>
+    <button class="logout-btn" id="logout-button" onclick="guvenliCikis()">🔒 Güvenli Çıkış</button>
 
-<!-- 1. ŞİFRE EKRANI -->
-<div id="lock-screen">
-<div class="lock-box">
-<h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
-<p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
-<input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
-<button onclick="kontrolEt()">Anılarımızı Aç ✨</button>
-<p id="error-message" class="error-msg"></p>
-</div>
-</div>
+    <div id="lock-screen">
+        <div class="lock-box">
+            <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
+            <p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
+            <input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
+            <button onclick="kontrolEt()">Anılarımızı Aç ✨</button>
+            <p id="error-message" class="error-msg"></p>
+        </div>
+    </div>
 
-<!-- 2. ANA İÇERİK -->
-<div id="main-content">
-<div class="container">
+    <div id="main-content">
+        <div class="container">
+            
+            <div class="glass-panel cover-section">
+                <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
+                <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
+            </div>
+            
+            <div class="glass-panel timer-section">
+                <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
+                <div class="countdown-container">
+                    <div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
+                    <div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
+                    <div class="time-box"><div class="num" id="t-dakika">00</div><div class="label">Dk</div></div>
+                    <div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
+                </div>
+            </div>
 
-<div class="glass-panel cover-section">
-<img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
-<div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
-</div>
+            <div class="glass-panel story-section">
+                <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
+                <p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
+                <p>11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
+            </div>
 
-<div class="glass-panel timer-section">
-<h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
-<div class="countdown-container">
-<div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
-<div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
-<div class="time-box"><div class="num" id="t-dakika">00</div><div class="label">Dk</div></div>
-<div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
-</div>
-</div>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '❤️')">
+                    <span class="icon">🍪</span>
+                    <span class="title">Şans Kurabiyesi</span>
+                </div>
+                <div class="menu-card" onclick="sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">
+                    <span class="icon">🧐</span>
+                    <span class="title">İlişki Testi</span>
+                </div>
+                <div class="menu-card" onclick="sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '✨')">
+                    <span class="icon">🗺️</span>
+                    <span class="title">Şehir Anıları</span>
+                </div>
+                <div class="menu-card" onclick="sayfaAc('video-page', 'linear-gradient(135deg, #fff5f5 0%, #faeefb 100%)', '❤️')">
+                    <span class="icon">🎥</span>
+                    <span class="title">Bizim Videolarımız</span>
+                </div>
+            </div>
 
-<div class="glass-panel story-section">
-<h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
-<p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
-<p>11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
-</div>
+            <div style="text-align: center; padding: 50px 0 10px 0; font-size: 1.1rem; color: #8a7691; font-weight: bold;">
+                © Tüm hakları saklıdır Mehmet ve Aynur ❤️
+            </div>
+        </div>
+    </div>
 
-<!-- TABLO TİPİ MENÜLER -->
-<div class="menu-grid">
-<div class="menu-card" onclick="sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '❤️')">
-<span class="icon">🍪</span>
-<span class="title">Şans Kurabiyesi</span>
-</div>
-<div class="menu-card" onclick="sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">
-<span class="icon">🧐</span>
-<span class="title">İlişki Testi</span>
-</div>
-<div class="menu-card" onclick="sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '✨')">
-<span class="icon">🗺️</span>
-<span class="title">Şehir Anıları</span>
-</div>
-<div class="menu-card" onclick="sayfaAc('video-page', 'linear-gradient(135deg, #fff5f5 0%, #faeefb 100%)', '❤️')">
-<span class="icon">🎥</span>
-<span class="title">Bizim Videolarımız</span>
-</div>
-</div>
+    <div id="image-viewer" onclick="this.style.display='none'">
+        <span class="close-viewer">&times;</span>
+        <img id="full-image" src="" alt="Tam Ekran">
+    </div>
 
-<div style="text-align: center; padding: 50px 0 10px 0; font-size: 1.1rem; color: #8a7691; font-weight: bold;">
-© Tüm hakları saklıdır Mehmet ve Aynur ❤️
-</div>
-</div>
-</div>
+    <div id="cookie-page" class="sub-page">
+        <div class="sub-page-content" style="text-align: center;">
+            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🔮 Aynuşum'un Şans Kurabiyesi</h2>
+            <p style="color: #524355; margin-bottom: 35px; font-size: 1.25rem;">Aşağıdaki butona basarak kalbimden kopan şans notunu görebilirsin sevgilim.</p>
+            <button class="cookie-btn" onclick="notUretSayfasi()">Kurabiyeyi Kır 🍪</button>
+            <br><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+        </div>
+    </div>
 
-<!-- MODAL SAYFALAR -->
-<div id="cookie-page" class="sub-page">
-<div class="sub-page-content" style="text-align: center;">
-<h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🔮 Aynuşum'un Şans Kurabiyesi</h2>
-<p style="color: #524355; margin-bottom: 35px; font-size: 1.25rem;">Aşağıdaki butona basarak kalbimden kopan şans notunu görebilirsin sevgilim.</p>
-<button class="cookie-btn" onclick="notUretSayfasi()">Kurabiyeyi Kır 🍪</button>
-<br><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
-</div>
-</div>
+    <div id="cookie-text-page">
+        <div class="cookie-speech-box">
+            <div id="huge-cookie-display" class="huge-cookie-text"></div>
+            <button class="close-btn" onclick="sozSayfasiKapat()">Geri Dön ↩</button>
+        </div>
+    </div>
 
-<!-- KOCAMAN SÖZÜN AÇILDIĞI YENİ ÖZEL SAYFA -->
-<div id="cookie-text-page">
-<div class="cookie-speech-box">
-<div id="huge-cookie-display" class="huge-cookie-text"></div>
-<button class="close-btn" onclick="sozSayfasiKapat()">Geri Dön ↩</button>
-</div>
-</div>
+    <div id="quiz-page" class="sub-page">
+        <div class="sub-page-content">
+            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🧐 Aynuşum'un Küçük İlişki Testi</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 25px; font-weight: bold; color: #3a2e3d;">Soru: Mehmet en çok neyi yaparken mutlu olur?</p>
+            <div>
+                <div class="quiz-option" onclick="cevapKontrol(true)">A) Aynur'un gözlerinin içine bakıp elini tutarken 🥰</div>
+                <div class="quiz-option" onclick="cevapKontrol(false)">B) Excel'de devasa tabloları filtrelerken 📊</div>
+                <div class="quiz-option" onclick="cevapKontrol(false)">C) İş güvenliği yönetmeliği okurken 📋</div>
+            </div>
+            <p id="quiz-result" style="margin-top: 25px; font-weight: bold; font-size: 1.3rem;"></p>
+            <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+        </div>
+    </div>
 
-<div id="quiz-page" class="sub-page">
-<div class="sub-page-content">
-<h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🧐 Aynuşum'un Küçük İlişki Testi</h2>
-<p style="font-size: 1.3rem; margin-bottom: 25px; font-weight: bold; color: #3a2e3d;">Soru: Mehmet en çok neyi yaparken mutlu olur?</p>
-<div>
-<div class="quiz-option" onclick="cevapKontrol(true)">A) Aynur'un gözlerinin içine bakıp elini tutarken 🥰</div>
-<div class="quiz-option" onclick="cevapKontrol(false)">B) Excel'de devasa tabloları filtrelerken 📊</div>
-<div class="quiz-option" onclick="cevapKontrol(false)">C) İş güvenliği yönetmeliği okurken 📋</div>
-</div>
-<p id="quiz-result" style="margin-top: 25px; font-weight: bold; font-size: 1.3rem;"></p>
-<button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
-</div>
-</div>
+    <div id="memory-page" class="sub-page">
+        <div class="sub-page-content" style="text-align: left;">
+            <h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">🗺️ Şehir Şehir Bizim Hikayemiz</h2>
+            
+            <div class="city-title-tab" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız <span>✨</span></div>
+            <div class="memory-card">
+                <p style="font-style: italic; color: #524355;">"Isparta'nın o güzel havasında, yan yana attığımız her adım dün gibi aklımda sevgilim..."</p>
+                <div id="isparta-gallery" class="photo-gallery">
+                    <img src="isparta1.jpg" alt="1"><img src="isparta2.jpg" alt="2"><img src="isparta3.jpg" alt="3"><img src="isparta4.jpg" alt="4"><img src="isparta5.jpg" alt="5"><img src="isparta6.jpg" alt="6"><img src="isparta7.jpg" alt="7"><img src="isparta8.jpg" alt="8"><img src="isparta9.jpg" alt="9"><img src="isparta10.jpg" alt="10"><img src="isparta11.jpg" alt="11"><img src="isparta12.jpg" alt="12"><img src="isparta13.jpg" alt="13">
+                </div>
+            </div>
 
-<div id="memory-page" class="sub-page">
-<div class="sub-page-content" style="text-align: left;">
-<h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">🗺️ Şehir Şehir Bizim Hikayemiz</h2>
+            <div class="city-title-tab" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız <span>✨</span></div>
+            <div class="memory-card">
+                <p style="font-style: italic; color: #524355;">"Mersin sahilinde, arabada seninle zamanı durdurduğumuz o anlar benim en büyük huzurum..."</p>
+                <div id="mersin-gallery" class="photo-gallery">
+                    <img src="mersin1.jpg" alt="1"><img src="mersin2.jpg" alt="2"><img src="mersin3.jpg" alt="3"><img src="mersin4.jpg" alt="4">
+                </div>
+            </div>
 
-<div class="city-title-tab" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız <span>✨</span></div>
-<div class="memory-card">
-<p style="font-style: italic; color: #524355;">"Isparta'nın o güzel havasında, yan yana attığımız her adım dün gibi aklımda sevgilim..."</p>
-<div id="isparta-gallery" class="photo-gallery">
-<img src="isparta1.jpg" alt="1"><img src="isparta2.jpg" alt="2"><img src="isparta3.jpg" alt="3"><img src="isparta4.jpg" alt="4"><img src="isparta5.jpg" alt="5"><img src="isparta6.jpg" alt="6"><img src="isparta7.jpg" alt="7"><img src="isparta8.jpg" alt="8"><img src="isparta9.jpg" alt="9"><img src="isparta10.jpg" alt="10"><img src="isparta11.jpg" alt="11"><img src="isparta12.jpg" alt="12"><img src="isparta13.jpg" alt="13">
-</div>
-</div>
+            <div class="city-title-tab" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız <span>✨</span></div>
+            <div class="memory-card">
+                <p style="font-style: italic; color: #524355;">"Kendi memleketimde, benim dünyam olan seninle yeni hatıralar biriktirmek..."</p>
+                <div id="hatay-gallery" class="photo-gallery">
+                    <img src="hatay1.jpg" alt="1"><img src="hatay2.jpg" alt="2"><img src="hatay3.jpg" alt="3"><img src="hatay4.jpg" alt="4">
+                </div>
+            </div>
+            <div style="text-align: center;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
+        </div>
+    </div>
 
-<div class="city-title-tab" onclick="toggleSection('mersin-gallery', 'grid')">📍 Mersin Anılarımız <span>✨</span></div>
-<div class="memory-card">
-<p style="font-style: italic; color: #524355;">"Mersin sahilinde, arabada seninle zamanı durdurduğumuz o anlar benim en büyük huzurum..."</p>
-<div id="mersin-gallery" class="photo-gallery">
-<img src="mersin1.jpg" alt="1"><img src="mersin2.jpg" alt="2"><img src="mersin3.jpg" alt="3"><img src="mersin4.jpg" alt="4">
-</div>
-</div>
+    <div id="video-page" class="sub-page">
+        <div class="sub-page-content">
+            <h2 style="color: #ff477e; margin-bottom: 30px; font-size: 1.8rem;">🎥 Bizim Videolarımız</h2>
+            <div class="video-gallery">
+                <a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 1 <span>▶ İzle</span></a>
+                <a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 2 <span>▶ İzle</span></a>
+                <a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 3 <span>▶ İzle</span></a>
+            </div>
+            <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+        </div>
+    </div>
 
-<div class="city-title-tab" onclick="toggleSection('hatay-gallery', 'grid')">📍 Hatay Anılarımız <span>✨</span></div>
-<div class="memory-card">
-<p style="font-style: italic; color: #524355;">"Kendi memleketimde, benim dünyam olan seninle yeni hatıralar biriktirmek..."</p>
-<div id="hatay-gallery" class="photo-gallery">
-<img src="hatay1.jpg" alt="1"><img src="hatay2.jpg" alt="2"><img src="hatay3.jpg" alt="3"><img src="hatay4.jpg" alt="4">
-</div>
-</div>
-<div style="text-align: center;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
-</div>
-</div>
+    <script>
+        var efektInterval;
+        var aktifEfektEmoji = '✨';
+        var yanlisMesajlari = [
+            "Şifre doğru değil Aynuşum, tekrar dene... 😉",
+            "Iı-ıh! Bu tarih bizi tanıştırmadı küserim bak! 😜",
+            "Kalp hafızanı biraz daha zorla sevgilim, bulacaksın! 🗓️",
+            "Yanlış tarih! Yoksa ilk buluşmamızı unuttun mu aşkım? 😱",
+            "Mehmet bu şifreye üzüldü... Doğrusunu bildiğinden eminim! ❤️"
+        ];
 
-<div id="video-page" class="sub-page">
-<div class="sub-page-content">
-<h2 style="color: #ff477e; margin-bottom: 30px; font-size: 1.8rem;">🎥 Bizim Videolarımız</h2>
-<div class="video-gallery">
-<a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 1 <span>▶ İzle</span></a>
-<a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 2 <span>▶ İzle</span></a>
-<a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 3 <span>▶ İzle</span></a>
-</div>
-<button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
-</div>
-</div>
+        var notlar = [
+            "Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
+            "Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
+            "İş güvenliği uzmanıyım ama senin gözlerinin oluşturzada o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
+            "Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
+            "İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
+        ];
 
-<script>
-var efektInterval;
-var aktifEfektEmoji = '✨';
-var yanlisMesajlari = [
-"Şifre doğru değil Aynuşum, tekrar dene... 😉",
-"Iı-ıh! Bu tarih bizi tanıştırmadı küserim bak! 😜",
-"Kalp hafızanı biraz daha zorla sevgilim, bulacaksın! 🗓️",
-"Yanlış tarih! Yoksa ilk buluşmamızı unuttun mu aşkım? 😱",
-"Mehmet bu şifreye üzüldü... Doğrusunu bildiğinden eminim! ❤️"
- ];
+        window.onload = function() {
+            if (localStorage.getItem("aynusum_login") === "true") {
+                sifresizGiris();
+            }
+        };
+// BÜTÜNSEL TARAYICI GERİ TUŞU YÖNETİMİ
+        window.onpopstate = function(event) {
+            if (document.getElementById("image-viewer").style.display === "flex") {
+                document.getElementById("image-viewer").style.display = "none";
+            } else if (document.getElementById("cookie-text-page").style.display === "flex") {
+                sozSayfasiKapat(true);
+            } else {
+                sayfaKapat(true);
+            }
+        };
 
-var notlar = [
-"Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
-"Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
-"İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
-"Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
-"İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
- ];
+        // LIGHTBOX FOTOĞRAF TETİKLEYİCİSİ
+        document.querySelectorAll('.photo-gallery img').forEach(img => {
+            img.onclick = function() {
+                history.pushState({page: "lightbox"}, "");
+                var viewer = document.getElementById("image-viewer");
+                var fullImg = document.getElementById("full-image");
+                viewer.style.display = "flex";
+                fullImg.src = this.src;
+            }
+        });
 
-window.onload = function() {
-if (localStorage.getItem("aynusum_login") === "true") {
-sifresizGiris();
-}
-};
+        // ESC TUŞU İLE FOTOĞRAF KAPATMA
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode == 27) {
+                if (document.getElementById("image-viewer").style.display === "flex") {
+                    history.back();
+                }
+            }
+        };
 
-// TARAYICI GERİ TUŞUNU YÖNETEN SİSTEM
-window.onpopstate = function(event) {
-// Eğer açılmış bir söz sayfası varsa önce onu kapat
-if (document.getElementById("cookie-text-page").style.display === "flex") {
-sozSayfasiKapat(true);
-} else {
-// Diğer modallar açıksa onları kapat
-sayfaKapat(true);
-}
-};
+        function kontrolEt() {
+            var input = document.getElementById("password-input").value.trim();
+            if (input === "04102025") {
+                localStorage.setItem("aynusum_login", "true");
+                sifresizGiris();
+            } else {
+                var rastgeleMesaj = yanlisMesajlari[Math.floor(Math.random() * yanlisMesajlari.length)];
+                var errEl = document.getElementById("error-message");
+                errEl.innerText = rastgeleMesaj;
+                errEl.style.display = "block";
+                document.getElementById("password-input").value = "";
+            }
+        }
 
-function kontrolEt() {
-var input = document.getElementById("password-input").value.trim();
-if (input === "04102025") {
-localStorage.setItem("aynusum_login", "true");
-sifresizGiris();
-} else {
-var rastgeleMesaj = yanlisMesajlari[Math.floor(Math.random() * yanlisMesajlari.length)];
-var errEl = document.getElementById("error-message");
-errEl.innerText = rastgeleMesaj;
-errEl.style.display = "block";
-document.getElementById("password-input").value = "";
-}
-}
+        function sifresizGiris() {
+            document.getElementById("lock-screen").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+            document.getElementById("logout-button").style.display = "block";
+            zamanlayiciyiBaslat();
+        }
 
-function sifresizGiris() {
-document.getElementById("lock-screen").style.display = "none";
-document.getElementById("main-content").style.display = "block";
-document.getElementById("logout-button").style.display = "block";
-zamanlayiciyiBaslat();
-}
+        function guvenliCikis() {
+            localStorage.removeItem("aynusum_login");
+            document.getElementById("main-content").style.display = "none";
+            document.getElementById("logout-button").style.display = "none";
+            document.getElementById("error-message").style.display = "none";
+            document.getElementById("password-input").value = "";
+            document.getElementById("lock-screen").style.display = "flex";
+            sayfaKapat(true);
+        }
 
-function guvenliCikis() {
-localStorage.removeItem("aynusum_login");
-document.getElementById("main-content").style.display = "none";
-document.getElementById("logout-button").style.display = "none";
-document.getElementById("error-message").style.display = "none";
-document.getElementById("password-input").value = "";
-document.getElementById("lock-screen").style.display = "flex";
-sayfaKapat(true);
-}
+        function zamanlayiciyiBaslat() {
+            var baslangic = new Date("2025-09-11T00:00:00").getTime();
+            setInterval(function() {
+                var simdi = new Date().getTime();
+                var fark = simdi - baslangic;
+                var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+                var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+                var saniye = Math.floor((fark % (1000 * 60)) / 1000);
+                
+                document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
+                document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
+                document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
+                document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
+            }, 1000);
+        }
 
-function zamanlayiciyiBaslat() {
-var baslangic = new Date("2025-09-11T00:00:00").getTime();
-setInterval(function() {
-var simdi = new Date().getTime();
-var fark = simdi - baslangic;
-var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
-var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
-var saniye = Math.floor((fark % (1000 * 60)) / 1000);
+        function sayfaAc(sayfaId, arkaPlanRenk, emojiKarakteri) {
+            history.pushState({page: sayfaId}, "");
+            var sayfa = document.getElementById(sayfaId);
+            sayfa.style.background = arkaPlanRenk;
+            sayfa.style.display = "block";
+            
+            aktifEfektEmoji = emojiKarakteri;
+            efektBaslat();
+        }
 
-document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
-document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
-document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
-document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
-}, 1000);
-}
+        function sayfaKapat(fromPopState) {
+            if (!fromPopState && history.state !== null) {
+                history.back();
+                return;
+            }
+            document.querySelectorAll('.sub-page').forEach(function(p) {
+                p.style.display = 'none';
+            });
+            efektDurdur();
+        }
 
-function sayfaAc(sayfaId, arkaPlanRenk, emojiKarakteri) {
-// Tarayıcı geçmişine sanal durum ekle (Geri tuşu için)
-history.pushState({page: sayfaId}, "");
+        function notUretSayfasi() {
+            history.pushState({page: "cookie-text"}, "");
+            var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
+            document.getElementById("huge-cookie-display").innerText = rastgeleNot;
+            document.getElementById("cookie-text-page").style.display = "flex";
+            
+            aktifEfektEmoji = '❤️';
+            efektBaslat();
+        }
 
-var sayfa = document.getElementById(sayfaId);
-sayfa.style.background = arkaPlanRenk;
-sayfa.style.display = "block";
+        function sozSayfasiKapat(fromPopState) {
+            if (!fromPopState) {
+                history.back();
+                return;
+            }
+            document.getElementById("cookie-text-page").style.display = "none";
+            aktifEfektEmoji = '❤️';
+            efektBaslat();
+        }
 
-aktifEfektEmoji = emojiKarakteri;
-efektBaslat();
-}
+        function efektBaslat() {
+            efektDurdur();
+            var container = document.getElementById("global-effects");
+            container.style.display = "block";
+            
+            efektInterval = setInterval(function() {
+                var p = document.createElement("div");
+                p.classList.add("floating-emoji");
+                p.innerText = aktifEfektEmoji;
+                
+                p.style.left = Math.random() * 92 + "%"; 
+                var boyut = (Math.random() * 25 + 25) + "px"; 
+                var sure = (Math.random() * 2 + 3.5) + "s";
+                var donme = (Math.random() * 360) + "deg";
+                
+                p.style.setProperty('--size', boyut);
+                p.style.setProperty('--duration', sure);
+                p.style.setProperty('--rot', donme);
+                
+                container.appendChild(p);
+                setTimeout(function() { p.remove(); }, 5500);
+            }, 200);
+        }
 
-function sayfaKapat(fromPopState) {
-// Eğer tarayıcı geri tuşuna basılarak gelinmediyse geçmişi temizle
-if (!fromPopState && history.state !== null) {
-history.back();
-return;
-}
-document.querySelectorAll('.sub-page').forEach(function(p) {
-p.style.display = 'none';
-});
-efektDurdur();
-}
-// ŞANS KURABİYESİ YENİ SAYFA FONKSİYONLARI
-function notUretSayfasi() {
-history.pushState({page: "cookie-text"}, "");
-var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
-document.getElementById("huge-cookie-display").innerText = rastgeleNot;
-document.getElementById("cookie-text-page").style.display = "flex";
+        function efektDurdur() {
+            clearInterval(efektInterval);
+            var container = document.getElementById("global-effects");
+            container.innerHTML = "";
+            container.style.display = "none";
+        }
 
-aktifEfektEmoji = '❤️';
-efektBaslat();
-}
+        function cevapKontrol(dogruMu) {
+            var res = document.getElementById("quiz-result");
+            if(dogruMu) {
+                res.innerHTML = "Doğru Cevap! 🎉 Zaten aksini seçemezdin ki, seni çok seviyorum! ❤️";
+                res.style.color = "#2e7d32";
+            } else {
+                res.innerHTML = "Yanlış! 🧐 Ciddi misin? Mehmet sence bunu mu seçerdi, bi' daha dene!";
+                res.style.color = "#c62828";
+            }
+        }
 
-function sozSayfasiKapat(fromPopState) {
-if (!fromPopState) {
-history.back();
-return;
-}
-document.getElementById("cookie-text-page").style.display = "none";
-// Üstteki efektleri ana modala göre koru veya güncelle
-aktifEfektEmoji = '❤️';
-efektBaslat();
-}
-
-// PARÇACIK EFEKT YÖNETİMİ
-function efektBaslat() {
-efektDurdur();
-var container = document.getElementById("global-effects");
-container.style.display = "block";
-
-efektInterval = setInterval(function() {
-var p = document.createElement("div");
-p.classList.add("floating-emoji");
-p.innerText = aktifEfektEmoji;
-
-p.style.left = Math.random() * 92 + "%";
-var boyut = (Math.random() * 25 + 25) + "px"; // 25px-50px arası daha büyük efektler
-var sure = (Math.random() * 2 + 3.5) + "s";
-var donme = (Math.random() * 360) + "deg";
-
-p.style.setProperty('--size', boyut);
-p.style.setProperty('--duration', sure);
-p.style.setProperty('--rot', donme);
-
-container.appendChild(p);
-setTimeout(function() { p.remove(); }, 5500);
-}, 200);
-}
-
-function efektDurdur() {
-clearInterval(efektInterval);
-var container = document.getElementById("global-effects");
-container.innerHTML = "";
-container.style.display = "none";
-}
-
-function cevapKontrol(dogruMu) {
-var res = document.getElementById("quiz-result");
-if(dogruMu) {
-res.innerHTML = "Doğru Cevap! 🎉 Zaten aksini seçemezdin ki, seni çok seviyorum! ❤️";
-res.style.color = "#2e7d32";
-} else {
-res.innerHTML = "Yanlış! 🧐 Ciddi misin? Mehmet sence bunu mu seçerdi, bi' daha dene!";
-res.style.color = "#c62828";
-}
-}
-
-function toggleSection(id, tip) {
-var el = document.getElementById(id);
-if (el.style.display === "none" || el.style.display === "") {
-el.style.display = tip;
-} else {
-el.style.display = "none";
-}
-}
-</script>
+        function toggleSection(id, tip) {
+            var el = document.getElementById(id);
+            if (el.style.display === "none" || el.style.display === "") {
+                el.style.display = tip;
+            } else {
+                el.style.display = "none";
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>

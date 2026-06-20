@@ -16,7 +16,7 @@
             overflow-x: hidden; 
             position: relative;
             min-height: 100vh;
-            font-size: 1.25rem; /* Büyük fontlar */
+            font-size: 1.25rem;
         }
 
         /* GELİŞMİŞ EMOLİ EFEKT SİSTEMİ */
@@ -26,11 +26,8 @@
         }
         
         .floating-emoji {
-            position: absolute;
-            bottom: -60px;
-            font-size: var(--size);
-            animation: floatUpReal var(--duration) linear infinite;
-            opacity: 0;
+            position: absolute; bottom: -60px; font-size: var(--size);
+            animation: floatUpReal var(--duration) linear infinite; opacity: 0;
             filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
         }
 
@@ -59,8 +56,7 @@
             width: 100%; padding: 18px 25px; background: white;
             border: 2.5px solid #ffd0dd; border-radius: 50px; color: #3a2e3d;
             margin-bottom: 25px; font-size: 1.2rem; text-align: center; outline: none;
-            transition: all 0.3s; font-weight: bold;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.3s; font-weight: bold; box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
         }
         .lock-box input:focus { border-color: #ff477e; box-shadow: 0 0 15px rgba(255,71,126,0.25); }
         .lock-box button {
@@ -76,15 +72,14 @@
             position: fixed; top: 20px; right: 20px; z-index: 998;
             background: rgba(255, 255, 255, 0.95); border: 2px solid #ffd0dd;
             color: #ff477e; padding: 12px 24px; border-radius: 30px; font-weight: bold;
-            cursor: pointer; font-size: 1.05rem; transition: all 0.3s;
-            display: none; backdrop-filter: blur(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            cursor: pointer; font-size: 1.05rem; transition: all 0.3s; display: none;
+            backdrop-filter: blur(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
         .logout-btn:hover { background: #ff477e; color: white; transform: translateY(-2px); }
 
         /* ANA KONTEYNER */
         #main-content { display: none; }
-        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px 50px 20px; }
+        .container { max-width: 950px; margin: 0 auto; padding: 100px 20px 50px 20px; }
         
         .glass-panel {
             background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -92,9 +87,39 @@
             box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
         }
         
-        .cover-section { text-align: center; }
-        .cover-photo { width: 100%; max-height: 520px; object-fit: cover; border-radius: 24px; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
-        .cover-title { font-size: 2.5rem; color: #ff477e; margin-top: 30px; font-weight: 800; line-height: 1.4; }
+        /* Gelişmiş Yan Yana Kapak ve Spotify Düzeni */
+        .cover-wrapper {
+            display: flex; gap: 30px; align-items: stretch; flex-wrap: wrap;
+        }
+        .cover-left { flex: 1.4; min-width: 300px; }
+        .cover-photo { width: 100%; height: 100%; min-height: 380px; object-fit: cover; border-radius: 24px; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+        
+        /* SPOTIFY TARZI ŞARKI KARTI TEMA */
+        .spotify-card {
+            flex: 1; min-width: 280px; background: rgba(24, 24, 24, 0.85); backdrop-filter: blur(15px);
+            border-radius: 24px; padding: 30px; color: white; display: flex; flex-direction: column;
+            justify-content: space-between; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
+        }
+        .spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .spot-logo { width: 30px; height: 30px; opacity: 0.9; }
+        .spot-album-art { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); margin-bottom: 20px; }
+        .spot-info { margin-bottom: 20px; }
+        .spot-track-title { font-size: 1.4rem; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .spot-artist { font-size: 1.05rem; color: #b3b3b3; font-weight: 600; margin-top: 4px; }
+        
+        /* Spotify Oynatıcı Kontrolleri */
+        .spot-progress-container { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .spot-time { font-size: 0.9rem; color: #b3b3b3; min-width: 35px; font-weight: bold; }
+        .spot-progress-bar { flex: 1; height: 5px; background: #4f4f4f; border-radius: 10px; position: relative; cursor: pointer; }
+        .spot-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 10px; transition: width 0.1s linear; }
+        
+        .spot-controls { display: flex; align-items: center; justify-content: center; gap: 25px; }
+        .spot-btn { background: none; border: none; color: #b3b3b3; cursor: pointer; transition: all 0.2s; outline: none; }
+        .spot-btn:hover { color: white; transform: scale(1.05); }
+        .spot-play-btn { background: white; color: black; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .spot-play-btn:hover { transform: scale(1.08); background: #1db954; color: white; }
+
+        .cover-title { font-size: 2.5rem; color: #ff477e; margin-top: 30px; font-weight: 800; line-height: 1.4; text-align: center; }
 
         .timer-section h2 { font-size: 1.6rem; margin-bottom: 25px; color: #9c3c6b; text-align: center; font-weight: 700; }
         .countdown-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
@@ -118,7 +143,7 @@
         }
         .menu-card .icon { font-size: 3.2rem; margin-bottom: 15px; display: block; }
         .menu-card .title { font-size: 1.3rem; font-weight: bold; color: #3a2e3d; }
- /* ALT SAYFALAR / MODALLAR */
+/* ALT SAYFALAR / MODALLAR */
         .sub-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000; padding: 40px 20px; overflow-y: auto;
@@ -147,9 +172,7 @@
             align-items: center; justify-content: center; padding: 30px; text-align: center;
             animation: fadeIn 0.3s ease;
         }
-        .cookie-speech-box {
-            max-width: 750px; width: 100%; padding: 40px;
-        }
+        .cookie-speech-box { max-width: 750px; width: 100%; padding: 40px; }
         .huge-cookie-text {
             font-size: 2.6rem; font-weight: 800; color: #802f6b; line-height: 1.6;
             margin-bottom: 50px; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.02);
@@ -160,12 +183,8 @@
             display: none; position: fixed; z-index: 10005; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.95); backdrop-filter: blur(12px); align-items: center; justify-content: center;
         }
-        #image-viewer img {
-            max-width: 95%; max-height: 90vh; border-radius: 15px; box-shadow: 0 0 40px rgba(255,255,255,0.25);
-        }
-        .close-viewer {
-            position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; font-weight: bold; cursor: pointer; z-index: 10006;
-        }
+        #image-viewer img { max-width: 95%; max-height: 90vh; border-radius: 15px; box-shadow: 0 0 40px rgba(255,255,255,0.25); }
+        .close-viewer { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; font-weight: bold; cursor: pointer; z-index: 10006; }
 
         /* MENÜ DETAY ELEMANLARI */
         .cookie-btn { background: #b062de; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(176,98,222,0.35); font-size: 1.2rem; transition: all 0.2s; }
@@ -189,9 +208,9 @@
 <body>
 
     <div class="effect-container" id="global-effects"></div>
-
     <button class="logout-btn" id="logout-button" onclick="guvenliCikis()">🔒 Güvenli Çıkış</button>
 
+    <!-- 1. ŞİFRE EKRANI -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
@@ -201,12 +220,52 @@
             <p id="error-message" class="error-msg"></p>
         </div>
     </div>
-
+<!-- 2. ANA İÇERİK -->
     <div id="main-content">
         <div class="container">
             
-            <div class="glass-panel cover-section">
-                <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
+            <div class="glass-panel">
+                <div class="cover-wrapper">
+                    <!-- Sol Taraf: Kapak Fotoğrafı -->
+                    <div class="cover-left">
+                        <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
+                    </div>
+                    
+                    <!-- Sağ Taraf: Spotify Şarkı Kartı -->
+                    <div class="spotify-card">
+                        <div class="spot-header">
+                            <span style="font-size: 0.9rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">IKIMIZIN ŞARKISI</span>
+                            <svg class="spot-logo" viewBox="0 0 24 24" fill="#1db954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.182-.413.125-.845-.107-.97-.522-.125-.413.108-.847.522-.972 3.666-1.112 8.242-.57 11.336 1.33.37.227.49.704.26 1.072zm.105-2.836C14.493 8.78 8.7 8.59 5.353 9.607a1 1 0 1 1-.577-1.915c3.842-1.166 10.222-.94 14.187 1.414a1 1 0 0 1-1.022 1.718z"/></svg>
+                        </div>
+                        
+                        <img src="sarki_kapak.jpg" alt="Şarkı Kapak Resmi" class="spot-album-art">
+                        
+                        <div class="spot-info">
+                            <div class="spot-track-title">Bizim En Güzel Hikayemiz 🤍</div>
+                            <div class="spot-artist">Mehmet & Aynur</div>
+                        </div>
+                        
+                        <!-- İlerleme Çubuğu -->
+                        <div class="spot-progress-container">
+                            <span class="spot-time" id="track-current-time">0:00</span>
+                            <div class="spot-progress-bar" onclick="sureAyarla(event)">
+                                <div class="spot-progress-fill" id="track-progress"></div>
+                            </div>
+                            <span class="spot-time" id="track-total-time">0:00</span>
+                        </div>
+                        
+                        <!-- Kontrol Butonları -->
+                        <div class="spot-controls">
+                            <button class="spot-btn" style="font-size: 1.2rem;">⏮</button>
+                            <button class="spot-btn spot-play-btn" id="play-button" onclick="muzikCalDurdur()">▶</button>
+                            <button class="spot-btn" style="font-size: 1.2rem;">⏭</button>
+                        </div>
+                        
+                        <!-- GERÇEK SES ALTYAPISI -->
+                        <audio id="background-music" src="sarki.mp3" loop></audio>
+                    </div>
+                </div>
+                
                 <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
             </div>
             
@@ -226,22 +285,19 @@
                 <p>11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
             </div>
 
+            <!-- TABLO TİPİ MENÜLER -->
             <div class="menu-grid">
                 <div class="menu-card" onclick="sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '❤️')">
-                    <span class="icon">🍪</span>
-                    <span class="title">Şans Kurabiyesi</span>
+                    <span class="icon">🍪</span><span class="title">Şans Kurabiyesi</span>
                 </div>
                 <div class="menu-card" onclick="sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">
-                    <span class="icon">🧐</span>
-                    <span class="title">İlişki Testi</span>
+                    <span class="icon">🧐</span><span class="title">İlişki Testi</span>
                 </div>
                 <div class="menu-card" onclick="sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '✨')">
-                    <span class="icon">🗺️</span>
-                    <span class="title">Şehir Anıları</span>
+                    <span class="icon">🗺️</span><span class="title">Şehir Anıları</span>
                 </div>
                 <div class="menu-card" onclick="sayfaAc('video-page', 'linear-gradient(135deg, #fff5f5 0%, #faeefb 100%)', '❤️')">
-                    <span class="icon">🎥</span>
-                    <span class="title">Bizim Videolarımız</span>
+                    <span class="icon">🎥</span><span class="title">Bizim Videolarımız</span>
                 </div>
             </div>
 
@@ -251,13 +307,15 @@
         </div>
     </div>
 
+    <!-- LIGHTBOX TAM EKRAN GÖRÜNTÜLEME ALANI -->
     <div id="image-viewer" onclick="this.style.display='none'">
         <span class="close-viewer">&times;</span>
         <img id="full-image" src="" alt="Tam Ekran">
     </div>
 
+    <!-- MODAL SAYFALAR -->
     <div id="cookie-page" class="sub-page">
-        <div class="sub-page-content" style="text-align: center;">
+        <div class="sub-page-content">
             <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🔮 Aynuşum'un Şans Kurabiyesi</h2>
             <p style="color: #524355; margin-bottom: 35px; font-size: 1.25rem;">Aşağıdaki butona basarak kalbimden kopan şans notunu görebilirsin sevgilim.</p>
             <button class="cookie-btn" onclick="notUretSayfasi()">Kurabiyeyi Kır 🍪</button>
@@ -265,6 +323,7 @@
         </div>
     </div>
 
+    <!-- KOCAMAN SÖZÜN AÇILDIĞI YENİ ÖZEL SAYFA -->
     <div id="cookie-text-page">
         <div class="cookie-speech-box">
             <div id="huge-cookie-display" class="huge-cookie-text"></div>
@@ -287,7 +346,7 @@
     </div>
 
     <div id="memory-page" class="sub-page">
-        <div class="sub-page-content" style="text-align: left;">
+        <div class="sub-page-content">
             <h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">🗺️ Şehir Şehir Bizim Hikayemiz</h2>
             
             <div class="city-title-tab" onclick="toggleSection('isparta-gallery', 'grid')">📍 Isparta Anılarımız <span>✨</span></div>
@@ -348,12 +407,39 @@
             "İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
         ];
 
+        var audio = document.getElementById("background-music");
+        var progressFill = document.getElementById("track-progress");
+        var currentTimeEl = document.getElementById("track-current-time");
+        var totalTimeEl = document.getElementById("track-total-time");
+        var playBtn = document.getElementById("play-button");
+
         window.onload = function() {
             if (localStorage.getItem("aynusum_login") === "true") {
                 sifresizGiris();
             }
+            
+            // Şarkı dosyası yüklenince toplam süreyi formatlayıp yazdırır
+            audio.onloadedmetadata = function() {
+                totalTimeEl.innerText = zamanFormatla(audio.duration);
+            };
+            
+            // Şarkı çalarken anlık süre ve ilerleme barı güncellemesi
+            audio.ontimeupdate = function() {
+                if(audio.duration) {
+                    var yuzde = (audio.currentTime / audio.duration) * 100;
+                    progressFill.style.width = yuzde + "%";
+                    currentTimeEl.innerText = zamanFormatla(audio.currentTime);
+                }
+            };
+
+            // Şarkı bittiğinde butonun sıfırlanması
+            audio.onended = function() {
+                playBtn.innerText = "▶";
+                progressFill.style.width = "0%";
+                currentTimeEl.innerText = "0:00";
+            };
         };
-// BÜTÜNSEL TARAYICI GERİ TUŞU YÖNETİMİ
+
         window.onpopstate = function(event) {
             if (document.getElementById("image-viewer").style.display === "flex") {
                 document.getElementById("image-viewer").style.display = "none";
@@ -363,8 +449,7 @@
                 sayfaKapat(true);
             }
         };
-
-        // LIGHTBOX FOTOĞRAF TETİKLEYİCİSİ
+// LIGHTBOX FOTOĞRAF TETİKLEYİCİSİ
         document.querySelectorAll('.photo-gallery img').forEach(img => {
             img.onclick = function() {
                 history.pushState({page: "lightbox"}, "");
@@ -375,13 +460,10 @@
             }
         });
 
-        // ESC TUŞU İLE FOTOĞRAF KAPATMA
         document.onkeydown = function(evt) {
             evt = evt || window.event;
-            if (evt.keyCode == 27) {
-                if (document.getElementById("image-viewer").style.display === "flex") {
-                    history.back();
-                }
+            if (evt.keyCode == 27 && document.getElementById("image-viewer").style.display === "flex") {
+                history.back();
             }
         };
 
@@ -408,6 +490,8 @@
 
         function guvenliCikis() {
             localStorage.removeItem("aynusum_login");
+            audio.pause();
+            playBtn.innerText = "▶";
             document.getElementById("main-content").style.display = "none";
             document.getElementById("logout-button").style.display = "none";
             document.getElementById("error-message").style.display = "none";
@@ -433,12 +517,43 @@
             }, 1000);
         }
 
+        /* GERÇEK SPOTIFY OYNATICI FONKSİYONLARI */
+        function muzikCalDurdur() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playBtn.innerText = "⏸";
+                }).catch(e => {
+                    alert("Müzik dosyası ('sarki.mp3') bulunamadı ya da yüklenemedi. Lütfen klasörde dosyanın adının doğru olduğundan emin olun.");
+                });
+            } else {
+                audio.pause();
+                playBtn.innerText = "▶";
+            }
+        }
+
+        function sureAyarla(e) {
+            var bar = e.currentTarget;
+            var tiklamaX = e.offsetX;
+            var toplamGenislik = bar.offsetWidth;
+            var yuzde = (tiklamaX / toplamGenislik);
+            
+            if(audio.duration) {
+                audio.currentTime = audio.duration * yuzde;
+            }
+        }
+
+        function zamanFormatla(saniye) {
+            if (isNaN(saniye)) return "0:00";
+            var dk = Math.floor(saniye / 60);
+            var sn = Math.floor(saniye % 60);
+            return dk + ":" + (sn < 10 ? "0" + sn : sn);
+        }
+
         function sayfaAc(sayfaId, arkaPlanRenk, emojiKarakteri) {
             history.pushState({page: sayfaId}, "");
             var sayfa = document.getElementById(sayfaId);
             sayfa.style.background = arkaPlanRenk;
             sayfa.style.display = "block";
-            
             aktifEfektEmoji = emojiKarakteri;
             efektBaslat();
         }
@@ -448,9 +563,7 @@
                 history.back();
                 return;
             }
-            document.querySelectorAll('.sub-page').forEach(function(p) {
-                p.style.display = 'none';
-            });
+            document.querySelectorAll('.sub-page').forEach(function(p) { p.style.display = 'none'; });
             efektDurdur();
         }
 
@@ -459,16 +572,12 @@
             var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
             document.getElementById("huge-cookie-display").innerText = rastgeleNot;
             document.getElementById("cookie-text-page").style.display = "flex";
-            
             aktifEfektEmoji = '❤️';
             efektBaslat();
         }
 
         function sozSayfasiKapat(fromPopState) {
-            if (!fromPopState) {
-                history.back();
-                return;
-            }
+            if (!fromPopState) { history.back(); return; }
             document.getElementById("cookie-text-page").style.display = "none";
             aktifEfektEmoji = '❤️';
             efektBaslat();
@@ -483,7 +592,6 @@
                 var p = document.createElement("div");
                 p.classList.add("floating-emoji");
                 p.innerText = aktifEfektEmoji;
-                
                 p.style.left = Math.random() * 92 + "%"; 
                 var boyut = (Math.random() * 25 + 25) + "px"; 
                 var sure = (Math.random() * 2 + 3.5) + "s";
@@ -518,11 +626,7 @@
 
         function toggleSection(id, tip) {
             var el = document.getElementById(id);
-            if (el.style.display === "none" || el.style.display === "") {
-                el.style.display = tip;
-            } else {
-                el.style.display = "none";
-            }
+            el.style.display = (el.style.display === "none" || el.style.display === "") ? tip : "none";
         }
     </script>
 </body>

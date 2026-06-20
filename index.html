@@ -87,37 +87,38 @@
             box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
         }
         
-        /* Gelişmiş Yan Yana Kapak ve Spotify Düzeni */
+        /* Yan Yana Kapak ve Spotify Düzeni Güncellendi */
         .cover-wrapper {
-            display: flex; gap: 30px; align-items: stretch; flex-wrap: wrap;
+            display: flex; gap: 30px; align-items: stretch; justify-content: center; flex-wrap: wrap;
         }
-        .cover-left { flex: 1.4; min-width: 300px; }
-        .cover-photo { width: 100%; height: 100%; min-height: 380px; object-fit: cover; border-radius: 24px; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+        .cover-left { flex: 1.2; min-width: 300px; display: flex; }
+        .cover-photo { width: 100%; height: 100%; min-height: 400px; object-fit: cover; border-radius: 24px; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
         
-        /* SPOTIFY TARZI ŞARKI KARTI TEMA */
+        /* SPOTIFY TARZI ŞARKI KARTI - NETLEŞTİRİLDİ VE SABİTLENDİ */
         .spotify-card {
-            flex: 1; min-width: 280px; background: rgba(24, 24, 24, 0.85); backdrop-filter: blur(15px);
-            border-radius: 24px; padding: 30px; color: white; display: flex; flex-direction: column;
-            justify-content: space-between; box-shadow: 0 15px 35px rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1);
+            flex: 1; min-width: 320px; max-width: 400px; background: #121212 !important;
+            border-radius: 24px; padding: 30px; color: white !important; display: flex; flex-direction: column;
+            justify-content: space-between; box-shadow: 0 15px 35px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1);
+            z-index: 10;
         }
-        .spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-        .spot-logo { width: 30px; height: 30px; opacity: 0.9; }
-        .spot-album-art { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.4); margin-bottom: 20px; }
-        .spot-info { margin-bottom: 20px; }
-        .spot-track-title { font-size: 1.4rem; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .spot-artist { font-size: 1.05rem; color: #b3b3b3; font-weight: 600; margin-top: 4px; }
+        .spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
+        .spot-logo { width: 30px; height: 30px; opacity: 1; }
+        .spot-album-art { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); margin-bottom: 15px; }
+        .spot-info { margin-bottom: 15px; text-align: left; }
+        .spot-track-title { font-size: 1.35rem; font-weight: 800; color: #ffffff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .spot-artist { font-size: 1.05rem; color: #b3b3b3 !important; font-weight: 600; margin-top: 4px; }
         
         /* Spotify Oynatıcı Kontrolleri */
-        .spot-progress-container { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-        .spot-time { font-size: 0.9rem; color: #b3b3b3; min-width: 35px; font-weight: bold; }
+        .spot-progress-container { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .spot-time { font-size: 0.85rem; color: #b3b3b3 !important; min-width: 35px; font-weight: bold; }
         .spot-progress-bar { flex: 1; height: 5px; background: #4f4f4f; border-radius: 10px; position: relative; cursor: pointer; }
-        .spot-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 10px; transition: width 0.1s linear; }
+        .spot-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 10px; position: absolute; left: 0; top: 0; }
         
         .spot-controls { display: flex; align-items: center; justify-content: center; gap: 25px; }
-        .spot-btn { background: none; border: none; color: #b3b3b3; cursor: pointer; transition: all 0.2s; outline: none; }
-        .spot-btn:hover { color: white; transform: scale(1.05); }
-        .spot-play-btn { background: white; color: black; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .spot-play-btn:hover { transform: scale(1.08); background: #1db954; color: white; }
+        .spot-btn { background: none; border: none; color: #b3b3b3 !important; cursor: pointer; transition: all 0.2s; outline: none; font-size: 1.3rem; }
+        .spot-btn:hover { color: white !important; transform: scale(1.05); }
+        .spot-play-btn { background: white !important; color: black !important; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: none; cursor: pointer; transition: all 0.2s; }
+        .spot-play-btn:hover { transform: scale(1.08) !important; background: #1db954 !important; color: white !important; }
 
         .cover-title { font-size: 2.5rem; color: #ff477e; margin-top: 30px; font-weight: 800; line-height: 1.4; text-align: center; }
 
@@ -129,8 +130,7 @@
 
         .story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
         .story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
-
-        /* MENÜ KUTUCUKLARI */
+/* MENÜ KUTUCUKLARI */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 40px; }
         .menu-card {
             background: white; border: 2px solid #ffe3eb; border-radius: 28px; padding: 40px 25px;
@@ -143,7 +143,8 @@
         }
         .menu-card .icon { font-size: 3.2rem; margin-bottom: 15px; display: block; }
         .menu-card .title { font-size: 1.3rem; font-weight: bold; color: #3a2e3d; }
-/* ALT SAYFALAR / MODALLAR */
+
+        /* ALT SAYFALAR / MODALLAR */
         .sub-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000; padding: 40px 20px; overflow-y: auto;
@@ -220,7 +221,8 @@
             <p id="error-message" class="error-msg"></p>
         </div>
     </div>
-<!-- 2. ANA İÇERİK -->
+
+    <!-- 2. ANA İÇERİK -->
     <div id="main-content">
         <div class="container">
             
@@ -234,7 +236,7 @@
                     <!-- Sağ Taraf: Spotify Şarkı Kartı -->
                     <div class="spotify-card">
                         <div class="spot-header">
-                            <span style="font-size: 0.9rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">IKIMIZIN ŞARKISI</span>
+                            <span style="font-size: 0.85rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">IKIMIZIN ŞARKISI</span>
                             <svg class="spot-logo" viewBox="0 0 24 24" fill="#1db954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.182-.413.125-.845-.107-.97-.522-.125-.413.108-.847.522-.972 3.666-1.112 8.242-.57 11.336 1.33.37.227.49.704.26 1.072zm.105-2.836C14.493 8.78 8.7 8.59 5.353 9.607a1 1 0 1 1-.577-1.915c3.842-1.166 10.222-.94 14.187 1.414a1 1 0 0 1-1.022 1.718z"/></svg>
                         </div>
                         
@@ -256,9 +258,9 @@
                         
                         <!-- Kontrol Butonları -->
                         <div class="spot-controls">
-                            <button class="spot-btn" style="font-size: 1.2rem;">⏮</button>
+                            <button class="spot-btn">⏮</button>
                             <button class="spot-btn spot-play-btn" id="play-button" onclick="muzikCalDurdur()">▶</button>
-                            <button class="spot-btn" style="font-size: 1.2rem;">⏭</button>
+                            <button class="spot-btn">⏭</button>
                         </div>
                         
                         <!-- GERÇEK SES ALTYAPISI -->
@@ -306,8 +308,7 @@
             </div>
         </div>
     </div>
-
-    <!-- LIGHTBOX TAM EKRAN GÖRÜNTÜLEME ALANI -->
+<!-- LIGHTBOX TAM EKRAN GÖRÜNTÜLEME ALANI -->
     <div id="image-viewer" onclick="this.style.display='none'">
         <span class="close-viewer">&times;</span>
         <img id="full-image" src="" alt="Tam Ekran">
@@ -327,7 +328,7 @@
     <div id="cookie-text-page">
         <div class="cookie-speech-box">
             <div id="huge-cookie-display" class="huge-cookie-text"></div>
-            <button class="close-btn" onclick="sozSayfasiKapat()">Geri Dön ↩</button>
+            <button class="close-btn" onclick="sozSayfasiKapat(false)">Geri Dön ↩</button>
         </div>
     </div>
 
@@ -402,7 +403,7 @@
         var notlar = [
             "Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
             "Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
-            "İş güvenliği uzmanıyım ama senin gözlerinin oluşturzada o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
+            "İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
             "Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
             "İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
         ];
@@ -418,12 +419,10 @@
                 sifresizGiris();
             }
             
-            // Şarkı dosyası yüklenince toplam süreyi formatlayıp yazdırır
             audio.onloadedmetadata = function() {
                 totalTimeEl.innerText = zamanFormatla(audio.duration);
             };
             
-            // Şarkı çalarken anlık süre ve ilerleme barı güncellemesi
             audio.ontimeupdate = function() {
                 if(audio.duration) {
                     var yuzde = (audio.currentTime / audio.duration) * 100;
@@ -431,9 +430,7 @@
                     currentTimeEl.innerText = zamanFormatla(audio.currentTime);
                 }
             };
-
-            // Şarkı bittiğinde butonun sıfırlanması
-            audio.onended = function() {
+audio.onended = function() {
                 playBtn.innerText = "▶";
                 progressFill.style.width = "0%";
                 currentTimeEl.innerText = "0:00";
@@ -449,7 +446,7 @@
                 sayfaKapat(true);
             }
         };
-// LIGHTBOX FOTOĞRAF TETİKLEYİCİSİ
+
         document.querySelectorAll('.photo-gallery img').forEach(img => {
             img.onclick = function() {
                 history.pushState({page: "lightbox"}, "");
@@ -517,13 +514,12 @@
             }, 1000);
         }
 
-        /* GERÇEK SPOTIFY OYNATICI FONKSİYONLARI */
         function muzikCalDurdur() {
             if (audio.paused) {
                 audio.play().then(() => {
                     playBtn.innerText = "⏸";
                 }).catch(e => {
-                    alert("Müzik dosyası ('sarki.mp3') bulunamadı ya da yüklenemedi. Lütfen klasörde dosyanın adının doğru olduğundan emin olun.");
+                    alert("Müzik dosyası ('sarki.mp3') bulunamadı ya da yüklenemedi. Klasörde dosyanın adının tam olarak 'sarki.mp3' olduğundan emin olun.");
                 });
             } else {
                 audio.pause();
@@ -605,8 +601,7 @@
                 setTimeout(function() { p.remove(); }, 5500);
             }, 200);
         }
-
-        function efektDurdur() {
+function efektDurdur() {
             clearInterval(efektInterval);
             var container = document.getElementById("global-effects");
             container.innerHTML = "";

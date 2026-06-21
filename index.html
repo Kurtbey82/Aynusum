@@ -38,7 +38,7 @@
             100% { transform: translateY(-125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
         }
         
-        /* 1. ŞİFRE EKRANI (BÜYÜTÜLDÜ VE EKRANI KAPLIYOR) */
+        /* 1. ŞİFRE EKRANI */
         #lock-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #ffdeee 0%, #e8dbfc 100%);
@@ -79,9 +79,9 @@
         }
         .logout-btn:hover { background: #ff477e; color: white; transform: translateY(-2px); }
 
-        /* ANA KONTEYNER */
+        /* ANA KONTEYNER (YATAY GENİŞLETİLDİ) */
         #main-content { display: none; }
-        .container { max-width: 750px; margin: 0 auto; padding: 90px 20px 50px 20px; }
+        .container { max-width: 950px; margin: 0 auto; padding: 90px 20px 50px 20px; }
         
         .glass-panel {
             background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -89,39 +89,40 @@
             box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
         }
         
-        /* SPOTIFY KARTI (FOTOĞRAF ORANI ARTTIRILDI, SİYAH ALAN DARALTILDI) */
+        /* SPOTIFY KARTI YENİ EN-BOY ORANI VE DÜZENİ (YANLARA DOĞRU GENİŞ) */
         .spotify-card {
-            width: 100%; background: #121212 !important;
-            border-radius: 24px; padding: 20px; color: white !important; display: flex; flex-direction: column;
-            box-shadow: 0 20px 45px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08);
+            width: 100%; max-width: 100%; background: #121212 !important;
+            border-radius: 28px; padding: 25px; color: white !important; display: flex; flex-direction: column;
+            box-shadow: 0 25px 55px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);
             z-index: 10;
         }
-        .spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; padding: 0 5px; }
         
-        /* Fotoğraf artık çok daha baskın ve büyük */
+        /* Üst alan daraltıldı, logo küçültüldü */
+        .spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 5px; }
+        .spot-logo { width: 22px; height: 22px; fill: #1db954; } /* LOGO KÜÇÜLTÜLDÜ */
+        
+        /* Fotoğraf üst kısımda maksimum yer kaplayacak şekilde yatay ve geniş */
         .spot-album-art { 
             width: 100%; 
-            height: auto;
-            max-height: 550px; 
+            height: 480px; 
             object-fit: cover; 
-            border-radius: 16px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6); 
-            margin-bottom: 15px; 
+            border-radius: 18px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.55); 
+            margin-bottom: 20px; 
         }
+        .spot-info { margin-bottom: 15px; text-align: left; padding: 0 5px; }
+        .spot-track-title { font-size: 1.5rem; font-weight: 800; color: #ffffff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .spot-artist { font-size: 1.1rem; color: #b3b3b3 !important; font-weight: 600; margin-top: 2px; }
         
-        .spot-info { margin-bottom: 12px; text-align: left; padding: 0 5px; }
-        .spot-track-title { font-size: 1.4rem; font-weight: 800; color: #ffffff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .spot-artist { font-size: 1.05rem; color: #b3b3b3 !important; font-weight: 600; margin-top: 2px; }
-        
-        .spot-progress-container { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding: 0 5px; }
-        .spot-time { font-size: 0.85rem; color: #b3b3b3 !important; min-width: 38px; font-weight: bold; }
+        .spot-progress-container { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding: 0 5px; }
+        .spot-time { font-size: 0.9rem; color: #b3b3b3 !important; min-width: 40px; font-weight: bold; }
         .spot-progress-bar { flex: 1; height: 5px; background: #4f4f4f; border-radius: 10px; position: relative; cursor: pointer; }
         .spot-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 10px; position: absolute; left: 0; top: 0; }
         
-        .spot-controls { display: flex; align-items: center; justify-content: center; gap: 25px; }
-        .spot-btn { background: none; border: none; color: #b3b3b3 !important; cursor: pointer; transition: all 0.2s; outline: none; font-size: 1.3rem; }
+        .spot-controls { display: flex; align-items: center; justify-content: center; gap: 30px; }
+        .spot-btn { background: none; border: none; color: #b3b3b3 !important; cursor: pointer; transition: all 0.2s; outline: none; font-size: 1.4rem; }
         .spot-btn:hover { color: white !important; transform: scale(1.05); }
-        .spot-play-btn { background: white !important; color: black !important; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: none; cursor: pointer; transition: all 0.2s; }
+        .spot-play-btn { background: white !important; color: black !important; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: none; cursor: pointer; transition: all 0.2s; }
         .spot-play-btn:hover { transform: scale(1.08) !important; background: #1db954 !important; color: white !important; }
 
         .cover-title { font-size: 2.3rem; color: #ff477e; margin-top: 25px; font-weight: 800; line-height: 1.4; text-align: center; }
@@ -158,7 +159,7 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
         .sub-page-content {
-            max-width: 800px; margin: 40px auto; background: rgba(255, 255, 255, 0.98);
+            max-width: 850px; margin: 40px auto; background: rgba(255, 255, 255, 0.98);
             border: 2px solid #ffe3eb; border-radius: 36px; padding: 50px 40px;
             box-shadow: 0 25px 60px rgba(231, 166, 194, 0.4); position: relative; z-index: 1001;
             font-size: 1.25rem; color: #483b4d;
@@ -198,17 +199,14 @@
         .quiz-option { background: white; border: 2.5px solid #f0e6f2; padding: 18px; border-radius: 20px; margin: 16px 0; cursor: pointer; text-align: left; transition: all 0.2s; color: #483b4d; font-weight: 600; font-size: 1.2rem; }
         .quiz-option:hover { background: #fff1f4; border-color: #ff477e; color: #ff477e; }
         
-        /* 3. YENİ ŞEHİR ANILARI KUTUCUK SİSTEMİ (RESİMLİ KARTLAR) */
-        .city-card-grid {
-            display: flex; flex-direction: column; gap: 25px; margin: 20px 0;
-        }
+        /* ŞEHİR ANILARI KUTUCUK SİSTEMİ */
+        .city-card-grid { display: flex; flex-direction: column; gap: 25px; margin: 20px 0; }
         .city-image-card {
             position: relative; width: 100%; height: 160px; border-radius: 24px;
             overflow: hidden; cursor: pointer; display: flex; align-items: center; padding: 30px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: all 0.3s ease;
             border: 2px solid white;
         }
-        /* Arka plan resmi ve karartma katmanı */
         .city-card-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center; transition: transform 0.5s ease;
@@ -223,9 +221,7 @@
             position: relative; z-index: 3; color: white; font-size: 1.6rem; font-weight: 800;
             display: flex; align-items: center; gap: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        .city-image-card:hover {
-            transform: translateY(-5px); box-shadow: 0 12px 30px rgba(255, 71, 126, 0.25); border-color: #ff477e;
-        }
+        .city-image-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(255, 71, 126, 0.25); border-color: #ff477e; }
         .city-image-card:hover .city-card-bg { transform: scale(1.06); }
 
         /* FOTOĞRAF GALERİ ALANI */
@@ -245,7 +241,7 @@
     <div class="effect-container" id="global-effects"></div>
     <button class="logout-btn" id="logout-button" onclick="guvenliCikis()">🔒 Güvenli Çıkış</button>
 
-    <!-- 1. ŞİFRE EKRANI (DEVASA BOYUTTA) -->
+    <!-- 1. ŞİFRE EKRANI -->
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
@@ -261,13 +257,15 @@
         <div class="container">
             
             <div class="glass-panel">
-                <!-- EN ÜSTTE BÜYÜK FOTOĞRAFLI SPOTIFY KARTI -->
+                <!-- YANLARA DOĞRU GENİŞLETİLMİŞ SPOTIFY KARTI -->
                 <div class="spotify-card">
                     <div class="spot-header">
                         <span style="font-size: 0.85rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">IKIMIZIN ŞARKISI</span>
-                        <svg class="spot-logo" viewBox="0 0 24 24" fill="#1db954"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.182-.413.125-.845-.107-.97-.522-.125-.413.108-.847.522-.972 3.666-1.112 8.242-.57 11.336 1.33.37.227.49.704.26 1.072zm.105-2.836C14.493 8.78 8.7 8.59 5.353 9.607a1 1 0 1 1-.577-1.915c3.842-1.166 10.222-.94 14.187 1.414a1 1 0 0 1-1.022 1.718z"/></svg>
+                        <!-- KÜÇÜLTÜLMÜŞ SPOTIFY SİMGESİ -->
+                        <svg class="spot-logo" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.182-.413.125-.845-.107-.97-.522-.125-.413.108-.847.522-.972 3.666-1.112 8.242-.57 11.336 1.33.37.227.49.704.26 1.072zm.105-2.836C14.493 8.78 8.7 8.59 5.353 9.607a1 1 0 1 1-.577-1.915c3.842-1.166 10.222-.94 14.187 1.414a1 1 0 0 1-1.022 1.718z"/></svg>
                     </div>
                     
+                    <!-- DAHA ÇOK YER KAPLAYAN BÜYÜK FOTOĞRAF -->
                     <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="spot-album-art">
                     
                     <div class="spot-info">
@@ -310,7 +308,8 @@
                 <p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
                 <p>11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
             </div>
-<!-- ANA MENÜ KUTUCUKLARI -->
+
+            <!-- ANA MENÜ KUTUCUKLARI -->
             <div class="menu-grid">
                 <div class="menu-card" onclick="sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '❤️')">
                     <span class="icon">🍪</span><span class="title">Şans Kurabiyesi</span>
@@ -331,7 +330,6 @@
             </div>
         </div>
     </div>
-
     <!-- LIGHTBOX -->
     <div id="image-viewer" onclick="this.style.display='none'">
         <span class="close-viewer">&times;</span>
@@ -368,14 +366,13 @@
             <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
         </div>
     </div>
-    <!-- 3. ŞEHİR ANILARI EKRANI (SİMGELERİ İLK FOTOĞRAF OLAN RESİMLİ KUTUCUKLAR) -->
+
+    <!-- ŞEHİR ANILARI EKRANI -->
     <div id="memory-page" class="sub-page">
         <div class="sub-page-content">
             <h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">🗺️ Şehir Şehir Bizim Hikayemiz</h2>
-            
             <div class="city-card-grid">
                 
-                <!-- Isparta Kartı -->
                 <div class="city-image-card" onclick="toggleCitySection('isparta-card', 'isparta-gallery')">
                     <div class="city-card-bg" style="background-image: url('isparta1.jpg');"></div>
                     <div class="city-card-overlay"></div>
@@ -388,7 +385,6 @@
                     </div>
                 </div>
 
-                <!-- Mersin Kartı -->
                 <div class="city-image-card" onclick="toggleCitySection('mersin-card', 'mersin-gallery')">
                     <div class="city-card-bg" style="background-image: url('mersin1.jpg');"></div>
                     <div class="city-card-overlay"></div>
@@ -401,7 +397,6 @@
                     </div>
                 </div>
 
-                <!-- Hatay Kartı -->
                 <div class="city-image-card" onclick="toggleCitySection('hatay-card', 'hatay-gallery')">
                     <div class="city-card-bg" style="background-image: url('hatay1.jpg');"></div>
                     <div class="city-card-overlay"></div>
@@ -430,7 +425,6 @@
             <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
         </div>
     </div>
-
     <script>
         var efektInterval;
         var aktifEfektEmoji = '✨';
@@ -539,7 +533,6 @@
             document.getElementById("lock-screen").style.display = "flex";
             sayfaKapat(true);
         }
-
         function zamanlayiciyiBaslat() {
             var baslangic = new Date("2025-09-11T00:00:00").getTime();
             setInterval(function() {
@@ -605,6 +598,7 @@
             document.querySelectorAll('.sub-page').forEach(function(p) { p.style.display = 'none'; });
             efektDurdur();
         }
+
         function notUretSayfasi() {
             history.pushState({page: "cookie-text"}, "");
             var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
@@ -662,7 +656,6 @@
             }
         }
 
-        /* ŞEHİR KARTLARINI AÇIP KAPATAN ÖZEL FONKSİYON */
         function toggleCitySection(cardId, galleryId) {
             var card = document.getElementById(cardId);
             var gallery = document.getElementById(galleryId);

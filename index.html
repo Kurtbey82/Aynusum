@@ -17,20 +17,53 @@
             position: relative;
             min-height: 100vh;
             font-size: 1.25rem;
+            padding-top: 80px; /* Sabit header için üst boşluk */
         }
+
+        /* SABİT ÜST NAVİGASYON SÜTUNU */
+        .fixed-header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 75px;
+            background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-bottom: 2px solid #ffe3eb; z-index: 999;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 25px;
+            box-shadow: 0 4px 15px rgba(236, 213, 224, 0.3);
+        }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        .menu-toggle-btn { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #ff477e; transition: transform 0.2s; }
+        .menu-toggle-btn:hover { transform: scale(1.1); }
+        .nav-home-btn { background: #ff477e; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+        .nav-home-btn:hover { background: #ff758c; transform: translateY(-1px); }
+        
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .header-logo { font-size: 1.4rem; font-weight: 800; color: #ff477e; letter-spacing: -0.5px; }
+        .nav-logout-btn { background: none; border: 2px solid #ff477e; color: #ff477e; padding: 7px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; }
+        .nav-logout-btn:hover { background: #ff477e; color: white; }
+
+        /* YAN SÜTUN MENÜ (SIDEBAR) */
+        .sidebar-menu {
+            position: fixed; top: 75px; left: -320px; width: 300px; height: calc(100vh - 75px);
+            background: white; border-right: 2px solid #ffe3eb; z-index: 998;
+            transition: left 0.3s ease; padding: 30px 20px;
+            box-shadow: 5px 0 25px rgba(236, 213, 224, 0.25);
+        }
+        .sidebar-menu.active { left: 0; }
+        .sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+        .sidebar-item { 
+            padding: 15px 20px; background: #fff5f7; border-radius: 15px; 
+            color: #3a2e3d; font-weight: 600; font-size: 1.15rem; cursor: pointer;
+            transition: all 0.2s; border: 1px solid #ffe3eb;
+        }
+        .sidebar-item:hover { background: #ff477e; color: white; border-color: #ff477e; transform: translateX(5px); }
 
         /* GELİŞMİŞ EMOLİ EFEKT SİSTEMİ */
         .effect-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 9999; overflow: hidden; display: none;
         }
-        
         .floating-emoji {
             position: absolute; bottom: -60px; font-size: var(--size);
             animation: floatUpReal var(--duration) linear infinite; opacity: 0;
-            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
         }
-
         @keyframes floatUpReal {
             0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
             15% { opacity: 0.9; }
@@ -38,7 +71,7 @@
             100% { transform: translateY(-125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
         }
         
-        /* 1. ŞİFRE EKRANI */
+        /* ŞİFRE EKRANI */
         #lock-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #ffdeee 0%, #e8dbfc 100%);
@@ -46,42 +79,75 @@
             z-index: 10000; padding: 15px; text-align: center;
         }
         .lock-box {
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(25px);
             border: 2px solid rgba(255, 255, 255, 0.7); padding: 60px 40px; border-radius: 40px;
             box-shadow: 0 30px 60px rgba(231, 166, 194, 0.4); 
             max-width: 95%; width: 1100px; min-height: 85vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .lock-box h1 { font-size: 3.5rem; margin-bottom: 30px; color: #ff477e; font-weight: 800; line-height: 1.2; letter-spacing: -1px; }
-        .lock-box p { color: #524355; font-size: 1.6rem; margin: 0 auto 40px auto; line-height: 1.8; font-weight: 500; max-width: 850px; }
+        .lock-box h1 { font-size: 3.5rem; margin-bottom: 30px; color: #ff477e; font-weight: 800; line-height: 1.2; }
+        .lock-box p { color: #524355; font-size: 1.6rem; margin: 0 auto 40px auto; line-height: 1.8; max-width: 850px; font-weight: 500; }
         .lock-box input {
-            width: 100%; max-width: 500px; padding: 22px 30px; background: white;
-            border: 3px solid #ffd0dd; border-radius: 50px; color: #3a2e3d;
-            margin-bottom: 30px; font-size: 1.4rem; text-align: center; outline: none;
-            transition: all 0.3s; font-weight: bold; box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);
+            width: 100%; max-width: 500px; padding: 22px 30px; border: 3px solid #ffd0dd; border-radius: 50px;
+            margin-bottom: 30px; font-size: 1.4rem; text-align: center; outline: none; font-weight: bold;
         }
         .lock-box input:focus { border-color: #ff477e; box-shadow: 0 0 20px rgba(255,71,126,0.3); }
         .lock-box button {
             background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%); color: white; border: none; padding: 20px 50px;
             border-radius: 50px; font-size: 1.4rem; cursor: pointer; width: 100%; max-width: 500px; font-weight: bold;
-            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.35); transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 71, 126, 0.35);
         }
-        .lock-box button:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255, 71, 126, 0.45); }
         .error-msg { color: #de354c; font-size: 1.4rem; margin-top: 25px; display: none; font-weight: bold; }
 
-        /* GÜVENLİ ÇIKIŞ BUTONU */
-        .logout-btn {
-            position: fixed; top: 20px; right: 20px; z-index: 998;
-            background: rgba(255, 255, 255, 0.95); border: 2px solid #ffd0dd;
-            color: #ff477e; padding: 12px 24px; border-radius: 30px; font-weight: bold;
-            cursor: pointer; font-size: 1.05rem; transition: all 0.3s; display: none;
-            backdrop-filter: blur(5px); box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        /* İNTERAKTİF PASTA VE DOĞUM GÜNÜ EKRANI */
+        #birthday-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #fff0f3 0%, #f7e6ff 100%);
+            z-index: 10005; display: none; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 20px;
         }
-        .logout-btn:hover { background: #ff477e; color: white; transform: translateY(-2px); }
+        .birthday-close-btn {
+            position: absolute; top: 30px; right: 30px; background: none; border: none;
+            font-size: 2.5rem; color: #ff477e; cursor: pointer; font-weight: bold; transition: transform 0.2s;
+        }
+        .birthday-close-btn:hover { transform: scale(1.2); }
+        
+        /* Pasta ve Mum CSS Tasarımı */
+        .cake-container { position: relative; width: 200px; height: 200px; margin: 30px 0; }
+        .cake-base { position: absolute; bottom: 0; width: 200px; height: 100px; background: #f4a261; border-radius: 20px 20px 10px 10px; box-shadow: 0 8px 0 #e76f51; }
+        .cake-cream { position: absolute; bottom: 60px; width: 200px; height: 40px; background: #fff; border-radius: 20px; }
+        .candle { position: absolute; bottom: 100px; left: 90px; width: 20px; height: 60px; background: #e9c46a; border-radius: 5px; }
+        .flame { 
+            position: absolute; bottom: 160px; left: 93px; width: 14px; height: 25px; 
+            background: #ffb703; border-radius: 50% 50% 20% 20%; 
+            animation: flicker 0.1s ease-in-out infinite alternate;
+        }
+        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1) rotate(2deg); } }
+        
+        .blowing-wind {
+            position: absolute; width: 150px; height: 10px; background: rgba(255,255,255,0.8);
+            border-radius: 10px; top: 50%; left: -200px; opacity: 0;
+        }
+        @keyframes windBlow {
+            0% { left: -200px; opacity: 0; }
+            50% { left: 90px; opacity: 1; }
+            100% { left: 400px; opacity: 0; }
+        }
 
-        /* ANA KONTEYNER (YATAY GENİŞLETİLDİ) */
+        .countdown-number { font-size: 5rem; font-weight: 800; color: #ff477e; margin: 20px 0; }
+        .bday-h1 { font-size: 3rem; color: #ff477e; font-weight: 800; display: none; }
+        
+        /* Mektup Kartı */
+        .bday-letter-card {
+            background: white; padding: 40px; border-radius: 30px; border: 2px solid #ffe3eb;
+            box-shadow: 0 15px 40px rgba(231, 166, 194, 0.3); max-width: 700px; display: none;
+            animation: fadeIn 0.5s ease forwards; margin-top: 20px;
+        }
+        .bday-letter-card p { font-size: 1.35rem; line-height: 1.9; color: #483b4d; font-weight: 500; }
+
+        /* ANA KONTEYNER */
         #main-content { display: none; }
-        .container { max-width: 950px; margin: 0 auto; padding: 90px 20px 50px 20px; }
+        .container { max-width: 950px; margin: 0 auto; padding: 30px 20px 50px 20px; }
         
         .glass-panel {
             background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -89,29 +155,22 @@
             box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
         }
         
-        /* SPOTIFY KARTI YENİ EN-BOY ORANI VE DÜZENİ (YANLARA DOĞRU GENİŞ) */
+        /* SPOTIFY KARTI YATAY TASARIM */
         .spotify-card {
-            width: 100%; max-width: 100%; background: #121212 !important;
+            width: 100%; background: #121212 !important;
             border-radius: 28px; padding: 25px; color: white !important; display: flex; flex-direction: column;
             box-shadow: 0 25px 55px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08);
-            z-index: 10;
         }
-        
-        /* Üst alan daraltıldı, logo küçültüldü */
         .spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 5px; }
-        .spot-logo { width: 22px; height: 22px; fill: #1db954; } /* LOGO KÜÇÜLTÜLDÜ */
+        .spot-logo { width: 22px; height: 22px; fill: #1db954; }
         
-        /* Fotoğraf üst kısımda maksimum yer kaplayacak şekilde yatay ve geniş */
         .spot-album-art { 
-            width: 100%; 
-            height: 480px; 
-            object-fit: cover; 
-            border-radius: 18px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.55); 
-            margin-bottom: 20px; 
+            width: 100%; height: 480px; object-fit: cover; border-radius: 18px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.55); margin-bottom: 20px; 
         }
+        
         .spot-info { margin-bottom: 15px; text-align: left; padding: 0 5px; }
-        .spot-track-title { font-size: 1.5rem; font-weight: 800; color: #ffffff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .spot-track-title { font-size: 1.5rem; font-weight: 800; color: #ffffff !important; }
         .spot-artist { font-size: 1.1rem; color: #b3b3b3 !important; font-weight: 600; margin-top: 2px; }
         
         .spot-progress-container { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding: 0 5px; }
@@ -120,128 +179,98 @@
         .spot-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 10px; position: absolute; left: 0; top: 0; }
         
         .spot-controls { display: flex; align-items: center; justify-content: center; gap: 30px; }
-        .spot-btn { background: none; border: none; color: #b3b3b3 !important; cursor: pointer; transition: all 0.2s; outline: none; font-size: 1.4rem; }
-        .spot-btn:hover { color: white !important; transform: scale(1.05); }
-        .spot-play-btn { background: white !important; color: black !important; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: none; cursor: pointer; transition: all 0.2s; }
-        .spot-play-btn:hover { transform: scale(1.08) !important; background: #1db954 !important; color: white !important; }
+        .spot-btn { background: none; border: none; color: #b3b3b3 !important; cursor: pointer; font-size: 1.4rem; }
+        .spot-play-btn { background: white !important; color: black !important; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; border: none; cursor: pointer; }
+        .spot-play-btn:hover { background: #1db954 !important; color: white !important; transform: scale(1.05); }
 
-        .cover-title { font-size: 2.3rem; color: #ff477e; margin-top: 25px; font-weight: 800; line-height: 1.4; text-align: center; }
+        .cover-title { font-size: 2.3rem; color: #ff477e; margin-top: 25px; font-weight: 800; text-align: center; }
 
+        /* SAYAÇ */
         .timer-section h2 { font-size: 1.6rem; margin-bottom: 25px; color: #9c3c6b; text-align: center; font-weight: 700; }
         .countdown-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .time-box { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; min-width: 110px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.02); }
-        .time-box .num { font-size: 2.3rem; font-weight: 800; color: #ff477e; line-height: 1; }
+        .time-box { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; min-width: 110px; text-align: center; }
+        .time-box .num { font-size: 2.3rem; font-weight: 800; color: #ff477e; }
         .time-box .label { font-size: 1rem; color: #7d6585; font-weight: bold; margin-top: 6px; }
 
         .story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
         .story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
-
-        /* MENÜ KUTUCUKLARI */
+        /* ANA MENÜ KUTUCUKLARI */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 40px; }
         .menu-card {
             background: white; border: 2px solid #ffe3eb; border-radius: 28px; padding: 40px 25px;
             text-align: center; cursor: pointer; transition: all 0.3s ease;
             box-shadow: 0 6px 20px rgba(236, 213, 224, 0.4);
         }
-        .menu-card:hover {
-            transform: translateY(-8px); background: #fff1f4;
-            border-color: #ffb3c6; box-shadow: 0 15px 30px rgba(255, 71, 126, 0.18);
-        }
+        .menu-card:hover { transform: translateY(-8px); background: #fff1f4; border-color: #ffb3c6; }
         .menu-card .icon { font-size: 3.2rem; margin-bottom: 15px; display: block; }
         .menu-card .title { font-size: 1.3rem; font-weight: bold; color: #3a2e3d; }
 
-        /* ALT SAYFALAR / MODALLAR */
+        /* MODALLAR / ALT SAYFALAR */
         .sub-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1000; padding: 40px 20px; overflow-y: auto;
+            z-index: 1000; padding: 90px 20px 40px 20px; overflow-y: auto;
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             animation: fadeIn 0.4s ease forwards;
         }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
         .sub-page-content {
-            max-width: 850px; margin: 40px auto; background: rgba(255, 255, 255, 0.98);
+            max-width: 850px; margin: 0 auto; background: rgba(255, 255, 255, 0.98);
             border: 2px solid #ffe3eb; border-radius: 36px; padding: 50px 40px;
-            box-shadow: 0 25px 60px rgba(231, 166, 194, 0.4); position: relative; z-index: 1001;
-            font-size: 1.25rem; color: #483b4d;
+            box-shadow: 0 25px 60px rgba(231, 166, 194, 0.4); position: relative;
         }
         .close-btn {
             background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%);
             color: white; border: none; padding: 14px 35px; border-radius: 50px;
-            font-weight: bold; cursor: pointer; margin-top: 40px; box-shadow: 0 6px 18px rgba(255, 71, 126, 0.25);
-            font-size: 1.15rem; transition: all 0.2s;
-        }
-        .close-btn:hover { transform: scale(1.05); }
-
-        /* KOCAMAN SÖZ SAYFASI */
-        #cookie-text-page {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2000; background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
-            align-items: center; justify-content: center; padding: 30px; text-align: center;
-            animation: fadeIn 0.3s ease;
-        }
-        .cookie-speech-box { max-width: 750px; width: 100%; padding: 40px; }
-        .huge-cookie-text {
-            font-size: 2.6rem; font-weight: 800; color: #802f6b; line-height: 1.6;
-            margin-bottom: 50px; font-style: italic; text-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            font-weight: bold; cursor: pointer; margin-top: 40px; font-size: 1.15rem;
         }
 
-        /* LIGHTBOX */
-        #image-viewer {
-            display: none; position: fixed; z-index: 10005; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.95); backdrop-filter: blur(12px); align-items: center; justify-content: center;
-        }
-        #image-viewer img { max-width: 95%; max-height: 90vh; border-radius: 15px; box-shadow: 0 0 40px rgba(255,255,255,0.25); }
-        .close-viewer { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; font-weight: bold; cursor: pointer; z-index: 10006; }
-
-        /* MÜZİK/QUIZ ELEMANLARI */
-        .cookie-btn { background: #b062de; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(176,98,222,0.35); font-size: 1.2rem; transition: all 0.2s; }
-        .cookie-btn:hover { transform: scale(1.05); }
-        .quiz-option { background: white; border: 2.5px solid #f0e6f2; padding: 18px; border-radius: 20px; margin: 16px 0; cursor: pointer; text-align: left; transition: all 0.2s; color: #483b4d; font-weight: 600; font-size: 1.2rem; }
+        /* BENİM AGZIMDAN TEST */
+        .quiz-option { background: white; border: 2.5px solid #f0e6f2; padding: 18px; border-radius: 20px; margin: 16px 0; cursor: pointer; font-weight: 600; }
         .quiz-option:hover { background: #fff1f4; border-color: #ff477e; color: #ff477e; }
         
-        /* ŞEHİR ANILARI KUTUCUK SİSTEMİ */
+        /* ŞEHİR ANILARI */
         .city-card-grid { display: flex; flex-direction: column; gap: 25px; margin: 20px 0; }
         .city-image-card {
             position: relative; width: 100%; height: 160px; border-radius: 24px;
             overflow: hidden; cursor: pointer; display: flex; align-items: center; padding: 30px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: all 0.3s ease;
-            border: 2px solid white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid white;
         }
-        .city-card-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center; transition: transform 0.5s ease;
-            z-index: 1;
-        }
-        .city-card-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 100%);
-            z-index: 2;
-        }
-        .city-card-text {
-            position: relative; z-index: 3; color: white; font-size: 1.6rem; font-weight: 800;
-            display: flex; align-items: center; gap: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        .city-image-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(255, 71, 126, 0.25); border-color: #ff477e; }
+        .city-card-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s; z-index: 1; }
+        .city-card-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 100%); z-index: 2; }
+        .city-card-text { position: relative; z-index: 3; color: white; font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
         .city-image-card:hover .city-card-bg { transform: scale(1.06); }
 
-        /* FOTOĞRAF GALERİ ALANI */
-        .photo-gallery { display: none; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; padding: 5px; }
-        .photo-gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; border: 4px solid white; box-shadow: 0 5px 12px rgba(0,0,0,0.06); cursor: zoom-in; transition: transform 0.3s; }
-        .photo-gallery img:hover { transform: scale(1.05); }
-        .memory-card { background: #fffbfa; border-left: 5px solid #ff477e; padding: 22px; border-radius: 0 20px 20px 0; margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(0,0,0,0.01); display: none; }
-        .memory-card p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 0; }
+        .photo-gallery { display: none; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; }
+        .photo-gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; border: 4px solid white; cursor: zoom-in; }
+        .memory-card { background: #fffbfa; border-left: 5px solid #ff477e; padding: 22px; border-radius: 0 20px 20px 0; margin-bottom: 25px; display: none; }
 
         .video-gallery { display: flex; flex-direction: column; gap: 15px; }
-        .video-btn { display: flex; align-items: center; justify-content: space-between; background: white; border: 2px solid #ffe3eb; color: #483b4d; text-decoration: none; padding: 20px 25px; border-radius: 22px; font-weight: bold; box-shadow: 0 5px 12px rgba(0,0,0,0.02); transition: all 0.2s; font-size: 1.2rem; }
-        .video-btn:hover { background: #ff477e; color: white; border-color: #ff477e; }
+        .video-btn { display: flex; align-items: center; justify-content: space-between; background: white; border: 2px solid #ffe3eb; color: #483b4d; text-decoration: none; padding: 20px 25px; border-radius: 22px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <div class="effect-container" id="global-effects"></div>
-    <button class="logout-btn" id="logout-button" onclick="guvenliCikis()">🔒 Güvenli Çıkış</button>
+    <div class="fixed-header" id="main-header" style="display: none;">
+        <div class="header-left">
+            <button class="menu-toggle-btn" onclick="toggleSidebar()">☰</button>
+            <button class="nav-home-btn" onclick="sayfaKapat(false)">🏠 Ana Sayfa</button>
+        </div>
+        <div class="header-right">
+            <div class="header-logo">Aynur & Mehmet</div>
+            <button class="nav-logout-btn" onclick="guvenliCikis()">🔒 Güvenli Çıkış</button>
+        </div>
+    </div>
 
-    <!-- 1. ŞİFRE EKRANI -->
+    <div class="sidebar-menu" id="sidebar">
+        <ul class="sidebar-list">
+            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '❤️')">🔮 Seni Neden Seviyorum?</li>
+            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '✨')">🗺️ Aşk Haritası</li>
+            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">📝 İlişki Notları & Testi</li>
+        </ul>
+    </div>
+
+    <div class="effect-container" id="global-effects"></div>
+
     <div id="lock-screen">
         <div class="lock-box">
             <h1>En Güzel Hikayemize Hoş Geldin... 🤍</h1>
@@ -252,20 +281,37 @@
         </div>
     </div>
 
-    <!-- 2. ANA İÇERİK -->
+    <div id="birthday-overlay">
+        <button class="birthday-close-btn" onclick="kapatPastaEkrani()">×</button>
+        <div id="cake-stage">
+            <h2 style="color: #ff477e; font-size: 2rem; margin-bottom: 10px;">🎂 Benim Güzel Doğum Günü Pastam!</h2>
+            <p style="color: #524355; font-size: 1.3rem;">Hazır mısın sevgilim? Geri sayım bitince mumları üfleyelim!</p>
+            <div class="cake-container">
+                <div class="cake-base"></div>
+                <div class="cake-cream"></div>
+                <div class="candle"></div>
+                <div class="flame" id="candle-flame"></div>
+                <div class="blowing-wind" id="wind-effect"></div>
+            </div>
+            <div class="countdown-number" id="bday-countdown">4</div>
+        </div>
+        <h1 class="bday-h1" id="bday-greeting">👏 İyi Ki Doğdun Aynur! 🎉</h1>
+        
+        <div class="bday-letter-card" id="bday-letter">
+            <p><strong>İyi ki doğdun, iyi ki benimlesin sevgilim... 🤍</strong><br><br>
+            Hayatıma girdiğin andan beri her günümü güzelleştiren, bana aşkın ve huzurun en saf halini yaşatan kadına... Doğduğun o muazzam gün, benim de en büyük şansımın doğduğu gündür. Farklı şehirlerde, her bir sokakta bıraktığımız tüm o güzel izler senin sevginle anlam kazandı. Seni çok seviyorum Aynuşum!</p>
+        </div>
+    </div>
+
     <div id="main-content">
         <div class="container">
-            
-            <div class="glass-panel">
-                <!-- YANLARA DOĞRU GENİŞLETİLMİŞ SPOTIFY KARTI -->
+         <div class="glass-panel">
                 <div class="spotify-card">
                     <div class="spot-header">
-                        <span style="font-size: 0.85rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">IKIMIZIN ŞARKISI</span>
-                        <!-- KÜÇÜLTÜLMÜŞ SPOTIFY SİMGESİ -->
+                        <span style="font-size: 0.85rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">İKİMİZİN ŞARKISI</span>
                         <svg class="spot-logo" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.51 9.822 1.128.296.18.387.563.206.862zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.182-.413.125-.845-.107-.97-.522-.125-.413.108-.847.522-.972 3.666-1.112 8.242-.57 11.336 1.33.37.227.49.704.26 1.072zm.105-2.836C14.493 8.78 8.7 8.59 5.353 9.607a1 1 0 1 1-.577-1.915c3.842-1.166 10.222-.94 14.187 1.414a1 1 0 0 1-1.022 1.718z"/></svg>
                     </div>
                     
-                    <!-- DAHA ÇOK YER KAPLAYAN BÜYÜK FOTOĞRAF -->
                     <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="spot-album-art">
                     
                     <div class="spot-info">
@@ -286,15 +332,13 @@
                         <button class="spot-btn spot-play-btn" id="play-button" onclick="muzikCalDurdur()">▶</button>
                         <button class="spot-btn">⏭</button>
                     </div>
-                    
                     <audio id="background-music" src="sarki.mp3" loop></audio>
                 </div>
-                
                 <div class="cover-title">Seni Çok Seviyorum Aynuşum... 🤍</div>
             </div>
             
             <div class="glass-panel timer-section">
-                <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
+                <h2>Seninle Geçen Her Anım Çok Değerli... ⏳</h2>
                 <div class="countdown-container">
                     <div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
                     <div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
@@ -306,10 +350,9 @@
             <div class="glass-panel story-section">
                 <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
                 <p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
-                <p>11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
+                <p>12 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
             </div>
 
-            <!-- ANA MENÜ KUTUCUKLARI -->
             <div class="menu-grid">
                 <div class="menu-card" onclick="sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '❤️')">
                     <span class="icon">🍪</span><span class="title">Şans Kurabiyesi</span>
@@ -324,124 +367,63 @@
                     <span class="icon">🎥</span><span class="title">Bizim Videolarımız</span>
                 </div>
             </div>
-
-            <div style="text-align: center; padding: 50px 0 10px 0; font-size: 1.1rem; color: #8a7691; font-weight: bold;">
-                © Tüm hakları saklıdır Mehmet ve Aynur ❤️
-            </div>
         </div>
     </div>
-    <!-- LIGHTBOX -->
-    <div id="image-viewer" onclick="this.style.display='none'">
-        <span class="close-viewer">&times;</span>
-        <img id="full-image" src="" alt="Tam Ekran">
-    </div>
 
-    <!-- MODAL SAYFALAR -->
     <div id="cookie-page" class="sub-page">
         <div class="sub-page-content">
-            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🔮 Aynuşum'un Şans Kurabiyesi</h2>
-            <p style="color: #524355; margin-bottom: 35px; font-size: 1.25rem;">Aşağıdaki butona basarak kalbimden kopan şans notunu görebilirsin sevgilim.</p>
-            <button class="cookie-btn" onclick="notUretSayfasi()">Kurabiyeyi Kır 🍪</button>
-            <br><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
-        </div>
-    </div>
-
-    <div id="cookie-text-page">
-        <div class="cookie-speech-box">
-            <div id="huge-cookie-display" class="huge-cookie-text"></div>
-            <button class="close-btn" onclick="sozSayfasiKapat(false)">Geri Dön ↩</button>
+            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🔮 Sana Özel Şans Kurabiyesi</h2>
+            <p style="color: #524355; margin-bottom: 35px;">Aşağıdaki butona basarak kalbimden kopan şans notunu görebilirsin sevgilim.</p>
+            <button class="close-btn" onclick="sayfaKapat()">Geri Dön</button>
         </div>
     </div>
 
     <div id="quiz-page" class="sub-page">
         <div class="sub-page-content">
-            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🧐 Aynuşum'un Küçük İlişki Testi</h2>
-            <p style="font-size: 1.3rem; margin-bottom: 25px; font-weight: bold; color: #3a2e3d;">Soru: Mehmet en çok neyi yaparken mutlu olur?</p>
+            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🧐 Senin İçin Küçük Bir Test</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 25px; font-weight: bold;">Soru: Ben en çok neyi yaparken mutlu olurum?</p>
             <div>
-                <div class="quiz-option" onclick="cevapKontrol(true)">A) Aynur'un gözlerinin içine bakıp elini tutarken 🥰</div>
-                <div class="quiz-option" onclick="cevapKontrol(false)">B) Excel'de devasa tabloları filtrelerken 📊</div>
-                <div class="quiz-option" onclick="cevapKontrol(false)">C) İş güvenliği yönetmeliği okurken 📋</div>
+                <div class="quiz-option" onclick="cevapKontrol(true)">A) Senin gözlerinin içine bakıp elini tutarken 🥰</div>
+                <div class="quiz-option" onclick="cevapKontrol(false)">B) Devasa Excel tablolarını filtreleyip uğraşırken 📊</div>
+                <div class="quiz-option" onclick="cevapKontrol(false)">C) İş güvenliği yönetmeliklerini ezberlerken 📋</div>
             </div>
             <p id="quiz-result" style="margin-top: 25px; font-weight: bold; font-size: 1.3rem;"></p>
-            <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+            <button class="close-btn" onclick="sayfaKapat()">Geri Dön</button>
         </div>
     </div>
 
-    <!-- ŞEHİR ANILARI EKRANI -->
     <div id="memory-page" class="sub-page">
         <div class="sub-page-content">
             <h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">🗺️ Şehir Şehir Bizim Hikayemiz</h2>
             <div class="city-card-grid">
-                
                 <div class="city-image-card" onclick="toggleCitySection('isparta-card', 'isparta-gallery')">
                     <div class="city-card-bg" style="background-image: url('isparta1.jpg');"></div>
                     <div class="city-card-overlay"></div>
                     <div class="city-card-text">📍 Isparta Anılarımız ✨</div>
                 </div>
                 <div id="isparta-card" class="memory-card">
-                    <p style="font-style: italic; color: #524355; margin-bottom: 20px;">"Isparta'nın o güzel havasında, yan yana attığımız her adım dün gibi aklımda sevgilim..."</p>
-                    <div id="isparta-gallery" class="photo-gallery">
-                        <img src="isparta1.jpg" alt="1"><img src="isparta2.jpg" alt="2"><img src="isparta3.jpg" alt="3"><img src="isparta4.jpg" alt="4"><img src="isparta5.jpg" alt="5"><img src="isparta6.jpg" alt="6"><img src="isparta7.jpg" alt="7"><img src="isparta8.jpg" alt="8"><img src="isparta9.jpg" alt="9"><img src="isparta10.jpg" alt="10"><img src="isparta11.jpg" alt="11"><img src="isparta12.jpg" alt="12"><img src="isparta13.jpg" alt="13">
-                    </div>
+                    <p style="font-style: italic;">"Isparta'nın o güzel havasında, yan yana attığımız her adım dün gibi aklımda sevgilim..."</p>
+                    <div id="isparta-gallery" class="photo-gallery"><img src="isparta1.jpg" alt="1"></div>
                 </div>
-
-                <div class="city-image-card" onclick="toggleCitySection('mersin-card', 'mersin-gallery')">
-                    <div class="city-card-bg" style="background-image: url('mersin1.jpg');"></div>
-                    <div class="city-card-overlay"></div>
-                    <div class="city-card-text">📍 Mersin Anılarımız ✨</div>
-                </div>
-                <div id="mersin-card" class="memory-card">
-                    <p style="font-style: italic; color: #524355; margin-bottom: 20px;">"Mersin sahilinde, arabada seninle zamanı durdurduğumuz o anlar benim en büyük huzurum..."</p>
-                    <div id="mersin-gallery" class="photo-gallery">
-                        <img src="mersin1.jpg" alt="1"><img src="mersin2.jpg" alt="2"><img src="mersin3.jpg" alt="3"><img src="mersin4.jpg" alt="4">
-                    </div>
-                </div>
-
-                <div class="city-image-card" onclick="toggleCitySection('hatay-card', 'hatay-gallery')">
-                    <div class="city-card-bg" style="background-image: url('hatay1.jpg');"></div>
-                    <div class="city-card-overlay"></div>
-                    <div class="city-card-text">📍 Hatay Anılarımız ✨</div>
-                </div>
-                <div id="hatay-card" class="memory-card">
-                    <p style="font-style: italic; color: #524355; margin-bottom: 20px;">"Kendi memleketimde, benim dünyam olan seninle yeni hatıralar biriktirmek..."</p>
-                    <div id="hatay-gallery" class="photo-gallery">
-                        <img src="hatay1.jpg" alt="1"><img src="hatay2.jpg" alt="2"><img src="hatay3.jpg" alt="3"><img src="hatay4.jpg" alt="4">
-                    </div>
-                </div>
-
             </div>
-            <div style="text-align: center;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
+            <button class="close-btn" onclick="sayfaKapat()">Geri Dön</button>
         </div>
     </div>
 
     <div id="video-page" class="sub-page">
         <div class="sub-page-content">
             <h2 style="color: #ff477e; margin-bottom: 30px; font-size: 1.8rem;">🎥 Bizim Videolarımız</h2>
-            <div class="video-gallery">
-                <a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 1 <span>▶ İzle</span></a>
-                <a href="https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 2 <span>▶ İzle</span></a>
-                <a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">❤️ Isparta Anısı - Video 3 <span>▶ İzle</span></a>
-            </div>
-            <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+            <button class="close-btn" onclick="sayfaKapat()">Geri Dön</button>
         </div>
     </div>
+
     <script>
         var efektInterval;
         var aktifEfektEmoji = '✨';
         var yanlisMesajlari = [
             "Şifre doğru değil Aynuşum, tekrar dene... 😉",
-            "Iı-ıh! Bu tarih bizi tanıştırmadı küserim bak! 😜",
             "Kalp hafızanı biraz daha zorla sevgilim, bulacaksın! 🗓️",
-            "Yanlış tarih! Yoksa ilk buluşmamızı unuttun mu aşkım? 😱",
-            "Mehmet bu şifreye üzüldü... Doğrusunu bildiğinden eminim! ❤️"
-        ];
-
-        var notlar = [
-            "Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
-            "Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
-            "İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
-            "Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
-            "İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
+            "Bu şifreye biraz üzüldüm... Doğrusunu bildiğinden eminim! ❤️"
         ];
 
         var audio = document.getElementById("background-music");
@@ -454,135 +436,114 @@
             if (localStorage.getItem("aynusum_login") === "true") {
                 sifresizGiris();
             }
-            
-            audio.onloadedmetadata = function() {
-                totalTimeEl.innerText = zamanFormatla(audio.duration);
-            };
-            
-            audio.ontimeupdate = function() {
-                if(audio.duration) {
-                    var yuzde = (audio.currentTime / audio.duration) * 100;
-                    progressFill.style.width = yuzde + "%";
-                    currentTimeEl.innerText = zamanFormatla(audio.currentTime);
-                }
-            };
-
-            audio.onended = function() {
-                playBtn.innerText = "▶";
-                progressFill.style.width = "0%";
-                currentTimeEl.innerText = "0:00";
-            };
         };
 
-        window.onpopstate = function(event) {
-            if (document.getElementById("image-viewer").style.display === "flex") {
-                document.getElementById("image-viewer").style.display = "none";
-            } else if (document.getElementById("cookie-text-page").style.display === "flex") {
-                sozSayfasiKapat(true);
-            } else {
-                sayfaKapat(true);
-            }
-        };
-
-        document.querySelectorAll('.photo-gallery img').forEach(img => {
-            img.onclick = function() {
-                history.pushState({page: "lightbox"}, "");
-                var viewer = document.getElementById("image-viewer");
-                var fullImg = document.getElementById("full-image");
-                viewer.style.display = "flex";
-                fullImg.src = this.src;
-            }
-        });
-
-        document.onkeydown = function(evt) {
-            evt = evt || window.event;
-            if (evt.keyCode == 27 && document.getElementById("image-viewer").style.display === "flex") {
-                history.back();
-            }
-        };
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle("active");
+        }
 
         function kontrolEt() {
             var input = document.getElementById("password-input").value.trim();
-            if (input === "04102025") {
+            if (input === "12092025") {
                 localStorage.setItem("aynusum_login", "true");
-                sifresizGiris();
+                
+                // DOĞUM GÜNÜ KONTROLÜ (Test için her zaman ya da 12 Eylül'de çalışır)
+                var bugün = new Date();
+                if (bugün.getMonth() === 8 && bugün.getDate() === 12 || true) { 
+                    baslatPastaAnimasyonu();
+                } else {
+                    sifresizGiris();
+                }
             } else {
                 var rastgeleMesaj = yanlisMesajlari[Math.floor(Math.random() * yanlisMesajlari.length)];
-                var errEl = document.getElementById("error-message");
-                errEl.innerText = rastgeleMesaj;
-                errEl.style.display = "block";
-                document.getElementById("password-input").value = "";
+                document.getElementById("error-message").innerText = rastgeleMesaj;
+                document.getElementById("error-message").style.display = "block";
             }
+        }
+
+        function baslatPastaAnimasyonu() {
+            document.getElementById("lock-screen").style.display = "none";
+            document.getElementById("birthday-overlay").style.display = "flex";
+            
+            var count = 4;
+            var cdEl = document.getElementById("bday-countdown");
+            
+            var interval = setInterval(function() {
+                count--;
+                if(count > 0) {
+                    cdEl.innerText = count;
+                } else if (count === 0) {
+                    cdEl.style.display = "none";
+                    clearInterval(interval);
+                    
+                    // Rüzgar ve Üfleme Efekti
+                    var wind = document.getElementById("wind-effect");
+                    wind.style.animation = "windBlow 1s ease-in-out forwards";
+                    
+                    setTimeout(function() {
+                        document.getElementById("candle-flame").style.display = "none";
+                        playBdayEffects(); // Alkış ve Konfeti
+                    }, 600);
+                }
+            }, 1000);
+        }
+
+        function playBdayEffects() {
+            // Yapay Dijital Alkış Sesi (Audio Web API)
+            try {
+                var ctx = new (window.AudioContext || window.webkitAudioContext)();
+                var bufferSize = ctx.sampleRate * 1.5, buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate), data = buffer.getChannelData(0);
+                for (var i = 0; i < bufferSize; i++) { data[i] = Math.random() * 2 - 1; }
+                var noise = ctx.createBufferSource(); noise.buffer = buffer;
+                var filter = ctx.createBiquadFilter(); filter.type = 'bandpass'; filter.frequency.value = 1000;
+                noise.connect(filter); filter.connect(ctx.destination); noise.start();
+            } catch(e) {}
+
+            document.getElementById("cake-stage").style.display = "none";
+            document.getElementById("bday-greeting").style.display = "block";
+            document.getElementById("bday-letter").style.display = "block";
+            
+            aktifEfektEmoji = '🎉';
+            efektBaslat();
+        }
+
+        function kapatPastaEkrani() {
+            document.getElementById("birthday-overlay").style.display = "none";
+            efektDurdur();
+            sifresizGiris();
         }
 
         function sifresizGiris() {
             document.getElementById("lock-screen").style.display = "none";
             document.getElementById("main-content").style.display = "block";
-            document.getElementById("logout-button").style.display = "block";
+            document.getElementById("main-header").style.display = "flex";
             zamanlayiciyiBaslat();
         }
-
         function guvenliCikis() {
             localStorage.removeItem("aynusum_login");
             audio.pause();
-            playBtn.innerText = "▶";
             document.getElementById("main-content").style.display = "none";
-            document.getElementById("logout-button").style.display = "none";
-            document.getElementById("error-message").style.display = "none";
-            document.getElementById("password-input").value = "";
+            document.getElementById("main-header").style.display = "none";
             document.getElementById("lock-screen").style.display = "flex";
-            sayfaKapat(true);
+            document.getElementById("password-input").value = "";
         }
+
         function zamanlayiciyiBaslat() {
-            var baslangic = new Date("2025-09-11T00:00:00").getTime();
+            var baslangic = new Date("2025-09-12T00:00:00").getTime();
             setInterval(function() {
-                var simdi = new Date().getTime();
-                var fark = simdi - baslangic;
-                var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
-                var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
-                var saniye = Math.floor((fark % (1000 * 60)) / 1000);
-                
-                document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
-                document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
-                document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
-                document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
+                var fark = new Date().getTime() - baslangic;
+                document.getElementById("t-gun").innerText = Math.floor(fark / (1000 * 60 * 60 * 24));
+                document.getElementById("t-saat").innerText = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("t-dakika").innerText = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("t-saniye").innerText = Math.floor((fark % (1000 * 60)) / 1000);
             }, 1000);
         }
 
         function muzikCalDurdur() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    playBtn.innerText = "⏸";
-                }).catch(e => {
-                    alert("Müzik dosyası bulunamadı.");
-                });
-            } else {
-                audio.pause();
-                playBtn.innerText = "▶";
-            }
-        }
-
-        function sureAyarla(e) {
-            var bar = e.currentTarget;
-            var tiklamaX = e.offsetX;
-            var toplamGenislik = bar.offsetWidth;
-            var yuzde = (tiklamaX / toplamGenislik);
-            
-            if(audio.duration) {
-                audio.currentTime = audio.duration * yuzde;
-            }
-        }
-
-        function zamanFormatla(saniye) {
-            if (isNaN(saniye)) return "0:00";
-            var dk = Math.floor(saniye / 60);
-            var sn = Math.floor(saniye % 60);
-            return dk + ":" + (sn < 10 ? "0" + sn : sn);
+            if (audio.paused) { audio.play(); playBtn.innerText = "⏸"; } else { audio.pause(); playBtn.innerText = "▶"; }
         }
 
         function sayfaAc(sayfaId, arkaPlanRenk, emojiKarakteri) {
-            history.pushState({page: sayfaId}, "");
             var sayfa = document.getElementById(sayfaId);
             sayfa.style.background = arkaPlanRenk;
             sayfa.style.display = "block";
@@ -590,83 +551,41 @@
             efektBaslat();
         }
 
-        function sayfaKapat(fromPopState) {
-            if (!fromPopState && history.state !== null) {
-                history.back();
-                return;
-            }
+        function sayfaKapat() {
             document.querySelectorAll('.sub-page').forEach(function(p) { p.style.display = 'none'; });
             efektDurdur();
-        }
-
-        function notUretSayfasi() {
-            history.pushState({page: "cookie-text"}, "");
-            var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
-            document.getElementById("huge-cookie-display").innerText = rastgeleNot;
-            document.getElementById("cookie-text-page").style.display = "flex";
-            aktifEfektEmoji = '❤️';
-            efektBaslat();
-        }
-
-        function sozSayfasiKapat(fromPopState) {
-            if (!fromPopState) { history.back(); return; }
-            document.getElementById("cookie-text-page").style.display = "none";
-            aktifEfektEmoji = '❤️';
-            efektBaslat();
         }
 
         function efektBaslat() {
             efektDurdur();
             var container = document.getElementById("global-effects");
             container.style.display = "block";
-            
             efektInterval = setInterval(function() {
                 var p = document.createElement("div");
                 p.classList.add("floating-emoji");
                 p.innerText = aktifEfektEmoji;
-                p.style.left = Math.random() * 92 + "%"; 
-                var boyut = (Math.random() * 25 + 25) + "px"; 
-                var sure = (Math.random() * 2 + 3.5) + "s";
-                var donme = (Math.random() * 360) + "deg";
-                
-                p.style.setProperty('--size', boyut);
-                p.style.setProperty('--duration', sure);
-                p.style.setProperty('--rot', donme);
-                
+                p.style.left = Math.random() * 92 + "%";
+                p.style.setProperty('--size', (Math.random() * 25 + 25) + "px");
+                p.style.setProperty('--duration', (Math.random() * 2 + 3.5) + "s");
+                p.style.setProperty('--rot', (Math.random() * 360) + "deg");
                 container.appendChild(p);
                 setTimeout(function() { p.remove(); }, 5500);
             }, 200);
         }
 
-        function efektDurdur() {
-            clearInterval(efektInterval);
-            var container = document.getElementById("global-effects");
-            container.innerHTML = "";
-            container.style.display = "none";
-        }
+        function efektDurdur() { clearInterval(efektInterval); document.getElementById("global-effects").innerHTML = ""; }
 
         function cevapKontrol(dogruMu) {
             var res = document.getElementById("quiz-result");
-            if(dogruMu) {
-                res.innerHTML = "Doğru Cevap! 🎉 Zaten aksini seçemezdin ki, seni çok seviyorum! ❤️";
-                res.style.color = "#2e7d32";
-            } else {
-                res.innerHTML = "Yanlış! 🧐 Ciddi misin? Mehmet sence bunu mu seçerdi, bi' daha dene!";
-                res.style.color = "#c62828";
-            }
+            if(dogruMu) { res.innerHTML = "Doğru Cevap! 🎉 Zaten aksini seçemezdin ki, seni çok seviyorum! ❤️"; res.style.color = "#2e7d32"; } 
+            else { res.innerHTML = "Yanlış! 🧐 Ciddi misin? Benim bunu seçeceğimi mi düşündün, bi' daha dene!"; res.style.color = "#c62828"; }
         }
 
         function toggleCitySection(cardId, galleryId) {
             var card = document.getElementById(cardId);
             var gallery = document.getElementById(galleryId);
-            
-            if (card.style.display === "block") {
-                card.style.display = "none";
-                gallery.style.display = "none";
-            } else {
-                card.style.display = "block";
-                gallery.style.display = "grid";
-            }
+            card.style.display = card.style.display === "block" ? "none" : "block";
+            gallery.style.display = gallery.style.display === "grid" ? "none" : "grid";
         }
     </script>
 </body>

@@ -55,21 +55,21 @@
         }
         .sidebar-item:hover { background: #ff477e; color: white; border-color: #ff477e; transform: translateX(5px); }
 
-        /* GELİŞMİŞ EMOJİ VE ÇİÇEK SİSTEMİ */
+        /* GELİŞMİŞ EMOJİ VE ÇİÇEK SİSTEMİ (YUKARIDAN AŞAĞIYA AKIŞ OLMASI İÇİN GÜNCELLENDİ) */
         .effect-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 10006; overflow: hidden; display: none;
         }
         .floating-emoji {
-            position: absolute; bottom: -60px; font-size: var(--size);
-            animation: floatUpReal var(--duration) linear infinite; opacity: 0;
+            position: absolute; top: -60px; font-size: var(--size);
+            animation: floatDownReal var(--duration) linear infinite; opacity: 0;
             filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
         }
-        @keyframes floatUpReal {
+        @keyframes floatDownReal {
             0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
             15% { opacity: 0.9; }
             85% { opacity: 0.9; }
-            100% { transform: translateY(-125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
+            100% { transform: translateY(125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
         }
         
         /* ŞİFRE EKRANI */
@@ -100,16 +100,17 @@
         }
         .lock-box button:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255, 71, 126, 0.45); }
         .error-msg { color: #de354c; font-size: 1.4rem; margin-top: 25px; display: none; font-weight: bold; }
-        /* PASTA EKRANI OVERLAY (DÜZELTİLMİŞ FLEX DÜZENİ) */
+
+        /* PASTA EKRANI OVERLAY */
         #birthday-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, #fff0f3 0%, #f5e1ff 100%);
-            z-index: 1005; display: none; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 1050; display: none; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 30px 20px; overflow-y: auto;
         }
         .birthday-close-btn {
             position: absolute; top: 30px; right: 30px; background: none; border: none;
-            font-size: 2.5rem; color: #ff477e; cursor: pointer; font-weight: bold; transition: transform 0.2s; z-index: 1010;
+            font-size: 2.5rem; color: #ff477e; cursor: pointer; font-weight: bold; transition: transform 0.2s; z-index: 1060;
         }
         .birthday-close-btn:hover { transform: scale(1.2); }
 
@@ -127,14 +128,13 @@
             color: #524355; font-size: 1.4rem; font-weight: 500; z-index: 102; position: relative;
             margin-bottom: 10px; max-width: 600px;
         }
-
-        /* PASTA TASARIMI - ÇAKIŞMALARI ENGELLEYEN BOYUTLANDIRMA */
+        /* PASTA TASARIMI */
         .giant-cake-wrapper {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             position: relative; width: 100%; margin: 20px 0; z-index: 101;
         }
         .cake-3d { 
-            position: relative; width: 360px; height: 260px; /* Ölçekleme yerine doğrudan boyutlar büyütüldü */
+            position: relative; width: 360px; height: 260px;
             display: flex; flex-direction: column; align-items: center; 
         }
         .cake-layer { width: 100%; border-radius: 35px 35px 15px 15px; position: relative; box-shadow: 0 10px 0 rgba(0,0,0,0.06); }
@@ -200,7 +200,6 @@
             border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 32px; padding: 35px; margin-bottom: 40px;
             box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
         }
-        
         /* SPOTIFY KARTI */
         .spotify-card {
             width: 100%; background: #121212 !important;
@@ -235,6 +234,7 @@
 
         .story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
         .story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
+
         /* MODALLAR */
         .sub-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -313,7 +313,6 @@
         }
         .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(142,68,173,0.45); }
         .cookie-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
-
         /* INTERAKTİF KALBİN ODALARI TASARIMI */
         .heart-rooms-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
         .heart-room-card {
@@ -338,6 +337,7 @@
         }
         @keyframes zoomInRoom { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .room-text { font-size: 1.8rem; font-weight: 600; color: #3a2e3d; line-height: 1.7; font-style: italic; margin-bottom: 40px; }
+
         /* LIGHTBOX */
         #image-viewer { display: none; position: fixed; z-index: 10007; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(12px); align-items: center; justify-content: center; }
         #image-viewer img { max-width: 95%; max-height: 90vh; border-radius: 15px; }
@@ -530,10 +530,10 @@
             <button class="close-btn" onclick="odaKapat(false)">Kalbe Geri Dön ↩</button>
         </div>
     </div>
-
     <div id="cookie-page" class="sub-page">
         <div class="sub-page-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
-       <div class="cookie-wrapper">
+            
+            <div class="cookie-wrapper">
                 <div class="cookie-container" id="interactive-cookie" onclick="kirKurabiye()">
                     <div class="cookie-piece cp-1"></div>
                     <div class="cookie-piece cp-2"></div>
@@ -630,15 +630,17 @@
         var efektInterval;
         var aktifEfektEmoji = '✨';
         var bdayEfektInterval;
-        var yanlisMesajlari = [
+        var gecerliSayfaId = ''; // Mevcut açık sayfayı takip etmek için eklendi
+   var yanlisMesajlari = [
             "Şifre doğru değil Aynuşum, tekrar dene... 😉",
             "Kalp hafızanı biraz daha zorla sevgilim, bulacaksın! 🗓️",
             "Bu şifreye biraz üzüldüm... Doğrusunu bildiğinden eminim! ❤️"
         ];
+
         var notlar = [
             "Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
             "Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
-            "İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
+            "İş güvenliği uzmanıyım ama senin gözlerinin oluşturzada oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
             "Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
             "İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
         ];
@@ -720,7 +722,10 @@
 
         function baslatPastaAnimasyonu() {
             document.getElementById("lock-screen").style.display = "none";
-            document.getElementById("birthday-overlay").style.display = "flex";
+            
+            var bdayOverlay = document.getElementById("birthday-overlay");
+            bdayOverlay.style.display = "flex";
+            gecerliSayfaId = "birthday-overlay"; // Pasta sayfasında olduğumuzu işaretledik
             
             var count = 5;
             var cdEl = document.getElementById("bday-countdown");
@@ -733,7 +738,6 @@
                 } else if (count === 0) {
                     cdEl.innerText = "Üfleniyor... 🤍";
                     clearInterval(interval);
-                    
                     setTimeout(function() {
                         cdEl.style.display = "none";
                         document.getElementById("cake-instructions").style.display = "none";
@@ -753,6 +757,7 @@
                 }
             }, 1000);
         }
+
         function mumlariUfleVeKutla() {
             animAudio.play().catch(e => console.log("animasyon.mp3 yüklenemedi"));
             var container = document.getElementById("global-effects");
@@ -769,6 +774,7 @@
                     return;
                 }
                 
+                // Üfleme kutlamasında da emojiler yukarıdan aşağı aksın
                 var p = document.createElement("div");
                 p.classList.add("floating-emoji");
                 p.innerText = cicekler[Math.floor(Math.random() * cicekler.length)];
@@ -822,11 +828,11 @@
             overlay.appendChild(f);
             setTimeout(function() { f.remove(); }, 1000);
         }
-
         function kapatPastaEkrani() {
             clearInterval(bdayEfektInterval);
             animAudio.pause(); animAudio.currentTime = 0;
             document.getElementById("birthday-overlay").style.display = "none";
+            gecerliSayfaId = '';
             efektDurdur();
             sifresizGiris();
         }
@@ -846,6 +852,7 @@
             document.getElementById("lock-screen").style.display = "flex";
             document.getElementById("error-message").style.display = "none";
             document.getElementById("password-input").value = "";
+            gecerliSayfaId = '';
             sayfaKapat(true);
         }
 
@@ -864,6 +871,7 @@
                 document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
             }, 1000);
         }
+
         function muzikCalDurdur() {
             if (audio.paused) { audio.play().then(() => { playBtn.innerText = "⏸"; }).catch(e => { alert("Müzik dosyası bulunamadı."); }); } 
             else { audio.pause(); playBtn.innerText = "▶"; }
@@ -884,12 +892,15 @@
             history.pushState({page: sayfaId}, "");
             var sayfa = document.getElementById(sayfaId);
             sayfa.style.background = arkaPlanRenk; sayfa.style.display = "block";
-            aktifEfektEmoji = emojiKarakteri; efektBaslat();
+            gecerliSayfaId = sayfaId; // Sayfa ID'sini sakla
+            aktifEfektEmoji = emojiKarakteri; 
+            efektBaslat();
         }
 
         function sayfaKapat(fromPopState) {
             if (!fromPopState && history.state !== null) { history.back(); return; }
             document.querySelectorAll('.sub-page').forEach(function(p) { p.style.display = 'none'; });
+            gecerliSayfaId = '';
             efektDurdur();
         }
 
@@ -916,10 +927,9 @@
             breakBtn.disabled = true;
             breakBtn.innerText = "Kurabiye Parçalandı! ❤️";
             
-            aktifEfektEmoji = '❤️'; 
-            efektBaslat();
+            // Kurabiye patlayınca efekt tetiklenmesin istiyoruz çünkü bu sayfada izin yok
+            efektDurdur();
         }
-
         function odaAc(odaId) {
             history.pushState({page: "single-room"}, "");
             var data = odaVerileri[odaId];
@@ -930,6 +940,7 @@
             overlay.style.background = data.bg;
             overlay.style.display = "flex";
             
+            gecerliSayfaId = "love-rooms-page"; // Tekil oda açılsa da kök sayfa sevgi odalarıdır
             aktifEfektEmoji = data.emoji;
             efektBaslat();
         }
@@ -937,12 +948,19 @@
         function odaKapat(fromPopState) {
             if (!fromPopState) { history.back(); return; }
             document.getElementById("single-room-overlay").style.display = "none";
+            gecerliSayfaId = "love-rooms-page";
             aktifEfektEmoji = '💖';
             efektBaslat();
         }
 
         function efektBaslat() {
             efektDurdur();
+            
+            // Kısıtlama Şartı: Sadece pasta ekranı ve seni neden seviyorum sayfasında çalışsın
+            if (gecerliSayfaId !== "birthday-overlay" && gecerliSayfaId !== "love-rooms-page") {
+                return; 
+            }
+            
             var container = document.getElementById("global-effects");
             container.style.display = "block";
             efektInterval = setInterval(function() {

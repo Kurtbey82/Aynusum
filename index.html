@@ -127,6 +127,7 @@
         .layer-top { height: 55px; background: #fff0f3; width: 70%; z-index: 3; margin-top: -25px; border: 3px solid #ffccd5; }
         
         .cream-drip { position: absolute; top: 15px; width: 100%; height: 20px; background: #ffffff; border-radius: 0 0 15px 15px; opacity: 0.9; }
+
         /* 24 TANE MUM YERLEŞİMİ */
         .candles-grid {
             position: absolute; top: -25px; width: 65%; height: 40px;
@@ -217,9 +218,9 @@
         .time-box { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; min-width: 110px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.02); }
         .time-box .num { font-size: 2.3rem; font-weight: 800; color: #ff477e; }
         .time-box .label { font-size: 1rem; color: #7d6585; font-weight: bold; margin-top: 6px; }
-
         .story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
         .story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
+
         /* MODALLAR */
         .sub-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -240,6 +241,74 @@
         }
         .close-btn:hover { transform: scale(1.05); }
 
+        /* YENİ ŞANS KURABİYESİ TASARIMI VE ANİMASYONLARI */
+        .cookie-wrapper {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            margin: 40px 0; min-height: 320px; position: relative;
+        }
+        .cookie-container {
+            position: relative; width: 220px; height: 180px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 0.2s;
+        }
+        .cookie-container:hover { transform: scale(1.05); }
+        
+        /* Kurabiyenin Sol ve Sağ Görsel Parçaları */
+        .cookie-part {
+            position: absolute; width: 120px; height: 160px;
+            background: #e3a857; background: linear-gradient(145deg, #fcd58e 0%, #d4953c 100%);
+            border: 3px solid #b57a26; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+        }
+        .left-part {
+            left: 0; border-radius: 100px 20px 20px 100px;
+            transform-origin: left center;
+        }
+        .right-part {
+            right: 0; border-radius: 20px 100px 100px 20px;
+            transform-origin: right center;
+        }
+        /* Kurabiyenin İç Kıvrım Detayları (CSS Sanatı) */
+        .cookie-part::after {
+            content: ''; position: absolute; width: 30px; height: 60px;
+            background: rgba(0,0,0,0.06); border-radius: 50%; top: 50%; transform: translateY(-50%);
+        }
+        .left-part::after { right: 10px; }
+        .right-part::after { left: 10px; }
+
+        /* Kırılma Durumu CSS Sınıfları */
+        .cookie-container.broken .left-part {
+            transform: translateX(-60px) rotate(-35deg); opacity: 0.85;
+        }
+        .cookie-container.broken .right-part {
+            transform: translateX(60px) rotate(35deg); opacity: 0.85;
+        }
+
+        /* Kurabiyenin İçinden Çıkan Kağıt Not */
+        .cookie-paper {
+            position: absolute; width: 280px; background: #ffffff;
+            border-left: 5px solid #ff477e; padding: 20px; border-radius: 4px 12px 12px 4px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); text-align: center;
+            font-size: 1.25rem; font-weight: 600; color: #483b4d; font-style: italic;
+            line-height: 1.7; opacity: 0; transform: scale(0.4) translateY(0);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2; pointer-events: none;
+        }
+        .cookie-container.broken .cookie-paper {
+            opacity: 1; transform: scale(1) translateY(-110px); pointer-events: auto;
+        }
+
+        .cookie-btn { 
+            background: linear-gradient(90deg, #b062de 0%, #8e44ad 100%); 
+            color: white; border: none; padding: 18px 45px; border-radius: 50px; 
+            font-weight: bold; cursor: pointer; font-size: 1.3rem; 
+            box-shadow: 0 6px 20px rgba(142,68,173,0.35); transition: all 0.2s;
+            margin-top: 25px;
+        }
+        .cookie-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(142,68,173,0.45); }
+        .cookie-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; }
+
         /* INTERAKTİF KALBİN ODALARI TASARIMI */
         .heart-rooms-container {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px;
@@ -250,10 +319,6 @@
             text-align: center; cursor: pointer; transition: all 0.3s ease;
             position: relative; overflow: hidden;
             box-shadow: 0 8px 20px rgba(236, 213, 224, 0.3);
-        }
-        .heart-room-card:hover {
-            transform: scale(1.04); border-style: solid; border-color: #ff477e;
-            box-shadow: 0 12px 25px rgba(255, 71, 126, 0.15);
         }
         .heart-room-icon { font-size: 2.8rem; margin-bottom: 10px; display: inline-block; animation: pulseHeart 2s infinite; }
         @keyframes pulseHeart { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -282,21 +347,6 @@
         #image-viewer img { max-width: 95%; max-height: 90vh; border-radius: 15px; }
         .close-viewer { position: absolute; top: 20px; right: 30px; color: white; font-size: 45px; font-weight: bold; cursor: pointer; }
 
-        .cookie-btn { background: #b062de; color: white; border: none; padding: 16px 35px; border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.2rem; box-shadow: 0 5px 15px rgba(176,98,222,0.35); transition: all 0.2s; }
-        .cookie-btn:hover { transform: scale(1.05); }
-        
-        /* ŞANS KURABİYESİ METİN ALANI */
-        #cookie-text-page {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1500; align-items: center; justify-content: center; padding: 20px;
-            background: rgba(255, 240, 245, 0.98);
-        }
-        .cookie-speech-box {
-            background: white; border: 2px solid #ffe3eb; max-width: 700px; width: 100%;
-            padding: 45px; border-radius: 35px; text-align: center; box-shadow: 0 20px 50px rgba(231,166,194,0.4);
-        }
-        .huge-cookie-text { font-size: 1.6rem; font-weight: 600; color: #483b4d; line-height: 1.8; margin-bottom: 30px; font-style: italic; }
-
         .quiz-option { background: white; border: 2.5px solid #f0e6f2; padding: 18px; border-radius: 20px; margin: 16px 0; cursor: pointer; text-align: left; transition: all 0.2s; font-weight: 600; font-size: 1.2rem; color: #483b4d; }
         .quiz-option:hover { background: #fff1f4; border-color: #ff477e; color: #ff477e; }
         
@@ -324,7 +374,8 @@
     </style>
 </head>
 <body>
-  <div class="fixed-header" id="main-header" style="display: none;">
+
+    <div class="fixed-header" id="main-header" style="display: none;">
         <div class="header-left">
             <button class="menu-toggle-btn" onclick="toggleSidebar()">☰</button>
             <button class="nav-home-btn" onclick="sayfaKapat(false)">🏠 Ana Sayfa</button>
@@ -337,7 +388,7 @@
 
     <div class="sidebar-menu" id="sidebar">
         <ul class="sidebar-list">
-            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '🔮')">🔮 Şans Kurabiyesi</li>
+            <li class="sidebar-item" onclick="toggleSidebar(); temizleVeKurabiyeAc()">🔮 Şans Kurabiyesi</li>
             <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('love-rooms-page', 'linear-gradient(135deg, #fff3f6 0%, #f7eefc 100%)', '💖')">❤️ Seni Neden Seviyorum?</li>
             <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '🗺️')">🗺️ Aşk Haritası (Şehir Anıları)</li>
             <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">📝 İlişki Testi</li>
@@ -376,7 +427,6 @@
             
             <div class="countdown-number" id="bday-countdown">5</div>
         </div>
-
         <h1 class="bday-h1" id="bday-greeting">👏 İyi Ki Doğdun Aynur! 🎉</h1>
         
         <div class="bday-letter-card" id="bday-letter">
@@ -439,6 +489,7 @@
             </div>
         </div>
     </div>
+
     <div id="image-viewer" onclick="this.style.display='none'">
         <span class="close-viewer">&times;</span>
         <img id="full-image" src="" alt="Tam Ekran">
@@ -458,7 +509,7 @@
                     <span class="heart-room-icon">🌊</span>
                     <div class="heart-room-title">Huzur Odası</div>
                 </div>
-                <div class="heart-room-card" onclick="odaAc(3)">
+                <div class="heart-room-card" onclick="omegaAc(3)">
                     <span class="heart-room-icon">🛡️</span>
                     <div class="heart-room-title">Güven Odası</div>
                 </div>
@@ -483,20 +534,20 @@
             <button class="close-btn" onclick="odaKapat(false)">Kalbe Geri Dön ↩</button>
         </div>
     </div>
-
     <div id="cookie-page" class="sub-page">
-        <div class="sub-page-content">
-            <h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">🔮 Sana Özel Şans Kurabiyesi</h2>
-            <p style="color: #524355; margin-bottom: 35px; font-size: 1.25rem;">Aşağıdaki butona basarak kalbimden kopan şans notunu görebilirsin sevgilim.</p>
-            <button class="cookie-btn" onclick="notUretSayfasi()">Kurabiyeyi Kır 🍪</button>
-            <br><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
-        </div>
-    </div>
-
-    <div id="cookie-text-page">
-        <div class="cookie-speech-box">
-            <div id="huge-cookie-display" class="huge-cookie-text"></div>
-            <button class="close-btn" onclick="sozSayfasiKapat(false)">Geri Dön ↩</button>
+        <div class="sub-page-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            
+            <div class="cookie-wrapper">
+                <div class="cookie-container" id="interactive-cookie" onclick="kirKurabiye()">
+                    <div class="cookie-part left-part"></div>
+                    <div class="cookie-paper" id="cookie-note-paper">Not yükleniyor...</div>
+                    <div class="cookie-part right-part"></div>
+                </div>
+                
+                <button class="cookie-btn" id="break-cookie-button" onclick="kirKurabiye()">Kurabiyeyi Kır 🍪</button>
+            </div>
+            
+            <button class="close-btn" style="margin-top: 10px;" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
         </div>
     </div>
 
@@ -559,6 +610,7 @@
             <div style="text-align: center;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
         </div>
     </div>
+
     <div id="video-page" class="sub-page">
         <div class="sub-page-content">
             <h2 style="color: #ff477e; margin-bottom: 30px; font-size: 1.8rem;">🎥 Bizim Videolarımız</h2>
@@ -580,7 +632,6 @@
             "Kalp hafızanı biraz daha zorla sevgilim, bulacaksın! 🗓️",
             "Bu şifreye biraz üzüldüm... Doğrusunu bildiğinden eminim! ❤️"
         ];
-
         var notlar = [
             "Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
             "Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
@@ -636,7 +687,6 @@
         window.onpopstate = function(event) {
             if (document.getElementById("image-viewer").style.display === "flex") { document.getElementById("image-viewer").style.display = "none"; } 
             else if (document.getElementById("single-room-overlay").style.display === "flex") { odaKapat(true); }
-            else if (document.getElementById("cookie-text-page").style.display === "flex") { sozSayfasiKapat(true); } 
             else { sayfaKapat(true); }
         };
 
@@ -664,6 +714,7 @@
                 document.getElementById("password-input").value = "";
             }
         }
+
         function baslatPastaAnimasyonu() {
             document.getElementById("lock-screen").style.display = "none";
             document.getElementById("birthday-overlay").style.display = "flex";
@@ -699,7 +750,6 @@
                 }
             }, 1000);
         }
-
         function mumlariUfleVeKutla() {
             animAudio.play().catch(e => console.log("animasyon.mp3 yüklenemedi"));
             
@@ -773,7 +823,8 @@
             overlay.appendChild(f);
             setTimeout(function() { f.remove(); }, 1000);
         }
-       function kapatPastaEkrani() {
+
+        function kapatPastaEkrani() {
             clearInterval(bdayEfektInterval);
             animAudio.pause();
             animAudio.currentTime = 0;
@@ -808,8 +859,7 @@
                 var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
                 var saniye = Math.floor((fark % (1000 * 60)) / 1000);
-                
-                document.getElementById("t-gun").innerText = gun < 10 ? "0" + gun : gun;
+                ("t-gun").innerText = gun < 10 ? "0" + gun : gun;
                 document.getElementById("t-saat").innerText = saat < 10 ? "0" + saat : saat;
                 document.getElementById("t-dakika").innerText = dakika < 10 ? "0" + dakika : dakika;
                 document.getElementById("t-saniye").innerText = saniye < 10 ? "0" + saniye : saniye;
@@ -845,6 +895,39 @@
             efektDurdur();
         }
 
+        /* YENİ ŞANS KURABİYESİ FONKSİYONLARI */
+        function temizleVeKurabiyeAc() {
+            // Kurabiyeyi eski haline getirip sayfayı açıyoruz
+            var cookieBox = document.getElementById("interactive-cookie");
+            var breakBtn = document.getElementById("break-cookie-button");
+            cookieBox.classList.remove("broken");
+            breakBtn.disabled = false;
+            breakBtn.innerText = "Kurabiyeyi Kır 🍪";
+            
+            sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '🔮');
+        }
+
+        function kirKurabiye() {
+            var cookieBox = document.getElementById("interactive-cookie");
+            var breakBtn = document.getElementById("break-cookie-button");
+            
+            // Eğer zaten kırılmışsa tekrar işlem yapmasın
+            if(cookieBox.classList.contains("broken")) return;
+            
+            // Rastgele notu seçip kağıda yazıyoruz
+            var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
+            document.getElementById("cookie-note-paper").innerText = rastgeleNot;
+            
+            // Animasyonu tetikleyen sınıfı ekliyoruz
+            cookieBox.classList.add("broken");
+            breakBtn.disabled = true;
+            breakBtn.innerText = "Kurabiye Kırıldı! ❤️";
+            
+            // Kalp efektlerini başlat
+            aktifEfektEmoji = '❤️'; 
+            efektBaslat();
+        }
+
         function odaAc(odaId) {
             history.pushState({page: "single-room"}, "");
             var data = odaVerileri[odaId];
@@ -866,19 +949,6 @@
             efektBaslat();
         }
 
-        function notUretSayfasi() {
-            history.pushState({page: "cookie-text"}, "");
-            var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
-            document.getElementById("huge-cookie-display").innerText = rastgeleNot;
-            document.getElementById("cookie-text-page").style.display = "flex";
-            aktifEfektEmoji = '❤️'; efektBaslat();
-        }
-        function sozSayfasiKapat(fromPopState) {
-            if (!fromPopState) { history.back(); return; }
-            document.getElementById("cookie-text-page").style.display = "none";
-            aktifEfektEmoji = '❤️'; efektBaslat();
-        }
-
         function efektBaslat() {
             efektDurdur();
             var container = document.getElementById("global-effects");
@@ -895,7 +965,6 @@
                 setTimeout(function() { p.remove(); }, 5500);
             }, 200);
         }
-
         function efektDurdur() { clearInterval(efektInterval); var container = document.getElementById("global-effects"); container.innerHTML = ""; container.style.display = "none"; }
 
         function cevapKontrol(dogruMu) {
@@ -909,6 +978,8 @@
             if (card.style.display === "block") { card.style.display = "none"; gallery.style.display = "none"; } 
             else { card.style.display = "block"; gallery.style.display = "grid"; }
         }
+        
+        function omegaAc(odaId) { odaAc(odaId); }
     </script>
 </body>
 </html>

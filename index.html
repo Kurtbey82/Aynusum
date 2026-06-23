@@ -127,7 +127,6 @@
         .layer-top { height: 55px; background: #fff0f3; width: 70%; z-index: 3; margin-top: -25px; border: 3px solid #ffccd5; }
         
         .cream-drip { position: absolute; top: 15px; width: 100%; height: 20px; background: #ffffff; border-radius: 0 0 15px 15px; opacity: 0.9; }
-
         /* 24 TANE MUM YERLEŞİMİ */
         .candles-grid {
             position: absolute; top: -25px; width: 65%; height: 40px;
@@ -156,6 +155,7 @@
             40% { left: 50px; opacity: 1; filter: blur(2px); }
             100% { left: 500px; opacity: 0; }
         }
+
         /* HAVAİ FİŞEK EFEKTİ SİSTEMİ */
         .firework {
             position: absolute; width: 6px; height: 6px; border-radius: 50%;
@@ -220,18 +220,6 @@
 
         .story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
         .story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
-
-        /* MENÜ KUTULARI */
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 40px; }
-        .menu-card {
-            background: white; border: 2px solid #ffe3eb; border-radius: 28px; padding: 40px 25px;
-            text-align: center; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(236, 213, 224, 0.4);
-        }
-        .menu-card:hover { transform: translateY(-8px); background: #fff1f4; border-color: #ffb3c6; box-shadow: 0 15px 30px rgba(255, 71, 126, 0.18); }
-        .menu-card .icon { font-size: 3.2rem; margin-bottom: 15px; display: block; }
-        .menu-card .title { font-size: 1.3rem; font-weight: bold; color: #3a2e3d; }
-
         /* MODALLAR */
         .sub-page {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -336,7 +324,7 @@
     </style>
 </head>
 <body>
-    <div class="fixed-header" id="main-header" style="display: none;">
+  <div class="fixed-header" id="main-header" style="display: none;">
         <div class="header-left">
             <button class="menu-toggle-btn" onclick="toggleSidebar()">☰</button>
             <button class="nav-home-btn" onclick="sayfaKapat(false)">🏠 Ana Sayfa</button>
@@ -351,8 +339,9 @@
         <ul class="sidebar-list">
             <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '🔮')">🔮 Şans Kurabiyesi</li>
             <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('love-rooms-page', 'linear-gradient(135deg, #fff3f6 0%, #f7eefc 100%)', '💖')">❤️ Seni Neden Seviyorum?</li>
-            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '🗺️')">🗺️ Aşk Haritası</li>
+            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '🗺️')">🗺️ Aşk Haritası (Şehir Anıları)</li>
             <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">📝 İlişki Testi</li>
+            <li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('video-page', 'linear-gradient(135deg, #fff5f5 0%, #faeefb 100%)', '🎥')">🎥 Bizim Videolarımız</li>
         </ul>
     </div>
 
@@ -437,28 +426,12 @@
                     <div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
                 </div>
             </div>
+
             <div class="glass-panel story-section">
                 <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
                 <p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
                 <p>12 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
-            </div>
-
-            <div class="menu-grid">
-                <div class="menu-card" onclick="sayfaAc('love-rooms-page', 'linear-gradient(135deg, #fff3f6 0%, #f7eefc 100%)', '💖')">
-                    <span class="icon">❤️</span><span class="title">Seni Neden Seviyorum?</span>
-                </div>
-                <div class="menu-card" onclick="sayfaAc('cookie-page', 'linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%)', '🔮')">
-                    <span class="icon">🔮</span><span class="title">Şans Kurabiyesi</span>
-                </div>
-                <div class="menu-card" onclick="sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)', '✨')">
-                    <span class="icon">🧐</span><span class="title">İlişki Testi</span>
-                </div>
-                <div class="menu-card" onclick="sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)', '🗺️')">
-                    <span class="icon">🗺️</span><span class="title">Şehir Anıları</span>
-                </div>
-                <div class="menu-card" onclick="sayfaAc('video-page', 'linear-gradient(135deg, #fff5f5 0%, #faeefb 100%)', '🎥')">
-                    <span class="icon">🎥</span><span class="title">Bizim Videolarımız</span>
-                </div>
+                <p style="text-align: center; font-weight: bold; margin-top: 20px; color: #ff477e;">✨ Sol üstteki menü ikonuna (☰) tıklayarak bizim için hazırladığım tüm özel sürprizlere göz atabilirsin sevgilim!</p>
             </div>
 
             <div style="text-align: center; padding: 50px 0 10px 0; font-size: 1.1rem; color: #8a7691; font-weight: bold;">
@@ -466,7 +439,6 @@
             </div>
         </div>
     </div>
-
     <div id="image-viewer" onclick="this.style.display='none'">
         <span class="close-viewer">&times;</span>
         <img id="full-image" src="" alt="Tam Ekran">
@@ -541,6 +513,7 @@
             <button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
         </div>
     </div>
+
     <div id="memory-page" class="sub-page">
         <div class="sub-page-content">
             <h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">🗺️ Şehir Şehir Bizim Hikayemiz</h2>
@@ -586,7 +559,6 @@
             <div style="text-align: center;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
         </div>
     </div>
-
     <div id="video-page" class="sub-page">
         <div class="sub-page-content">
             <h2 style="color: #ff477e; margin-bottom: 30px; font-size: 1.8rem;">🎥 Bizim Videolarımız</h2>
@@ -692,7 +664,6 @@
                 document.getElementById("password-input").value = "";
             }
         }
-
         function baslatPastaAnimasyonu() {
             document.getElementById("lock-screen").style.display = "none";
             document.getElementById("birthday-overlay").style.display = "flex";
@@ -728,6 +699,7 @@
                 }
             }, 1000);
         }
+
         function mumlariUfleVeKutla() {
             animAudio.play().catch(e => console.log("animasyon.mp3 yüklenemedi"));
             
@@ -801,8 +773,7 @@
             overlay.appendChild(f);
             setTimeout(function() { f.remove(); }, 1000);
         }
-
-        function kapatPastaEkrani() {
+       function kapatPastaEkrani() {
             clearInterval(bdayEfektInterval);
             animAudio.pause();
             animAudio.currentTime = 0;
@@ -828,6 +799,7 @@
             document.getElementById("password-input").value = "";
             sayfaKapat(true);
         }
+
         function zamanlayiciyiBaslat() {
             var baslangic = new Date("2025-09-12T00:00:00").getTime();
             setInterval(function() {
@@ -901,7 +873,6 @@
             document.getElementById("cookie-text-page").style.display = "flex";
             aktifEfektEmoji = '❤️'; efektBaslat();
         }
-
         function sozSayfasiKapat(fromPopState) {
             if (!fromPopState) { history.back(); return; }
             document.getElementById("cookie-text-page").style.display = "none";
@@ -924,6 +895,7 @@
                 setTimeout(function() { p.remove(); }, 5500);
             }, 200);
         }
+
         function efektDurdur() { clearInterval(efektInterval); var container = document.getElementById("global-effects"); container.innerHTML = ""; container.style.display = "none"; }
 
         function cevapKontrol(dogruMu) {

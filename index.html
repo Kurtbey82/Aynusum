@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aynur & Mehmet</title>
-    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
@@ -29,392 +28,522 @@
             overflow-x: hidden;
         }
 
-        /* Üst Menü / Navbar */
-        nav {
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        /* --- 1. GİRİŞ VE ŞİFRE EKRANI --- */
+        #login-screen {
             position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ff85a2, #ff4a75);
+            z-index: 10000;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 15px 30px;
-        }
-
-        .logo {
-            font-family: 'Dancing Script', cursive;
-            font-size: 28px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary-color);
-        }
-
-        /* Sayfa İçerik Alanları */
-        .container {
-            max-width: 1100px;
-            margin: 100px auto 60px auto;
-            padding: 20px;
-        }
-
-        .page-section {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
+            color: white;
             text-align: center;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            color: var(--dark-color);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-box h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        /* --- 1. ANA SAYFA BİLEŞENLERİ --- */
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            margin-bottom: 30px;
-        }
-        .hero h1 { font-family: 'Dancing Script', cursive; font-size: 48px; color: var(--primary-color); margin-bottom: 10px; }
 
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .card:hover { transform: translateY(-5px); }
-
-        /* Spotify Kartı */
-        .spotify-card iframe {
-            border-radius: 12px;
+        .login-box input {
             width: 100%;
-            height: 152px;
-            border: none;
-        }
-
-        /* Şans Kurabiyesi */
-        .cookie-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
+            padding: 12px 20px;
+            margin: 15px 0;
+            border: 2px solid #eee;
             border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-        .cookie-btn:hover { background: var(--secondary-color); }
-        #cookie-text {
-            margin-top: 15px;
-            font-style: italic;
-            color: #555;
-            min-height: 40px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
         }
 
-        /* --- 2. ANI ŞEHİRLERİ --- */
-        .map-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .city-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 5px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        }
-        .city-card h3 { color: var(--primary-color); margin-bottom: 8px; }
+        .login-box input:focus { border-color: var(--primary-color); }
 
-        /* --- 3. FOTOĞRAF GALERİSİ --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            aspect-ratio: 1;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        .gallery-item:hover img { transform: scale(1.05); }
+        #login-error { color: red; font-size: 14px; margin-top: 10px; display: none; }
 
-        /* Lightbox */
-        .lightbox {
-            display: none;
+        /* --- 2. DOĞUM GÜNÜ PASTA EKRANI --- */
+        #cake-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
+            background: #fff0f3;
+            z-index: 9999;
+            display: none;
             justify-content: center;
             align-items: center;
-        }
-        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 8px; }
-        .lightbox-close {
-            position: absolute;
-            top: 20px; right: 30px;
-            color: white; font-size: 40px; cursor: pointer;
-        }
-        /* --- 4. İLİŞKİ TESTİ --- */
-        .quiz-card {
-            background: white;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-        }
-        .quiz-option {
-            background: #f0f2f5;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        .quiz-option:hover { background: var(--secondary-color); color: white; }
-        .quiz-option.correct { background: #4caf50; color: white; }
-        .quiz-option.wrong { background: #f44336; color: white; }
-        #quiz-result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 20px; }
-
-        /* --- 5. MİNİ OYUN ALANI --- */
-        .game-wrapper {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            flex-direction: column;
             text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
         }
-        #gameCanvas {
-            background: #f0f2f5;
-            border-bottom: 4px solid var(--primary-color);
-            border-radius: 8px;
-            display: block;
-            margin: 15px auto;
-            cursor: pointer;
-            max-width: 100%;
+       .cake-wrapper { position: relative; margin-top: 40px; width: 200px; height: 200px; }
+        .real-cake { font-size: 130px; line-height: 1; position: absolute; bottom: 0; left: 15px; }
+        .candles-container { position: absolute; top: 35px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; }
+        .candle { width: 8px; height: 35px; background: linear-gradient(to top, #ffadad, #ffd6a5); position: relative; border-radius: 3px; }
+        .fire { width: 10px; height: 16px; background: #ff9f1c; position: absolute; top: -16px; left: -1px; border-radius: 50% 50% 20% 20%; box-shadow: 0 0 10px #ff9f1c; animation: flicker 0.1s ease-in-out infinite alternate; }
+        
+        @keyframes flicker {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1) translateY(-1px); background: #ff4d00; }
         }
-        .score-board {
-            display: flex;
+
+        .countdown-text { font-size: 72px; font-weight: bold; color: var(--primary-color); font-family: 'Poppins', sans-serif; height: 100px; }
+        .confetti { position: absolute; width: 10px; height: 10px; background-color: #f00; border-radius: 50%; pointer-events: none; opacity: 0; }
+
+        /* Sürpriz Mesaj Penceresi */
+        #message-popup {
+            position: fixed;
+            top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7);
+            background: white; padding: 40px; border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); z-index: 10001;
+            text-align: center; display: none; max-width: 500px; width: 90%;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #message-popup.active { display: block; transform: translate(-50%, -50%) scale(1); }
+        .close-popup-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #aaa; transition: color 0.3s; }
+        .close-popup-btn:hover { color: var(--primary-color); }
+
+        /* --- 3. SABİT ÜST BAR (NAVBAR) --- */
+        nav {
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: fixed; top: 0; left: 0; width: 100%;
+            z-index: 1000; height: 70px;
+            display: none;
             justify-content: space-between;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 0 10px;
-            margin-top: 10px;
-        }
-        #gameMessage {
-            margin-top: 10px;
-            height: 24px;
-            color: var(--primary-color);
-            font-weight: 600;
+            align-items: center; padding: 0 30px;
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            font-size: 14px;
-            color: #777;
-            border-top: 1px solid #eee;
-            margin-top: 40px;
+        .nav-left { display: flex; align-items: center; gap: 20px; }
+        .menu-toggle { font-size: 24px; cursor: pointer; color: var(--dark-color); padding: 5px; }
+        .home-btn { font-size: 16px; cursor: pointer; font-weight: 600; color: var(--dark-color); text-decoration: none; display: flex; align-items: center; gap: 5px; }
+        .home-btn:hover, .menu-toggle:hover { color: var(--primary-color); }
+
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-logo { font-family: 'Dancing Script', cursive; font-size: 26px; color: var(--primary-color); font-weight: bold; text-decoration: none; }
+        .logout-btn { background: #f0f2f5; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; color: #555; display: flex; align-items: center; gap: 5px; transition: all 0.3s; }
+        .logout-btn:hover { background: #ffebee; color: var(--primary-color); }
+
+        /* --- YAN MENÜ (SIDEBAR) --- */
+        .sidebar {
+            position: fixed; top: 70px; left: -280px; width: 280px; height: calc(100vh - 70px);
+            background: white; box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            z-index: 999; transition: left 0.3s ease; padding: 20px 0;
         }
+        .sidebar.active { left: 0; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li a { display: flex; align-items: center; gap: 15px; padding: 15px 25px; text-decoration: none; color: var(--dark-color); font-weight: 600; font-size: 15px; transition: all 0.3s; cursor: pointer; }
+        .sidebar-menu li a:hover, .sidebar-menu li a.active { background: #fff0f3; color: var(--primary-color); border-left: 4px solid var(--primary-color); }
+        /* --- İÇERİK ALANI --- */
+        .container { max-width: 1000px; margin: 100px auto 40px auto; padding: 20px; display: none; min-height: calc(100vh - 210px); }
+        .page-section { display: none; animation: fadeIn 0.4s ease forwards; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2.section-title { text-align: center; color: var(--primary-color); font-family: 'Dancing Script', cursive; font-size: 36px; margin-bottom: 25px; }
+
+        /* --- ANA SAYFA BİLEŞENLERİ --- */
+        .main-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); text-align: center; margin-bottom: 25px; }
+        
+        /* Müzik Çalar Alanı */
+        .music-player-box { display: flex; flex-direction: column; align-items: center; gap: 15px; background: #fff0f3; padding: 20px; border-radius: 15px; margin: 15px auto; max-width: 450px; }
+        .album-art { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); animation: rotateArt 10s linear infinite; animation-play-state: paused; }
+        .album-art.playing { animation-play-state: running; }
+        .music-info h3 { font-size: 16px; margin-bottom: 5px; }
+        .music-info p { font-size: 13px; color: #777; }
+        .audio-controls { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
+        .play-pause-btn { background: var(--primary-color); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(255, 74, 117, 0.3); }
+
+        /* Aşk Zaman Sayacı */
+        .counter-grid { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        .counter-item { background: var(--dark-color); color: white; padding: 15px; border-radius: 12px; min-width: 75px; }
+        .counter-value { font-size: 24px; font-weight: bold; display: block; color: var(--secondary-color); }
+        .counter-label { font-size: 11px; color: #ccc; }
+
+        /* --- 4.1 SENİ NEDEN SEVİYORUM SEKMESİ --- */
+        .love-reasons-list { list-style: none; text-align: left; max-width: 600px; margin: 0 auto; }
+        .love-reasons-list li { background: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border-left: 5px solid var(--primary-color); font-weight: 500; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; align-items: center; gap: 10px; }
+        
+        /* --- 4.2 ŞANS KURABİYESİ --- */
+        .cookie-wrapper-box { text-align: center; padding: 30px; }
+        .cookie-btn { background: var(--primary-color); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 16px; }
+        #cookie-display-text { margin-top: 20px; font-style: italic; color: #555; min-height: 50px; font-size: 16px; font-weight: 500; }
+
+        /* --- 4.3 ANILAR (GERÇEK FOTOĞRAF VE VİDEOLAR) --- */
+        .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .media-card-item { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); position: relative; cursor: pointer; }
+        .media-card-item img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.3s; }
+        .media-card-item:hover img { transform: scale(1.03); }
+        .media-card-item video { width: 100%; height: 220px; object-fit: cover; display: block; background: #000; }
+        .media-caption { padding: 12px; font-size: 14px; font-weight: 600; text-align: center; color: #555; background: white; border-top: 1px solid #eee; }
+
+        /* Lightbox Büyütme Modalı */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 11000; justify-content: center; align-items: center;
+        }
+        .lightbox img { max-width: 90%; max-height: 85%; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+        .lightbox-close { position: absolute; top: 25px; right: 35px; color: white; font-size: 45px; cursor: pointer; }
+        /* --- 4.4 NOTLAR --- */
+        .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .note-paper { background: #fffde7; padding: 25px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; border-left: 4px solid #ffeb3b; }
+        .note-paper h3 { font-family: 'Dancing Script', cursive; font-size: 24px; color: #b78a00; margin-bottom: 10px; }
+        .note-paper p { font-size: 14px; line-height: 1.6; color: #555; }
+
+        /* --- 4.5 MINI OYUN ALANI --- */
+        .game-container-box { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); text-align: center; max-width: 650px; margin: 0 auto; }
+        #gameCanvas { background: #f0f2f5; border-bottom: 4px solid var(--primary-color); border-radius: 8px; display: block; margin: 15px auto; cursor: pointer; max-width: 100%; }
+        .score-board { display: flex; justify-content: space-between; font-size: 16px; font-weight: bold; padding: 0 5px; }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 25px; background: white; font-size: 14px; color: #777; border-top: 1px solid #eee; display: none; }
     </style>
 </head>
 <body>
 
-    <!-- Navigasyon Barı -->
-    <nav>
-        <a class="logo" href="#">Aynur & Mehmet</a>
-        <ul class="nav-links">
-            <li><a onclick="switchPage('home')" id="nav-home" class="active"><i class="fa-solid fa-heart"></i> Ana Sayfa</a></li>
-            <li><a onclick="switchPage('map')" id="nav-map"><i class="fa-solid fa-map-location-dot"></i> Anı Şehirleri</a></li>
-            <li><a onclick="switchPage('gallery')" id="nav-gallery"><i class="fa-solid fa-images"></i> Galeri</a></li>
-            <li><a onclick="switchPage('quiz')" id="nav-quiz"><i class="fa-solid fa-lightbulb"></i> Aşk Testi</a></li>
-            <li><a onclick="switchPage('game')" id="nav-game"><i class="fa-solid fa-gamepad"></i> Mini Oyun</a></li>
-        </ul>
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>Giriş Paneli</h2>
+            <p>Sadece bizim bildiğimiz o özel tarihi gir sevgilim:</p>
+            <input type="password" id="password-input" placeholder="GGAAYYYY">
+            <button class="login-btn" onclick="checkLogin()">Giriş Yap ❤️</button>
+            <div id="login-error">Hatalı tarih girdin aşkım, tekrar dene! 💕</div>
+        </div>
+    </div>
+
+    <div id="cake-screen">
+        <div class="countdown-text" id="countdown-box">3</div>
+        <div class="cake-wrapper">
+            <div class="candles-container">
+                <div class="candle"><div class="fire" id="f1"></div></div>
+                <div class="candle"><div class="fire" id="f2"></div></div>
+                <div class="candle"><div class="fire" id="f3"></div></div>
+            </div>
+            <div class="real-cake">🎂</div>
+        </div>
+    </div>
+
+    <div id="message-popup">
+        <span class="close-popup-btn" onclick="closeBirthdayPopup()">×</span>
+        <h2 style="font-family:'Dancing Script', cursive; font-size: 32px; margin-bottom: 15px;">İyi Ki Doğdun Aynuş'um! 🥳</h2>
+        <p style="font-size: 15px; line-height: 1.6; color: #555;">Hayatıma girdiğin gün benim en büyük şansım oldu. Yeni yaşın sana tüm güzellikleri getirsin, kalbindeki her dilek gerçek olsun. Seni dünyalar kadar çok seviyorum birtanem! ❤️</p>
+    </div>
+
+    <nav id="main-navbar">
+        <div class="nav-left">
+            <div class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+            <a class="home-btn" onclick="goToHome()"><i class="fa-solid fa-house"></i> Ana Sayfa</a>
+        </div>
+        <div class="nav-right">
+            <button class="logout-btn" onclick="secureLogout()"><i class="fa-solid fa-right-from-bracket"></i> Güvenli Çıkış</button>
+            <a class="nav-logo" href="#">Aynur & Mehmet</a>
+        </div>
     </nav>
 
-    <div class="container">
- <!-- 1. ANA SAYFA -->
+    <div class="sidebar" id="main-sidebar">
+        <ul class="sidebar-menu">
+            <li><a onclick="switchPage('love')" id="link-love"><i class="fa-solid fa-heart-circle-check"></i> Seni Neden Seviyorum?</a></li>
+            <li><a onclick="switchPage('cookie')" id="link-cookie"><i class="fa-solid fa-cookie"></i> Şans Kurabiyesi</a></li>
+            <li><a onclick="switchPage('memories')" id="link-memories"><i class="fa-solid fa-photo-film"></i> Anılar</a></li>
+            <li><a onclick="switchPage('notes')" id="link-notes"><i class="fa-solid fa-note-sticky"></i> Notlar</a></li>
+            <li><a onclick="switchPage('game')" id="link-game"><i class="fa-solid fa-gamepad"></i> Mini Oyun</a></li>
+        </ul>
+    </div>
+
+    <div class="container" id="main-container">
+        
         <div id="page-home" class="page-section active">
-            <div class="hero">
-                <h1>Seni Çok Seviyorum Aynuş'um... ❤️</h1>
-                <p>Bizim dünyamıza, bizim küçük dijital yuvamıza hoş geldin bir tanem.</p>
-            </div>
-            
-            <div class="dashboard-grid">
-                <!-- Müzik Kartı -->
-                <div class="card spotify-card">
-                    <h2><i class="fa-solid fa-music"></i> Bizim Şarkımız</h2>
-                    <iframe src="https://open.spotify.com/embed/track/5Qr6b76STgNAat86Y96gZ3?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <div class="main-card">
+                <div class="music-player-box">
+                    <img src="isparta1.jpg" class="album-art" id="player-art" alt="Kapak">
+                    <div class="music-info">
+                        <h3>Bizim Şarkımız</h3>
+                        <p>Mehmet & Aynur Anısına</p>
+                    </div>
+                    <div class="audio-controls">
+                        <button class="play-pause-btn" onclick="togglePlay()"><i class="fa-solid fa-play" id="play-icon"></i></button>
+                    </div>
+                    <audio id="bg-audio" src="sarki.mp3" loop></audio>
                 </div>
 
-                <!-- Şans Kurabiyesi -->
-                <div class="card">
-                    <h2><i class="fa-solid fa-cookie"></i> Günün Şans Kurabiyesi</h2>
-                    <p>Bugün kurabiyenden sana nasıl bir mesaj çıkacak dersin?</p>
-                    <div id="cookie-text">Kurabiyeyi kırmak için aşağıdaki butona tıkla!</div>
-                    <button class="cookie-btn" onclick="breakCookie()">Kurabiyeyi Kır 🥠</button>
+                <h3 style="margin-top:25px; font-size:16px; color:#555;">İyi ki Hayatımdasın... Başlangıcımızdan Beri:</h3>
+                <div class="counter-grid">
+                    <div class="counter-item"><span class="counter-value" id="count-day">0</span><span class="counter-label">Gün</span></div>
+                    <div class="counter-item"><span class="counter-value" id="count-hour">0</span><span class="counter-label">Saat</span></div>
+                    <div class="counter-item"><span class="counter-value" id="count-min">0</span><span class="counter-label">Dakika</span></div>
+                    <div class="counter-item"><span class="counter-value" id="count-sec">0</span><span class="counter-label">Saniye</span></div>
+                </div>
+
+                <p style="font-style: italic; color:#666; margin-top:20px; line-height:1.6;">"Sen benim gökyüzüm, aldığım her nefessin. Hayatımdaki en güzel varlığım, iyi ki varsın..."</p>
+            </div>
+        </div>
+        <div id="page-love" class="page-section">
+            <h2 class="section-title">Seni Neden Seviyorum?</h2>
+            <ul class="love-reasons-list">
+                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Her sabah güne senin varlığınla uyanmanın huzuru paha biçilemez.</li>
+                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Gülüşün, dünyadaki tüm dertleri bir anda unutturabilecek güce sahip.</li>
+                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Sadece benim sevgilim değil, en yakın dostum ve sırdaşım olduğun için.</li>
+                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Kalbinin o saf, temiz ve sevgi dolu halini her an hissedebiliyorum.</li>
+                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Hayatımın her anını güzelleştirdiğin ve bana gerçek aşkı yaşattığın için.</li>
+            </ul>
+        </div>
+
+        <div id="page-cookie" class="page-section">
+            <h2 class="section-title">Günün Şans Kurabiyesi</h2>
+            <div class="main-card cookie-wrapper-box">
+                <p style="margin-bottom: 15px; color: #555;">Bugün kurabiyenin içinden senin için nasıl bir mesaj çıkacak?</p>
+                <div id="cookie-display-text">Kurabiyeyi açmak için aşağıdaki butona tıkla aşkım! 🥠</div>
+                <button class="cookie-btn" onclick="getCookiePhrase()">Kurabiyeyi Kır 🥠</button>
+            </div>
+        </div>
+
+        <div id="page-memories" class="page-section">
+            <h2 class="section-title">Biriktirdiğimiz Güzel Anılar</h2>
+            <div class="media-grid">
+                <div class="media-card-item" onclick="openLightbox('isparta1.jpg')">
+                    <img src="isparta1.jpg" alt="Isparta Anısı 1">
+                    <div class="media-caption">Isparta Günlerimiz 🌹</div>
+                </div>
+                <div class="media-card-item" onclick="openLightbox('isparta2.jpg')">
+                    <img src="isparta2.jpg" alt="Isparta Anısı 2">
+                    <div class="media-caption">Güzel Bir Kare 📸</div>
+                </div>
+                <div class="media-card-item" onclick="openLightbox('hatay1.jpg')">
+                    <img src="hatay1.jpg" alt="Hatay Anısı 1">
+                    <div class="media-caption">Memleketimiz Hatay ❤️</div>
+                </div>
+                <div class="media-card-item" onclick="openLightbox('ankara1.jpg')">
+                    <img src="ankara1.jpg" alt="Ankara Anısı 1">
+                    <div class="media-caption">Ankara Hatırası ❄️</div>
+                </div>
+
+                <div class="media-card-item">
+                    <video controls preload="metadata">
+                        <source src="video1.mp4" type="video/mp4">
+                        Tarayıcınız video oynatmayı desteklemiyor.
+                    </video>
+                    <div class="media-caption">En Tatlı Anlar 1 🎥</div>
+                </div>
+                <div class="media-card-item">
+                    <video controls preload="metadata">
+                        <source src="video2.mp4" type="video/mp4">
+                        Tarayıcınız video oynatmayı desteklemiyor.
+                    </video>
+                    <div class="media-caption">En Tatlı Anlar 2 🎬</div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. ANI ŞEHİRLERİ -->
-        <div id="page-map" class="page-section">
-            <h2><i class="fa-solid fa-map-location-dot"></i> İz Bıraktığımız Şehirler</h2>
-            <div class="map-container">
-                <div class="city-card">
-                    <h3>Hatay</h3>
-                    <p>Hikayemizin kalbi, evimiz, köklerimiz... Her sokağında bizden bir parça saklayan memleketimiz.</p>
+        <div id="page-notes" class="page-section">
+            <h2 class="section-title">Sana Küçük Notlarım</h2>
+            <div class="notes-grid">
+                <div class="note-paper">
+                    <h3>İlk Gün Notu</h3>
+                    <p>12 Eylül hayatımın akışının tamamen değiştiği, seninle güzelleştiği o muazzam günün başlangıcı...</p>
                 </div>
-                <div class="city-card">
-                    <h3>Isparta</h3>
-                    <p>Güllerin ve yolların şehri. Mesafeleri adımladığımız, kavuşmaların en güzelini biriktirdiğimiz yer.</p>
-                </div>
-                <div class="city-card">
-                    <h3>Ankara</h3>
-                    <p>Ayazına aldırmadan el ele yürüdüğümüz, paylaştığımız o güzel zamanların başkenti.</p>
+                <div class="note-paper">
+                    <h3>Küçük Bir Hatırlatma</h3>
+                    <p>Günlerin nasıl geçtiği önemli değil, mesafelerin ne olduğu önemli değil. Kalbim her zaman seninle atıyor Aynuş'um.</p>
                 </div>
             </div>
         </div>
 
-        <!-- 3. GALERİ -->
-        <div id="page-gallery" class="page-section">
-            <h2><i class="fa-solid fa-images"></i> En Güzel Anılarımız</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox('https://picsum.photos/800/800?random=1')">
-                    <img src="https://picsum.photos/400/400?random=1" alt="Anı 1">
-                </div>
-                <div class="gallery-item" onclick="openLightbox('https://picsum.photos/800/800?random=2')">
-                    <img src="https://picsum.photos/400/400?random=2" alt="Anı 2">
-                </div>
-                <div class="gallery-item" onclick="openLightbox('https://picsum.photos/800/800?random=3')">
-                    <img src="https://picsum.photos/400/400?random=3" alt="Anı 3">
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. AŞK TESTİ -->
-        <div id="page-quiz" class="page-section">
-            <h2><i class="fa-solid fa-lightbulb"></i> İlişki Testi</h2>
-            <div class="quiz-card" id="quiz-box">
-                <!-- Soru dinamik olarak gelecek -->
-            </div>
-            <div id="quiz-result"></div>
-        </div>
-        <!-- 5. MİNİ OYUN -->
         <div id="page-game" class="page-section">
-            <div class="game-wrapper">
-                <h2><i class="fa-solid fa-gamepad"></i> Aynuş'un Macera Koşusu 🐦</h2>
-                <p style="color: #666; font-size: 14px;">Zıplamak için <b>SPACE (Boşluk)</b> veya <b>YUKARI Ok</b>, eğilmek için <b>AŞAĞI Ok</b> tuşuna bas. Mobilde zıplamak için ekrana dokun!</p>
-                
-                <canvas id="gameCanvas" width="650" height="250"></canvas>
-                
+            <h2 class="section-title">Aynuş'un Koşu Macerası</h2>
+            <div class="game-container-box">
+                <p style="color: #666; font-size: 13px; margin-bottom: 10px;">Zıplamak için <b>SPACE (Boşluk)</b> / <b>YUKARI Ok</b>, eğilmek için <b>AŞAĞI Ok</b> tuşuna bas. Mobilde ekrana dokun!</p>
+                <canvas id="gameCanvas" width="600" height="230"></canvas>
                 <div class="score-board">
-                    <div id="gameScore">Skor: 0</div>
-                    <div id="gameHighScore">En Yüksek Skor: 0</div>
+                    <div id="scoreText">Skor: 0</div>
+                    <div id="highScoreText">En Yüksek: 0</div>
                 </div>
-                <div id="gameMessage">Oyunu başlatmak için bir tuşa bas veya ekrana dokun!</div>
+                <div id="gameStatusMessage" style="margin-top: 10px; font-weight: 600; color: var(--primary-color);">Başlamak için tuşa bas veya dokun!</div>
             </div>
         </div>
 
     </div>
 
-    <!-- Fotoğraf Lightbox Modalı -->
-    <div id="lightboxModal" class="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <img id="lightboxImg" src="" alt="Büyük Görsel">
+    <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">×</span>
+        <img id="lightboxImg" src="" alt="Büyütülmüş Görsel" onclick="event.stopPropagation()">
     </div>
 
-    <!-- Footer Alt Bilgi -->
-    <footer>
-        <p>Mehmet & Aynur — Tüm hakları saklıdır ve sonsuza kadar sevgiyle korunacaktır. ❤️</p>
+    <nav style="display:none;"></nav> <footer id="main-footer">
+        <p>Aynur & Mehmet Tüm hakları saklıdır</p>
     </footer>
 
     <script>
-        /* --- SAYFA SEÇİCİ MANTIĞI --- */
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
-            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
-            
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.getElementById('nav-' + pageId).classList.add('active');
-
-            // Eğer oyun sayfasından çıkılıyorsa oyunu durdur/sıfırla
-            if (pageId !== 'game' && gameStatus === 'PLAYING') {
-                gameStatus = 'START';
+        /* --- 1. GİRİŞ KONTROLÜ --- */
+        function checkLogin() {
+            const pass = document.getElementById('password-input').value;
+            if(pass !== "") { 
+                document.getElementById('login-screen').style.display = 'none';
+                startBirthdaySequence();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
             }
         }
 
-        /* --- ŞANS KURABİYESİ SİSTEMİ --- */
-        const cookiePhrases = [
-            "Bugün gözlerinin içi ekstra parlayacak, çünkü çok seviliyorsun! ✨",
-            "Yakın zamanda içini ısıtacak çok tatlı bir kavuşma var! 🚌",
-            "Mehmet şu an seni düşünüyor ve gülümsüyor. ❤️",
-            "Bugün şansın dönüm noktası: Dünyanın en şanslı kadını sensin, çünkü kalbinde kocaman bir aşk var!"
-        ];
-        function breakCookie() {
-            const randomPhrase = cookiePhrases[Math.floor(Math.random() * cookiePhrases.length)];
-            document.getElementById('cookie-text').innerText = randomPhrase;
+        /* --- 2. DOĞUM GÜNÜ PASTA & CELEBRATION DÖNGÜSÜ --- */
+        function startBirthdaySequence() {
+            const cakeScreen = document.getElementById('cake-screen');
+            const countdownBox = document.getElementById('countdown-box');
+            cakeScreen.style.display = 'flex';
+
+            let count = 3;
+            let timer = setInterval(() => {
+                count--;
+                if(count > 0) {
+                    countdownBox.innerText = count;
+                } else if(count === 0) {
+                    countdownBox.innerText = "Dilek Tut! 🌟";
+                    setTimeout(() => {
+                        document.getElementById('f1').style.display = 'none';
+                        document.getElementById('f2').style.display = 'none';
+                        document.getElementById('f3').style.display = 'none';
+                        countdownBox.innerText = "Üflendi! 💨";
+                        
+                        triggerCenterConfetti();
+
+                        setTimeout(() => {
+                            document.getElementById('message-popup').classList.add('active');
+                        }, 3000);
+
+                    }, 2000);
+                    clearInterval(timer);
+                }
+            }, 1000);
         }
 
-        /* --- FOTOĞRAF LIGHTBOX --- */
+        function triggerCenterConfetti() {
+            const screen = document.getElementById('cake-screen');
+            for (let i = 0; i < 120; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                screen.appendChild(confetti);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 15;
+                const colors = ['#ff4a75', '#ff85a2', '#ffd166', '#06d6a0', '#118ab2'];
+                
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = '50%';
+                confetti.style.top = '50%';
+                confetti.style.opacity = '1';
+
+                let posX = window.innerWidth / 2;
+                let posY = window.innerHeight / 2;
+                let vx = Math.cos(angle) * velocity;
+                let vy = Math.sin(angle) * velocity;
+                let gravity = 0.2;
+
+                let confTimer = setInterval(() => {
+                    posX += vx;
+                    posY += vy;
+                    vy += gravity;
+                    confetti.style.left = posX + 'px';
+                    confetti.style.top = posY + 'px';
+                    confetti.style.opacity -= 0.015;
+
+                    if (parseFloat(confetti.style.opacity) <= 0) {
+                        confetti.remove();
+                        clearInterval(confTimer);
+                    }
+                }, 20);
+            }
+        }
+        function closeBirthdayPopup() {
+            document.getElementById('message-popup').classList.remove('active');
+            document.getElementById('cake-screen').style.display = 'none';
+            
+            document.getElementById('main-navbar').style.display = 'flex';
+            document.getElementById('main-container').style.display = 'block';
+            document.getElementById('main-footer').style.display = 'block';
+            
+            startLoveCounter();
+            initAudio();
+        }
+
+        /* --- 3. SABİT ÜST BAR VE NAVİGASYON --- */
+        function toggleSidebar() {
+            document.getElementById('main-sidebar').classList.toggle('active');
+        }
+
+        function goToHome() {
+            document.getElementById('main-sidebar').classList.remove('active');
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            document.getElementById('page-home').classList.add('active');
+            if (gameStatus === 'PLAYING') gameStatus = 'START';
+        }
+
+        function switchPage(pageId) {
+            document.getElementById('main-sidebar').classList.remove('active');
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+            
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.getElementById('link-' + pageId).classList.add('active');
+            
+            if(pageId !== 'game' && gameStatus === 'PLAYING') gameStatus = 'START';
+        }
+
+        function secureLogout() {
+            location.reload();
+        }
+
+        /* --- ŞARKI.MP3 OYNATICI VE ALBÜM KAPAK FOTOĞRAFI GÜNCELLEMESİ --- */
+        const audio = document.getElementById('bg-audio');
+        const playIcon = document.getElementById('play-icon');
+        const albumArt = document.getElementById('player-art');
+
+        function initAudio() {
+            audio.play().then(() => {
+                playIcon.className = "fa-solid fa-pause";
+                albumArt.classList.add('playing');
+            }).catch(() => {});
+        }
+
+        function togglePlay() {
+            if(audio.paused) {
+                audio.play();
+                playIcon.className = "fa-solid fa-pause";
+                albumArt.classList.add('playing');
+            } else {
+                audio.pause();
+                playIcon.className = "fa-solid fa-play";
+                albumArt.classList.remove('playing');
+            }
+        }
+
+        /* --- 12.09.2025 AŞK SAYAÇ MANTIĞI --- */
+        function startLoveCounter() {
+            const startDate = new Date("2025-09-12T00:00:00");
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - startDate;
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const mins = Math.floor((diff / (1000 * 60)) % 60);
+                const secs = Math.floor((diff / 1000) % 60);
+
+                document.getElementById('count-day').innerText = days;
+                document.getElementById('count-hour').innerText = hours;
+                document.getElementById('count-min').innerText = mins;
+                document.getElementById('count-sec').innerText = secs;
+            }, 1000);
+        }
+        /* --- FOTOĞRAF LIGHTBOX (BÜYÜTME) FONKSİYONLARI --- */
         function openLightbox(src) {
             const modal = document.getElementById('lightboxModal');
             document.getElementById('lightboxImg').src = src;
@@ -424,64 +553,40 @@
             document.getElementById('lightboxModal').style.display = 'none';
         }
 
-        /* --- İLİŞKİ TESTİ VERİLERİ --- */
-        const quizData = [
-            { question: "Bizim ilk resmi buluşma yerimiz neresiydi?", options: ["Sahil", "Kafe", "Park", "Otogar"], correct: 1 },
-            { question: "Mehmet'in senin en çok sevdiği huyun hangisidir?", options: ["Gülüşün", "Ses tonun", "Trip atışın", "Hepsi"], correct: 3 }
+        /* --- 4.2 ŞANS KURABİYESİ --- */
+        const cookiePhrases = [
+            "Bugün gözlerinin içi ekstra parlayacak, çünkü dünyanın en çok sevilen kadını sensin! ✨",
+            "Mehmet şu an seni düşünüyor, seninle geçireceği o güzel günlerin hayalini kuruyor. ❤️",
+            "Kurabiyen der ki: Kalbindeki o harika adamla ömür boyu el ele yürüyeceksiniz! 🚌",
+            "Bugün şansın dönüm noktası: Mehmet'in aşkı tüm gün koruyucu kalkanın olacak!"
         ];
-        let currentQuestion = 0;
-        function loadQuiz() {
-            const quizBox = document.getElementById('quiz-box');
-            if (currentQuestion >= quizData.length) {
-                document.getElementById('quiz-result').innerText = "Tebrikler tüm soruları bitirdin Aynuş! Sen mükemmel bir partnersin. 🏆";
-                quizBox.style.display = 'none';
-                return;
-            }
-            let data = quizData[currentQuestion];
-            let html = `<h3 style='margin-bottom:15px;'>Soru ${currentQuestion+1}: ${data.question}</h3>`;
-            data.options.forEach((opt, idx) => {
-                html += `<div class="quiz-option" onclick="checkQuizAnswer(${idx})">${opt}</div>`;
-            });
-            quizBox.innerHTML = html;
+        function getCookiePhrase() {
+            const txt = cookiePhrases[Math.floor(Math.random() * cookiePhrases.length)];
+            document.getElementById('cookie-display-text').innerText = txt;
         }
-        function checkQuizAnswer(selected) {
-            const options = document.querySelectorAll('.quiz-option');
-            let correctIdx = quizData[currentQuestion].correct;
-            if (selected === correctIdx) {
-                options[selected].classList.add('correct');
-                setTimeout(() => { currentQuestion++; loadQuiz(); }, 1200);
-            } else {
-                options[selected].classList.add('wrong');
-                options[correctIdx].classList.add('correct');
-                setTimeout(() => { currentQuestion++; loadQuiz(); }, 1800);
-            }
-        }
-        loadQuiz();
-        /* --- ENTEGRE T-REX OYUN SİSTEMİ (Aynuş'un Koşusu) --- */
+
+        /* --- 4.5 MINI OYUN (Aynuş'un Koşusu) --- */
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
-        const scoreDisplay = document.getElementById("gameScore");
-        const highScoreDisplay = document.getElementById("gameHighScore");
-        const gameMessage = document.getElementById("gameMessage");
+        const scoreText = document.getElementById("scoreText");
+        const highScoreText = document.getElementById("highScoreText");
+        const gameStatusMessage = document.getElementById("gameStatusMessage");
 
-        let gameStatus = "START"; 
-        let score = 0;
-        let highScore = 0;
-        let gameSpeed = 5;
-        let obstacles = [];
-        let frameCount = 0;
+        let gameStatus = "START";
+        let score = 0; let highScore = 0; let gameSpeed = 5;
+        let obstacles = []; let frameCount = 0;
 
-        const aynur = {
-            x: 50, y: 190, width: 30, height: 50,
+        const aynurCharacter = {
+            x: 40, y: 170, width: 30, height: 50,
             originalHeight: 50, crouchHeight: 25,
             dy: 0, gravity: 0.6, jumpForce: -12,
             isGrounded: true, isCrouching: false,
-            
+
             draw() {
                 ctx.save();
-                ctx.font = this.isCrouching ? "28px Arial" : "40px Arial";
+                ctx.font = this.isCrouching ? "26px Arial" : "38px Arial";
                 ctx.textAlign = "center";
-                if (this.isCrouching) {
+                if(this.isCrouching) {
                     ctx.fillText("🧘‍♀️", this.x + this.width/2, this.y + this.height + 5);
                 } else {
                     ctx.fillText("🧍‍♀️", this.x + this.width/2, this.y + this.height - 2);
@@ -489,166 +594,111 @@
                 ctx.restore();
             },
             jump() {
-                if (this.isGrounded && !this.isCrouching) {
+                if(this.isGrounded && !this.isCrouching) {
                     this.dy = this.jumpForce;
                     this.isGrounded = false;
                 }
             },
-            crouch(crouchState) {
-                if (this.isGrounded) {
-                    this.isCrouching = crouchState;
-                    if (crouchState) {
+            crouch(state) {
+                if(this.isGrounded) {
+                    this.isCrouching = state;
+                    if(state) {
                         this.height = this.crouchHeight;
-                        this.y = 215;
+                        this.y = 195;
                     } else {
                         this.height = this.originalHeight;
-                        this.y = 190;
+                        this.y = 170;
                     }
                 }
             },
             update() {
                 this.dy += this.gravity;
                 this.y += this.dy;
-                let groundY = 240 - this.height;
-                if (this.y >= groundY) {
-                    this.y = groundY;
-                    this.dy = 0;
-                    this.isGrounded = true;
+                let ground = 220 - this.height;
+                if(this.y >= ground) {
+                    this.y = ground; this.dy = 0; this.isGrounded = true;
                 }
                 this.draw();
             }
         };
-
-        class Bird {
+        class EnemyBird {
             constructor() {
                 this.x = canvas.width;
-                this.type = Math.random() > 0.5 ? "HIGH" : "LOW"; 
-                this.y = this.type === "HIGH" ? 145 : 195;
-                this.width = 30;
-                this.height = 25;
+                this.type = Math.random() > 0.5 ? "HIGH" : "LOW";
+                this.y = this.type === "HIGH" ? 130 : 175;
+                this.width = 25; this.height = 20;
                 this.speed = gameSpeed + (Math.random() * 1.5);
             }
             draw() {
-                ctx.save();
-                ctx.font = "26px Arial";
-                ctx.fillText("🐦", this.x, this.y + this.height);
-                ctx.restore();
+                ctx.save(); ctx.font = "24px Arial";
+                ctx.fillText("🐦", this.x, this.y + this.height); ctx.restore();
             }
-            update() {
-                this.x -= this.speed;
-                this.draw();
-            }
+            update() { this.x -= this.speed; this.draw(); }
         }
-        // Klavye Hareketleri ve Ekran Kayma Engelleyici
+
         window.addEventListener("keydown", (e) => {
             if (document.getElementById('page-game').classList.contains('active')) {
-                if (["Space", "ArrowUp", "ArrowDown"].includes(e.code)) {
-                    e.preventDefault();
-                }
-                if (gameStatus === "START" || gameStatus === "GAMEOVER") {
-                    resetGame();
-                    return;
-                }
-                if (e.code === "Space" || e.code === "ArrowUp") aynur.jump();
-                if (e.code === "ArrowDown") aynur.crouch(true);
+                if (["Space", "ArrowUp", "ArrowDown"].includes(e.code)) e.preventDefault();
+                if (gameStatus === "START" || gameStatus === "GAMEOVER") { resetGame(); return; }
+                if (e.code === "Space" || e.code === "ArrowUp") aynurCharacter.jump();
+                if (e.code === "ArrowDown") aynurCharacter.crouch(true);
             }
         });
 
         window.addEventListener("keyup", (e) => {
             if (document.getElementById('page-game').classList.contains('active')) {
-                if (e.code === "ArrowDown") aynur.crouch(false);
+                if (e.code === "ArrowDown") aynurCharacter.crouch(false);
             }
         });
 
-        // Mobil Dokunmatik Alan
         canvas.addEventListener("touchstart", (e) => {
             e.preventDefault();
-            if (gameStatus === "START" || gameStatus === "GAMEOVER") {
-                resetGame();
-            } else {
-                aynur.jump();
-            }
+            if (gameStatus === "START" || gameStatus === "GAMEOVER") resetGame();
+            else aynurCharacter.jump();
         });
 
-        function updateGameMessages() {
-            if (score === 0) gameMessage.innerText = "Macera başladı! Dikkat et, kuşlar geliyor! 🐦";
-            if (score === 200) gameMessage.innerText = "Harikasın Aynuş! Çok hızlısın! ⚡";
-            if (score === 500) gameMessage.innerText = "Rekorlara doymayan bir Aynur çizelim şuraya... 😎";
-            if (score === 1000) gameMessage.innerText = "İnanılmaz! Kuşlar bile sana yetişemiyor! ❤️";
-        }
-
-        function checkCollision(rect1, rect2) {
-            return rect1.x < rect2.x + rect2.width &&
-                   rect1.x + rect1.width > rect2.x &&
-                   rect1.y < rect2.y + rect2.height &&
-                   rect1.y + rect1.height > rect2.y;
-        }
-
         function resetGame() {
-            obstacles = [];
-            score = 0;
-            gameSpeed = 5;
-            frameCount = 0;
-            aynur.y = 190;
-            aynur.dy = 0;
-            aynur.isCrouching = false;
-            aynur.height = aynur.originalHeight;
-            gameStatus = "PLAYING";
-            gameMessage.innerText = "Macera başladı!";
+            obstacles = []; score = 0; gameSpeed = 5; frameCount = 0;
+            aynurCharacter.y = 170; aynurCharacter.dy = 0; aynurCharacter.isCrouching = false;
+            aynurCharacter.height = aynurCharacter.originalHeight;
+            gameStatus = "PLAYING"; gameStatusMessage.innerText = "Macera tam gaz devam ediyor!";
         }
 
-        function animate() {
+        function checkHit(r1, r2) {
+            return r1.x < r2.x + r2.width && r1.x + r1.width > r2.x && r1.y < r2.y + r2.height && r1.y + r1.height > r2.y;
+        }
+
+        function runGame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Zemin Çizgisi
-            ctx.beginPath();
-            ctx.moveTo(0, 240);
-            ctx.lineTo(canvas.width, 240);
-            ctx.strokeStyle = "#ccc";
-            ctx.lineWidth = 2;
-            ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(0, 220); ctx.lineTo(canvas.width, 220);
+            ctx.strokeStyle = "#bbb"; ctx.lineWidth = 2; ctx.stroke();
 
             if (gameStatus === "PLAYING") {
-                frameCount++;
-                score++;
-                scoreDisplay.innerText = "Skor: " + score;
-                
-                if (frameCount % 500 === 0) gameSpeed += 0.5;
-                updateGameMessages();
+                frameCount++; score++;
+                scoreText.innerText = "Skor: " + score;
+                if (frameCount % 400 === 0) gameSpeed += 0.5;
 
-                let spawnInterval = Math.max(60, 120 - Math.floor(gameSpeed * 4));
-                if (frameCount % spawnInterval === 0) {
-                    obstacles.push(new Bird());
-                }
+                if (frameCount % 90 === 0) obstacles.push(new EnemyBird());
 
                 for (let i = obstacles.length - 1; i >= 0; i--) {
                     obstacles[i].update();
+                    if (obstacles[i].x + obstacles[i].width < 0) { obstacles.splice(i, 1); continue; }
                     
-                    if (obstacles[i].x + obstacles[i].width < 0) {
-                        obstacles.splice(i, 1);
-                        continue;
-                    }
-                    
-                    if (checkCollision(aynur, obstacles[i])) {
+                    if (checkHit(aynurCharacter, obstacles[i])) {
                         gameStatus = "GAMEOVER";
-                        gameMessage.innerText = "Oooof! Kuşa çarptık! Yeniden başlamak için tıkla/tuşa bas. 💥";
-                        if (score > highScore) {
-                            highScore = score;
-                            highScoreDisplay.innerText = "En Yüksek Skor: " + highScore;
-                        }
+                        gameStatusMessage.innerText = "Kuşa çarptık! Yeniden oynamak için tıkla veya bir tuşa bas. 💥";
+                        if (score > highScore) { highScore = score; highScoreText.innerText = "En Yüksek: " + highScore; }
                     }
                 }
-                aynur.update();
+                aynurCharacter.update();
             } else {
-                aynur.draw();
+                aynurCharacter.draw();
                 for (let obs of obstacles) obs.draw();
-                ctx.fillStyle = gameStatus === "START" ? "rgba(0, 0, 0, 0.02)" : "rgba(255, 74, 117, 0.08)";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(runGame);
         }
-
-        animate();
+        runGame();
     </script>
 </body>
 </html>

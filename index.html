@@ -1,704 +1,981 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aynur & Mehmet</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-color: #ff4a75;
-            --secondary-color: #ff85a2;
-            --bg-color: #f7f9fc;
-            --dark-color: #2b2d42;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İyi Ki Doğdun Aynuşum...</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+body {
+background: #fff5f7;
+background: linear-gradient(135deg, #ffeef2 0%, #fff5f7 50%, #f3e9fa 100%);
+color: #3a2e3d;
+overflow-x: hidden;
+position: relative;
+min-height: 100vh;
+font-size: 1.25rem;
+padding-top: 80px;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+/* SABİT ÜST NAVİGASYON SÜTUNU */
+.fixed-header {
+position: fixed; top: 0; left: 0; width: 100%; height: 75px;
+background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+border-bottom: 2px solid #ffe3eb; z-index: 999;
+display: flex; align-items: center; justify-content: space-between; padding: 0 25px;
+box-shadow: 0 4px 15px rgba(236, 213, 224, 0.3);
+}
+.header-left { display: flex; align-items: center; gap: 20px; }
+.menu-toggle-btn { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #ff477e; transition: transform 0.2s; }
+.menu-toggle-btn:hover { transform: scale(1.1); }
+.nav-home-btn { background: #ff477e; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+.nav-home-btn:hover { background: #ff758c; transform: translateY(-1px); }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.header-logo { font-size: 1.4rem; font-weight: 800; color: #ff477e; letter-spacing: -0.5px; }
+.nav-logout-btn { background: none; border: 2px solid #ff477e; color: #ff477e; padding: 7px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.95rem; transition: all 0.2s; }
+.nav-logout-btn:hover { background: #ff477e; color: white; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--dark-color);
-            overflow-x: hidden;
-        }
+/* YAN SÜTUN MENÜ (SIDEBAR) */
+.sidebar-menu {
+position: fixed; top: 75px; left: -320px; width: 300px; height: calc(100vh - 75px);
+background: white; border-right: 2px solid #ffe3eb; z-index: 998;
+transition: left 0.3s ease; padding: 30px 20px;
+box-shadow: 5px 0 25px rgba(236, 213, 224, 0.25);
+}
+.sidebar-menu.active { left: 0; }
+.sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+.sidebar-item {
+padding: 15px 20px; background: #fff5f7; border-radius: 15px;
+color: #3a2e3d; font-weight: 600; font-size: 1.15rem; cursor: pointer;
+transition: all 0.2s; border: 1px solid #ffe3eb;
+}
+.sidebar-item:hover { background: #ff477e; color: white; border-color: #ff477e; transform: translateX(5px); }
 
-        /* --- 1. GİRİŞ VE ŞİFRE EKRANI --- */
-        #login-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #ff85a2, #ff4a75);
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
+/* GELİŞMİŞ EMOJİ VE ÇİÇEK SİSTEMİ */
+.effect-container {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+pointer-events: none; z-index: 10006; overflow: hidden; display: none;
+}
+.floating-emoji {
+position: absolute; top: -60px; font-size: var(--size);
+animation: floatDownReal var(--duration) linear infinite; opacity: 0;
+filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+}
+@keyframes floatDownReal {
+0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+15% { opacity: 0.9; }
+85% { opacity: 0.9; }
+100% { transform: translateY(125vh) scale(1.3) rotate(var(--rot)); opacity: 0; }
+}
 
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            color: var(--dark-color);
-            max-width: 400px;
-            width: 90%;
-        }
+/* ŞİFRE EKRANI */
+#lock-screen {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: linear-gradient(135deg, #ffdeee 0%, #e8dbfc 100%);
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+z-index: 10000; padding: 15px; text-align: center;
+}
+.lock-box {
+background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+border: 2px solid rgba(255, 255, 255, 0.7);
+padding: 60px 40px; border-radius: 40px;
+box-shadow: 0 30px 60px rgba(231, 166, 194, 0.4);
+max-width: 95%; width: 1100px; min-height: 85vh;
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.lock-box h1 { font-size: 3.5rem; margin-bottom: 30px; color: #ff477e; font-weight: 800; line-height: 1.2; letter-spacing: -1px; }
+.lock-box p { color: #524355; font-size: 1.6rem; margin: 0 auto 40px auto; line-height: 1.8; font-weight: 500; max-width: 850px; }
+.lock-box input {
+width: 100%; max-width: 500px; padding: 22px 30px; border: 3px solid #ffd0dd; border-radius: 50px;
+margin-bottom: 30px; font-size: 1.4rem; text-align: center; outline: none; font-weight: bold;
+}
+.lock-box input:focus { border-color: #ff477e; box-shadow: 0 0 20px rgba(255,71,126,0.3); }
+.lock-box button {
+background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%); color: white; border: none; padding: 20px 50px;
+border-radius: 50px; font-size: 1.4rem; cursor: pointer; width: 100%; max-width: 500px; font-weight: bold;
+box-shadow: 0 8px 25px rgba(255, 71, 126, 0.35); transition: all 0.3s;
+}
+.lock-box button:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(255, 71, 126, 0.45); }
+.error-msg { color: #de354c; font-size: 1.4rem; margin-top: 25px; display: none; font-weight: bold; }
+    /* PASTA EKRANI OVERLAY */
+#birthday-overlay {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: linear-gradient(135deg, #fff0f3 0%, #f5e1ff 100%);
+z-index: 1050; display: none; flex-direction: column; align-items: center; justify-content: center;
+text-align: center; padding: 30px 20px; overflow-y: auto;
+}
+.birthday-close-btn {
+position: absolute; top: 30px; right: 30px; background: none; border: none;
+font-size: 2.5rem; color: #ff477e; cursor: pointer; font-weight: bold; transition: transform 0.2s; z-index: 1060;
+}
+.birthday-close-btn:hover { transform: scale(1.2); }
 
-        .login-box h2 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 36px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
+#cake-stage {
+width: 100%; max-width: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; z-index: 100;
+}
+#cake-stage h2 { color: #ff477e; font-size: 2.3rem; font-weight: 800; z-index: 102; position: relative; text-shadow: 0 2px 10px rgba(255,71,126,0.1); line-height: 1.3; }
+#cake-instructions { color: #524355; font-size: 1.4rem; font-weight: 500; z-index: 102; position: relative; margin-bottom: 10px; max-width: 600px; }
 
-        .login-box input {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 15px 0;
-            border: 2px solid #eee;
-            border-radius: 25px;
-            font-size: 16px;
-            text-align: center;
-            outline: none;
-        }
+.giant-cake-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; width: 100%; margin: 20px 0; z-index: 101; }
+.cake-3d { position: relative; width: 360px; height: 260px; display: flex; flex-direction: column; align-items: center; }
+.cake-layer { width: 100%; border-radius: 35px 35px 15px 15px; position: relative; box-shadow: 0 10px 0 rgba(0,0,0,0.06); }
+.layer-bottom { height: 110px; background: #f1a3b7; z-index: 1; border: 3px solid #e58da4; }
+.layer-middle { height: 85px; background: #ffccd5; width: 85%; z-index: 2; margin-top: -35px; border: 3px solid #fca5b7; }
+.layer-top { height: 65px; background: #fff0f3; width: 70%; z-index: 3; margin-top: -30px; border: 3px solid #ffccd5; }
+.cream-drip { position: absolute; top: 18px; width: 100%; height: 22px; background: #ffffff; border-radius: 0 0 15px 15px; opacity: 0.9; }
 
-        .login-box input:focus { border-color: var(--primary-color); }
+.candles-grid { position: absolute; top: -30px; width: 65%; height: 45px; z-index: 10; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+.mini-candle { width: 6px; height: 42px; background: linear-gradient(to bottom, #ff758c, #ff477e); border-radius: 2px; position: relative; }
+.mini-candle:nth-child(even) { background: linear-gradient(to bottom, #b062de, #7e37ab); }
+.mini-flame {
+position: absolute; top: -14px; left: -2px; width: 10px; height: 16px; background: #ffb703; border-radius: 50% 50% 20% 20%;
+box-shadow: 0 0 10px #ffb703, 0 0 20px #ff477e; animation: candleFlicker 0.15s ease-in-out infinite alternate;
+}
+@keyframes candleFlicker { 0% { transform: scale(1) rotate(-1deg); } 100% { transform: scale(1.15) rotate(2deg); } }
 
-        #login-error { color: red; font-size: 14px; margin-top: 10px; display: none; }
+.blowing-wind { position: absolute; width: 250px; height: 15px; background: rgba(255,255,255,0.85); border-radius: 10px; top: 10%; left: -400px; opacity: 0; z-index: 100; }
+@keyframes windBlowReal { 0% { left: -400px; opacity: 0; } 40% { left: 50px; opacity: 1; filter: blur(2px); } 100% { left: 500px; opacity: 0; } }
 
-        /* --- 2. DOĞUM GÜNÜ PASTA EKRANI --- */
-        #cake-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #fff0f3;
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-       .cake-wrapper { position: relative; margin-top: 40px; width: 200px; height: 200px; }
-        .real-cake { font-size: 130px; line-height: 1; position: absolute; bottom: 0; left: 15px; }
-        .candles-container { position: absolute; top: 35px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; }
-        .candle { width: 8px; height: 35px; background: linear-gradient(to top, #ffadad, #ffd6a5); position: relative; border-radius: 3px; }
-        .fire { width: 10px; height: 16px; background: #ff9f1c; position: absolute; top: -16px; left: -1px; border-radius: 50% 50% 20% 20%; box-shadow: 0 0 10px #ff9f1c; animation: flicker 0.1s ease-in-out infinite alternate; }
-        
-        @keyframes flicker {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1) translateY(-1px); background: #ff4d00; }
-        }
+.firework { position: absolute; width: 6px; height: 6px; border-radius: 50%; z-index: 99; display: none; pointer-events: none; }
+@keyframes fireworkPop { 0% { transform: translate(0, 0) scale(1); opacity: 1;} 100% { transform: translate(var(--fx), var(--fy)) scale(0); opacity: 0; box-shadow: var(--shadows); } }
 
-        .countdown-text { font-size: 72px; font-weight: bold; color: var(--primary-color); font-family: 'Poppins', sans-serif; height: 100px; }
-        .confetti { position: absolute; width: 10px; height: 10px; background-color: #f00; border-radius: 50%; pointer-events: none; opacity: 0; }
+.countdown-number { font-size: 5.5rem; font-weight: 800; color: #ff477e; margin-top: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.05); z-index: 102; position: relative; }
+.bday-h1 { font-size: 3.5rem; color: #ff477e; font-weight: 800; display: none; text-shadow: 0 4px 12px rgba(255,71,126,0.2); }
+.bday-letter-card {
+background: white; padding: 40px; border-radius: 30px; border: 2px solid #ffe3eb;
+box-shadow: 0 15px 40px rgba(231, 166, 194, 0.3); max-width: 700px; display: none;
+animation: fadeln 0.5s ease forwards; margin-top: 20px; z-index: 105;
+}
+.bday-letter-card p { font-size: 1.35rem; line-height: 1.9; color: #483b4d; font-weight: 500; }
 
-        /* Sürpriz Mesaj Penceresi */
-        #message-popup {
-            position: fixed;
-            top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.7);
-            background: white; padding: 40px; border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); z-index: 10001;
-            text-align: center; display: none; max-width: 500px; width: 90%;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        #message-popup.active { display: block; transform: translate(-50%, -50%) scale(1); }
-        .close-popup-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #aaa; transition: color 0.3s; }
-        .close-popup-btn:hover { color: var(--primary-color); }
+/* ANA KONTEYNER */
+#main-content { display: none; }
+.container { max-width: 950px; margin: 0 auto; padding: 30px 20px 50px 20px; }
+.glass-panel {
+background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 32px; padding: 35px; margin-bottom: 40px;
+box-shadow: 0 12px 35px rgba(236, 213, 224, 0.5);
+}
 
-        /* --- 3. SABİT ÜST BAR (NAVBAR) --- */
-        nav {
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            position: fixed; top: 0; left: 0; width: 100%;
-            z-index: 1000; height: 70px;
-            display: none;
-            justify-content: space-between;
-            align-items: center; padding: 0 30px;
-        }
+/* SPOTIFY KARTI */
+.spotify-card {
+width: 100%; background: #121212 !important; border-radius: 28px; padding: 25px; color: white !important; display: flex; flex-direction: column;
+box-shadow: 0 25px 55px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); z-index: 10;
+}
+.spot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 5px; }
+.spot-logo { width: 22px; height: 22px; fill: #1db954; }
+.spot-album-art { width: 100%; height: 480px; object-fit: cover; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.55); margin-bottom: 20px; }
+.spot-info { margin-bottom: 15px; text-align: left; padding: 0 5px; }
+.spot-track-title { font-size: 1.5rem; font-weight: 800; color: #ffffff !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.spot-artist { font-size: 1.1rem; color: #b3b3b3 !important; font-weight: 600; margin-top: 2px; }
+.spot-progress-container { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; padding: 0 5px; }
+.spot-time { font-size: 0.9rem; color: #b3b3b3 !important; min-width: 40px; font-weight: bold; }
+.spot-progress-bar { flex: 1; height: 5px; background: #4f4f4f; border-radius: 10px; position: relative; cursor: pointer; }
+.spot-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 10px; position: absolute; left: 0; top: 0; }
+.spot-controls { display: flex; align-items: center; justify-content: center; gap: 30px; }
+.spot-btn { background: none; border: none; color: #b3b3b3 !important; cursor: pointer; font-size: 1.4rem; transition: all 0.2s; }
+.spot-btn:hover { color: white !important; transform: scale(1.05); }
+.spot-play-btn { background: white !important; color: black !important; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.spot-play-btn:hover { transform: scale(1.08) !important; background: #1db954 !important; color: white !important; }
 
-        .nav-left { display: flex; align-items: center; gap: 20px; }
-        .menu-toggle { font-size: 24px; cursor: pointer; color: var(--dark-color); padding: 5px; }
-        .home-btn { font-size: 16px; cursor: pointer; font-weight: 600; color: var(--dark-color); text-decoration: none; display: flex; align-items: center; gap: 5px; }
-        .home-btn:hover, .menu-toggle:hover { color: var(--primary-color); }
+.cover-title { font-size: 2.3rem; color: #ff477e; margin-top: 25px; font-weight: 800; text-align: center; }
+.timer-section h2 { font-size: 1.6rem; margin-bottom: 25px; color: #9c3c6b; text-align: center; font-weight: 700; }
+.countdown-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.time-box { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; min-width: 110px; text-align: center; box-shadow: 0 6px 18px rgba(0,0,0,0.02); }
+.time-box .num { font-size: 2.3rem; font-weight: 800; color: #ff477e; }
+.time-box .label { font-size: 1rem; color: #7d6585; font-weight: bold; margin-top: 6px; }
 
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .nav-logo { font-family: 'Dancing Script', cursive; font-size: 26px; color: var(--primary-color); font-weight: bold; text-decoration: none; }
-        .logout-btn { background: #f0f2f5; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 13px; color: #555; display: flex; align-items: center; gap: 5px; transition: all 0.3s; }
-        .logout-btn:hover { background: #ffebee; color: var(--primary-color); }
+.story-section h2 { color: #ff477e; margin-bottom: 20px; font-weight: 800; font-size: 1.9rem; }
+.story-section p { line-height: 2; font-size: 1.25rem; margin-bottom: 25px; color: #483b4d; font-weight: 500; }
 
-        /* --- YAN MENÜ (SIDEBAR) --- */
-        .sidebar {
-            position: fixed; top: 70px; left: -280px; width: 280px; height: calc(100vh - 70px);
-            background: white; box-shadow: 4px 0 15px rgba(0,0,0,0.05);
-            z-index: 999; transition: left 0.3s ease; padding: 20px 0;
-        }
-        .sidebar.active { left: 0; }
-        .sidebar-menu { list-style: none; }
-        .sidebar-menu li a { display: flex; align-items: center; gap: 15px; padding: 15px 25px; text-decoration: none; color: var(--dark-color); font-weight: 600; font-size: 15px; transition: all 0.3s; cursor: pointer; }
-        .sidebar-menu li a:hover, .sidebar-menu li a.active { background: #fff0f3; color: var(--primary-color); border-left: 4px solid var(--primary-color); }
-        /* --- İÇERİK ALANI --- */
-        .container { max-width: 1000px; margin: 100px auto 40px auto; padding: 20px; display: none; min-height: calc(100vh - 210px); }
-        .page-section { display: none; animation: fadeIn 0.4s ease forwards; }
-        .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* MODALLAR */
+.sub-page {
+display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+z-index: 1000; padding: 90px 20px 40px 20px; overflow-y: auto;
+backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+animation: fadeln 0.4s ease forwards;
+}
+@keyframes fadeln { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+.sub-page-content {
+max-width: 850px; margin: 0 auto; background: rgba(255, 255, 255, 0.98);
+border: 2px solid #ffe3eb; border-radius: 36px; padding: 50px 40px;
+box-shadow: 0 25px 60px rgba(231, 166, 194, 0.4); position: relative; z-index: 1001;
+}
+.close-btn {
+background: linear-gradient(90deg, #ff758c 0%, #ff477e 100%);
+color: white; border: none; padding: 14px 35px; border-radius: 50px;
+font-weight: bold; cursor: pointer; margin-top: 40px; font-size: 1.15rem; transition: all 0.2s;
+}
+.close-btn:hover { transform: scale(1.05); }
+    /* ŞANS KURABİYESİ */
+.cookie-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 40px 0; min-height: 360px; position: relative; width: 100%; }
+.cookie-container { position: relative; width: 240px; height: 200px; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+.cookie-piece {
+position: absolute; background: #eac086; background: linear-gradient(135deg, #fcd58e 0%, #dfa049 45%, #b97e2a 100%); border: 2px solid #b27622;
+box-shadow: inset -4px -6px 15px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.12); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: 5; opacity: 1;
+}
+.cp-1 { width: 120px; height: 160px; left: 0; top: 20px; border-radius: 110px 30px 40px 110px; transform-origin: left bottom; }
+.cp-2 { width: 120px; height: 160px; right: 0; top: 20px; border-radius: 30px 110px 110px 40px; transform-origin: right bottom; }
+.cp-3 { width: 90px; height: 90px; left: 30px; top: 55px; border-radius: 50% 10px 50% 50%; background: #d0923a; z-index: 4; }
+.cp-4 { width: 90px; height: 90px; right: 30px; top: 55px; border-radius: 10px 50% 50% 50%; background: #c2852e; z-index: 4; }
+.cookie-crumb { position: absolute; width: 16px; height: 16px; background: #c2852e; border-radius: 30% 70% 40% 60%; z-index: 6; opacity: 1; transition: all 0.6s ease-out; }
+.crumb-1 { top: 60px; left: 110px; width: 22px; height: 14px; }
+.crumb-2 { top: 110px; left: 95px; width: 14px; height: 18px; }
+.crumb-3 { top: 80px; right: 105px; width: 18px; height: 12px; }
 
-        h2.section-title { text-align: center; color: var(--primary-color); font-family: 'Dancing Script', cursive; font-size: 36px; margin-bottom: 25px; }
+.cookie-container.exploded .cp-1 { transform: translate(-250px, -180px) rotate(-140deg) scale(0.2); opacity: 0; }
+.cookie-container.exploded .cp-2 { transform: translate(250px, -180px) rotate(140deg) scale(0.2); opacity: 0; }
+.cookie-container.exploded .cp-3 { transform: translate(-180px, 220px) rotate(220deg) scale(0); opacity: 0; }
+.cookie-container.exploded .cp-4 { transform: translate(180px, 220px) rotate(-220deg) scale(0); opacity: 0; }
+.cookie-container.exploded .crumb-1 { transform: translate(60px, -260px) rotate(360deg); opacity: 0; }
+.cookie-container.exploded .crumb-2 { transform: translate(-120px, -190px) rotate(-270deg); opacity: 0; }
+.cookie-container.exploded .crumb-3 { transform: translate(190px, 120px) rotate(180deg); opacity: 0; }
 
-        /* --- ANA SAYFA BİLEŞENLERİ --- */
-        .main-card { background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); text-align: center; margin-bottom: 25px; }
-        
-        /* Müzik Çalar Alanı */
-        .music-player-box { display: flex; flex-direction: column; align-items: center; gap: 15px; background: #fff0f3; padding: 20px; border-radius: 15px; margin: 15px auto; max-width: 450px; }
-        .album-art { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); animation: rotateArt 10s linear infinite; animation-play-state: paused; }
-        .album-art.playing { animation-play-state: running; }
-        .music-info h3 { font-size: 16px; margin-bottom: 5px; }
-        .music-info p { font-size: 13px; color: #777; }
-        .audio-controls { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
-        .play-pause-btn { background: var(--primary-color); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(255, 74, 117, 0.3); }
+.cookie-paper {
+position: absolute; width: 320px; background: #ffffff; border-left: 6px solid #ff477e; padding: 25px; border-radius: 4px 16px 16px 4px;
+box-shadow: 0 12px 40px rgba(0,0,0,0.15); text-align: center; font-size: 1.3rem; font-weight: 600; color: #483b4d; font-style: italic; line-height: 1.7;
+opacity: 0; transform: scale(0.3); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transition-delay: 0.4s; z-index: 2; pointer-events: none;
+}
+.cookie-container.exploded .cookie-paper { opacity: 1; transform: scale(1); pointer-events: auto; }
 
-        /* Aşk Zaman Sayacı */
-        .counter-grid { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-        .counter-item { background: var(--dark-color); color: white; padding: 15px; border-radius: 12px; min-width: 75px; }
-        .counter-value { font-size: 24px; font-weight: bold; display: block; color: var(--secondary-color); }
-        .counter-label { font-size: 11px; color: #ccc; }
+/* KOŞU OYUNU EKRANI STİLLERİ */
+#game-area {
+width: 100%; max-width: 700px; height: 350px; background: linear-gradient(to bottom, #e0f2fe, #fbcfe8);
+border: 4px solid #ff477e; border-radius: 24px; position: relative; overflow: hidden; margin: 20px auto; display: none;
+}
+#game-character {
+width: 50px; height: 60px; background: #ff477e; border-radius: 12px; position: absolute; bottom: 40px; left: 50px;
+display: flex; align-items: center; justify-content: center; font-size: 2rem; z-index: 10; transition: bottom 0.1s ease;
+}
+#game-obstacle {
+width: 35px; height: 40px; background: #9333ea; border-radius: 8px; position: absolute; bottom: 40px; right: -40px;
+display: flex; align-items: center; justify-content: center; font-size: 1.3rem; z-index: 10;
+}
+#game-ground {
+width: 100%; height: 40px; background: #f472b6; position: absolute; bottom: 0; left: 0; border-top: 4px solid #db2777;
+}
+#game-score-board {
+position: absolute; top: 15px; left: 20px; font-size: 1.3rem; font-weight: bold; color: #4c1d95; background: rgba(255,255,255,0.7); padding: 5px 15px; border-radius: 12px;
+}
+#game-msg-overlay {
+position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; z-index: 20; text-align: center; padding: 20px;
+}
+#game-msg-overlay h3 { font-size: 2rem; margin-bottom: 15px; color: #fbcfe8; }
+#game-msg-overlay button {
+background: #ff477e; color: white; border: none; padding: 10px 25px; border-radius: 20px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: transform 0.2s; margin-top: 10px;
+}
+#game-msg-overlay button:hover { transform: scale(1.05); }
 
-        /* --- 4.1 SENİ NEDEN SEVİYORUM SEKMESİ --- */
-        .love-reasons-list { list-style: none; text-align: left; max-width: 600px; margin: 0 auto; }
-        .love-reasons-list li { background: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 12px; border-left: 5px solid var(--primary-color); font-weight: 500; box-shadow: 0 4px 10px rgba(0,0,0,0.01); display: flex; align-items: center; gap: 10px; }
-        
-        /* --- 4.2 ŞANS KURABİYESİ --- */
-        .cookie-wrapper-box { text-align: center; padding: 30px; }
-        .cookie-btn { background: var(--primary-color); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 600; cursor: pointer; font-size: 16px; }
-        #cookie-display-text { margin-top: 20px; font-style: italic; color: #555; min-height: 50px; font-size: 16px; font-weight: 500; }
-
-        /* --- 4.3 ANILAR (GERÇEK FOTOĞRAF VE VİDEOLAR) --- */
-        .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .media-card-item { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); position: relative; cursor: pointer; }
-        .media-card-item img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.3s; }
-        .media-card-item:hover img { transform: scale(1.03); }
-        .media-card-item video { width: 100%; height: 220px; object-fit: cover; display: block; background: #000; }
-        .media-caption { padding: 12px; font-size: 14px; font-weight: 600; text-align: center; color: #555; background: white; border-top: 1px solid #eee; }
-
-        /* Lightbox Büyütme Modalı */
-        .lightbox {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 11000; justify-content: center; align-items: center;
-        }
-        .lightbox img { max-width: 90%; max-height: 85%; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
-        .lightbox-close { position: absolute; top: 25px; right: 35px; color: white; font-size: 45px; cursor: pointer; }
-        /* --- 4.4 NOTLAR --- */
-        .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .note-paper { background: #fffde7; padding: 25px; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; border-left: 4px solid #ffeb3b; }
-        .note-paper h3 { font-family: 'Dancing Script', cursive; font-size: 24px; color: #b78a00; margin-bottom: 10px; }
-        .note-paper p { font-size: 14px; line-height: 1.6; color: #555; }
-
-        /* --- 4.5 MINI OYUN ALANI --- */
-        .game-container-box { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); text-align: center; max-width: 650px; margin: 0 auto; }
-        #gameCanvas { background: #f0f2f5; border-bottom: 4px solid var(--primary-color); border-radius: 8px; display: block; margin: 15px auto; cursor: pointer; max-width: 100%; }
-        .score-board { display: flex; justify-content: space-between; font-size: 16px; font-weight: bold; padding: 0 5px; }
-
-        /* FOOTER */
-        footer { text-align: center; padding: 25px; background: white; font-size: 14px; color: #777; border-top: 1px solid #eee; display: none; }
-    </style>
+/* DİĞER ELEMANLAR */
+.photo-gallery { display: none; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 20px; padding: 5px; }
+.photo-gallery img { width: 100%; height: 180px; object-fit: cover; border-radius: 20px; border: 4px solid white; box-shadow: 0 5px 12px rgba(0,0,0,0.06); cursor: zoom-in; transition: transform 0.3s; }
+.photo-gallery img:hover { transform: scale(1.05); }
+.memory-card { background: #fffbfa; border-left: 5px solid #ff477e; padding: 22px; border-radius: 0 20px 20px 0; margin-bottom: 25px; display: none; }
+.video-gallery { display: flex; flex-direction: column; gap: 15px; }
+.video-btn { display: flex; align-items: center; justify-content: space-between; background: white; border: 2px solid #ffe3eb; color: #483b4d; text-decoration: none; padding: 20px 25px; border-radius: 22px; font-weight: bold; font-size: 1.2rem; transition: all 0.2s; }
+.video-btn:hover { background: #ff477e; color: white; border-color: #ff477e; }
+#image-viewer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 2000; }
+#full-image { max-width: 90%; max-height: 90%; border-radius: 12px; }
+.close-viewer { position: absolute; top: 20px; right: 30px; color: white; font-size: 3rem; cursor: pointer; }
+.quiz-option { background: white; border: 2px solid #ffe3eb; padding: 15px; border-radius: 15px; margin-bottom: 10px; cursor: pointer; transition: all 0.2s; }
+.quiz-option:hover { background: #fff5f7; border-color: #ff477e; }
+.heart-rooms-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
+.heart-room-card { background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 20px; width: 160px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.heart-room-card:hover { transform: translateY(-5px); border-color: #ff477e; }
+#single-room-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1100; }
+.room-content-box { background: white; padding: 40px; border-radius: 30px; max-width: 500px; text-align: center; }
+</style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="login-box">
-            <h2>Giriş Paneli</h2>
-            <p>Sadece bizim bildiğimiz o özel tarihi gir sevgilim:</p>
-            <input type="password" id="password-input" placeholder="GGAAYYYY">
-            <button class="login-btn" onclick="checkLogin()">Giriş Yap ❤️</button>
-            <div id="login-error">Hatalı tarih girdin aşkım, tekrar dene! 💕</div>
-        </div>
-    </div>
+<div class="fixed-header" id="main-header" style="display: none;">
+<div class="header-left">
+<button class="menu-toggle-btn" onclick="toggleSidebar()">=</button>
+<button class="nav-home-btn" onclick="sayfaKapat(false)">Ana Sayfa</button>
+</div>
+<div class="header-right">
+<div class="header-logo">Aynur & Mehmet</div>
+<button class="nav-logout-btn" onclick="guvenliCikis()">Güvenli Çıkış</button>
+</div>
+</div>
 
-    <div id="cake-screen">
-        <div class="countdown-text" id="countdown-box">3</div>
-        <div class="cake-wrapper">
-            <div class="candles-container">
-                <div class="candle"><div class="fire" id="f1"></div></div>
-                <div class="candle"><div class="fire" id="f2"></div></div>
-                <div class="candle"><div class="fire" id="f3"></div></div>
-            </div>
-            <div class="real-cake">🎂</div>
-        </div>
-    </div>
+<div class="sidebar-menu" id="sidebar">
+<ul class="sidebar-list">
+<li class="sidebar-item" onclick="toggleSidebar(); temizleVeKurabiyeAc()">Şans Kurabiyesi</li>
+<li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('love-rooms-page', 'linear-gradient(135deg, #fff3f6 0%, #f7eefc 100%)')">Seni Neden Seviyorum?</li>
+<li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('memory-page', 'linear-gradient(135deg, #f7f9fc 0%, #fff0f5 100%)')">Aşk Haritası (Şehir Anıları)</li>
+<li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('quiz-page', 'linear-gradient(135deg, #f3e9fa 0%, #e6f2ff 100%)')">İlişki Testi</li>
+<li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('game-page', 'linear-gradient(135deg, #e0f2fe 0%, #fbcfe8 100%)')">Aynuş'un Koşusu (Oyun)</li>
+<li class="sidebar-item" onclick="toggleSidebar(); sayfaAc('video-page', 'linear-gradient(135deg, #fff5f5 0%, #faeefb 100%)')">Bizim Videolarımız</li>
+</ul>
+</div>
+<div class="effect-container" id="global-effects"></div>
 
-    <div id="message-popup">
-        <span class="close-popup-btn" onclick="closeBirthdayPopup()">×</span>
-        <h2 style="font-family:'Dancing Script', cursive; font-size: 32px; margin-bottom: 15px;">İyi Ki Doğdun Aynuş'um! 🥳</h2>
-        <p style="font-size: 15px; line-height: 1.6; color: #555;">Hayatıma girdiğin gün benim en büyük şansım oldu. Yeni yaşın sana tüm güzellikleri getirsin, kalbindeki her dilek gerçek olsun. Seni dünyalar kadar çok seviyorum birtanem! ❤️</p>
-    </div>
+<div id="lock-screen">
+<div class="lock-box">
+<h1>En Güzel Hikayemize Hoş Geldin...</h1>
+<p>Bugün senin günün Aynuşum. Kalbimin sadece senin bildiğin o gizli odasını açmak ve şehirler arası biriktirdiğimiz tüm o güzel anılara yolculuk yapmak için şifreyi girmelisin...</p>
+<input type="text" id="password-input" placeholder="İlk buluşma tarihimiz (GGAAYYYY)">
+<button onclick="kontrolEt()">Anılarımızı Aç</button>
+<p id="error-message" class="error-msg"></p>
+</div>
+</div>
 
-    <nav id="main-navbar">
-        <div class="nav-left">
-            <div class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
-            <a class="home-btn" onclick="goToHome()"><i class="fa-solid fa-house"></i> Ana Sayfa</a>
-        </div>
-        <div class="nav-right">
-            <button class="logout-btn" onclick="secureLogout()"><i class="fa-solid fa-right-from-bracket"></i> Güvenli Çıkış</button>
-            <a class="nav-logo" href="#">Aynur & Mehmet</a>
-        </div>
-    </nav>
+<div id="birthday-overlay">
+<button class="birthday-close-btn" onclick="kapatPastaEkrani()">x</button>
+<div id="cake-stage">
+<h2>Benim Güzel Doğum Günü Pastam!</h2>
+<p id="cake-instructions">Hazır mısın sevgilim? Geri sayım bitince mumları üfleyelim!</p>
+<div class="giant-cake-wrapper">
+<div class="cake-3d">
+<div class="candles-grid" id="candles-container"></div>
+<div class="cake-layer layer-top"><div class="cream-drip"></div></div>
+<div class="cake-layer layer-middle"><div class="cream-drip"></div></div>
+<div class="cake-layer layer-bottom"><div class="cream-drip"></div></div>
+</div>
+<div class="blowing-wind" id="wind-effect"></div>
+</div>
+<div class="countdown-number" id="bday-countdown">5</div>
+</div>
+<h1 class="bday-h1" id="bday-greeting">İyi Ki Doğdun Aynur!</h1>
+<div class="bday-letter-card" id="bday-letter">
+<p><strong>İyi ki doğdun, iyi ki benimlesin sevgilim...</strong><br><br>Hayatıma girdiğin andan beri her günümü güzelleştiren, bana aşkın ve huzurun en sahici halini yaşatan kadına... Doğduğun o muazzam gün, benim de en büyük şansımın doğduğu gündür. Farklı şehirlerde, her bir sokakta bıraktığımız tüm o güzel izler senin sevginle anlam kazandı. Seni çok seviyorum Aynuşum!</p>
+</div>
+<audio id="animation-music" src="animasyon.mp3"></audio>
+</div>
 
-    <div class="sidebar" id="main-sidebar">
-        <ul class="sidebar-menu">
-            <li><a onclick="switchPage('love')" id="link-love"><i class="fa-solid fa-heart-circle-check"></i> Seni Neden Seviyorum?</a></li>
-            <li><a onclick="switchPage('cookie')" id="link-cookie"><i class="fa-solid fa-cookie"></i> Şans Kurabiyesi</a></li>
-            <li><a onclick="switchPage('memories')" id="link-memories"><i class="fa-solid fa-photo-film"></i> Anılar</a></li>
-            <li><a onclick="switchPage('notes')" id="link-notes"><i class="fa-solid fa-note-sticky"></i> Notlar</a></li>
-            <li><a onclick="switchPage('game')" id="link-game"><i class="fa-solid fa-gamepad"></i> Mini Oyun</a></li>
-        </ul>
-    </div>
+<div id="main-content">
+<div class="container">
+<div class="glass-panel">
+<div class="spotify-card">
+<div class="spot-header">
+<span style="font-size: 0.85rem; letter-spacing: 1px; font-weight: bold; color: #b3b3b3;">İKİMİZİN ŞARKISI</span>
+<svg class="spot-logo" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.893-.982-.336.075-.668-.135-.745-.47-.077-.337.135-.668.47-.745 3.856-.887 7.15-.519 8.822 1.128.296.18.387.563.206.862zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.075-1.182-.413.125-.845-.107-.97-.522-.125-.413.108-.847.522-.972 3.666-1.112 8.242-.57 11.336 1.33.37.227.49.704.26 1.072zm.105-2.836C14.493 8.78 8.7 8.595 5.353 9.607a1 1 0 1 1-.577-1.915c3.842-1.166 10.222-.94 14.187 1.414a1 1 0 0 1-1.022 1.718z"/></svg>
+</div>
+<img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="spot-album-art">
+<div class="spot-info">
+<div class="spot-track-title">Bizim En Güzel Hikayemiz</div>
+<div class="spot-artist">Mehmet & Aynur</div>
+</div>
+<div class="spot-progress-container">
+<span class="spot-time" id="track-current-time">0:00</span>
+<div class="spot-progress-bar" onclick="sureAyarla(event)">
+<div class="spot-progress-fill" id="track-progress"></div>
+</div>
+<span class="spot-time" id="track-total-time">0:00</span>
+</div>
+<div class="spot-controls">
+<button class="spot-btn">◄◄</button>
+<button class="spot-btn spot-play-btn" id="play-button" onclick="muzikCalDurdur()">▶</button>
+<button class="spot-btn">►►I</button>
+</div>
+<audio id="background-music" src="sarki.mp3" loop></audio>
+</div>
+<div class="cover-title">Seni Çok Seviyorum Aynuşum...</div>
+</div>
 
-    <div class="container" id="main-container">
-        
-        <div id="page-home" class="page-section active">
-            <div class="main-card">
-                <div class="music-player-box">
-                    <img src="isparta1.jpg" class="album-art" id="player-art" alt="Kapak">
-                    <div class="music-info">
-                        <h3>Bizim Şarkımız</h3>
-                        <p>Mehmet & Aynur Anısına</p>
-                    </div>
-                    <div class="audio-controls">
-                        <button class="play-pause-btn" onclick="togglePlay()"><i class="fa-solid fa-play" id="play-icon"></i></button>
-                    </div>
-                    <audio id="bg-audio" src="sarki.mp3" loop></audio>
-                </div>
+<div class="glass-panel timer-section">
+<h2>Seninle Geçen Her Anım Çok Değerli...</h2>
+<div class="countdown-container">
+<div class="time-box"><div class="num" id="t-gun">00</div><div class="label">Gün</div></div>
+<div class="time-box"><div class="num" id="t-saat">00</div><div class="label">Saat</div></div>
+<div class="time-box"><div class="num" id="t-dakika">00</div><div class="label">Dk</div></div>
+<div class="time-box"><div class="num" id="t-saniye">00</div><div class="label">Sn</div></div>
+</div>
+</div>
 
-                <h3 style="margin-top:25px; font-size:16px; color:#555;">İyi ki Hayatımdasın... Başlangıcımızdan Beri:</h3>
-                <div class="counter-grid">
-                    <div class="counter-item"><span class="counter-value" id="count-day">0</span><span class="counter-label">Gün</span></div>
-                    <div class="counter-item"><span class="counter-value" id="count-hour">0</span><span class="counter-label">Saat</span></div>
-                    <div class="counter-item"><span class="counter-value" id="count-min">0</span><span class="counter-label">Dakika</span></div>
-                    <div class="counter-item"><span class="counter-value" id="count-sec">0</span><span class="counter-label">Saniye</span></div>
-                </div>
+<div class="glass-panel story-section">
+<h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum</h2>
+<p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
+<p>12 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
+<p style="text-align: center; font-weight: bold; margin-top: 20px; color: #ff477e;">Sol üstteki menü ikonuna ( = ) tıklayarak bizim için hazırladığım tüm özel sürprizlere göz atabilirsin sevgilim!</p>
+</div>
 
-                <p style="font-style: italic; color:#666; margin-top:20px; line-height:1.6;">"Sen benim gökyüzüm, aldığım her nefessin. Hayatımdaki en güzel varlığım, iyi ki varsın..."</p>
-            </div>
-        </div>
-        <div id="page-love" class="page-section">
-            <h2 class="section-title">Seni Neden Seviyorum?</h2>
-            <ul class="love-reasons-list">
-                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Her sabah güne senin varlığınla uyanmanın huzuru paha biçilemez.</li>
-                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Gülüşün, dünyadaki tüm dertleri bir anda unutturabilecek güce sahip.</li>
-                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Sadece benim sevgilim değil, en yakın dostum ve sırdaşım olduğun için.</li>
-                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Kalbinin o saf, temiz ve sevgi dolu halini her an hissedebiliyorum.</li>
-                <li><i class="fa-solid fa-star" style="color:#ffd166;"></i> Hayatımın her anını güzelleştirdiğin ve bana gerçek aşkı yaşattığın için.</li>
-            </ul>
-        </div>
+<div style="text-align: center; padding: 50px 0 10px 0; font-size: 1.1rem; color: #8a7691; font-weight: bold;">Tüm hakları saklıdır Mehmet ve Aynur</div>
+</div>
+</div>
+<!-- GİZLİ ODALAR SAYFASI -->
+<div id="love-rooms-page" class="sub-page">
+<div class="sub-page-content" style="max-width: 900px;">
+<h2 style="color: #ff477e; text-align: center; font-size: 2rem; margin-bottom: 10px;">Kalbimin Gizli Odaları</h2>
+<p style="text-align: center; color: #524355; margin-bottom: 30px; font-weight: 500;">Seni neden mi seviyorum Aynuşum? Gel, kalbimin kapılarını tek tek arala...</p>
+<div class="heart-rooms-container">
+<div class="heart-room-card" onclick="odaAc(1)"><span class="heart-room-icon">💖</span><div class="heart-room-title">Gülüşün Odası</div></div>
+<div class="heart-room-card" onclick="odaAc(2)"><span class="heart-room-icon">🌸</span><div class="heart-room-title">Huzur Odası</div></div>
+<div class="heart-room-card" onclick="odaAc(3)"><span class="heart-room-icon">🔒</span><div class="heart-room-title">Güven Odası</div></div>
+<div class="heart-room-card" onclick="odaAc(4)"><span class="heart-room-icon">👀</span><div class="heart-room-title">Gözlerin Odası</div></div>
+<div class="heart-room-card" onclick="odaAc(5)"><span class="heart-room-icon">✨</span><div class="heart-room-title">Geleceğim Odası</div></div>
+</div>
+<div style="text-align: center; margin-top: 30px;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
+</div>
+</div>
 
-        <div id="page-cookie" class="page-section">
-            <h2 class="section-title">Günün Şans Kurabiyesi</h2>
-            <div class="main-card cookie-wrapper-box">
-                <p style="margin-bottom: 15px; color: #555;">Bugün kurabiyenin içinden senin için nasıl bir mesaj çıkacak?</p>
-                <div id="cookie-display-text">Kurabiyeyi açmak için aşağıdaki butona tıkla aşkım! 🥠</div>
-                <button class="cookie-btn" onclick="getCookiePhrase()">Kurabiyeyi Kır 🥠</button>
-            </div>
-        </div>
+<div id="single-room-overlay">
+<div class="room-content-box">
+<div id="room-emoji-display" style="font-size: 4rem; margin-bottom: 20px;"></div>
+<div id="room-text-display" class="room-text">Oda yazısı buraya gelecek...</div>
+<button class="close-btn" onclick="odaKapat(false)">Kalbe Geri Dön</button>
+</div>
+</div>
 
-        <div id="page-memories" class="page-section">
-            <h2 class="section-title">Biriktirdiğimiz Güzel Anılar</h2>
-            <div class="media-grid">
-                <div class="media-card-item" onclick="openLightbox('isparta1.jpg')">
-                    <img src="isparta1.jpg" alt="Isparta Anısı 1">
-                    <div class="media-caption">Isparta Günlerimiz 🌹</div>
-                </div>
-                <div class="media-card-item" onclick="openLightbox('isparta2.jpg')">
-                    <img src="isparta2.jpg" alt="Isparta Anısı 2">
-                    <div class="media-caption">Güzel Bir Kare 📸</div>
-                </div>
-                <div class="media-card-item" onclick="openLightbox('hatay1.jpg')">
-                    <img src="hatay1.jpg" alt="Hatay Anısı 1">
-                    <div class="media-caption">Memleketimiz Hatay ❤️</div>
-                </div>
-                <div class="media-card-item" onclick="openLightbox('ankara1.jpg')">
-                    <img src="ankara1.jpg" alt="Ankara Anısı 1">
-                    <div class="media-caption">Ankara Hatırası ❄️</div>
-                </div>
+<!-- ŞANS KURABİYESİ SAYFASI -->
+<div id="cookie-page" class="sub-page">
+<div class="sub-page-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh;">
+<div class="cookie-wrapper">
+<div class="cookie-container" id="interactive-cookie" onclick="kirKurabiye()">
+<div class="cookie-piece cp-1"></div>
+<div class="cookie-piece cp-2"></div>
+<div class="cookie-piece cp-3"></div>
+<div class="cookie-piece cp-4"></div>
+<div class="cookie-crumb crumb-1"></div>
+<div class="cookie-crumb crumb-2"></div>
+<div class="cookie-crumb crumb-3"></div>
+<div class="cookie-paper" id="cookie-note-paper">Not yükleniyor...</div>
+</div>
+<button class="cookie-btn" id="break-cookie-button" style="background: #ff477e; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 20px;" onclick="kirKurabiye()">Kurabiyeyi Kır</button>
+</div>
+<button class="close-btn" style="margin-top: 15px;" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+</div>
+</div>
 
-                <div class="media-card-item">
-                    <video controls preload="metadata">
-                        <source src="video1.mp4" type="video/mp4">
-                        Tarayıcınız video oynatmayı desteklemiyor.
-                    </video>
-                    <div class="media-caption">En Tatlı Anlar 1 🎥</div>
-                </div>
-                <div class="media-card-item">
-                    <video controls preload="metadata">
-                        <source src="video2.mp4" type="video/mp4">
-                        Tarayıcınız video oynatmayı desteklemiyor.
-                    </video>
-                    <div class="media-caption">En Tatlı Anlar 2 🎬</div>
-                </div>
-            </div>
-        </div>
+<!-- İLİŞKİ TESTİ SAYFASI -->
+<div id="quiz-page" class="sub-page">
+<div class="sub-page-content">
+<h2 style="color: #ff477e; margin-bottom: 20px; font-size: 1.8rem;">Senin İçin Küçük Bir Test</h2>
+<p style="font-size: 1.3rem; margin-bottom: 25px; font-weight: bold; color: #3a2e3d;">Soru: Ben en çok neyi yaparken mutlu olurum?</p>
+<div>
+<div class="quiz-option" onclick="cevapKontrol(true)">A) Senin gözlerinin içine bakıp elini tutarken</div>
+<div class="quiz-option" onclick="cevapKontrol(false)">B) Devasa Excel tablolarını filtreleyip uğraşırken</div>
+<div class="quiz-option" onclick="cevapKontrol(false)">C) İş güvenliği yönetmeliklerini ezberlerken</div>
+</div>
+<p id="quiz-result" style="margin-top: 25px; font-weight: bold; font-size: 1.3rem;"></p>
+<button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+</div>
+</div>
 
-        <div id="page-notes" class="page-section">
-            <h2 class="section-title">Sana Küçük Notlarım</h2>
-            <div class="notes-grid">
-                <div class="note-paper">
-                    <h3>İlk Gün Notu</h3>
-                    <p>12 Eylül hayatımın akışının tamamen değiştiği, seninle güzelleştiği o muazzam günün başlangıcı...</p>
-                </div>
-                <div class="note-paper">
-                    <h3>Küçük Bir Hatırlatma</h3>
-                    <p>Günlerin nasıl geçtiği önemli değil, mesafelerin ne olduğu önemli değil. Kalbim her zaman seninle atıyor Aynuş'um.</p>
-                </div>
-            </div>
-        </div>
+<!-- AYNUŞ'UN KOŞUSU (OYUN) SAYFASI -->
+<div id="game-page" class="sub-page">
+<div class="sub-page-content" style="max-width: 800px; text-align: center;">
+<h2 style="color: #ff477e; font-size: 2rem; margin-bottom: 10px;">Aynuş'un Koşusu 🏃‍♀️✨</h2>
+<p style="color: #524355; font-size: 1.1rem; margin-bottom: 15px;">Engellerin üzerinden zıpla ve Mehmet'e ulaşmak için 100 skora ulaş sevgilim! <br><strong>Zıplamak için Boşluk (Space) tuşuna basabilir veya ekrana dokunabilirsin.</strong></p>
+<div id="game-area" onclick="oyunZiplama()">
+<div id="game-score-board">Skor: <span id="game-current-score">0</span> / 100</div>
+<div id="game-character">🏃‍♀️</div>
+<div id="game-obstacle">🌵</div>
+<div id="game-ground"></div>
+<div id="game-msg-overlay">
+<h3 id="game-msg-title">Oyuna Başla</h3>
+<p id="game-msg-desc">Hazır olduğunda butona tıkla!</p>
+<button id="game-action-btn" onclick="oyunBaslat(event)">Başla</button>
+</div>
+</div>
+<button class="close-btn" onclick="sayfaKapat(); oyunDurdur();">Ana Sayfaya Dön</button>
+</div>
+</div>
+<!-- AŞK HARİTASI SAYFASI -->
+<div id="memory-page" class="sub-page">
+<div class="sub-page-content">
+<h2 style="color: #ff477e; text-align: center; margin-bottom: 30px; font-size: 1.9rem;">Şehir Şehir Bizim Hikayemiz</h2>
+<div class="city-card-grid">
+<div class="city-image-card" style="background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 15px; margin-bottom: 15px; cursor: pointer;" onclick="toggleCitySection('isparta-card', 'isparta-gallery')">
+<div class="city-card-text" style="font-weight: bold; color: #ff477e;">📍 Isparta Anılarımız</div>
+</div>
+<div id="isparta-card" class="memory-card">
+<p style="font-style: italic; color: #524355; margin-bottom: 20px;">"Isparta'nın o güzel havasında, yan yana attığımız her adım dün gibi aklımda sevgilim..."</p>
+<div id="isparta-gallery" class="photo-gallery">
+<img src="isparta1.jpg" alt="1"><img src="isparta2.jpg" alt="2"><img src="isparta3.jpg" alt="3"><img src="isparta4.jpg" alt="4"><img src="isparta5.jpg" alt="5"><img src="isparta6.jpg" alt="6"><img src="isparta7.jpg" alt="7"><img src="isparta8.jpg" alt="8"><img src="isparta9.jpg" alt="9"><img src="isparta10.jpg" alt="10"><img src="isparta11.jpg" alt="11"><img src="isparta12.jpg" alt="12"><img src="isparta13.jpg" alt="13">
+</div>
+</div>
 
-        <div id="page-game" class="page-section">
-            <h2 class="section-title">Aynuş'un Koşu Macerası</h2>
-            <div class="game-container-box">
-                <p style="color: #666; font-size: 13px; margin-bottom: 10px;">Zıplamak için <b>SPACE (Boşluk)</b> / <b>YUKARI Ok</b>, eğilmek için <b>AŞAĞI Ok</b> tuşuna bas. Mobilde ekrana dokun!</p>
-                <canvas id="gameCanvas" width="600" height="230"></canvas>
-                <div class="score-board">
-                    <div id="scoreText">Skor: 0</div>
-                    <div id="highScoreText">En Yüksek: 0</div>
-                </div>
-                <div id="gameStatusMessage" style="margin-top: 10px; font-weight: 600; color: var(--primary-color);">Başlamak için tuşa bas veya dokun!</div>
-            </div>
-        </div>
+<div class="city-image-card" style="background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 15px; margin-bottom: 15px; cursor: pointer;" onclick="toggleCitySection('mersin-card', 'mersin-gallery')">
+<div class="city-card-text" style="font-weight: bold; color: #ff477e;">📍 Mersin Anılarımız</div>
+</div>
+<div id="mersin-card" class="memory-card">
+<p style="font-style: italic; color: #524355; margin-bottom: 20px;">"Mersin sahilinde, arabada seninle zamanı durdurduğumuz o anlar benim en büyük huzurum..."</p>
+<div id="mersin-gallery" class="photo-gallery">
+<img src="mersin1.jpg" alt="1"><img src="mersin2.jpg" alt="2"><img src="mersin3.jpg" alt="3"><img src="mersin4.jpg" alt="4">
+</div>
+</div>
 
-    </div>
+<div class="city-image-card" style="background: white; border: 2px solid #ffe3eb; border-radius: 20px; padding: 15px; margin-bottom: 15px; cursor: pointer;" onclick="toggleCitySection('hatay-card', 'hatay-gallery')">
+<div class="city-card-text" style="font-weight: bold; color: #ff477e;">📍 Hatay Anılarımız</div>
+</div>
+<div id="hatay-card" class="memory-card">
+<p style="font-style: italic; color: #524355; margin-bottom: 20px;">"Kendi memleketimde, benim dünyam olan seninle yeni hatıralar biriktirmek..."</p>
+<div id="hatay-gallery" class="photo-gallery">
+<img src="hatay1.jpg" alt="1"><img src="hatay2.jpg" alt="2"><img src="hatay3.jpg" alt="3"><img src="hatay4.jpg" alt="4">
+</div>
+</div>
+</div>
+<div style="text-align: center; margin-top: 20px;"><button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button></div>
+</div>
+</div>
 
-    <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">×</span>
-        <img id="lightboxImg" src="" alt="Büyütülmüş Görsel" onclick="event.stopPropagation()">
-    </div>
+<!-- VİDEOLAR SAYFASI -->
+<div id="video-page" class="sub-page">
+<div class="sub-page-content">
+<h2 style="color: #ff477e; margin-bottom: 30px; font-size: 1.8rem;">Bizim Videolarımız</h2>
+<div class="video-gallery">
+<a href="https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/view?usp=drivesdk" target="_blank" class="video-btn">Isparta Anısı - Video 1 <span>İzle</span></a>
+<a href="https://drive.google.com/file/d/19AAZ4klfj1jVTwSUrJGgScQcdsaFfdTm/view?usp=drivesdk" target="_blank" class="video-btn">Isparta Anısı - Video 2 <span>İzle</span></a>
+<a href="https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/view?usp=drivesdk" target="_blank" class="video-btn">Isparta Anısı - Video 3 <span>İzle</span></a>
+</div>
+<button class="close-btn" onclick="sayfaKapat()">Ana Sayfaya Dön</button>
+</div>
+</div>
 
-    <nav style="display:none;"></nav> <footer id="main-footer">
-        <p>Aynur & Mehmet Tüm hakları saklıdır</p>
-    </footer>
+<div id="image-viewer" onclick="this.style.display='none'">
+<span class="close-viewer">x</span>
+<img id="full-image" src="" alt="Tam Ekran">
+</div>
 
-    <script>
-        /* --- 1. GİRİŞ KONTROLÜ --- */
-        function checkLogin() {
-            const pass = document.getElementById('password-input').value;
-            if(pass !== "") { 
-                document.getElementById('login-screen').style.display = 'none';
-                startBirthdaySequence();
-            } else {
-                document.getElementById('login-error').style.display = 'block';
-            }
-        }
+<script>
+var efektInterval;
+var bdayEfektInterval;
+var gecerliSayfald = "";
 
-        /* --- 2. DOĞUM GÜNÜ PASTA & CELEBRATION DÖNGÜSÜ --- */
-        function startBirthdaySequence() {
-            const cakeScreen = document.getElementById('cake-screen');
-            const countdownBox = document.getElementById('countdown-box');
-            cakeScreen.style.display = 'flex';
+var yanlisMesajlari = [
+"Şifre doğru değil Aynuşum, tekrar dene...",
+"Kalp hafızanı biraz daha zorla sevgilim, bulacaksın!",
+"Bu şifreye biraz üzüldüm... Doğrusunu bildiğinden eminim!"
+];
 
-            let count = 3;
-            let timer = setInterval(() => {
-                count--;
-                if(count > 0) {
-                    countdownBox.innerText = count;
-                } else if(count === 0) {
-                    countdownBox.innerText = "Dilek Tut! 🌟";
-                    setTimeout(() => {
-                        document.getElementById('f1').style.display = 'none';
-                        document.getElementById('f2').style.display = 'none';
-                        document.getElementById('f3').style.display = 'none';
-                        countdownBox.innerText = "Üflendi! 💨";
-                        
-                        triggerCenterConfetti();
+var notlar = [
+"Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam...",
+"Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor!",
+"İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum...",
+"Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
+"İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
+];
+  var odaVerileri = {
+1: { emoji: "💖", bg: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)", text: "Çünkü gülümsediğinde, Isparta'nın en ayaz gecesi bile bir anda ilkbahara dönüyor, içim ısınıyor sevgilim... Senin gülüşün benim dünyamın güneşi." },
+2: { emoji: "🌸", bg: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)", text: "Çünkü senin yanındayken dünyanın bütün yorgunluğu, bütün iş güvenliği riskleri ve karmaşası yok oluyor... Mersin sahilinde arabada oturduğumuz o anlar gibi, sadece sonsuz bir huzur kalıyor." },
+3: { emoji: "🔒", bg: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)", text: "Çünkü kollarının arası, benim bu hayatta bildiğim en güvenli liman. Hayatın tüm karmaşasına karşı seninle bir olmak, bana en büyük gücü veriyor sevgilim." },
+4: { emoji: "👀", bg: "linear-gradient(135deg, #cd9cf2 0%, #f6f3ff 100%)", text: "Çünkü gözlerinin içine her baktığımda, zaman tamamen duruyor. Kilometrelerce yolu, tüm o yorucu otobüs yolculuklarını sadece o gözleri birkaç saat görebilmek için unuttuğumu biliyorum..." },
+5: { emoji: "✨", bg: "linear-gradient(135deg, #fccb90 0%, #dcd9e2 100%)", text: "Çünkü seninle kurduğum gelecek hayallerinin içinde hiçbir belirsizlik yok. Attığım her adımda, kurduğum her yarında sadece sen varsın Aynuşum. Seninle yaşlanmayı seviyorum." }
+};
 
-                        setTimeout(() => {
-                            document.getElementById('message-popup').classList.add('active');
-                        }, 3000);
+var cicekler = ['🌸', '🌹', '🌷', '🌺', '❤️', '✨'];
+var audio = document.getElementById("background-music");
+var animAudio = document.getElementById("animation-music");
+var progressFill = document.getElementById("track-progress");
+var currentTimeEl = document.getElementById("track-current-time");
+var totalTimeEl = document.getElementById("track-total-time");
+var playBtn = document.getElementById("play-button");
 
-                    }, 2000);
-                    clearInterval(timer);
-                }
-            }, 1000);
-        }
+/* KOŞU OYUNU DEĞİŞKENLERİ */
+var oyunInterval = null;
+var oyunSkor = 0;
+var isJumping = false;
+var oyunAktif = false;
+var obstacleSpeed = 6;
 
-        function triggerCenterConfetti() {
-            const screen = document.getElementById('cake-screen');
-            for (let i = 0; i < 120; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                screen.appendChild(confetti);
+window.onload = function() {
+if (localStorage.getItem("aynusum_login") === "true") {
+sifresizGiris();
+}
+var container = document.getElementById("candles-container");
+container.innerHTML = "";
+for(var i=0; i<24; i++) {
+var c = document.createElement("div");
+c.classList.add("mini-candle");
+var f = document.createElement("div");
+f.classList.add("mini-flame");
+f.id = "flame-" + i;
+c.appendChild(f);
+container.appendChild(c);
+}
+if(audio) {
+audio.onloadedmetadata = function() { totalTimeEl.innerText = zamanFormatla(audio.duration); };
+audio.ontimeupdate = function() {
+if(audio.duration) {
+var yuzde = (audio.currentTime / audio.duration) * 100;
+progressFill.style.width = yuzde + "%";
+currentTimeEl.innerText = zamanFormatla(audio.currentTime);
+}
+};
+audio.onended = function() { playBtn.innerText = "▶"; progressFill.style.width = "0%"; currentTimeEl.innerText = "0:00"; };
+}
+};
 
-                const angle = Math.random() * Math.PI * 2;
-                const velocity = 5 + Math.random() * 15;
-                const colors = ['#ff4a75', '#ff85a2', '#ffd166', '#06d6a0', '#118ab2'];
-                
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = '50%';
-                confetti.style.top = '50%';
-                confetti.style.opacity = '1';
+window.onpopstate = function(event) {
+if (document.getElementById("image-viewer").style.display === "flex") {
+document.getElementById("image-viewer").style.display = "none";
+} else if (document.getElementById("single-room-overlay").style.display === "flex") {
+odaKapat(true);
+} else {
+sayfaKapat(true);
+}
+};
 
-                let posX = window.innerWidth / 2;
-                let posY = window.innerHeight / 2;
-                let vx = Math.cos(angle) * velocity;
-                let vy = Math.sin(angle) * velocity;
-                let gravity = 0.2;
+document.querySelectorAll('.photo-gallery img').forEach(img => {
+img.onclick = function() {
+history.pushState({page: "lightbox"}, "");
+var viewer = document.getElementById("image-viewer");
+var fullImg = document.getElementById("full-image");
+viewer.style.display = "flex";
+fullImg.src = this.src;
+};
+});
 
-                let confTimer = setInterval(() => {
-                    posX += vx;
-                    posY += vy;
-                    vy += gravity;
-                    confetti.style.left = posX + 'px';
-                    confetti.style.top = posY + 'px';
-                    confetti.style.opacity -= 0.015;
+function toggleSidebar() { document.getElementById("sidebar").classList.toggle("active"); }
 
-                    if (parseFloat(confetti.style.opacity) <= 0) {
-                        confetti.remove();
-                        clearInterval(confTimer);
-                    }
-                }, 20);
-            }
-        }
-        function closeBirthdayPopup() {
-            document.getElementById('message-popup').classList.remove('active');
-            document.getElementById('cake-screen').style.display = 'none';
-            
-            document.getElementById('main-navbar').style.display = 'flex';
-            document.getElementById('main-container').style.display = 'block';
-            document.getElementById('main-footer').style.display = 'block';
-            
-            startLoveCounter();
-            initAudio();
-        }
+function kontrolEt() {
+var input = document.getElementById("password-input").value.trim();
+if (input === "04102025") {
+localStorage.setItem("aynusum_login", "true");
+baslatPastaAnimasyonu();
+} else {
+var rastgeleMesaj = yanlisMesajlari[Math.floor(Math.random() * yanlisMesajlari.length)];
+var errEl = document.getElementById("error-message");
+errEl.innerText = rastgeleMesaj;
+errEl.style.display = "block";
+document.getElementById("password-input").value = "";
+}
+}
+ function baslatPastaAnimasyonu() {
+document.getElementById("lock-screen").style.display = "none";
+var bdayOverlay = document.getElementById("birthday-overlay");
+bdayOverlay.style.display = "flex";
+gecerliSayfald = "birthday-overlay";
+var count = 5;
+var cdEl = document.getElementById("bday-countdown");
+cdEl.innerText = count;
+var interval = setInterval(function() {
+count--;
+if(count > 0) {
+cdEl.innerText = count;
+} else if (count === 0) {
+cdEl.innerText = "Üfleniyor...";
+clearInterval(interval);
+setTimeout(function() {
+cdEl.style.display = "none";
+document.getElementById("cake-instructions").style.display = "none";
+var wind = document.getElementById("wind-effect");
+wind.style.animation = "windBlowReal 1.2s ease-in-out forwards";
+setTimeout(function() {
+for(var i=0; i<24; i++) {
+var flm = document.getElementById("flame-"+i);
+if(flm) flm.style.display = "none";
+}
+mumlariUfleVeKutla();
+}, 500);
+}, 1500);
+}
+}, 1000);
+}
 
-        /* --- 3. SABİT ÜST BAR VE NAVİGASYON --- */
-        function toggleSidebar() {
-            document.getElementById('main-sidebar').classList.toggle('active');
-        }
+function mumlariUfleVeKutla() {
+if(animAudio) animAudio.play().catch(e => console.log("animasyon.mp3 yüklenemedi"));
+var container = document.getElementById("global-effects");
+container.style.display = "block";
+var endAnimTime = Date.now() + 6000;
+bdayEfektInterval = setInterval(function() {
+if (Date.now() > endAnimTime) {
+clearInterval(bdayEfektInterval);
+container.innerHTML = "";
+container.style.display = "none";
+document.getElementById("bday-greeting").style.display = "block";
+document.getElementById("bday-letter").style.display = "block";
+return;
+}
+var p = document.createElement("div");
+p.classList.add("floating-emoji");
+p.innerText = cicekler[Math.floor(Math.random() * cicekler.length)];
+p.style.left = Math.random() * 94 + "%";
+p.style.setProperty('--size', (Math.random() * 20 + 30) + "px");
+p.style.setProperty('--duration', (Math.random() * 1.5 + 2) + "s");
+p.style.setProperty('--rot', (Math.random() * 360) + "deg");
+container.appendChild(p);
+createFireworkExplosion();
+}, 100);
+}
 
-        function goToHome() {
-            document.getElementById('main-sidebar').classList.remove('active');
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
-            document.getElementById('page-home').classList.add('active');
-            if (gameStatus === 'PLAYING') gameStatus = 'START';
-        }
+function createFireworkExplosion() {
+var overlay = document.getElementById("birthday-overlay");
+var f = document.createElement("div");
+f.classList.add("firework");
+f.style.display = "block";
+var rx = Math.random() * 80 + 10;
+var ry = Math.random() * 60 + 10;
+f.style.left = rx + "%"; f.style.top = ry + "vh";
+var colors = ['#ff477e', '#ffb703', '#b062de', '#1db954', '#00b4d8', '#ff758c'];
+var color = colors[Math.floor(Math.random() * colors.length)];
+f.style.backgroundColor = color;
+var shadows = "";
+for(var i=0; i<25; i++) {
+var angle = Math.random() * Math.PI * 2;
+var dist = Math.random() * 120 + 40;
+var x = Math.cos(angle) * dist; var y = Math.sin(angle) * dist;
+shadows += (shadows ? "," : "") + x + "px " + y + "px 0 " + color;
+}
+f.style.setProperty('--shadows', shadows);
+f.style.setProperty('--fx', "0px"); f.style.setProperty('--fy', "0px");
+f.style.animation = "fireworkPop 1s ease-out forwards";
+overlay.appendChild(f);
+setTimeout(function() { f.remove(); }, 1000);
+}
 
-        function switchPage(pageId) {
-            document.getElementById('main-sidebar').classList.remove('active');
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
-            
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.getElementById('link-' + pageId).classList.add('active');
-            
-            if(pageId !== 'game' && gameStatus === 'PLAYING') gameStatus = 'START';
-        }
+function kapatPastaEkrani() {
+clearInterval(bdayEfektInterval);
+if(animAudio) { animAudio.pause(); animAudio.currentTime = 0; }
+document.getElementById("birthday-overlay").style.display = "none";
+gecerliSayfald = "";
+sifresizGiris();
+}
 
-        function secureLogout() {
-            location.reload();
-        }
+function sifresizGiris() {
+document.getElementById("lock-screen").style.display = "none";
+document.getElementById("main-content").style.display = "block";
+document.getElementById("main-header").style.display = "flex";
+zamanlayiciyiBaslat();
+}
+ function guvenliCikis() {
+localStorage.removeItem("aynusum_login");
+if(audio) audio.pause();
+playBtn.innerText = "▶";
+document.getElementById("main-content").style.display = "none";
+document.getElementById("main-header").style.display = "none";
+document.getElementById("lock-screen").style.display = "flex";
+document.getElementById("error-message").style.display = "none";
+document.getElementById("password-input").value = "";
+gecerliSayfald = "";
+sayfaKapat(true);
+}
 
-        /* --- ŞARKI.MP3 OYNATICI VE ALBÜM KAPAK FOTOĞRAFI GÜNCELLEMESİ --- */
-        const audio = document.getElementById('bg-audio');
-        const playIcon = document.getElementById('play-icon');
-        const albumArt = document.getElementById('player-art');
+function zamanlayiciyiBaslat() {
+var baslangic = new Date("2025-09-12T00:00:00").getTime();
+setInterval(function() {
+var fark = new Date().getTime() - baslangic;
+var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+var saniye = Math.floor((fark % (1000 * 60)) / 1000);
 
-        function initAudio() {
-            audio.play().then(() => {
-                playIcon.className = "fa-solid fa-pause";
-                albumArt.classList.add('playing');
-            }).catch(() => {});
-        }
+document.getElementById("t-gun").innerText = gun < 10 ? '0' + gun : gun;
+document.getElementById("t-saat").innerText = saat < 10 ? '0' + saat : saat;
+document.getElementById("t-dakika").innerText = dakika < 10 ? '0' + dakika : dakika;
+document.getElementById("t-saniye").innerText = saniye < 10 ? '0' + saniye : saniye;
+}, 1000);
+}
 
-        function togglePlay() {
-            if(audio.paused) {
-                audio.play();
-                playIcon.className = "fa-solid fa-pause";
-                albumArt.classList.add('playing');
-            } else {
-                audio.pause();
-                playIcon.className = "fa-solid fa-play";
-                albumArt.classList.remove('playing');
-            }
-        }
+function muzikCalDurdur() {
+if (audio.paused) {
+audio.play().then(() => { playBtn.innerText = "⏸"; }).catch(e => { alert("Müzik dosyası bulunamadı."); });
+} else {
+audio.pause(); playBtn.innerText = "▶";
+}
+}
 
-        /* --- 12.09.2025 AŞK SAYAÇ MANTIĞI --- */
-        function startLoveCounter() {
-            const startDate = new Date("2025-09-12T00:00:00");
-            setInterval(() => {
-                const now = new Date();
-                const diff = now - startDate;
+function sureAyarla(e) {
+var bar = e.currentTarget;
+if(audio.duration) { audio.currentTime = audio.duration * (e.offsetX / bar.offsetWidth); }
+}
 
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const mins = Math.floor((diff / (1000 * 60)) % 60);
-                const secs = Math.floor((diff / 1000) % 60);
+function zamanFormatla(saniye) {
+if (isNaN(saniye)) return "0:00";
+var dk = Math.floor(saniye / 60), sn = Math.floor(saniye % 60);
+return dk + ":" + (sn < 10 ? "0" + sn : sn);
+}
 
-                document.getElementById('count-day').innerText = days;
-                document.getElementById('count-hour').innerText = hours;
-                document.getElementById('count-min').innerText = mins;
-                document.getElementById('count-sec').innerText = secs;
-            }, 1000);
-        }
-        /* --- FOTOĞRAF LIGHTBOX (BÜYÜTME) FONKSİYONLARI --- */
-        function openLightbox(src) {
-            const modal = document.getElementById('lightboxModal');
-            document.getElementById('lightboxImg').src = src;
-            modal.style.display = 'flex';
-        }
-        function closeLightbox() {
-            document.getElementById('lightboxModal').style.display = 'none';
-        }
+function sayfaAc(id, bg) {
+sayfaKapat(true);
+var pg = document.getElementById(id);
+if(pg) {
+pg.style.display = "block";
+document.body.style.background = bg;
+gecerliSayfald = id;
+history.pushState({page: id}, "");
+if(id === 'game-page') { oyunArayuzSifirla(); }
+}
+}
 
-        /* --- 4.2 ŞANS KURABİYESİ --- */
-        const cookiePhrases = [
-            "Bugün gözlerinin içi ekstra parlayacak, çünkü dünyanın en çok sevilen kadını sensin! ✨",
-            "Mehmet şu an seni düşünüyor, seninle geçireceği o güzel günlerin hayalini kuruyor. ❤️",
-            "Kurabiyen der ki: Kalbindeki o harika adamla ömür boyu el ele yürüyeceksiniz! 🚌",
-            "Bugün şansın dönüm noktası: Mehmet'in aşkı tüm gün koruyucu kalkanın olacak!"
-        ];
-        function getCookiePhrase() {
-            const txt = cookiePhrases[Math.floor(Math.random() * cookiePhrases.length)];
-            document.getElementById('cookie-display-text').innerText = txt;
-        }
+function sayfaKapat(fromHistory) {
+if(gecerliSayfald !== "") {
+var pg = document.getElementById(gecerliSayfald);
+if(pg) pg.style.display = "none";
+if(gecerliSayfald === 'game-page') { oyunDurdur(); }
+}
+document.body.style.background = "linear-gradient(135deg, #ffeef2 0%, #fff5f7 50%, #f3e9fa 100%)";
+gecerliSayfald = "";
+if(!fromHistory && window.history.state) { history.back(); }
+}
 
-        /* --- 4.5 MINI OYUN (Aynuş'un Koşusu) --- */
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-        const scoreText = document.getElementById("scoreText");
-        const highScoreText = document.getElementById("highScoreText");
-        const gameStatusMessage = document.getElementById("gameStatusMessage");
+function temizleVeKurabiyeAc() {
+var cookie = document.getElementById("interactive-cookie");
+if(cookie) cookie.classList.remove("exploded");
+document.getElementById("cookie-note-paper").style.opacity = "0";
+sayfaAc('cookie-page', 'linear-gradient(135deg, #fff5f5 0%, #fff0f3 100%)');
+}
 
-        let gameStatus = "START";
-        let score = 0; let highScore = 0; let gameSpeed = 5;
-        let obstacles = []; let frameCount = 0;
+function kirKurabiye() {
+var cookie = document.getElementById("interactive-cookie");
+if(!cookie.classList.contains("exploded")) {
+cookie.classList.add("exploded");
+var rastgeleNot = notlar[Math.floor(Math.random() * notlar.length)];
+document.getElementById("cookie-note-paper").innerText = rastgeleNot;
+}
+}
 
-        const aynurCharacter = {
-            x: 40, y: 170, width: 30, height: 50,
-            originalHeight: 50, crouchHeight: 25,
-            dy: 0, gravity: 0.6, jumpForce: -12,
-            isGrounded: true, isCrouching: false,
+function cevapKontrol(dogru Mu) {
+var res = document.getElementById("quiz-result");
+if(dogruMu) { res.innerText = "Doğru Cevap Sevgilim! Sen benim her şeyimsin... ❤️"; res.style.color = "#1db954"; }
+else { res.innerText = "Yanlış Cevap Aynuşum! Hadi bir daha dene... 😉"; res.style.color = "#de354c"; }
+}
 
-            draw() {
-                ctx.save();
-                ctx.font = this.isCrouching ? "26px Arial" : "38px Arial";
-                ctx.textAlign = "center";
-                if(this.isCrouching) {
-                    ctx.fillText("🧘‍♀️", this.x + this.width/2, this.y + this.height + 5);
-                } else {
-                    ctx.fillText("🧍‍♀️", this.x + this.width/2, this.y + this.height - 2);
-                }
-                ctx.restore();
-            },
-            jump() {
-                if(this.isGrounded && !this.isCrouching) {
-                    this.dy = this.jumpForce;
-                    this.isGrounded = false;
-                }
-            },
-            crouch(state) {
-                if(this.isGrounded) {
-                    this.isCrouching = state;
-                    if(state) {
-                        this.height = this.crouchHeight;
-                        this.y = 195;
-                    } else {
-                        this.height = this.originalHeight;
-                        this.y = 170;
-                    }
-                }
-            },
-            update() {
-                this.dy += this.gravity;
-                this.y += this.dy;
-                let ground = 220 - this.height;
-                if(this.y >= ground) {
-                    this.y = ground; this.dy = 0; this.isGrounded = true;
-                }
-                this.draw();
-            }
-        };
-        class EnemyBird {
-            constructor() {
-                this.x = canvas.width;
-                this.type = Math.random() > 0.5 ? "HIGH" : "LOW";
-                this.y = this.type === "HIGH" ? 130 : 175;
-                this.width = 25; this.height = 20;
-                this.speed = gameSpeed + (Math.random() * 1.5);
-            }
-            draw() {
-                ctx.save(); ctx.font = "24px Arial";
-                ctx.fillText("🐦", this.x, this.y + this.height); ctx.restore();
-            }
-            update() { this.x -= this.speed; this.draw(); }
-        }
+function toggleCitySection(cardId, galleryId) {
+var card = document.getElementById(cardId);
+var gallery = document.getElementById(galleryId);
+if(card.style.display === "block") { card.style.display = "none"; gallery.style.display = "none"; }
+else { card.style.display = "block"; gallery.style.display = "grid"; }
+    }
+   function odaAc(num) {
+var overlay = document.getElementById("single-room-overlay");
+var data = odaVerileri[num];
+if(data) {
+document.getElementById("room-emoji-display").innerText = data.emoji;
+document.getElementById("room-text-display").innerText = data.text;
+overlay.style.display = "flex";
+history.pushState({page: "room-overlay"}, "");
+}
+}
+function odaKapat(fromHistory) {
+document.getElementById("single-room-overlay").style.display = "none";
+if(!fromHistory) history.back();
+}
 
-        window.addEventListener("keydown", (e) => {
-            if (document.getElementById('page-game').classList.contains('active')) {
-                if (["Space", "ArrowUp", "ArrowDown"].includes(e.code)) e.preventDefault();
-                if (gameStatus === "START" || gameStatus === "GAMEOVER") { resetGame(); return; }
-                if (e.code === "Space" || e.code === "ArrowUp") aynurCharacter.jump();
-                if (e.code === "ArrowDown") aynurCharacter.crouch(true);
-            }
-        });
+/* KOŞU OYUNU MEKANİKLERİ VE MOTORU */
+function oyunArayuzSifirla() {
+oyunDurdur();
+oyunSkor = 0;
+obstacleSpeed = 6;
+isJumping = false;
+document.getElementById("game-current-score").innerText = "0";
+document.getElementById("game-character").style.bottom = "40px";
+document.getElementById("game-character").innerText = "🏃‍♀️";
+document.getElementById("game-obstacle").style.right = "-40px";
+document.getElementById("game-obstacle").innerText = "🌵";
+document.getElementById("game-msg-overlay").style.display = "flex";
+document.getElementById("game-msg-title").innerText = "Aynuş'un Koşusu";
+document.getElementById("game-msg-desc").innerText = "Mehmet'e kavuşmak için 100 skora ulaş sevgilim!";
+document.getElementById("game-action-btn").innerText = "Başla";
+}
 
-        window.addEventListener("keyup", (e) => {
-            if (document.getElementById('page-game').classList.contains('active')) {
-                if (e.code === "ArrowDown") aynurCharacter.crouch(false);
-            }
-        });
+function oyunBaslat(e) {
+if(e) e.stopPropagation();
+document.getElementById("game-msg-overlay").style.display = "none";
+oyunSkor = 0;
+obstacleSpeed = 6;
+oyunAktif = true;
+var char = document.getElementById("game-character");
+var obs = document.getElementById("game-obstacle");
+obs.style.right = "-40px";
 
-        canvas.addEventListener("touchstart", (e) => {
-            e.preventDefault();
-            if (gameStatus === "START" || gameStatus === "GAMEOVER") resetGame();
-            else aynurCharacter.jump();
-        });
+var obsPosition = -40;
 
-        function resetGame() {
-            obstacles = []; score = 0; gameSpeed = 5; frameCount = 0;
-            aynurCharacter.y = 170; aynurCharacter.dy = 0; aynurCharacter.isCrouching = false;
-            aynurCharacter.height = aynurCharacter.originalHeight;
-            gameStatus = "PLAYING"; gameStatusMessage.innerText = "Macera tam gaz devam ediyor!";
-        }
+oyunInterval = setInterval(function() {
+if(!oyunAktif) return;
+// Skoru artır
+oyunSkor++;
+document.getElementById("game-current-score").innerText = oyunSkor;
 
-        function checkHit(r1, r2) {
-            return r1.x < r2.x + r2.width && r1.x + r1.width > r2.x && r1.y < r2.y + r2.height && r1.y + r1.height > r2.y;
-        }
+// Zorluk seviyesi (hız) artışı
+if(oyunSkor % 20 === 0) { obstacleSpeed += 0.5; }
 
-        function runGame() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.beginPath(); ctx.moveTo(0, 220); ctx.lineTo(canvas.width, 220);
-            ctx.strokeStyle = "#bbb"; ctx.lineWidth = 2; ctx.stroke();
+// Bölüm Kazanma Durumu
+if(oyunSkor >= 100) {
+oyunKazanma();
+return;
+}
 
-            if (gameStatus === "PLAYING") {
-                frameCount++; score++;
-                scoreText.innerText = "Skor: " + score;
-                if (frameCount % 400 === 0) gameSpeed += 0.5;
+// Engeli sola kaydır
+var currentRight = parseFloat(obs.style.right) || -40;
+currentRight += obstacleSpeed;
+obs.style.right = currentRight + "px";
 
-                if (frameCount % 90 === 0) obstacles.push(new EnemyBird());
+// Ekran genişliğine göre engel sınıra geldiğinde başa sar
+var gameAreaWidth = document.getElementById("game-area").offsetWidth;
+if(currentRight > gameAreaWidth) {
+obs.style.right = "-40px";
+// Engeli rastgele değiştir
+var obsEmojis = ['🌵', '📦', '🧱', '⚠️'];
+obs.innerText = obsEmojis[Math.floor(Math.random() * obsEmojis.length)];
+}
 
-                for (let i = obstacles.length - 1; i >= 0; i--) {
-                    obstacles[i].update();
-                    if (obstacles[i].x + obstacles[i].width < 0) { obstacles.splice(i, 1); continue; }
-                    
-                    if (checkHit(aynurCharacter, obstacles[i])) {
-                        gameStatus = "GAMEOVER";
-                        gameStatusMessage.innerText = "Kuşa çarptık! Yeniden oynamak için tıkla veya bir tuşa bas. 💥";
-                        if (score > highScore) { highScore = score; highScoreText.innerText = "En Yüksek: " + highScore; }
-                    }
-                }
-                aynurCharacter.update();
-            } else {
-                aynurCharacter.draw();
-                for (let obs of obstacles) obs.draw();
-            }
-            requestAnimationFrame(runGame);
-        }
-        runGame();
-    </script>
+// Çarpışma Algılama Mekanizması
+var charBottom = parseFloat(char.style.bottom) || 40;
+// Engelin soldan tam konumu yaklaşık hesaplanır
+var obsLeftInArea = gameAreaWidth - currentRight - 35; 
+
+if(obsLeftInArea > 50 && obsLeftInArea < 100 && charBottom <= 85) {
+oyunKaybetme();
+}
+}, 30);
+}
+ function oyunZiplama() {
+if(!oyunAktif || isJumping) return;
+isJumping = true;
+var char = document.getElementById("game-character");
+var pos = 40;
+char.innerText = "🤸‍♀️";
+
+// Yukarı zıplama
+var upInterval = setInterval(function() {
+if(pos >= 150) {
+clearInterval(upInterval);
+// Aşağı düşme
+var downInterval = setInterval(function() {
+if(pos <= 40) {
+clearInterval(downInterval);
+pos = 40;
+char.style.bottom = pos + "px";
+char.innerText = "🏃‍♀️";
+isJumping = false;
+} else {
+pos -= 6;
+char.style.bottom = pos + "px";
+}
+}, 15);
+} else {
+pos += 8;
+char.style.bottom = pos + "px";
+}
+}, 15);
+}
+
+function oyunKaybetme() {
+oyunDurdur();
+document.getElementById("game-character").innerText = "💥";
+document.getElementById("game-msg-overlay").style.display = "flex";
+document.getElementById("game-msg-title").innerText = "Oyun Bitti sevgilim! 🥺";
+document.getElementById("game-msg-desc").innerText = "Skorun: " + oyunSkor + " - Takıldın ama Mehmet seni hala bekliyor, tekrar dene!";
+document.getElementById("game-action-btn").innerText = "Yeniden Dene";
+}
+
+function oyunKazanma() {
+oyunDurdur();
+document.getElementById("game-character").innerText = "🥰";
+document.getElementById("game-obstacle").innerText = "👦"; // Mehmet karakteri belirebilir
+document.getElementById("game-msg-overlay").style.display = "flex";
+document.getElementById("game-msg-title").innerText = "Tebrikler Aynuşum! 🎉❤️";
+document.getElementById("game-msg-desc").innerText = "Harika koştun ve bana ulaştın! Seni her halinle çok seviyorum.";
+document.getElementById("game-action-btn").innerText = "Tekrar Oyna";
+}
+
+function oyunDurdur() {
+oyunAktif = false;
+if(oyunInterval) { clearInterval(oyunInterval); oyunInterval = null; }
+}
+
+// Klavye ile Boşluk tuşu kontrolü
+document.addEventListener('keydown', function(e) {
+if(e.code === 'Space' && gecerliSayfald === 'game-page') {
+e.preventDefault();
+oyunZiplama();
+}
+});
+</script>
 </body>
-</html>
+</html>   

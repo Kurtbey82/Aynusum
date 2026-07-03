@@ -124,30 +124,31 @@ border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 28px; padding: 35px; 
 box-shadow: 0 10px 30px rgba(236, 213, 224, 0.4);
 }
 
-/* SPOTIFY KARE BÜYÜK KART TASARIMI */
+/* SPOTIFY RESİM ORANI ARTIRILMIŞ YENİ TASARIM */
 .spotify-card {
-background: #121212; color: white; border-radius: 24px; padding: 35px;
-display: flex; flex-direction: column; align-items: center; text-align: center; gap: 25px;
+background: #121212; color: white; border-radius: 24px; padding: 25px;
+display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px;
 box-shadow: 0 20px 45px rgba(0,0,0,0.3); margin-bottom: 35px; position: relative;
+width: 100%; max-width: 400px; margin-left: auto; margin-right: auto;
 }
 .spotify-img-wrapper {
-width: 300px; height: 300px; flex-shrink: 0; position: relative;
+width: 100%; aspect-ratio: 1 / 1; max-width: 350px; position: relative;
 border-radius: 16px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,0.5);
 }
 .cover-photo { width: 100%; height: 100%; object-fit: cover; }
-.spotify-info { width: 100%; max-width: 450px; }
-.spotify-title { font-size: 1.4rem; font-weight: 800; color: #ffffff; margin-bottom: 6px; }
-.spotify-subtitle { font-size: 1rem; color: #1db954; font-weight: 600; margin-bottom: 20px; }
+.spotify-info { width: 100%; padding: 5px 10px; }
+.spotify-title { font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
+.spotify-subtitle { font-size: 0.95rem; color: #1db954; font-weight: 600; margin-bottom: 15px; }
 
-.spotify-controls { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
+.spotify-controls { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
 .play-toggle-btn {
-background: #1db954; color: black; border: none; width: 60px; height: 60px; border-radius: 50%;
-font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+background: #1db954; color: black; border: none; width: 50px; height: 50px; border-radius: 50%;
+font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
 transition: all 0.2s; box-shadow: 0 4px 12px rgba(29,185,84,0.4);
 }
 .play-toggle-btn:hover { transform: scale(1.06); background: #1ed760; }
 
-.spotify-bar-container { display: flex; align-items: center; gap: 12px; width: 100%; font-size: 0.8rem; color: #b3b3b3; }
+.spotify-bar-container { display: flex; align-items: center; gap: 12px; width: 100%; font-size: 0.75rem; color: #b3b3b3; }
 .spotify-progress-bar { flex-grow: 1; height: 5px; background: #404040; border-radius: 3px; position: relative; cursor: pointer; }
 .spotify-progress-fill { width: 0%; height: 100%; background: #1db954; border-radius: 3px; }
 
@@ -173,30 +174,47 @@ border: 1px solid #ffe3eb; border-radius: 32px; padding: 40px 30px;
 box-shadow: 0 20px 50px rgba(231, 166, 194, 0.25); position: relative; z-index: 1001;
 }
 
-/* ŞANS KURABİYESİ YENİ PARÇALANMA SİSTEMİ */
+/* DAHA BÜYÜK VE GERÇEKÇİ ÇOK PARÇALI KURABİYE SİSTEMİ */
+.cookie-container-block {
+display: flex; flex-direction: column; align-items: center; justify-content: center;
+margin: 40px auto; min-height: 260px; position: relative; width: 100%; max-width: 400px;
+}
 .cookie-wrapper {
-position: relative; width: 160px; height: 160px; margin: 40px auto; cursor: pointer;
-perspective: 1000px;
+position: relative; width: 220px; height: 220px; cursor: pointer; perspective: 1000px;
 }
 .cookie-piece {
-position: absolute; width: 100%; height: 100%; font-size: 120px;
-line-height: 160px; text-align: center; transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+position: absolute; width: 100%; height: 100%; font-size: 180px;
+line-height: 220px; text-align: center; transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 user-select: none; -webkit-user-select: none;
 }
-.cookie-left { clip-path: inset(0 50% 0 0); }
-.cookie-right { clip-path: inset(0 0 0 50%); }
+/* 8 Farklı Mikroskobik Dilim Alanı */
+.cp-1 { clip-path: polygon(50% 50%, 0 0, 50% 0); }
+.cp-2 { clip-path: polygon(50% 50%, 50% 0, 100% 0); }
+.cp-3 { clip-path: polygon(50% 50%, 100% 0, 100% 50%); }
+.cp-4 { clip-path: polygon(50% 50%, 100% 50%, 100% 100%); }
+.cp-5 { clip-path: polygon(50% 50%, 100% 100%, 50% 100%); }
+.cp-6 { clip-path: polygon(50% 50%, 50% 100%, 0 100%); }
+.cp-7 { clip-path: polygon(50% 50%, 0 100%, 0 50%); }
+.cp-8 { clip-path: polygon(50% 50%, 0 50%, 0 0); }
 
-/* Parçalanma Aksiyon Sınıfları */
-.cookie-wrapper.broken .cookie-left {
-transform: translateX(-120px) translateY(-40px) rotate(-35deg) scale(0.8); opacity: 0;
-}
-.cookie-wrapper.broken .cookie-right {
-transform: translateX(120px) translateY(40px) rotate(45deg) scale(0.8); opacity: 0;
-}
+/* Paramparça Dağılma Efektleri */
+.cookie-wrapper.broken .cp-1 { transform: translateX(-90px) translateY(-110px) rotate(-60deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-2 { transform: translateX(90px) translateY(-110px) rotate(70deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-3 { transform: translateX(130px) translateY(-40px) rotate(45deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-4 { transform: translateX(120px) translateY(110px) rotate(110deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-5 { transform: translateX(40px) translateY(140px) rotate(-90deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-6 { transform: translateX(-80px) translateY(130px) rotate(55deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-7 { transform: translateX(-140px) translateY(30px) rotate(-80deg) scale(0.4); opacity: 0; }
+.cookie-wrapper.broken .cp-8 { transform: translateX(-110px) translateY(-60px) rotate(40deg) scale(0.4); opacity: 0; }
+
+/* KORUNAKLI MERKEZİ NOT ALANI */
 #cookie-result-box {
 display: none; background: #fff5f8; border: 2px dashed #ff477e; padding: 25px;
-border-radius: 20px; margin-top: 20px; animation: popupOpen 0.4s ease forwards;
+border-radius: 20px; width: 100%; max-width: 400px; margin: 20px auto 0 auto;
+animation: cookiePopupOpen 0.4s ease forwards; text-align: center;
+box-shadow: 0 10px 25px rgba(255, 71, 126, 0.1);
 }
+@keyframes cookiePopupOpen { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
 .quiz-option { background: white; border: 2px solid #f0e6f2; padding: 15px; border-radius: 16px; margin: 12px 0; cursor: pointer; font-weight: 500; transition: all 0.2s; }
 .quiz-option:hover { background: #fff1f4; border-color: #ff477e; color: #ff477e; }
@@ -236,7 +254,7 @@ content: ""; position: absolute; top: 0; width: 35px; height: 55px;
 border-radius: 35px 35px 0 0; background: var(--b-color);
 }
 .heart-balloon::before { left: 35px; transform: rotate(-45deg); transform-origin: 0 100%; }
-.heart-balloon::after { left: 0; transform: rotate(45deg); transform-origin: 100xl 100%; transform-origin: 100% 100%; }
+.heart-balloon::after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
 
 @keyframes riseUpGlobal {
 0% { transform: translateY(0) translateX(0); opacity: 0.9; }
@@ -248,7 +266,8 @@ border-radius: 35px 35px 0 0; background: var(--b-color);
 display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
 width: 85%; max-width: 420px; background: white; border: 2.5px solid #ff477e;
 border-radius: 24px; padding: 35px 25px; z-index: 10000;
-box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+box-shadow: 0 20px 50px rgba(0,0,0,0.2); opacity: 0;
+状况-webkit-backdrop-filter: blur(5px);
 animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 @keyframes popupOpen { to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
@@ -304,7 +323,8 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 <!-- ANA İÇERİK PANELİ -->
 <div id="main-content">
 <div class="container">
-  <!-- SPOTIFY BÜYÜK KARE KART -->
+
+<!-- SPOTIFY RESİM ORANI ARTIRILMIŞ KART -->
 <div class="spotify-card">
 <div class="spotify-img-wrapper">
 <img src="kapak.jpg" alt="Bizim Kapak Fotoğrafımız" class="cover-photo">
@@ -324,7 +344,6 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 </div>
 </div>
 </div>
-
 <!-- ZAMAN SAYACI -->
 <div class="glass-panel timer-section">
 <h2>Aynuşum ile Geçen Her An Çok Değerli... ⏳</h2>
@@ -340,7 +359,7 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 <div class="glass-panel story-section">
 <h2>İyi Ki Doğdun, İyi Ki Benim Oldun Aynuşum 🌸</h2>
 <p>Hayatımın en güzel günlerini başlatan o muazzam anı, senin doğduğun günü kutlamak istedim. Bu sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız, bizim sığınağımız.</p>
-<p>11 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
+<p>12 Eylül 2025'te başlayan o güzel yolculuğumuz, her geçen gün sevginle daha da anlam kazandı. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ve farklı şehirlerde bıraktığımız ne kadar güzel iz varsa hepsini buraya sakladım.</p>
 </div>
 
 <div style="text-align: center; padding: 20px 0 10px 0; font-size: 0.9rem; color: #a395a8; font-weight: bold;">
@@ -349,15 +368,23 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 </div>
 </div>
 
-<!-- SANS KURABIYESI SAYFASI -->
+<!-- SANS KURABIYESI SAYFASI (YENİLENDİ) -->
 <div id="cookie-page" class="sub-page">
 <div class="sub-page-content" style="text-align: center;">
 <h2 style="color: #ff477e; margin-bottom: 10px;">🔮 Aynuşum'un Şans Kurabiyesi</h2>
-<p style="color: #6c5d70; margin-bottom: 10px;">Kırmak için kurabiyenin üzerine tıkla sevgilim!</p>
+<p style="color: #6c5d70; margin-bottom: 20px;">Kırmak için kurabiyenin üzerine tıkla sevgilim!</p>
 
+<div class="cookie-container-block">
 <div class="cookie-wrapper" id="cookie-object" onclick="gercekciKurabiyeKir()">
-<div class="cookie-piece cookie-left">🍪</div>
-<div class="cookie-piece cookie-right">🍪</div>
+<div class="cookie-piece cp-1">🍪</div>
+<div class="cookie-piece cp-2">🍪</div>
+<div class="cookie-piece cp-3">🍪</div>
+<div class="cookie-piece cp-4">🍪</div>
+<div class="cookie-piece cp-5">🍪</div>
+<div class="cookie-piece cp-6">🍪</div>
+<div class="cookie-piece cp-7">🍪</div>
+<div class="cookie-piece cp-8">🍪</div>
+</div>
 </div>
 
 <div id="cookie-result-box">
@@ -405,7 +432,6 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 </div>
 </div>
 </div>
-
 <!-- VIDEOLAR -->
 <div id="video-page" class="sub-page">
 <div class="sub-page-content">
@@ -417,6 +443,7 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 </div>
 </div>
 </div>
+
 <!-- KOSU OYUNU -->
 <div id="game-page" class="sub-page">
 <div class="sub-page-content">
@@ -431,6 +458,14 @@ animation: popupOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 <div id="game-obstacle">⚡</div>
 </div>
 <button class="jump-control-btn" id="mobile-jump-btn" onmousedown="oyunZiplama()">Zıpla! 🚀</button>
+</div>
+</div>
+
+<!-- SENI NEDEN SEVIYORUM EKSİK KATMANI (EKLENDİ) -->
+<div id="why-love-page" class="sub-page">
+<div class="sub-page-content" style="text-align: center; background: rgba(255, 255, 255, 0.4); border: none; box-shadow: none;">
+<h2 style="color: #ff477e; margin-bottom: 10px; background: white; display: inline-block; padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">🎈 Seni Neden Seviyorum?</h2>
+<p style="color: #6c5d70; font-weight: bold; background: white; display: block; margin: 15px auto; padding: 10px; border-radius: 12px; max-width: 400px;">Ekranda uçuşan kalp balonlara tıklayarak senin için yazdığım gizli notları oku sevgilim! ❤️</p>
 </div>
 </div>
 
@@ -450,12 +485,11 @@ var yanlisMesajlari = [
 var notlar = [
 "Bugün gülümsediğinde dünyadaki her şey bir anlığına güzelleşti. En çok da benim dünyam... 🌸",
 "Sen benim yanımdayken, hayatın tüm zorlukları birer Excel hücresi gibi kolayca filtreleniyor! ❤️",
-"İş güvenliği uzmanıyım ama senin gözlerinin oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
+"İş güvenliği uzmanıyım ama senin gözlerinin oluşturzada oluşturduğu o tatlı riske karşı hiçbir önlem alamıyorum... 😍",
 "Farklı şehirlerde olsak da kalbimin tam merkezinde senin adın yazıyor Aynuşum.",
 "İyi ki doğdun hayatımın en güzel açısı, en büyük şansı!"
 ];
 
-// Aynur'u Neden Sevdiğini Bildiren Tamamen Romantik ve Net Gerekçeler
 var romantikNedenler = [
 "Seni çok seviyorum çünkü gülüşün en karanlık günümde bile içimi sıcacık ısıtmaya yetiyor. ❤️",
 "Seni çok seviyorum çünkü sesini duyduğum an kalbime tarifsiz bir huzur ve dinginlik yayılıyor.",
@@ -468,7 +502,6 @@ var romantikNedenler = [
 
 var balonRenkleri = ['#ff477e', '#ff758c', '#de354c', '#b062de', '#1e88e5', '#fb8c00', '#fdd835'];
 
-// Mini Oyun Değişkenleri
 var oyunDongusu, engelDongusu, skorDongusu;
 var oyunCalisiyor = false;
 var oyunSkor = 0;
@@ -489,17 +522,12 @@ zamanlayiciyiBaslat();
 
 var aktifSayfa = sessionStorage.getItem("aynusum_active_page");
 if (aktifSayfa && aktifSayfa !== "home") {
-    if(aktifSayfa === "game") {
-        oyunSayfasiAc();
-    } else if(aktifSayfa === "why-love") {
-        seniNedenSeviyorumAc();
-    } else {
-        sayfaAc(aktifSayfa + "-page", sessionStorage.getItem("aynusum_page_bg") || "white", aktifSayfa);
-    }
+    if(aktifSayfa === "game") { oyunSayfasiAc(); } 
+    else if(aktifSayfa === "why-love") { seniNedenSeviyorumAc(); } 
+    else { sayfaAc(aktifSayfa + "-page", sessionStorage.getItem("aynusum_page_bg") || "white", aktifSayfa); }
 }
 }
-
-window.addEventListener("keydown", function(e) {
+  window.addEventListener("keydown", function(e) {
 if (e.code === "Space" && oyunCalisiyor) {
     e.preventDefault();
     oyunZiplama();
@@ -524,6 +552,7 @@ errEl.style.display = "block";
 document.getElementById("password-input").value = "";
 }
 }
+
 function guvenliCikis() {
 sessionStorage.clear();
 document.getElementById("main-content").style.display = "none";
@@ -560,7 +589,6 @@ overlay.style.display = overlay.style.display === "block" ? "none" : "block";
 }
 
 function closeSidebar() {
-document.getElementById("sidebar-menu").classList.remove("remove");
 document.getElementById("sidebar-menu").classList.remove("active");
 document.getElementById("sidebar-overlay").style.display = "none";
 }
@@ -581,26 +609,28 @@ closeSidebar();
 
 function sayfaAc(sayfaId, arkaPlanRenk, sayfaKisaAd) {
 oyunDurdur();
+if(sayfaKisaAd !== 'why-love') {
 document.getElementById("global-balloon-layer").style.display = "none";
+}
 document.querySelectorAll('.sub-page').forEach(function(p) { p.style.display = 'none'; });
 
 sessionStorage.setItem("aynusum_active_page", sayfaKisaAd);
 sessionStorage.setItem("aynusum_page_bg", arkaPlanRenk);
 
 var sayfa = document.getElementById(sayfaId);
+if(sayfa) {
 sayfa.style.background = arkaPlanRenk;
 sayfa.style.display = "block";
+}
 closeSidebar();
 }
-
-function sayfaKapat() {
+  function sayfaKapat() {
 document.querySelectorAll('.sub-page').forEach(function(p) { p.style.display = 'none'; });
 document.getElementById("mobile-jump-btn").style.display = "none";
 document.getElementById("global-balloon-layer").style.display = "none";
 document.getElementById("global-balloon-layer").innerHTML = "";
 }
 
-// SPOTIFY MOTORU
 function toggleMusic() {
 var audio = document.getElementById("bg-music");
 var btn = document.getElementById("music-btn");
@@ -629,13 +659,14 @@ var bar = e.currentTarget;
 var pct = e.offsetX / bar.offsetWidth;
 audio.currentTime = pct * audio.duration;
 }
+
 function formatTime(secs) {
 var min = Math.floor(secs / 60);
 var sec = Math.floor(secs % 60);
 return min + ":" + (sec < 10 ? "0" : "") + sec;
 }
 
-// GERÇEKÇİ KURABİYE KIRMA SİSTEMİ
+// YENİ GERÇEKÇİ KOPMA VE NOT MERKEZLEME FONKSİYONU
 function gercekciKurabiyeKir() {
 var wrapper = document.getElementById("cookie-object");
 if(wrapper.classList.contains("broken")) return;
@@ -671,7 +702,6 @@ var el = document.getElementById(id);
 el.style.display = (el.style.display === "none" || el.style.display === "") ? tip : "none";
 }
 
-// OYUN MOTORU
 function oyunSayfasiAc() {
 sayfaAc('game-page', 'linear-gradient(135deg, #e0f2fe 0%, #fff1f2 100%)', 'game');
 document.getElementById("game-stage").style.display = "block";
@@ -712,8 +742,7 @@ if (obstaclePos > stageWidth) {
     obstacle.innerText = engeller[Math.floor(Math.random() * engeller.length)];
 } else { obstaclePos += engelHizi; }
 obstacle.style.right = obstaclePos + "px";
-
-var player = document.getElementById("game-player");
+  var player = document.getElementById("game-player");
 var pBottom = parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
 var obstacleLeft = stageWidth - obstaclePos - 30; 
 if (obstacleLeft > 30 && obstacleLeft < 70 && pBottom <= 80) { oyunBitti(); }
@@ -728,6 +757,7 @@ if(oyunCalisiyor) {
 }
 }, 100);
 }
+
 function oyunZiplama() {
 var player = document.getElementById("game-player");
 if (!player.classList.contains("jump-animation") && oyunCalisiyor) {
@@ -751,14 +781,12 @@ clearInterval(engelDongusu);
 clearInterval(skorDongusu);
 }
 
-/* TÜM EKRANDA UÇAN KALP BALON SİSTEMİ MONDÜLÜ */
 function seniNedenSeviyorumAc() {
 sayfaAc('why-love-page', 'linear-gradient(135deg, #fff5f7 0%, #f5f3ff 100%)', 'why-love');
 var layer = document.getElementById("global-balloon-layer");
 layer.style.display = "block";
 layer.innerHTML = "";
 
-// Ekran genişliğine göre rengarenk kalp balonları tüm yüzeye yayarak oluşturur
 for (var i = 0; i < 20; i++) {
     createGlobalHeartBalloon(layer);
 }
@@ -787,12 +815,10 @@ b.onclick = function(e) {
 
 layer.appendChild(b);
 }
-
-function popHeartBalloon() {
+ function popHeartBalloon() {
 var popup = document.getElementById("balloon-card-popup");
 var text = document.getElementById("balloon-card-text");
 
-// Sadece senin Aynur'u neden sevdiğini bildiren saf romantik neden görünür
 var rastgeleNeden = romantikNedenler[Math.floor(Math.random() * romantikNedenler.length)];
 text.innerText = rastgeleNeden;
 
@@ -804,4 +830,4 @@ document.getElementById("balloon-card-popup").style.display = "none";
 }
 </script>
 </body>
-</html>  
+</html> 

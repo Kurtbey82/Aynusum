@@ -1466,53 +1466,473 @@
 
             // Engelleri yürüt ve çarpışmayı test et
             const obstacles = document.querySelectorAll('.obstacle');
-            const playerRect = playerNode.getBoundingClientRect();
+<script>
+    // ================= SCRIPTS (GÜNCELLENMİŞ KUSURSUZ JAVASCRIPT MANTIĞI) =================
 
-            obstacles.forEach(obs => {
-                let currentRight = parseFloat(obs.style.right);
-                currentRight += 5; // Engelin hızı
-                obs.style.right = currentRight + 'px';
+// SİSTEM HAFIZA DEĞİŞKENLERİ
+const WRONG_ANSWERS = [
+    "Hafızanı zorla sevgilim",
+    "bir de bana unutkan diyorsun",
+    "Emin misin? Bir daha düşün aşkım"
+];
 
-                // Ekrandan çıkınca temizle ve skor ekle
-                if (currentRight > 520) {
-                    obs.remove();
-                    gameScore += 10;
-                    document.getElementById('current-score-val').innerText = gameScore;
-                }
+const LOVE_QUOTES = [
+    "Seni seviyorum çünkü gülüşün bana huzur veriyor.",
+    "Seni seviyorum çünkü seninle ben, kendimi tamamen evimde hissediyorum.",
+    "Seni seviyorum çünkü en karanlık anımda bile dünyamı aydınlatabiliyorsun.",
+    "Seni seviyorum çünkü kalbinin temizliği ve merhametin bana her gün ilham veriyor.",
+    "Seni seviyorum çünkü hayatın tüm zorluklarına seninle göğüs germek bana güç veriyor.",
+    "Seni seviyorum çünkü gözlerime baktığında dünyadaki tüm sesler susuyor.",
+    "Seni seviyorum çünkü sen benim sadece sevgilim değil, en güvenli limanımsın."
+];
 
-                // Hassas Dikdörtgen Çarpışma Analizi (Collision Detection)
-                const obsRect = obs.getBoundingClientRect();
-                if (
-                    playerRect.left < obsRect.right &&
-                    playerRect.right > obsRect.left &&
-                    playerRect.top < obsRect.bottom &&
-                    playerRect.bottom > obsRect.top
-                ) {
-                    // Çarpışma Gerçekleşti!
-                    stopGameLoop();
-                    alert(`Oyun Bitti sevgilim! Skorun: ${gameScore}. Tekrar denemek için Zıpla butonuna basabilirsin!`);
-                    resetAndStartGame();
-                }
-            });
+const COOKIE_COMPLIMENTS = [
+    "Bugün harika görünüyorsun sevgilim, gözlerindeki ışık hiç sönmesin!",
+    "Şans kurabiyenden kocaman bir aşk çıktı! Seni çok seviyorum.",
+    "Dünyanın en tatlı insanı şu an bu kurabiyeyi patlattı! 💖",
+    "Geleceğinde bolca huzur, mutluluk ve tabii ki ben varım sevgilim!",
+    "Hayat sana hep senin gibi güzel ve temiz sürprizler çıkarsın."
+];
+
+// TARAYICI YENİLEME KORUMASI (State Yönetimi)
+let currentState = {
+    isLoggedIn: false,
+    currentPage: 'home'
+};
+
+// Hafızadaki Varsayılan Notlar
+let customNotes = [
+    { title: "İlk Günün Hatırası", content: "Seninle her şey o kadar güzel başladı ki sevgilim..." }
+];
+
+// SAYFA YÜKLENDİĞİNDE ÇALIŞACAK BLOK
+window.addEventListener('load', () => {
+    // Notları yükle
+    if(localStorage.getItem('customNotes')) {
+        customNotes = JSON.parse(localStorage.getItem('customNotes'));
+    } else {
+        localStorage.setItem('customNotes', JSON.stringify(customNotes));
+    }
+
+    // Giriş kontrolü
+    if(localStorage.getItem('isLoggedIn') === 'true') {
+        currentState.isLoggedIn = true;
+        document.getElementById('login-screen').style.display = 'none';
+        
+        if(localStorage.getItem('currentPage')) {
+            currentState.currentPage = localStorage.getItem('currentPage');
         }
-        function spawnObstaclesLoop() {
-            if (currentState.currentPage !== 'mini-game') return;
+        navigateTo(currentState.currentPage);
+    } else {
+        // Oturum yoksa kesinlikle şifre ekranını göster
+        document.getElementById('login-screen').style.display = 'flex';
+    }
+    
+    // Sayaç ve kalplerin kurulumu
+    setInterval(updateLoveCounter, 1000);
+    initHeartsGenerator();
+});
 
-            const gameZone = document.getElementById('game-zone');
-            const obs = document.createElement('div');
-            obs.className = 'obstacle';
+// ŞİFRE DOĞRULAMA FONKSİYONU
+function checkPassword() {
+    const input = document.getElementById('password-input').value.trim().toLowerCase();
+    const errMsgNode = document.getElementById('error-message');
+
+    if(input === "mescid") {
+        currentState.isLoggedIn = true;
+        localStorage.setItem('isLoggedIn', 'true');
+        document.getElementById('login-screen').style.display = 'none';
+        navigateTo('home');
+    } else {
+        // Rastgele bir yanlış mesajı seçip gösterir
+        const randomMsg = WRONG_ANSWERS[Math.floor(Math.random() * WRONG_ANSWERS.length)];
+        errMsgNode.innerText = randomMsg;
+    }
+}
+
+// SAYFA GEÇİŞ MOTORU (Döngü Hatası Giderilmiş Temiz Versiyon)
+function navigateTo(pageId) {
+    // Eğer giriş yapılmadıysa ana sayfaya gitmeye zorlama, şifrede tut
+    if(!currentState.isLoggedIn) return;
+
+    // Açık olan tüm sayfaları gizle
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+
+    // İstediğimiz sayfayı göster
+    const activePage = document.getElementById(`${pageId}-page`);
+    if(activePage) {
+        activePage.classList.add('active');
+        currentState.currentPage = pageId;
+        localStorage.setItem('currentPage', pageId);
+    }
+
+    // Özel sayfa tetikleyicileri
+    if(pageId === 'notes') {
+        renderNotesList();
+    }
+    
+    if(pageId === 'mini-game') {
+        resetAndStartGame();
+    } else {
+        stopGameLoop();
+    }
+
+    // Yan menüyü kapat
+    document.getElementById('sidebar').classList.remove('open');
+}
+// MENÜ AÇMA / KAPATMA
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ALT MENÜ AÇMA / KAPATMA
+function toggleSubMenu() {
+    document.getElementById('memories-submenu').classList.toggle('open');
+}
+
+// GÜVENLİ ÇIKIŞ
+function logout() {
+    currentState.isLoggedIn = false;
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentPage');
+    document.getElementById('password-input').value = "";
+    document.getElementById('error-message').innerText = "";
+    document.getElementById('login-screen').style.display = 'flex';
+    
+    // Müziği durdur
+    const audio = document.getElementById('bg-music');
+    audio.pause();
+    document.getElementById('spotify-play-node').innerHTML = '<i class="fa-solid fa-play"></i>';
+}
+
+// SPOTIFY MÜZİK MOTORU
+function toggleMusic() {
+    const audio = document.getElementById('bg-music');
+    const playBtn = document.getElementById('spotify-play-node');
+
+    if (audio.paused) {
+        audio.play().catch(e => console.log("Müzik çalma izni engellendi. Kullanıcı etkileşimi gerekiyor."));
+        playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        audio.pause();
+        playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+}
+
+// AŞK SAYAÇ MOTORU (Tanışma: 12.09.2025)
+function updateLoveCounter() {
+    const startDate = new Date("2025-09-12T00:00:00");
+    const now = new Date();
+    const diff = now - startDate;
+
+    if(diff < 0) return;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('days').innerText = String(days).padStart(2, '0');
+    document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+    document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+}
+
+// MODAL KONTROLLERİ
+function openModal(text) {
+    document.getElementById('modal-text').innerText = text;
+    const modal = document.getElementById('global-modal');
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('open'), 10);
+}
+
+// MODAL KAPATMA
+function closeModal() {
+    const modal = document.getElementById('global-modal');
+    modal.classList.remove('open');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        if(currentState.currentPage === 'fortune-cookie') {
+            document.getElementById('main-cookie').style.opacity = '1';
+            document.getElementById('main-cookie').style.pointerEvents = 'auto';
+        }
+    }, 300);
+}
+
+// 4. KALPLERİN SÜREKLİ UÇUŞMA SİSTEMİ
+function initHeartsGenerator() {
+    const container = document.getElementById('love-reasons-page');
+    const heartColors = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
+    
+    setInterval(() => {
+        if(currentState.currentPage !== 'love-reasons') return;
+        
+        const heart = document.createElement('div');
+        heart.className = 'heart-fly';
+        heart.innerHTML = '❤️';
+        
+        heart.style.left = Math.random() * 90 + '%';
+        heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+        
+        const duration = Math.random() * 3 + 3;
+        const drift = Math.random() * 100 - 50;
+        
+        heart.style.setProperty('--duration', `${duration}s`);
+        heart.style.setProperty('--drift', `${drift}px`);
+        heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem';
+
+        heart.addEventListener('click', (e) => {
+            e.stopPropagation();
+            heart.remove();
+            const randomReason = LOVE_QUOTES[Math.floor(Math.random() * LOVE_QUOTES.length)];
+            openModal(randomReason);
+        });
+
+        container.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, duration * 1000);
+
+    }, 600);
+}
+  // 5. ŞANS KURABİYESİ KONTROLÜ
+function crackCookie() {
+    const cookieNode = document.getElementById('main-cookie');
+    const container = cookieNode.parentElement;
+    const rect = cookieNode.getBoundingClientRect();
+    
+    for (let i = 0; i < 10; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'cookie-particle';
+        particle.innerText = '🥠';
+        
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 100 + 50;
+        const x = Math.cos(angle) * distance + 'px';
+        const y = Math.sin(angle) * distance + 'px';
+        
+        particle.style.setProperty('--x', x);
+        particle.style.setProperty('--y', y);
+        
+        particle.style.left = '50%';
+        particle.style.top = '50%';
+        
+        container.appendChild(particle);
+        setTimeout(() => particle.remove(), 600);
+    }
+
+    cookieNode.style.opacity = '0';
+    cookieNode.style.pointerEvents = 'none';
+
+    setTimeout(() => {
+        const randomCompliment = COOKIE_COMPLIMENTS[Math.floor(Math.random() * COOKIE_COMPLIMENTS.length)];
+        openModal(randomCompliment);
+    }, 400);
+}
+
+// 7. ALT ALBÜMLERİ AÇMA MOTORU
+function openSubAlbum(cityName) {
+    const titleNode = document.getElementById('sub-album-title');
+    const descNode = document.getElementById('sub-album-desc');
+    const gridNode = document.getElementById('sub-album-grid');
+    
+    gridNode.innerHTML = '';
+    let imagesArray = [];
+    
+    if(cityName === 'isparta') {
+        titleNode.innerText = "Isparta Anılarımız";
+        descNode.innerText = "Beraber çekildiğimiz ilk fotoğraflar bu güzel şehirde";
+        for(let i=0; i<=12; i++) {
+            imagesArray.push(`isparta${i}.jpg`);
+        }
+    } else if(cityName === 'mersin') {
+        titleNode.innerText = "Mersin Anılarımız";
+        descNode.innerText = "Akdeniz'in sıcak dalgalarında biriktirdiğimiz anılarımız";
+        for(let i=1; i<=4; i++) {
+            imagesArray.push(`mersin${i}.jpg`);
+        }
+    } else if(cityName === 'hatay') {
+        titleNode.innerText = "Hatay Anılarımız";
+        descNode.innerText = "Memleketimizin topraklarında yan yana, can cana...";
+        for(let i=1; i<=4; i++) {
+            imagesArray.push(`hatay${i}.jpg`);
+        }
+    }
+
+    imagesArray.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'grid-img';
+        img.alt = src;
+        img.onerror = function() {
+            this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%23ffeef2'/><text x='50%' y='50%' font-size='10' dominant-baseline='middle' text-anchor='middle' fill='%23ff7597'>${src}</text></svg>";
+        };
+        img.onclick = () => showFullscreen(img.src);
+        gridNode.appendChild(img);
+    });
+
+    navigateTo('sub-album');
+}
+
+// TAM EKRAN MEDYA KONTROLLERİ
+function showFullscreen(src) {
+    const viewer = document.getElementById('fullscreen-viewer');
+    document.getElementById('fullscreen-img').src = src;
+    viewer.style.display = 'flex';
+}
+
+// FOTOĞRAF KAPATMA
+function closeFullscreen() {
+    document.getElementById('fullscreen-viewer').style.display = 'none';
+}
+
+// VİDEO AÇMA
+function openVideo(embedUrl) {
+    document.getElementById('custom-iframe-player').src = embedUrl;
+    navigateTo('video-player');
+}
+
+// 8. NOTLAR SİSTEMİ MOTORU
+function renderNotesList() {
+    const listNode = document.getElementById('global-notes-list');
+    listNode.innerHTML = '';
+    customNotes.forEach((note, index) => {
+        const div = document.createElement('div');
+        div.className = 'note-list-item';
+        div.innerText = note.title;
+        div.onclick = () => showNoteDetail(index);
+        listNode.appendChild(div);
+    });
+}
+
+function showNoteEditor() {
+    document.getElementById('note-title-input').value = '';
+    document.getElementById('note-content-input').value = '';
+    navigateTo('note-editor');
+}
+
+function saveNewNote() {
+    const title = document.getElementById('note-title-input').value.trim();
+    const content = document.getElementById('note-content-input').value.trim();
+
+    if(!title || !content) {
+        alert('Lütfen hem başlık hem de not içeriği yaz sevgilim.');
+        return;
+    }
+
+    customNotes.push({ title, content });
+    localStorage.setItem('customNotes', JSON.stringify(customNotes));
+    renderNotesList();
+    navigateTo('notes');
+}
+
+function showNoteDetail(index) {
+    const note = customNotes[index];
+    document.getElementById('detail-note-title').innerText = note.title;
+    document.getElementById('detail-note-content').innerText = note.content;
+    navigateTo('note-detail');
+}
+
+
+// ================= 9. MİNİ OYUN MOTORU =================
+let gameInterval = null;
+let spawnInterval = null;
+let gameScore = 0;
+let isJumping = false;
+let playerY = 0; 
+let jumpVelocity = 0;
+const gravityConstant = 1.8; 
+
+function resetAndStartGame() {
+    stopGameLoop();
+    gameScore = 0;
+    playerY = 0;
+    isJumping = false;
+    jumpVelocity = 0;
+    document.getElementById('current-score-val').innerText = gameScore;
+    
+    const playerNode = document.getElementById('runner-player');
+    playerNode.style.bottom = '20px';
+
+    const obstacles = document.querySelectorAll('.obstacle');
+    obstacles.forEach(o => o.remove());
+
+    gameInterval = setInterval(updateGamePhysics, 20);
+    spawnObstaclesLoop();
+}
+
+function stopGameLoop() {
+    clearInterval(gameInterval);
+    clearTimeout(spawnInterval);
+}
+
+function triggerJump() {
+    if (!isJumping) {
+        isJumping = true;
+        jumpVelocity = 22; 
+    }
+}
+
+function updateGamePhysics() {
+    const playerNode = document.getElementById('runner-player');
+    
+    if (isJumping) {
+        playerY += jumpVelocity;
+        jumpVelocity -= gravityConstant;
+
+        if (playerY <= 0) {
+            playerY = 0;
+            isJumping = false;
+            jumpVelocity = 0;
+        }
+    }
+    playerNode.style.bottom = (20 + playerY) + 'px';
+
+    const obstacles = document.querySelectorAll('.obstacle');
+    const playerRect = playerNode.getBoundingClientRect();
+
+    obstacles.forEach(obs => {
+        let currentRight = parseFloat(obs.style.right);
+        currentRight += 5; 
+        obs.style.right = currentRight + 'px';
+
+        if (currentRight > 520) {
+            obs.remove();
+            gameScore += 10;
+            document.getElementById('current-score-val').innerText = gameScore;
+        }
+
+        const obsRect = obs.getBoundingClientRect();
+        if (
+            playerRect.left < obsRect.right &&
+            playerRect.right > obsRect.left &&
+            playerRect.top < obsRect.bottom &&
+            playerRect.bottom > obsRect.top
+        ) {
+            stopGameLoop();
+            alert(`Oyun Bitti sevgilim! Skorun: ${gameScore}. Tekrar denemek için Zıpla butonuna basabilirsin!`);
+            resetAndStartGame();
+        }
+    });
+function spawnObstaclesLoop() {
+    if (currentState.currentPage !== 'mini-game') return;
+
+    const gameZone = document.getElementById('game-zone');
+    const obs = document.createElement('div');
+    obs.className = 'obstacle';
+    
+    const obsEmojis = ['🌵', '🪨', '🧱'];
+    obs.innerText = obsEmojis[Math.floor(Math.random() * obsEmojis.length)];
+    obs.style.right = '-30px';
+    obs.style.bottom = '20px';
+    gameZone.appendChild(obs);
+
+    const nextSpawnTime = Math.random() * 1000 + 1500; 
+    spawnInterval = setTimeout(spawnObstaclesLoop, nextSpawnTime);
+}
             
-            // Rastgele engel emojisi seçimi (Kaktüs, Taş, Engel çiti)
-            const obsEmojis = ['🌵', '🪨', '🧱'];
-            obs.innerText = obsEmojis[Math.floor(Math.random() * obsEmojis.length)];
-            obs.style.right = '-30px';
-            obs.style.bottom = '20px';
-            gameZone.appendChild(obs);
-
-            // Bir sonraki engeli rastgele sürede oluştur
-            const nextSpawnTime = Math.random() * 1000 + 1500; 
-            spawnInterval = setTimeout(spawnObstaclesLoop, nextSpawnTime);
-        }
     </script>
 </body>
 </html>

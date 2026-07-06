@@ -96,8 +96,7 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 10px rgba(255, 117, 151, 0.1);
         }
-
-        .login-btn {
+       .login-btn {
             background: var(--primary-color);
             color: white;
             border: none;
@@ -129,6 +128,7 @@
             height: 100%;
             position: relative;
         }
+
         #sidebar {
             width: var(--sidebar-width);
             background: var(--card-bg);
@@ -185,7 +185,7 @@
             color: var(--primary-hover);
         }
 
-        /* Alt Menü Mantığı */
+        /* Alt Menü Modülü */
         .submenu {
             list-style: none;
             padding-left: 35px;
@@ -196,9 +196,8 @@
 
         .submenu.open {
             max-height: 200px;
-        }
-
-        .submenu .menu-item {
+        } 
+.submenu .menu-item {
             padding: 8px 15px;
             font-size: 0.9rem;
         }
@@ -208,7 +207,7 @@
             border-top: 1px solid #ffe5ec;
         }
 
-        /* SPOTIFY TARZI ÇALMA ALANI */
+        /* SPOTIFY BÖLÜMÜ */
         .spotify-widget {
             background: #fff5f7;
             border-radius: 15px;
@@ -238,6 +237,7 @@
             font-size: 0.7rem;
             color: #888;
         }
+
         .spotify-ctrl {
             background: var(--primary-color);
             color: white;
@@ -276,7 +276,7 @@
             cursor: pointer;
         }
 
-        /* SAYFA YAPILARI */
+        /* SAYFALAR */
         .page {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -311,7 +311,6 @@
             margin-top: 25px;
             flex-wrap: wrap;
         }
-
         .counter-box {
             background: rgba(255, 255, 255, 0.2);
             padding: 15px 20px;
@@ -331,7 +330,8 @@
             text-transform: uppercase;
             opacity: 0.9;
         }
-       /* ALBÜM / GRID TASARIMI */
+
+        /* ALBÜM / GRID TASARIMI */
         .album-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -370,7 +370,7 @@
         .album-info h4 { font-weight: 600; }
         .album-info p { font-size: 0.8rem; color: #888; margin-top: 4px; }
 
-        /* ALT ALBÜM RESİM ızgarası */
+        /* ALT ALBÜM RESİM IZGARASI */
         .sub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -402,7 +402,8 @@
             bottom: -50px;
             cursor: pointer;
             user-select: none;
-            animation: flyUp var(--duration) linear forwards;
+            animation: flyUp var(--duratio
+                                 n) linear forwards;
             transition: transform 0.2s;
         }
 
@@ -414,7 +415,6 @@
             0% { transform: translateY(0) translateX(0); opacity: 1; }
             100% { transform: translateY(-85vh) translateX(var(--drift)); opacity: 0; }
         }
-
         /* ŞANS KURABİYESİ */
         .cookie-wrapper {
             display: flex;
@@ -423,6 +423,7 @@
             justify-content: center;
             min-height: 50vh;
         }
+
         .cookie-element {
             font-size: 6rem;
             cursor: pointer;
@@ -579,7 +580,7 @@
         <div class="login-card">
             <div id="lock-icon-container"><i class="fa-solid fa-lock"></i></div>
             <h2>Giriş Paneli</h2>
-            <p>Devam etmek için lütfen anahtar kelimeyi gir sevgilim.</p>
+            <p>Devam etmek için lütfen anahtar kelimeyi girin.</p>
             <div class="login-input-group">
                 <input type="password" id="password-input" placeholder="Şifreniz...">
             </div>
@@ -588,7 +589,7 @@
         </div>
     </div>
 
-    <!-- MOBİL BAŞLIK BAR BAR -->
+    <!-- MOBİL BAŞLIK BAR -->
     <div class="mobile-header">
         <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
         <h4 style="color: var(--primary-hover);">Mehmet OS</h4>
@@ -606,14 +607,14 @@
             <ul class="sidebar-menu">
                 <li><a class="menu-item" onclick="navigateTo('home')"><i class="fa-solid fa-house"></i> Ana Sayfa</a></li>
                 <li>
-                    <a class="menu-item" onclick="toggleSubMenu()"><i class="fa-solid fa-images"></i> Anılarımız <i class="fa-solid fa-chevron-down" style="margin-left:auto; font-size:0.8rem;"></i></a>
+                    <a class="menu-item" onclick="toggleSubMenu()"><i class="fa-solid fa-images"></i> Anılar <i class="fa-solid fa-chevron-down" style="margin-left:auto; font-size:0.8rem;"></i></a>
                     <ul class="submenu" id="memories-submenu">
                         <li><a class="menu-item" onclick="openSubAlbum('isparta')">Isparta</a></li>
                         <li><a class="menu-item" onclick="openSubAlbum('mersin')">Mersin</a></li>
                         <li><a class="menu-item" onclick="openSubAlbum('hatay')">Hatay</a></li>
                     </ul>
                 </li>
-                <li><a class="menu-item" onclick="navigateTo('love-reasons')"><i class="fa-solid fa-heart"></i> Neden Seni Seviyorum?</a></li>
+                <li><a class="menu-item" onclick="navigateTo('love-reasons')"><i class="fa-solid fa-heart"></i> Notlar</a></li>
                 <li><a class="menu-item" onclick="navigateTo('fortune-cookie')"><i class="fa-solid fa-cookie"></i> Şans Kurabiyesi</a></li>
                 <li><a class="menu-item" onclick="navigateTo('notes')"><i class="fa-solid fa-pen-fancy"></i> Hatıra Defteri</a></li>
                 <li><a class="menu-item" onclick="navigateTo('mini-game')"><i class="fa-solid fa-gamepad"></i> Mini Oyun</a></li>
@@ -624,7 +625,7 @@
                     <div class="spotify-info">
                         <i class="fa-brands fa-spotify"></i>
                         <div class="spotify-text">
-                            <p>En Özel Şarkımız</p>
+                            <p>Özel Şarkı</p>
                             <span>Arka Planda Çal</span>
                         </div>
                     </div>
@@ -639,8 +640,8 @@
             <!-- SAYFA: ANA SAYFA -->
             <div id="home-page" class="page">
                 <div class="hero-card">
-                    <h2>Sonsuz Aşkın Kronolojisi</h2>
-                    <p>Her saniyesi seninle güzelleşen o güzel ömrümüzün sayaç tablosu</p>
+                    <h2>Kronoloji Paneli</h2>
+                    <p>Zaman sayacı paneli</p>
                     <div class="counter-container">
                         <div class="counter-box"><span id="days">00</span><label>Gün</label></div>
                         <div class="counter-box"><span id="hours">00</span><label>Saat</label></div>
@@ -649,7 +650,7 @@
                     </div>
                 </div>
                 <h3>Sistem Özellikleri</h3>
-                <p style="margin-top: 10px; line-height: 1.6; color:#666;">Soldaki menüyü kullanarak fotoğraflarımıza göz atabilir, senin için hazırladığım şans kurabiyesini patlatabilir ya da hatıra defterine yeni notlar bırakabilirsin sevgilim.</p>
+                <p style="margin-top: 10px; line-height: 1.6; color:#666;">Sol menüyü kullanarak paneller arasında geçiş yapabilir, şans kurabiyesini açabilir veya hatıra defterine yeni içerikler ekleyebilirsiniz.</p>
             </div>
 
             <!-- SAYFA: ALT ALBÜM GÖRÜNTÜLEYİCİ -->
@@ -660,42 +661,42 @@
                 <div class="sub-grid" id="sub-album-grid"></div>
             </div>
 
-            <!-- SAYFA: NEDEN SENİ SEVİYORUM (UÇAN KALPLER) -->
+            <!-- SAYFA: NOTLAR/ÖZEL SÖZLER -->
             <div id="love-reasons-page" class="page">
-                <h2>Neden Seni Seviyorum?</h2>
-                <p style="color:#888;">Ekranda uçuşan kalplere dokunarak senin hakkında kalbimden geçen nedenleri oku sevgilim...</p>
+                <h2>Özel Notlar</h2>
+                <p style="color:#888;">Ekranda beliren elementlere tıklayarak kayıtlı içerikleri okuyabilirsiniz.</p>
             </div>
 
             <!-- SAYFA: ŞANS KURABİYESİ -->
             <div id="fortune-cookie-page" class="page">
                 <h2>Günün Şans Kurabiyesi</h2>
-                <p style="color:#888; margin-bottom: 30px;">Kurabiyeye tıklayarak içindeki gizli notu ve günün dileğini görebilirsin.</p>
+                <p style="color:#888; margin-bottom: 30px;">Kurabiyeye tıklayarak içindeki gizli mesajı ve dileği görebilirsin.</p>
                 <div class="cookie-wrapper">
                     <div class="cookie-element" id="main-cookie" onclick="crackCookie()">🥠</div>
                 </div>
             </div>
 
-            <!-- SAYFA: HATIRA DEFTERİ (NOT LİSTESİ) -->
+            <!-- SAYFA: HATIRA DEFTERI -->
             <div id="notes-page" class="page">
-                <h2>Hatıra Defterimiz</h2>
-                <p style="color:#888; margin-bottom:20px;">Beraber geçirdiğimiz günlere ait küçük notlar ve cümleler...</p>
+                <h2>Hatıra Defteri</h2>
+                <p style="color:#888; margin-bottom:20px;">Sistem üzerine bırakılmış dijital notlar...</p>
                 <div class="notes-container" id="global-notes-list"></div>
                 <button class="action-btn" onclick="showNoteEditor()"><i class="fa-solid fa-plus"></i> Yeni Not Ekle</button>
             </div>
 
-            <!-- SAYFA: NOT YAZMA EDİTÖRÜ -->
+            <!-- SAYFA: NOT YAZMA EDITÖRI -->
             <div id="note-editor-page" class="page">
-                <h2>Yeni Anı Yaz</h2>
+                <h2>Yeni Not Yaz</h2>
                 <div class="notes-container" style="margin-top:20px;">
                     <div class="form-group">
-                        <label>Anı Başlığı</label>
-                        <input type="text" id="note-title-input" placeholder="Örn: O Muhteşem Akşam Üstü...">
+                        <label>Başlık</label>
+                        <input type="text" id="note-title-input" placeholder="Başlık girin...">
                     </div>
                     <div class="form-group">
-                        <label>Not İçeriği</label>
-                        <textarea id="note-content-input" rows="6" placeholder="Kalbinden geçenleri buraya dök sevgilim..."></textarea>
+                        <label>İçerik</label>
+                        <textarea id="note-content-input" rows="6" placeholder="Not içeriğini yazın..."></textarea>
                     </div>
-                    <button class="action-btn" onclick="saveNewNote()">Hafızaya Kaydet</button>
+                    <button class="action-btn" onclick="saveNewNote()">Kaydet</button>
                     <button class="action-btn" onclick="navigateTo('notes')" style="background:#888;">İptal Et</button>
                 </div>
             </div>
@@ -706,13 +707,13 @@
                 <div class="notes-container" style="margin-top:20px;">
                     <p id="detail-note-content" style="white-space: pre-wrap; line-height: 1.7;"></p>
                 </div>
-                <button class="action-btn" onclick="navigateTo('notes')" style="margin-top:20px;">Listeye Geri Dön</button>
+                <button class="action-btn" onclick="navigateTo('notes')" style="margin-top:20px;">Geri Dön</button>
             </div>
 
             <!-- SAYFA: MİNİ OYUN -->
             <div id="mini-game-page" class="page">
                 <h2>Engelleri Aşma Oyunu</h2>
-                <p style="color:#888;">Karakteri zıplatmak için aşağıdaki butona tıkla ve engellerden kaç sevgilim!</p>
+                <p style="color:#888;">Karakteri zıplatmak için butona tıklayın ve engellerden kaçın!</p>
                 <h3 style="margin-top:15px;">Skor: <span id="current-score-val" style="color:var(--primary-hover);">0</span></h3>
                 
                 <div id="game-zone">
@@ -723,68 +724,56 @@
 
         </main>
     </div>
-    <!-- ENTEGRE EDİLMİŞ GLOBAL MODAL PENCERESİ -->
+
+    <!-- GLOBAL MODAL PENCERESİ -->
     <div class="global-modal" id="global-modal">
         <div class="modal-card">
-            <p id="modal-text">Buraya dinamik mesajlar gelecek.</p>
+            <p id="modal-text"></p>
             <button class="action-btn" onclick="closeModal()">Kapat</button>
         </div>
     </div>
-
-    <!-- TAM EKRAN FOTOĞRAF GÖRÜNTÜLEYİCİ -->
+    <!-- TAM EKRAN GÖRÜNTÜLEYİCİ -->
     <div id="fullscreen-viewer">
         <span class="close-fs" onclick="closeFullscreen()">&times;</span>
-        <img id="fullscreen-img" src="" alt="Tam Ekran Modu">
+        <img id="fullscreen-img" src="" alt="Mod">
     </div>
 
-    <!-- ==================== 8. SCRIPTS (KUSURSUZ JAVASCRIPT MOTORU) ==================== -->
+    <!-- ==================== 8. SCRIPTS ==================== -->
     <script>
-        // SİSTEM HAFIZA DEĞİŞKENLERİ
         const WRONG_ANSWERS = [
-            "Hafızanı zorla sevgilim",
-            "bir de bana unutkan diyorsun",
-            "Emin misin? Bir daha düşün aşkım"
+            "Hata: Şifre eşleşmedi. Lütfen tekrar deneyin.",
+            "Giriş başarısız. Bilgileri kontrol edin.",
+            "Geçersiz şifre."
         ];
 
         const LOVE_QUOTES = [
-            "Seni seviyorum çünkü gülüşün bana huzur veriyor.",
-            "Seni seviyorum çünkü seninle ben, kendimi tamamen evimde hissediyorum.",
-            "Seni seviyorum çünkü en karanlık anımda bile dünyamı aydınlatabiliyorsun.",
-            "Seni seviyorum çünkü kalbinin temizliği ve merhametin bana her gün ilham veriyor.",
-            "Seni seviyorum çünkü hayatın tüm zorluklarına seninle göğüs germek bana güç veriyor.",
-            "Seni seviyorum çünkü gözlerime baktığında dünyadaki tüm sesler susuyor.",
-            "Seni seviyorum çünkü sen benim sadece sevgilim değil, en güvenli limanımsın."
+            "Sistem mesajı: İçerik başarıyla yüklendi.",
+            "Kayıtlı veri 1: Başarı dilekleri.",
+            "Kayıtlı veri 2: Günlük motivasyon cümlesi."
         ];
 
         const COOKIE_COMPLIMENTS = [
-            "Bugün harika görünüyorsun sevgilim, gözlerindeki ışık hiç sönmesin!",
-            "Şans kurabiyenden kocaman bir aşk çıktı! Seni çok seviyorum.",
-            "Dünyanın en tatlı insanı şu an bu kurabiyeyi patlattı! 💖",
-            "Geleceğinde bolca huzur, mutluluk ve tabii ki ben varım sevgilim!",
-            "Hayat sana hep senin gibi güzel ve temiz sürprizler çıkarsın."
+            "Günün şansı: Harika bir gün geçireceksiniz!",
+            "Kurabiyeden çıkan mesaj: Planlarınız yolunda gidecek.",
+            "Gelecekte bolca huzur ve başarı sizi bekliyor."
         ];
 
-        // TARAYICI YENİLEME KORUMASI (State Yönetimi)
         let currentState = {
             isLoggedIn: false,
             currentPage: 'home'
         };
 
-        // Hafızadaki Varsayılan Notlar
         let customNotes = [
-            { title: "İlk Günün Hatırası", content: "Seninle her şey o kadar güzel başladı ki sevgilim..." }
+            { title: "Sistem Notu", content: "İlk kayıt başarıyla oluşturuldu." }
         ];
 
-        // SAYFA YÜKLENDİĞİNDE ÇALIŞACAK BLOK
         window.addEventListener('load', () => {
-            // Notları yükle
             if(localStorage.getItem('customNotes')) {
                 customNotes = JSON.parse(localStorage.getItem('customNotes'));
             } else {
                 localStorage.setItem('customNotes', JSON.stringify(customNotes));
             }
 
-            // Giriş kontrolü
             if(localStorage.getItem('isLoggedIn') === 'true') {
                 currentState.isLoggedIn = true;
                 document.getElementById('login-screen').style.display = 'none';
@@ -794,16 +783,13 @@
                 }
                 navigateTo(currentState.currentPage);
             } else {
-                // Oturum yoksa kesinlikle şifre ekranını göster
                 document.getElementById('login-screen').style.display = 'flex';
             }
             
-            // Sayaç ve kalplerin kurulumu
             setInterval(updateLoveCounter, 1000);
             initHeartsGenerator();
         });
 
-        // ŞİFRE DOĞRULAMA FONKSİYONU
         function checkPassword() {
             const input = document.getElementById('password-input').value.trim().toLowerCase();
             const errMsgNode = document.getElementById('error-message');
@@ -814,21 +800,17 @@
                 document.getElementById('login-screen').style.display = 'none';
                 navigateTo('home');
             } else {
-                // Rastgele bir yanlış mesajı seçip gösterir
                 const randomMsg = WRONG_ANSWERS[Math.floor(Math.random() * WRONG_ANSWERS.length)];
                 errMsgNode.innerText = randomMsg;
             }
         }
-        // SAYFA GEÇİŞ MOTORU
+
         function navigateTo(pageId) {
-            // Eğer giriş yapılmadıysa ana sayfaya gitmeye zorlama, şifrede tut
             if(!currentState.isLoggedIn) return;
 
-            // Açık olan tüm sayfaları gizle
             const pages = document.querySelectorAll('.page');
             pages.forEach(p => p.classList.remove('active'));
 
-            // İstediğimiz sayfayı göster
             const activePage = document.getElementById(`${pageId}-page`);
             if(activePage) {
                 activePage.classList.add('active');
@@ -836,32 +818,24 @@
                 localStorage.setItem('currentPage', pageId);
             }
 
-            // Özel sayfa tetikleyicileri
-            if(pageId === 'notes') {
-                renderNotesList();
-            }
-            
+            if(pageId === 'notes') renderNotesList();
             if(pageId === 'mini-game') {
                 resetAndStartGame();
             } else {
                 stopGameLoop();
             }
 
-            // Yan menüyü kapat
             document.getElementById('sidebar').classList.remove('open');
         }
 
-        // MENÜ AÇMA / KAPATMA
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
         }
 
-        // ALT MENÜ AÇMA / KAPATMA
         function toggleSubMenu() {
             document.getElementById('memories-submenu').classList.toggle('open');
         }
 
-        // GÜVENLİ ÇIKIŞ
         function logout() {
             currentState.isLoggedIn = false;
             localStorage.removeItem('isLoggedIn');
@@ -870,19 +844,16 @@
             document.getElementById('error-message').innerText = "";
             document.getElementById('login-screen').style.display = 'flex';
             
-            // Müziği durdur
             const audio = document.getElementById('bg-music');
             audio.pause();
             document.getElementById('spotify-play-node').innerHTML = '<i class="fa-solid fa-play"></i>';
         }
-
-        // SPOTIFY MÜZİK MOTORU
         function toggleMusic() {
             const audio = document.getElementById('bg-music');
             const playBtn = document.getElementById('spotify-play-node');
 
             if (audio.paused) {
-                audio.play().catch(e => console.log("Müzik çalma izni engellendi. Kullanıcı etkileşimi gerekiyor."));
+                audio.play().catch(e => console.log("Müzik çalma izni gerekiyor."));
                 playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
             } else {
                 audio.pause();
@@ -890,7 +861,6 @@
             }
         }
 
-        // AŞK SAYAÇ MOTORU (Tanışma: 12.09.2025)
         function updateLoveCounter() {
             const startDate = new Date("2025-09-12T00:00:00");
             const now = new Date();
@@ -909,14 +879,13 @@
             document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
         }
 
-        // MODAL KONTROLLERİ
         function openModal(text) {
             document.getElementById('modal-text').innerText = text;
             const modal = document.getElementById('global-modal');
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('open'), 10);
         }
-        // MODAL KAPATMA
+
         function closeModal() {
             const modal = document.getElementById('global-modal');
             modal.classList.remove('open');
@@ -929,45 +898,39 @@
             }, 300);
         }
 
-        // KALPLERİN SÜREKLİ UÇUŞMA SİSTEMİ
         function initHeartsGenerator() {
             const container = document.getElementById('love-reasons-page');
-            const heartColors = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
+            const colors = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
             
             setInterval(() => {
                 if(currentState.currentPage !== 'love-reasons') return;
                 
-                const heart = document.createElement('div');
-                heart.className = 'heart-fly';
-                heart.innerHTML = '❤️';
+                const element = document.createElement('div');
+                element.className = 'heart-fly';
+                element.innerHTML = '⭐';
                 
-                heart.style.left = Math.random() * 90 + '%';
-                heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+                element.style.left = Math.random() * 90 + '%';
+                element.style.color = colors[Math.floor(Math.random() * colors.length)];
                 
                 const duration = Math.random() * 3 + 3;
                 const drift = Math.random() * 100 - 50;
                 
-                heart.style.setProperty('--duration', `${duration}s`);
-                heart.style.setProperty('--drift', `${drift}px`);
-                heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem';
+                element.style.setProperty('--duration', `${duration}s`);
+                element.style.setProperty('--drift', `${drift}px`);
+                element.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem';
 
-                heart.addEventListener('click', (e) => {
+                element.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    heart.remove();
-                    const randomReason = LOVE_QUOTES[Math.floor(Math.random() * LOVE_QUOTES.length)];
-                    openModal(randomReason);
+                    element.remove();
+                    const randomQuote = LOVE_QUOTES[Math.floor(Math.random() * LOVE_QUOTES.length)];
+                    openModal(randomQuote);
                 });
 
-                container.appendChild(heart);
-
-                setTimeout(() => {
-                    heart.remove();
-                }, duration * 1000);
-
+                container.appendChild(element);
+                setTimeout(() => element.remove(), duration * 1000);
             }, 600);
         }
 
-        // ŞANS KURABİYESİ KONTROLÜ
         function crackCookie() {
             const cookieNode = document.getElementById('main-cookie');
             const container = cookieNode.parentElement;
@@ -975,7 +938,7 @@
             for (let i = 0; i < 10; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'cookie-particle';
-                particle.innerText = '🥠';
+                particle.innerText = '✨';
                 
                 const angle = Math.random() * Math.PI * 2;
                 const distance = Math.random() * 100 + 50;
@@ -984,14 +947,12 @@
                 
                 particle.style.setProperty('--x', x);
                 particle.style.setProperty('--y', y);
-                
                 particle.style.left = '50%';
                 particle.style.top = '50%';
                 
                 container.appendChild(particle);
                 setTimeout(() => particle.remove(), 600);
             }
-
             cookieNode.style.opacity = '0';
             cookieNode.style.pointerEvents = 'none';
 
@@ -1000,7 +961,7 @@
                 openModal(randomCompliment);
             }, 400);
         }
-        // ALT ALBÜMLERİ AÇMA MOTORU
+
         function openSubAlbum(cityName) {
             const titleNode = document.getElementById('sub-album-title');
             const descNode = document.getElementById('sub-album-desc');
@@ -1010,23 +971,17 @@
             let imagesArray = [];
             
             if(cityName === 'isparta') {
-                titleNode.innerText = "Isparta Anılarımız";
-                descNode.innerText = "Beraber çekildiğimiz ilk fotoğraflar bu güzel şehirde";
-                for(let i=0; i<=12; i++) {
-                    imagesArray.push(`isparta${i}.jpg`);
-                }
+                titleNode.innerText = "Isparta Klasörü";
+                descNode.innerText = "Isparta lokasyonuna ait görsel listesi.";
+                for(let i=0; i<=12; i++) imagesArray.push(`isparta${i}.jpg`);
             } else if(cityName === 'mersin') {
-                titleNode.innerText = "Mersin Anılarımız";
-                descNode.innerText = "Akdeniz'in sıcak dalgalarında biriktirdiğimiz anılarımız";
-                for(let i=1; i<=4; i++) {
-                    imagesArray.push(`mersin${i}.jpg`);
-                }
+                titleNode.innerText = "Mersin Klasörü";
+                descNode.innerText = "Mersin lokasyonuna ait görsel listesi.";
+                for(let i=1; i<=4; i++) imagesArray.push(`mersin${i}.jpg`);
             } else if(cityName === 'hatay') {
-                titleNode.innerText = "Hatay Anılarımız";
-                descNode.innerText = "Memleketimizin topraklarında yan yana, can cana...";
-                for(let i=1; i<=4; i++) {
-                    imagesArray.push(`hatay${i}.jpg`);
-                }
+                titleNode.innerText = "Hatay Klasörü";
+                descNode.innerText = "Hatay lokasyonuna ait görsel listesi.";
+                for(let i=1; i<=4; i++) imagesArray.push(`hatay${i}.jpg`);
             }
 
             imagesArray.forEach(src => {
@@ -1044,19 +999,17 @@
             navigateTo('sub-album');
         }
 
-        // TAM EKRAN MEDYA KONTROLLERİ
         function showFullscreen(src) {
             const viewer = document.getElementById('fullscreen-viewer');
             document.getElementById('fullscreen-img').src = src;
             viewer.style.display = 'flex';
         }
 
-        // FOTOĞRAF KAPATMA
+        /* FOTOĞRAF KAPATMA */
         function closeFullscreen() {
             document.getElementById('fullscreen-viewer').style.display = 'none';
         }
 
-        // NOTLAR SİSTEMİ MOTORU
         function renderNotesList() {
             const listNode = document.getElementById('global-notes-list');
             listNode.innerHTML = '';
@@ -1081,7 +1034,7 @@
             const content = document.getElementById('note-content-input').value.trim();
 
             if(!title || !content) {
-                alert('Lütfen hem başlık hem de not içeriği yaz sevgilim.');
+                alert('Lütfen gerekli alanları doldurun.');
                 return;
             }
 
@@ -1097,6 +1050,7 @@
             document.getElementById('detail-note-content').innerText = note.content;
             navigateTo('note-detail');
         }
+
         // MİNİ OYUN MOTORU
         let gameInterval = null;
         let spawnInterval = null;
@@ -1105,7 +1059,6 @@
         let playerY = 0; 
         let jumpVelocity = 0;
         const gravityConstant = 1.8; 
-
         function resetAndStartGame() {
             stopGameLoop();
             gameScore = 0;
@@ -1173,7 +1126,7 @@
                     playerRect.bottom > obsRect.top
                 ) {
                     stopGameLoop();
-                    alert(`Oyun Bitti sevgilim! Skorun: ${gameScore}. Tekrar denemek için Zıpla butonuna basabilirsin!`);
+                    alert(`Oyun Bitti. Skorunuz: ${gameScore}.`);
                     resetAndStartGame();
                 }
             });

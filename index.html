@@ -35,7 +35,7 @@
             flex-direction: column;
         }
 
-        /* ==================== 2. LOGIN SCREEN (ŞİFRELEME) ==================== */
+        /* ==================== 2. LOGIN SCREEN ==================== */
         #login-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -96,7 +96,7 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 10px rgba(255, 117, 151, 0.1);
         }
-       .login-btn {
+        .login-btn {
             background: var(--primary-color);
             color: white;
             border: none;
@@ -185,7 +185,6 @@
             color: var(--primary-hover);
         }
 
-        /* Alt Menü Modülü */
         .submenu {
             list-style: none;
             padding-left: 35px;
@@ -196,8 +195,9 @@
 
         .submenu.open {
             max-height: 200px;
-        } 
-.submenu .menu-item {
+        }
+
+        .submenu .menu-item {
             padding: 8px 15px;
             font-size: 0.9rem;
         }
@@ -206,8 +206,6 @@
             padding: 20px;
             border-top: 1px solid #ffe5ec;
         }
-
-        /* SPOTIFY BÖLÜMÜ */
         .spotify-widget {
             background: #fff5f7;
             border-radius: 15px;
@@ -276,7 +274,6 @@
             cursor: pointer;
         }
 
-        /* SAYFALAR */
         .page {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -291,9 +288,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ==================== 5. MODÜL TASARIMLARI (PAGES) ==================== */
-        
-        /* ANA SAYFA - SAYAÇ KARTI */
+        /* ==================== 5. PAGES STYLES ==================== */
         .hero-card {
             background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d6d 100%);
             color: white;
@@ -311,6 +306,7 @@
             margin-top: 25px;
             flex-wrap: wrap;
         }
+
         .counter-box {
             background: rgba(255, 255, 255, 0.2);
             padding: 15px 20px;
@@ -318,7 +314,6 @@
             backdrop-filter: blur(5px);
             min-width: 80px;
         }
-
         .counter-box span {
             display: block;
             font-size: 2rem;
@@ -331,46 +326,6 @@
             opacity: 0.9;
         }
 
-        /* ALBÜM / GRID TASARIMI */
-        .album-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .album-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .album-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .album-cover {
-            height: 180px;
-            background: #ffe5ec;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary-color);
-        }
-
-        .album-info {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .album-info h4 { font-weight: 600; }
-        .album-info p { font-size: 0.8rem; color: #888; margin-top: 4px; }
-
-        /* ALT ALBÜM RESİM IZGARASI */
         .sub-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -390,7 +345,6 @@
 
         .grid-img:hover { transform: scale(1.03); }
 
-        /* KALPLER SAYFASI UÇAN ELEMANLAR */
         #love-reasons-page {
             position: relative;
             min-height: 70vh;
@@ -402,20 +356,17 @@
             bottom: -50px;
             cursor: pointer;
             user-select: none;
-            animation: flyUp var(--duratio
-                                 n) linear forwards;
+            animation: flyUp var(--duration) linear forwards;
             transition: transform 0.2s;
         }
 
-        .heart-fly:hover {
-            transform: scale(1.4);
-        }
+        .heart-fly:hover { transform: scale(1.4); }
 
         @keyframes flyUp {
             0% { transform: translateY(0) translateX(0); opacity: 1; }
             100% { transform: translateY(-85vh) translateX(var(--drift)); opacity: 0; }
         }
-        /* ŞANS KURABİYESİ */
+
         .cookie-wrapper {
             display: flex;
             flex-direction: column;
@@ -431,9 +382,7 @@
             user-select: none;
         }
 
-        .cookie-element:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
+        .cookie-element:hover { transform: scale(1.1) rotate(10deg); }
 
         .cookie-particle {
             position: absolute;
@@ -447,7 +396,6 @@
             100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
         }
 
-        /* NOTLAR TASARIMI */
         .notes-container {
             background: var(--card-bg);
             border-radius: 20px;
@@ -477,19 +425,13 @@
             margin-top: 15px;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
+        .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
         .form-group input, .form-group textarea {
             width: 100%; padding: 12px; border: 1px solid #ffe5ec; border-radius: 10px; outline: none;
         }
-
-        /* MİNİ OYUN */
         #game-zone {
-            width: 100%;
-            height: 250px;
+            width: 100%; height: 250px;
             background: #fdf0f4;
             border-bottom: 4px solid #ff7597;
             position: relative;
@@ -513,7 +455,7 @@
             z-index: 5;
         }
 
-        /* ==================== 6. MODAL & FULLSCREEN VIEWERS ==================== */
+        /* ==================== 6. MODAL & VIEWERS ==================== */
         .global-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -524,6 +466,7 @@
             z-index: 10000;
             padding: 20px;
         }
+
         .modal-card {
             background: white;
             padding: 30px;
@@ -537,7 +480,6 @@
         }
 
         .global-modal.open .modal-card { transform: scale(1); }
-
         .modal-card p { font-size: 1.1rem; margin-bottom: 20px; font-weight: 400; line-height: 1.6; }
 
         #fullscreen-viewer {
@@ -551,19 +493,10 @@
         }
 
         #fullscreen-img { max-width: 95%; max-height: 90vh; border-radius: 8px; }
+        .close-fs { position: absolute; top: 20px; right: 20px; color: white; font-size: 2rem; cursor: pointer; }
 
-        .close-fs {
-            position: absolute; top: 20px; right: 20px;
-            color: white; font-size: 2rem; cursor: pointer;
-        }
-
-        /* ==================== 7. RESPONSIVE DESIGN ==================== */
         @media (max-width: 768px) {
-            #sidebar {
-                position: absolute;
-                left: 0; top: 0; bottom: 0;
-                transform: translateX(-100%);
-            }
+            #sidebar { position: absolute; left: 0; top: 0; bottom: 0; transform: translateX(-100%); }
             #sidebar.open { transform: translateX(0); }
             .mobile-header { display: flex; }
             body { height: auto; min-height: 100vh; }
@@ -572,13 +505,12 @@
 </head>
 <body>
 
-    <!-- GİZLİ SES DOSYASI (SPOTIFY ARKAPLAN MÜZİĞİ) -->
     <audio id="bg-music" src="sarki.mp3" loop></audio>
 
-    <!-- 1. ŞİFRE EKRANI (LOGIN SCREEN) -->
+    <!-- ŞİFRE EKRANI -->
     <div id="login-screen">
         <div class="login-card">
-            <div id="lock-icon-container"><i class="fa-solid fa-lock"></i></div>
+            <div><i class="fa-solid fa-lock"></i></div>
             <h2>Giriş Paneli</h2>
             <p>Devam etmek için lütfen anahtar kelimeyi girin.</p>
             <div class="login-input-group">
@@ -589,17 +521,15 @@
         </div>
     </div>
 
-    <!-- MOBİL BAŞLIK BAR -->
+    <!-- MOBİL HEADER -->
     <div class="mobile-header">
         <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
         <h4 style="color: var(--primary-hover);">Mehmet OS</h4>
         <div style="width:24px;"></div>
     </div>
-
-    <!-- ANA UYGULAMA ALANI -->
+    <!-- ANA KONTEYNER -->
     <div id="app-container">
         
-        <!-- YAN MENÜ (SIDEBAR) -->
         <aside id="sidebar">
             <div class="sidebar-header">
                 <h3>Mehmet OS v1.0</h3>
@@ -620,7 +550,6 @@
                 <li><a class="menu-item" onclick="navigateTo('mini-game')"><i class="fa-solid fa-gamepad"></i> Mini Oyun</a></li>
             </ul>
             <div class="sidebar-footer">
-                <!-- SPOTIFY OYNATICI -->
                 <div class="spotify-widget">
                     <div class="spotify-info">
                         <i class="fa-brands fa-spotify"></i>
@@ -634,10 +563,10 @@
                 <a class="menu-item" onclick="logout()" style="margin-top:15px; color:#d90429;"><i class="fa-solid fa-right-from-bracket" style="color:#d90429;"></i> Güvenli Çıkış</a>
             </div>
         </aside>
-        <!-- DEĞİŞKEN İÇERİK ALANI (MAIN CONTENT) -->
+
         <main id="main-content">
 
-            <!-- SAYFA: ANA SAYFA -->
+            <!-- ANA SAYFA -->
             <div id="home-page" class="page">
                 <div class="hero-card">
                     <h2>Kronoloji Paneli</h2>
@@ -653,7 +582,7 @@
                 <p style="margin-top: 10px; line-height: 1.6; color:#666;">Sol menüyü kullanarak paneller arasında geçiş yapabilir, şans kurabiyesini açabilir veya hatıra defterine yeni içerikler ekleyebilirsiniz.</p>
             </div>
 
-            <!-- SAYFA: ALT ALBÜM GÖRÜNTÜLEYİCİ -->
+            <!-- ALBÜM GÖRÜNTÜLEYİCİ -->
             <div id="sub-album-page" class="page">
                 <button class="action-btn" onclick="toggleSubMenu()" style="margin-bottom:15px;"><i class="fa-solid fa-arrow-left"></i> Albümlere Dön</button>
                 <h2 id="sub-album-title">Albüm Başlığı</h2>
@@ -661,13 +590,13 @@
                 <div class="sub-grid" id="sub-album-grid"></div>
             </div>
 
-            <!-- SAYFA: NOTLAR/ÖZEL SÖZLER -->
+            <!-- NOTLAR / ÖZEL SÖZLER -->
             <div id="love-reasons-page" class="page">
                 <h2>Özel Notlar</h2>
                 <p style="color:#888;">Ekranda beliren elementlere tıklayarak kayıtlı içerikleri okuyabilirsiniz.</p>
             </div>
 
-            <!-- SAYFA: ŞANS KURABİYESİ -->
+            <!-- ŞANS KURABİYESİ -->
             <div id="fortune-cookie-page" class="page">
                 <h2>Günün Şans Kurabiyesi</h2>
                 <p style="color:#888; margin-bottom: 30px;">Kurabiyeye tıklayarak içindeki gizli mesajı ve dileği görebilirsin.</p>
@@ -676,7 +605,7 @@
                 </div>
             </div>
 
-            <!-- SAYFA: HATIRA DEFTERI -->
+            <!-- HATIRA DEFTERI -->
             <div id="notes-page" class="page">
                 <h2>Hatıra Defteri</h2>
                 <p style="color:#888; margin-bottom:20px;">Sistem üzerine bırakılmış dijital notlar...</p>
@@ -684,7 +613,7 @@
                 <button class="action-btn" onclick="showNoteEditor()"><i class="fa-solid fa-plus"></i> Yeni Not Ekle</button>
             </div>
 
-            <!-- SAYFA: NOT YAZMA EDITÖRI -->
+            <!-- NOT YAZMA EDITÖRI -->
             <div id="note-editor-page" class="page">
                 <h2>Yeni Not Yaz</h2>
                 <div class="notes-container" style="margin-top:20px;">
@@ -700,8 +629,7 @@
                     <button class="action-btn" onclick="navigateTo('notes')" style="background:#888;">İptal Et</button>
                 </div>
             </div>
-
-            <!-- SAYFA: NOT DETAY GÖRÜNÜMÜ -->
+            <!-- NOT DETAY -->
             <div id="note-detail-page" class="page">
                 <h2 id="detail-note-title">Not Başlığı</h2>
                 <div class="notes-container" style="margin-top:20px;">
@@ -710,35 +638,36 @@
                 <button class="action-btn" onclick="navigateTo('notes')" style="margin-top:20px;">Geri Dön</button>
             </div>
 
-            <!-- SAYFA: MİNİ OYUN -->
+            <!-- MİNİ OYUN -->
             <div id="mini-game-page" class="page">
                 <h2>Engelleri Aşma Oyunu</h2>
                 <p style="color:#888;">Karakteri zıplatmak için butona tıklayın ve engellerden kaçın!</p>
                 <h3 style="margin-top:15px;">Skor: <span id="current-score-val" style="color:var(--primary-hover);">0</span></h3>
                 
                 <div id="game-zone">
-                    <div id="runner-player">🏃‍♀️</div>
+                    <div id="runner-player">跑</div>
                 </div>
-                <button class="action-btn" style="width:100%; padding:15px; font-size:1.2rem; margin-top:20px;" onclick="triggerJump()"><i class="fa-solid fa-arrow-up"></i> Zıpla!</button>
+                <button class="action-btn" style="width:100%; padding:15px; font-size:1.2rem; margin-top:20px warm_background;" onclick="triggerJump()"><i class="fa-solid fa-arrow-up"></i> Zıpla!</button>
             </div>
 
         </main>
     </div>
 
-    <!-- GLOBAL MODAL PENCERESİ -->
+    <!-- MODAL -->
     <div class="global-modal" id="global-modal">
         <div class="modal-card">
             <p id="modal-text"></p>
             <button class="action-btn" onclick="closeModal()">Kapat</button>
         </div>
     </div>
-    <!-- TAM EKRAN GÖRÜNTÜLEYİCİ -->
+
+    <!-- TAM EKRAN FOTOĞRAF -->
     <div id="fullscreen-viewer">
         <span class="close-fs" onclick="closeFullscreen()">&times;</span>
-        <img id="fullscreen-img" src="" alt="Mod">
+        <img id="fullscreen-img" src="" alt="Görsel">
     </div>
 
-    <!-- ==================== 8. SCRIPTS ==================== -->
+    <!-- SCRIPTS -->
     <script>
         const WRONG_ANSWERS = [
             "Hata: Şifre eşleşmedi. Lütfen tekrar deneyin.",
@@ -791,10 +720,10 @@
         });
 
         function checkPassword() {
-            const input = document.getElementById('password-input').value.trim().toLowerCase();
+            const input = document.getElementById('password-input').value.trim();
             const errMsgNode = document.getElementById('error-message');
 
-            if(input === "mescid") {
+            if(input.toLowerCase() === "mescid" || input.toUpperCase() === "MESCID") {
                 currentState.isLoggedIn = true;
                 localStorage.setItem('isLoggedIn', 'true');
                 document.getElementById('login-screen').style.display = 'none';
@@ -804,8 +733,7 @@
                 errMsgNode.innerText = randomMsg;
             }
         }
-
-        function navigateTo(pageId) {
+       function navigateTo(pageId) {
             if(!currentState.isLoggedIn) return;
 
             const pages = document.querySelectorAll('.page');
@@ -848,12 +776,13 @@
             audio.pause();
             document.getElementById('spotify-play-node').innerHTML = '<i class="fa-solid fa-play"></i>';
         }
+
         function toggleMusic() {
             const audio = document.getElementById('bg-music');
             const playBtn = document.getElementById('spotify-play-node');
 
             if (audio.paused) {
-                audio.play().catch(e => console.log("Müzik çalma izni gerekiyor."));
+                audio.play().catch(e => console.log("Müzik izni gerekiyor."));
                 playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
             } else {
                 audio.pause();
@@ -925,7 +854,6 @@
                     const randomQuote = LOVE_QUOTES[Math.floor(Math.random() * LOVE_QUOTES.length)];
                     openModal(randomQuote);
                 });
-
                 container.appendChild(element);
                 setTimeout(() => element.remove(), duration * 1000);
             }, 600);
@@ -953,6 +881,7 @@
                 container.appendChild(particle);
                 setTimeout(() => particle.remove(), 600);
             }
+
             cookieNode.style.opacity = '0';
             cookieNode.style.pointerEvents = 'none';
 
@@ -1005,7 +934,6 @@
             viewer.style.display = 'flex';
         }
 
-        /* FOTOĞRAF KAPATMA */
         function closeFullscreen() {
             document.getElementById('fullscreen-viewer').style.display = 'none';
         }
@@ -1043,7 +971,6 @@
             renderNotesList();
             navigateTo('notes');
         }
-
         function showNoteDetail(index) {
             const note = customNotes[index];
             document.getElementById('detail-note-title').innerText = note.title;
@@ -1051,7 +978,6 @@
             navigateTo('note-detail');
         }
 
-        // MİNİ OYUN MOTORU
         let gameInterval = null;
         let spawnInterval = null;
         let gameScore = 0;
@@ -1059,6 +985,7 @@
         let playerY = 0; 
         let jumpVelocity = 0;
         const gravityConstant = 1.8; 
+
         function resetAndStartGame() {
             stopGameLoop();
             gameScore = 0;

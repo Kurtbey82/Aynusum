@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mehmet OS</title>
+    <title>Aynur & Mehmet</title>
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* ==================== 1. GLOBAL STYLES & THEME ==================== */
+        /* ==================== GLOBAL STYLES & THEME ==================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -23,19 +23,19 @@
             --primary-hover: #ff4d6d;
             --text-color: #4a4a4a;
             --card-bg: #ffffff;
-            --sidebar-width: 260px;
+            --header-height: 70px;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* ==================== 2. LOGIN SCREEN ==================== */
+        /* ==================== 1. ŞİFRE EKRANI ==================== */
         #login-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -44,7 +44,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999;
             padding: 20px;
         }
 
@@ -54,53 +54,38 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(255, 117, 151, 0.2);
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 100%;
         }
 
-        .login-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
         .login-card h2 {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-weight: 600;
             color: var(--primary-hover);
-        }
-
-        .login-card p {
-            font-size: 0.9rem;
-            color: #7a7a7a;
-            margin-bottom: 25px;
-        }
-
-        .login-input-group {
-            position: relative;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
         }
 
         .login-input-group input {
             width: 100%;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border: 2px solid #ffe5ec;
             border-radius: 30px;
             outline: none;
             font-size: 1rem;
             text-align: center;
             transition: all 0.3s ease;
+            margin-bottom: 15px;
         }
 
         .login-input-group input:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(255, 117, 151, 0.1);
         }
+
         .login-btn {
             background: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px 35px;
+            padding: 14px 35px;
             border-radius: 30px;
             font-size: 1rem;
             cursor: pointer;
@@ -109,971 +94,783 @@
             transition: background 0.3s ease;
         }
 
-        .login-btn:hover {
-            background: var(--primary-hover);
-        }
+        .login-btn:hover { background: var(--primary-hover); }
+        #error-message { color: #d90429; font-size: 0.9rem; margin-top: 15px; min-height: 25px; font-weight: 600; }
 
-        #error-message {
-            color: #d90429;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            min-height: 20px;
-            font-weight: 600;
-        }
-
-        /* ==================== 3. APP CONTAINER & SIDEBAR ==================== */
-        #app-container {
-            display: flex;
-            flex: 1;
-            height: 100%;
-            position: relative;
-        }
-
-        #sidebar {
-            width: var(--sidebar-width);
+        /* ==================== 2. SABİT ÜST BAR ==================== */
+        #fixed-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: var(--header-height);
             background: var(--card-bg);
-            border-right: 1px solid #ffe5ec;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-            z-index: 100;
-        }
-
-        .sidebar-header {
-            padding: 25px 20px;
             border-bottom: 1px solid #ffe5ec;
-            text-align: center;
-        }
-
-        .sidebar-header h3 {
-            color: var(--primary-hover);
-            font-weight: 600;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-            padding: 20px 10px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 8px;
-        }
-
-        .menu-item {
-            display: flex;
+            display: none;
             align-items: center;
-            padding: 12px 15px;
-            color: var(--text-color);
+            justify-content: space-between;
+            padding: 0 25px;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
+        .header-btn {
+            background: none; border: none; font-size: 1.3rem; color: var(--primary-color);
+            cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 600;
             text-decoration: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 400;
-            transition: all 0.2s ease;
         }
+        .header-btn span { font-size: 1rem; }
+        .logo-area { font-weight: 600; font-size: 1.2rem; color: var(--primary-hover); }
 
-        .menu-item i {
-            margin-right: 15px;
-            width: 20px;
-            text-align: center;
-            color: var(--primary-color);
+        /* ==================== SOL MENÜ ==================== */
+        #nav-sidebar {
+            position: fixed;
+            top: var(--header-height); left: -280px; width: 280px; height: calc(100vh - var(--header-height));
+            background: var(--card-bg); border-right: 1px solid #ffe5ec;
+            transition: left 0.3s ease; z-index: 9998; padding: 20px 15px;
+            display: flex; flex-direction: column; gap: 10px;
         }
+        #nav-sidebar.open { left: 0; }
+        .menu-link {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 20px; color: var(--text-color); text-decoration: none;
+            border-radius: 12px; cursor: pointer; font-weight: 400; transition: all 0.2s;
+        }
+        .menu-link:hover { background: #fff5f7; color: var(--primary-hover); }
+        .menu-link i { color: var(--primary-color); width: 20px; text-align: center; }
+        
+        .sub-menu-list {
+            list-style: none; padding-left: 20px; display: none; flex-direction: column; gap: 5px;
+        }
+        .sub-menu-list.open { display: flex; }
 
-        .menu-item:hover {
-            background: #fff5f7;
-            color: var(--primary-hover);
-        }
-
-        .submenu {
-            list-style: none;
-            padding-left: 35px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .submenu.open {
-            max-height: 200px;
-        }
-
-        .submenu .menu-item {
-            padding: 8px 15px;
-            font-size: 0.9rem;
-        }
-
-        .sidebar-footer {
-            padding: 20px;
-            border-top: 1px solid #ffe5ec;
-        }
-        .spotify-widget {
-            background: #fff5f7;
-            border-radius: 15px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .spotify-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .spotify-info i {
-            color: #1ed760;
-            font-size: 1.4rem;
-        }
-
-        .spotify-text p {
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .spotify-text span {
-            font-size: 0.7rem;
-            color: #888;
-        }
-
-        .spotify-ctrl {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ==================== 4. MAIN CONTENT AREA ==================== */
-        #main-content {
+        /* ==================== ANA ALAN VE SAYFALAR ==================== */
+        #main-wrapper {
+            margin-top: var(--header-height);
+            padding: 30px 20px;
             flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .mobile-header {
             display: none;
-            background: var(--card-bg);
-            padding: 15px 20px;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #ffe5ec;
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ==================== 5. PAGES STYLES ==================== */
-        .hero-card {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #ff4d6d 100%);
-            color: white;
-            padding: 40px 30px;
-            border-radius: 24px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(255, 117, 151, 0.3);
-            margin-bottom: 30px;
-        }
-
-        .counter-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .counter-box {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px 20px;
-            border-radius: 16px;
-            backdrop-filter: blur(5px);
-            min-width: 80px;
-        }
-        .counter-box span {
-            display: block;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .counter-box label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-
-        .sub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .grid-img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-        }
-
-        .grid-img:hover { transform: scale(1.03); }
-
-        #love-reasons-page {
-            position: relative;
-            min-height: 70vh;
-            overflow: hidden;
-        }
-
-        .heart-fly {
-            position: absolute;
-            bottom: -50px;
-            cursor: pointer;
-            user-select: none;
-            animation: flyUp var(--duration) linear forwards;
-            transition: transform 0.2s;
-        }
-
-        .heart-fly:hover { transform: scale(1.4); }
-
-        @keyframes flyUp {
-            0% { transform: translateY(0) translateX(0); opacity: 1; }
-            100% { transform: translateY(-85vh) translateX(var(--drift)); opacity: 0; }
-        }
-
-        .cookie-wrapper {
-            display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-height: 50vh;
         }
 
-        .cookie-element {
-            font-size: 6rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, opacity 0.3s;
-            user-select: none;
+        .page-container { width: 100%; max-width: 800px; display: none; animation: pageFade 0.4s ease forwards; }
+        .page-container.active { display: block; }
+        @keyframes pageFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ==================== ANA SAYFA TASARIMI ==================== */
+        .spotify-container {
+            width: 100%; max-width: 450px; margin: 0 auto 30px auto;
+            background: #121212; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); display: flex; flex-direction: column;
+        }
+        .spotify-img-box {
+            width: 100%; aspect-ratio: 1/1; position: relative; background: #282828;
+        }
+        .spotify-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .spotify-controls {
+            padding: 15px 25px; display: flex; align-items: center; justify-content: space-between; background: #121212;
+        }
+        .track-details { color: white; }
+        .track-details h4 { font-size: 1rem; font-weight: 600; }
+        .track-details p { font-size: 0.8rem; color: #b3b3b3; }
+        .play-pause-btn {
+            background: #1ed760; border: none; width: 50px; height: 50px; border-radius: 50%;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: black;
         }
 
-        .cookie-element:hover { transform: scale(1.1) rotate(10deg); }
+        .time-counter {
+            display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap;
+        }
+        .time-box {
+            background: var(--card-bg); padding: 15px; border-radius: 15px;
+            min-width: 85px; text-align: center; box-shadow: 0 4px 15px rgba(255,117,151,0.05);
+        }
+        .time-box span { display: block; font-size: 1.8rem; font-weight: 600; color: var(--primary-hover); }
+        .time-box label { font-size: 0.75rem; text-transform: uppercase; color: #888; }
 
-        .cookie-particle {
-            position: absolute;
-            font-size: 1.5rem;
-            pointer-events: none;
-            animation: explode 0.6s ease-out forwards;
+        .main-narrative-card {
+            background: var(--card-bg); padding: 30px; border-radius: 24px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02); line-height: 1.8; text-align: justify; color: #5a5a5a;
         }
 
-        @keyframes explode {
-            0% { transform: translate(0, 0) scale(1); opacity: 1; }
-            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        footer {
+            width: 100%; text-align: center; padding: 25px 0; font-size: 0.9rem; color: #888; margin-top: auto;
         }
 
-        .notes-container {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        /* ==================== SENİ NEDEN SEVİYORUM (KALPLER) ==================== */
+        #love-reasons-page { position: relative; min-height: 75vh; overflow: hidden; background: #fff5f7; border-radius: 20px; }
+        .floating-heart {
+            position: absolute; bottom: -60px; cursor: pointer; user-select: none;
+            animation: moveUpwards var(--speed) linear forwards; font-size: 2.5rem;
+        }
+        @keyframes moveUpwards {
+            0% { transform: translateY(0) translateX(0); opacity: 1; }
+            100% { transform: translateY(-90vh) translateX(var(--drift)); opacity: 0; }
         }
 
-        .note-list-item {
-            padding: 15px;
-            border-bottom: 1px solid #ffe5ec;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* ==================== ŞANS KURABİYESİ ==================== */
+        .cookie-arena { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh; position: relative; }
+        .giant-cookie { font-size: 7rem; cursor: pointer; user-select: none; transition: transform 0.2s; }
+        .giant-cookie:hover { transform: scale(1.08); }
+        .cookie-shard { position: absolute; font-size: 1.8rem; pointer-events: none; animation: shardScatter 0.6s ease-out forwards; }
+        @keyframes shardScatter { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--mx), var(--my)) scale(0); opacity: 0; } }
+
+        /* ==================== NOT KARTLARI (MODAL) ==================== */
+        .popup-card-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4);
+            display: none; justify-content: center; align-items: center; z-index: 100000; padding: 20px;
         }
-
-        .note-list-item:hover { background: #fff5f7; }
-
-        .action-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 15px;
+        .popup-main-card {
+            background: white; padding: 35px 25px; border-radius: 20px; max-width: 450px; width: 100%;
+            position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;
         }
+        .popup-close-trigger { position: absolute; top: 15px; right: 15px; font-size: 1.4rem; cursor: pointer; color: #888; }
+        .popup-main-card p { font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; }
 
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 12px; border: 1px solid #ffe5ec; border-radius: 10px; outline: none;
+        /* ==================== ANILARIMIZ & ALBÜMLER ==================== */
+        .album-cover-container { display: flex; flex-direction: column; gap: 25px; margin-top: 15px; }
+        .album-book-cover {
+            background: var(--card-bg); border-radius: 20px; padding: 15px; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); text-align: center;
         }
-        #game-zone {
-            width: 100%; height: 250px;
-            background: #fdf0f4;
-            border-bottom: 4px solid #ff7597;
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-top: 20px;
+        .album-book-cover h4 { margin-top: 10px; color: var(--primary-hover); }
+        .album-book-cover img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 12px; }
+
+        .media-grid-layout {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-top: 20px;
         }
-
-        #runner-player {
-            width: 40px; height: 40px;
-            font-size: 2rem;
-            position: absolute;
-            left: 50px; bottom: 20px;
-            z-index: 10;
+        .grid-media-item { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; cursor: pointer; }
+        
+        #maximized-screen-viewer {
+            position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95);
+            display: none; justify-content: center; align-items: center; z-index: 110000;
         }
+        #maximized-screen-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .close-maximized { position: absolute; top: 20px; right: 20px; color: white; font-size: 2.5rem; cursor: pointer; }
 
-        .obstacle {
-            width: 30px; height: 30px;
-            font-size: 1.6rem;
-            position: absolute;
-            z-index: 5;
+        .video-card-element { background: black; border-radius: 12px; overflow: hidden; height: 140px; position: relative; cursor: pointer; }
+        .video-card-element img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .video-card-element::after {
+            content: '\f144'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 2.5rem;
         }
-
-        /* ==================== 6. MODAL & VIEWERS ==================== */
-        .global-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            padding: 20px;
+        #video-player-surface-page iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 16px; background: black; }
+        /* ==================== NOTLAR ALANI ==================== */
+        .notes-list-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .note-row-item {
+            background: var(--card-bg); padding: 18px 25px; border-radius: 12px; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02); font-weight: 600; color: var(--text-color);
         }
+        .note-row-item:hover { color: var(--primary-hover); }
+        .form-row { margin-bottom: 15px; }
+        .form-row label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-row input, .form-row textarea { width: 100%; padding: 12px; border: 1px solid #ffe5ec; border-radius: 10px; outline: none; }
+        .btn-universal { background: var(--primary-color); color: white; border: none; padding: 12px 24px; border-radius: 20px; cursor: pointer; font-weight: 600; }
 
-        .modal-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 450px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+        /* ==================== MİNİ OYUN ==================== */
+        #gaming-canvas-container {
+            width: 100%; height: 260px; background: #fff5f7; border-bottom: 4px solid var(--primary-color);
+            position: relative; overflow: hidden; border-radius: 16px; margin-top: 15px;
         }
-
-        .global-modal.open .modal-card { transform: scale(1); }
-        .modal-card p { font-size: 1.1rem; margin-bottom: 20px; font-weight: 400; line-height: 1.6; }
-
-        #fullscreen-viewer {
-            position: fixed;
-            top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 11000;
-        }
-
-        #fullscreen-img { max-width: 95%; max-height: 90vh; border-radius: 8px; }
-        .close-fs { position: absolute; top: 20px; right: 20px; color: white; font-size: 2rem; cursor: pointer; }
-
-        @media (max-width: 768px) {
-            #sidebar { position: absolute; left: 0; top: 0; bottom: 0; transform: translateX(-100%); }
-            #sidebar.open { transform: translateX(0); }
-            .mobile-header { display: flex; }
-            body { height: auto; min-height: 100vh; }
-        }
+        #runner-avatar { width: 40px; height: 40px; font-size: 2.2rem; position: absolute; left: 40px; bottom: 10px; z-index: 100; line-height: 1; }
+        .game-obstacle-node { width: 35px; height: 35px; font-size: 1.8rem; position: absolute; z-index: 90; bottom: 10px; line-height: 1; }
     </style>
 </head>
 <body>
 
-    <audio id="bg-music" src="sarki.mp3" loop></audio>
+    <audio id="audio-engine" src="sarki.mp3" loop></audio>
 
-    <!-- ŞİFRE EKRANI -->
+    <!-- 1. ŞİFRE EKRANI -->
     <div id="login-screen">
         <div class="login-card">
-            <div><i class="fa-solid fa-lock"></i></div>
-            <h2>Giriş Paneli</h2>
-            <p>Devam etmek için lütfen anahtar kelimeyi girin.</p>
+            <h2>Beni ilk nerede gördün?</h2>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 20px;">(Lütfen küçük harflerle yazın)</p>
             <div class="login-input-group">
-                <input type="password" id="password-input" placeholder="Şifreniz...">
+                <input type="password" id="password-field">
             </div>
-            <button class="login-btn" onclick="checkPassword()">Sistemi Aç</button>
+            <button class="login-btn" onclick="verifyAccessCredentials()">Sisteme Giriş Yap</button>
             <div id="error-message"></div>
         </div>
     </div>
 
-    <!-- MOBİL HEADER -->
-    <div class="mobile-header">
-        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-        <h4 style="color: var(--primary-hover);">Mehmet OS</h4>
-        <div style="width:24px;"></div>
-    </div>
-    <!-- ANA KONTEYNER -->
-    <div id="app-container">
-        
-        <aside id="sidebar">
-            <div class="sidebar-header">
-                <h3>Mehmet OS v1.0</h3>
-            </div>
-            <ul class="sidebar-menu">
-                <li><a class="menu-item" onclick="navigateTo('home')"><i class="fa-solid fa-house"></i> Ana Sayfa</a></li>
-                <li>
-                    <a class="menu-item" onclick="toggleSubMenu()"><i class="fa-solid fa-images"></i> Anılar <i class="fa-solid fa-chevron-down" style="margin-left:auto; font-size:0.8rem;"></i></a>
-                    <ul class="submenu" id="memories-submenu">
-                        <li><a class="menu-item" onclick="openSubAlbum('isparta')">Isparta</a></li>
-                        <li><a class="menu-item" onclick="openSubAlbum('mersin')">Mersin</a></li>
-                        <li><a class="menu-item" onclick="openSubAlbum('hatay')">Hatay</a></li>
-                    </ul>
-                </li>
-                <li><a class="menu-item" onclick="navigateTo('love-reasons')"><i class="fa-solid fa-heart"></i> Notlar</a></li>
-                <li><a class="menu-item" onclick="navigateTo('fortune-cookie')"><i class="fa-solid fa-cookie"></i> Şans Kurabiyesi</a></li>
-                <li><a class="menu-item" onclick="navigateTo('notes')"><i class="fa-solid fa-pen-fancy"></i> Hatıra Defteri</a></li>
-                <li><a class="menu-item" onclick="navigateTo('mini-game')"><i class="fa-solid fa-gamepad"></i> Mini Oyun</a></li>
-            </ul>
-            <div class="sidebar-footer">
-                <div class="spotify-widget">
-                    <div class="spotify-info">
-                        <i class="fa-brands fa-spotify"></i>
-                        <div class="spotify-text">
-                            <p>Özel Şarkı</p>
-                            <span>Arka Planda Çal</span>
-                        </div>
+    <!-- 2. SABİT ÜST BAR -->
+    <header id="fixed-header">
+        <div class="header-left">
+            <button class="header-btn" onclick="toggleNavigationSidebar()"><i class="fa-solid fa-bars"></i></button>
+            <button class="header-btn" onclick="switchApplicationPage('home')"><i class="fa-solid fa-house"></i> <span>Ana Sayfa</span></button>
+        </div>
+        <div class="header-right">
+            <button class="header-btn" onclick="terminateUserSession()" style="color: #d90429;"><i class="fa-solid fa-right-from-bracket"></i></button>
+            <div class="logo-area">Aynur&Mehmet</div>
+        </div>
+    </header>
+
+    <!-- SOL NAVİGASYON BARBARI -->
+    <nav id="nav-sidebar">
+        <a class="menu-link" onclick="switchApplicationPage('love-reasons')"><span>Seni Neden Seviyorum?</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a class="menu-link" onclick="switchApplicationPage('fortune-cookie')"><span>Şans Kurabiyesi</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a class="menu-link" onclick="toggleSubMenuTree()"><span>Anılarımız</span> <i class="fa-solid fa-chevron-down"></i></a>
+        <ul class="sub-menu-list" id="memories-tree">
+            <li><a class="menu-link" onclick="switchApplicationPage('city-memories')">Şehir Anılarımız</a></li>
+            <li><a class="menu-link" onclick="switchApplicationPage('video-gallery')">Videolarımız</a></li>
+        </ul>
+        <a class="menu-link" onclick="switchApplicationPage('notes-board')"><span>Notlar</span> <i class="fa-solid fa-chevron-right"></i></a>
+        <a class="menu-link" onclick="switchApplicationPage('arcade-game')"><span>Mini Oyun</span> <i class="fa-solid fa-chevron-right"></i></a>
+    </nav>
+
+    <!-- ANA İÇERİK ALANI -->
+    <main id="main-wrapper">
+
+        <!-- ANA SAYFA -->
+        <div id="home-page" class="page-container">
+            <div class="spotify-container">
+                <div class="spotify-img-box">
+                    <img src="kapak.jpg" alt="Spotify Cover" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23282828\'/><text x=\'50%\' y=\'50%\' font-size=\'20\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\'>kapak.jpg bulunamadı</text></svg>';">
+                </div>
+                <div class="spotify-controls">
+                    <div class="track-details">
+                        <h4>Özel Parça</h4>
+                        <p>sarki.mp3</p>
                     </div>
-                    <button class="spotify-ctrl" id="spotify-play-node" onclick="toggleMusic()"><i class="fa-solid fa-play"></i></button>
-                </div>
-                <a class="menu-item" onclick="logout()" style="margin-top:15px; color:#d90429;"><i class="fa-solid fa-right-from-bracket" style="color:#d90429;"></i> Güvenli Çıkış</a>
-            </div>
-        </aside>
-
-        <main id="main-content">
-
-            <!-- ANA SAYFA -->
-            <div id="home-page" class="page">
-                <div class="hero-card">
-                    <h2>Kronoloji Paneli</h2>
-                    <p>Zaman sayacı paneli</p>
-                    <div class="counter-container">
-                        <div class="counter-box"><span id="days">00</span><label>Gün</label></div>
-                        <div class="counter-box"><span id="hours">00</span><label>Saat</label></div>
-                        <div class="counter-box"><span id="minutes">00</span><label>Dakika</label></div>
-                        <div class="counter-box"><span id="seconds">00</span><label>Saniye</label></div>
-                    </div>
-                </div>
-                <h3>Sistem Özellikleri</h3>
-                <p style="margin-top: 10px; line-height: 1.6; color:#666;">Sol menüyü kullanarak paneller arasında geçiş yapabilir, şans kurabiyesini açabilir veya hatıra defterine yeni içerikler ekleyebilirsiniz.</p>
-            </div>
-
-            <!-- ALBÜM GÖRÜNTÜLEYİCİ -->
-            <div id="sub-album-page" class="page">
-                <button class="action-btn" onclick="toggleSubMenu()" style="margin-bottom:15px;"><i class="fa-solid fa-arrow-left"></i> Albümlere Dön</button>
-                <h2 id="sub-album-title">Albüm Başlığı</h2>
-                <p id="sub-album-desc" style="color:#888; margin-top:5px;"></p>
-                <div class="sub-grid" id="sub-album-grid"></div>
-            </div>
-
-            <!-- NOTLAR / ÖZEL SÖZLER -->
-            <div id="love-reasons-page" class="page">
-                <h2>Özel Notlar</h2>
-                <p style="color:#888;">Ekranda beliren elementlere tıklayarak kayıtlı içerikleri okuyabilirsiniz.</p>
-            </div>
-
-            <!-- ŞANS KURABİYESİ -->
-            <div id="fortune-cookie-page" class="page">
-                <h2>Günün Şans Kurabiyesi</h2>
-                <p style="color:#888; margin-bottom: 30px;">Kurabiyeye tıklayarak içindeki gizli mesajı ve dileği görebilirsin.</p>
-                <div class="cookie-wrapper">
-                    <div class="cookie-element" id="main-cookie" onclick="crackCookie()">🥠</div>
+                    <button class="play-pause-btn" id="audio-state-trigger" onclick="toggleAudioPlayback()"><i class="fa-solid fa-play"></i></button>
                 </div>
             </div>
 
-            <!-- HATIRA DEFTERI -->
-            <div id="notes-page" class="page">
-                <h2>Hatıra Defteri</h2>
-                <p style="color:#888; margin-bottom:20px;">Sistem üzerine bırakılmış dijital notlar...</p>
-                <div class="notes-container" id="global-notes-list"></div>
-                <button class="action-btn" onclick="showNoteEditor()"><i class="fa-solid fa-plus"></i> Yeni Not Ekle</button>
+            <div class="time-counter">
+                <div class="time-box"><span id="box-days">00</span><label>Gün</label></div>
+                <div class="time-box"><span id="box-hours">00</span><label>Saat</label></div>
+                <div class="time-box"><span id="box-mins">00</span><label>Dakika</label></div>
+                <div class="time-box"><span id="box-secs">00</span><label>Saniye</label></div>
             </div>
 
-            <!-- NOT YAZMA EDITÖRI -->
-            <div id="note-editor-page" class="page">
-                <h2>Yeni Not Yaz</h2>
-                <div class="notes-container" style="margin-top:20px;">
-                    <div class="form-group">
-                        <label>Başlık</label>
-                        <input type="text" id="note-title-input" placeholder="Başlık girin...">
-                    </div>
-                    <div class="form-group">
-                        <label>İçerik</label>
-                        <textarea id="note-content-input" rows="6" placeholder="Not içeriğini yazın..."></textarea>
-                    </div>
-                    <button class="action-btn" onclick="saveNewNote()">Kaydet</button>
-                    <button class="action-btn" onclick="navigateTo('notes')" style="background:#888;">İptal Et</button>
+            <div class="main-narrative-card">
+                Bugün senin günün sevgilim ve ben hayatımın en güzel günlerini başlatan o iyi ki doğdun anını kutlamak istedim.
+                Bu gördüğün sayfa, sadece sıradan bir internet sitesi değil; burası bizim dünyamız. Bastığımız topraklarda, iz bıraktığımız her yerde ve birbirimizin gözlerine baktığımız her anda biriktirdiğimiz anıların küçük bir dijital yuvası. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ne varsa hepsini buraya, sadece ikimize ait olan bu gizli köşeye sakladım.
+                Seninle geçen her dakika, hayatımın en değerli zaman dilimi oldu. Bu yüzden bu sitenin kapıları herkese açık değil. Burası sadece bizim hikayemiz, sadece bizim şehrimiz ve sadece bizim anılarımız...
+            </div>
+        </div>
+
+        <!-- SENİ NEDEN SEVİYORUM -->
+        <div id="love-reasons-page" class="page-container"></div>
+
+        <!-- ŞANS KURABİYESİ -->
+        <div id="fortune-cookie-page" class="page-container">
+            <div class="cookie-arena">
+                <div class="giant-cookie" id="interactive-cookie" onclick="triggerCookieFission()">🍪</div>
+            </div>
+        </div>
+
+        <!-- ŞEHİR ANILARI LİSTESİ -->
+        <div id="city-memories-page" class="page-container">
+            <h3 style="margin-bottom: 20px; color: var(--primary-hover);">Şehir Anılarımız</h3>
+            <div class="album-cover-container">
+                <div class="album-book-cover" onclick="openTargetedSubAlbum('isparta')">
+                    <img src="isparta0.jpg" alt="Isparta" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffeef2\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff7597\'>isparta0.jpg</text></svg>';">
+                    <h4>Isparta Anılarımız</h4>
+                </div>
+                <div class="album-book-cover" onclick="openTargetedSubAlbum('mersin')">
+                    <img src="mersin1.jpg" alt="Mersin" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffeef2\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff7597\'>mersin1.jpg</text></svg>';">
+                    <h4>Mersin Anılarımız</h4>
+                </div>
+                <div class="album-book-cover" onclick="openTargetedSubAlbum('hatay')">
+                    <img src="hatay1.jpg" alt="Hatay" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffeef2\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff7597\'>hatay1.jpg</text></svg>';">
+                    <h4>Hatay Anılarımız</h4>
                 </div>
             </div>
-            <!-- NOT DETAY -->
-            <div id="note-detail-page" class="page">
-                <h2 id="detail-note-title">Not Başlığı</h2>
-                <div class="notes-container" style="margin-top:20px;">
-                    <p id="detail-note-content" style="white-space: pre-wrap; line-height: 1.7;"></p>
+        </div>
+
+        <!-- İÇ GRID ALBÜM SAYFASI -->
+        <div id="nested-album-view-page" class="page-container">
+            <button class="btn-universal" onclick="switchApplicationPage('city-memories')" style="margin-bottom: 20px;"><i class="fa-solid fa-arrow-left"></i> Şehirlere Dön</button>
+            <h2 id="nested-album-heading" style="text-align: center; color: var(--primary-hover);"></h2>
+            <p id="nested-album-subtext" style="text-align: center; color: #888; margin: 10px 0 20px 0;"></p>
+            <div class="media-grid-layout" id="nested-album-grid-mesh"></div>
+        </div>
+        <!-- VİDEOLARIMIZ LİSTESİ -->
+        <div id="video-gallery-page" class="page-container">
+            <h3 style="margin-bottom: 20px; color: var(--primary-hover);">Videolarımız</h3>
+            <div class="media-grid-layout">
+                <div class="video-card-element" onclick="initiateVideoPlayback('https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/preview')">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/></svg>">
                 </div>
-                <button class="action-btn" onclick="navigateTo('notes')" style="margin-top:20px;">Geri Dön</button>
-            </div>
-
-            <!-- MİNİ OYUN -->
-            <div id="mini-game-page" class="page">
-                <h2>Engelleri Aşma Oyunu</h2>
-                <p style="color:#888;">Karakteri zıplatmak için butona tıklayın ve engellerden kaçın!</p>
-                <h3 style="margin-top:15px;">Skor: <span id="current-score-val" style="color:var(--primary-hover);">0</span></h3>
-                
-                <div id="game-zone">
-                    <div id="runner-player">跑</div>
+                <div class="video-card-element" onclick="initiateVideoPlayback('https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/preview')">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/></svg>">
                 </div>
-                <button class="action-btn" style="width:100%; padding:15px; font-size:1.2rem; margin-top:20px warm_background;" onclick="triggerJump()"><i class="fa-solid fa-arrow-up"></i> Zıpla!</button>
+                <div class="video-card-element" onclick="initiateVideoPlayback('https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/preview')">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/></svg>">
+                </div>
             </div>
+        </div>
 
-        </main>
-    </div>
+        <!-- VİDEO OYNATMA SAYFASI -->
+        <div id="video-player-surface-page" class="page-container">
+            <button class="btn-universal" onclick="switchApplicationPage('video-gallery')" style="margin-bottom:20px;"><i class="fa-solid fa-arrow-left"></i> Videolara Dön</button>
+            <div style="width:100%;">
+                <iframe id="global-video-frame" src="" allow="autoplay"></iframe>
+            </div>
+        </div>
 
-    <!-- MODAL -->
-    <div class="global-modal" id="global-modal">
-        <div class="modal-card">
-            <p id="modal-text"></p>
-            <button class="action-btn" onclick="closeModal()">Kapat</button>
+        <!-- NOTLAR LİSTESİ SÖRFÜ -->
+        <div id="notes-board-page" class="page-container">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <button class="btn-universal" onclick="switchApplicationPage('note-creator-form')"><i class="fa-solid fa-plus"></i> Not Ekle</button>
+            </div>
+            <div class="notes-list-stack" id="dynamic-notes-receiver"></div>
+        </div>
+
+        <!-- NOT EKLEME ARACI -->
+        <div id="note-creator-form-page" class="page-container">
+            <h3 style="margin-bottom:20px;">Yeni Not Ekle</h3>
+            <div class="form-row">
+                <label>Not Başlığı</label>
+                <input type="text" id="form-note-title">
+            </div>
+            <div class="form-row">
+                <label>Not İçeriği</label>
+                <textarea id="form-note-body" rows="6"></textarea>
+            </div>
+            <button class="btn-universal" onclick="persistGeneratedNote()">Kaydet ve Yayınla</button>
+            <button class="btn-universal" onclick="switchApplicationPage('notes-board')" style="background:#888;">İptal</button>
+        </div>
+
+        <!-- NOT DETAY SAYFASI -->
+        <div id="note-viewer-details-page" class="page-container">
+            <h3 id="expanded-note-title" style="color: var(--primary-hover); margin-bottom: 15px;"></h3>
+            <div class="main-narrative-card" id="expanded-note-body" style="white-space: pre-wrap;"></div>
+            <button class="btn-universal" onclick="switchApplicationPage('notes-board')" style="margin-top:20px;"><i class="fa-solid fa-arrow-left"></i> Geri Dön</button>
+        </div>
+
+        <!-- MİNİ OYUN -->
+        <div id="arcade-game-page" class="page-container">
+            <h3 style="text-align: center;">Skor: <span id="live-score-node" style="color:var(--primary-hover);">0</span></h3>
+            <div id="gaming-canvas-container">
+                <div id="runner-avatar">🏃</div>
+            </div>
+            <button class="btn-universal" style="width:100%; padding:15px; margin-top:20px; font-size:1.2rem;" onclick="executeAvatarJump()"><i class="fa-solid fa-arrow-up"></i> Zıpla!</button>
+        </div>
+
+        <footer>
+            Aynur&Mehmet Tüm hakları saklıdır.
+        </footer>
+    </main>
+
+    <!-- NOT KARTI MODAL POPUP -->
+    <div class="popup-card-overlay" id="global-popup-card">
+        <div class="popup-main-card">
+            <span class="popup-close-trigger" onclick="dismissPopupCard()">&times;</span>
+            <p id="popup-card-text-node"></p>
         </div>
     </div>
 
-    <!-- TAM EKRAN FOTOĞRAF -->
-    <div id="fullscreen-viewer">
-        <span class="close-fs" onclick="closeFullscreen()">&times;</span>
-        <img id="fullscreen-img" src="" alt="Görsel">
+    <!-- TAM EKRAN MEDYA PANELİ -->
+    <div id="maximized-screen-viewer">
+        <span class="close-maximized" onclick="dismissMaximizedViewer()">&times;</span>
+        <img id="maximized-media-source" src="" alt="View">
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- SISTEM KOD MOTORU -->
     <script>
-        const WRONG_ANSWERS = [
-            "Hata: Şifre eşleşmedi. Lütfen tekrar deneyin.",
-            "Giriş başarısız. Bilgileri kontrol edin.",
-            "Geçersiz şifre."
+        const INCORRECT_PASS_POOL = [
+            "Hafızanı zorla sevgilim",
+            "bir de bana unutkan diyorsun",
+            "Emin misin? Bir daha düşün aşkım"
         ];
 
-        const LOVE_QUOTES = [
-            "Sistem mesajı: İçerik başarıyla yüklendi.",
-            "Kayıtlı veri 1: Başarı dilekleri.",
-            "Kayıtlı veri 2: Günlük motivasyon cümlesi."
+        const ROMANTIC_STATEMENTS = [
+            "Seni seviyorum çünkü gülüşün bana her şeyi unutturacak kadar büyük bir huzur veriyor.",
+            "Seni seviyorum çünkü en karmaşık anlarımda bile sesin ruhuma dinginlik getiriyor.",
+            "Seni seviyorum çünkü seninle kurduğumuz bu dünya, sığındığım en güvenli liman.",
+            "Seni seviyorum çünkü gözlerindeki o ışık, geleceğe ait tüm kaygılarımı yok ediyor.",
+            "Seni seviyorum çünkü senin yanındayken kendimin en samimi ve en iyi versiyonu olabiliyorum."
         ];
 
-        const COOKIE_COMPLIMENTS = [
-            "Günün şansı: Harika bir gün geçireceksiniz!",
-            "Kurabiyeden çıkan mesaj: Planlarınız yolunda gidecek.",
-            "Gelecekte bolca huzur ve başarı sizi bekliyor."
+        const FORTUNE_PRAISES = [
+            "Bugün kurabiyeden çıkan mesaj: Dünyanın en zarif duruşuna ve gülüşüne sahipsin.",
+            "Günün iltifatı: Varlığın, etrafındaki her şeye benzersiz bir zarafet katıyor.",
+            "Kurabiyenin fısıltısı: Kararlılığın ve içindeki o güzel enerji her zorluğu aşmanı sağlayacak."
         ];
 
-        let currentState = {
-            isLoggedIn: false,
-            currentPage: 'home'
+        let runtimeState = {
+            authenticated: false,
+            activePanel: 'home'
         };
 
-        let customNotes = [
-            { title: "Sistem Notu", content: "İlk kayıt başarıyla oluşturuldu." }
+        let internalNotesData = [
+            { title: "Sistem Açılış Bildirisi", body: "Bu alan ortak dijital hafızamız için tasarlanmıştır. İstediğiniz notu ekleyebilirsiniz." }
         ];
 
         window.addEventListener('load', () => {
-            if(localStorage.getItem('customNotes')) {
-                customNotes = JSON.parse(localStorage.getItem('customNotes'));
-            } else {
-                localStorage.setItem('customNotes', JSON.stringify(customNotes));
+            if(localStorage.getItem('internalNotesData')) {
+                internalNotesData = JSON.parse(localStorage.getItem('internalNotesData'));
             }
-
-            if(localStorage.getItem('isLoggedIn') === 'true') {
-                currentState.isLoggedIn = true;
+            if(localStorage.getItem('authenticated') === 'true') {
+                runtimeState.authenticated = true;
                 document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('fixed-header').style.display = 'flex';
+                document.getElementById('main-wrapper').style.display = 'flex';
                 
-                if(localStorage.getItem('currentPage')) {
-                    currentState.currentPage = localStorage.getItem('currentPage');
+                if(localStorage.getItem('activePanel')) {
+                    runtimeState.activePanel = localStorage.getItem('activePanel');
                 }
-                navigateTo(currentState.currentPage);
-            } else {
-                document.getElementById('login-screen').style.display = 'flex';
+                switchApplicationPage(runtimeState.activePanel);
             }
             
-            setInterval(updateLoveCounter, 1000);
-            initHeartsGenerator();
+            setInterval(syncChronologyCounter, 1000);
+            generateFloatingHeartsEngine();
         });
 
-        function checkPassword() {
-            const input = document.getElementById('password-input').value.trim();
-            const errMsgNode = document.getElementById('error-message');
+        function verifyAccessCredentials() {
+            const rawInput = document.getElementById('password-field').value.trim();
+            const errDisplay = document.getElementById('error-message');
 
-            if(input.toLowerCase() === "mescid" || input.toUpperCase() === "MESCID") {
-                currentState.isLoggedIn = true;
-                localStorage.setItem('isLoggedIn', 'true');
+            if(rawInput.toLowerCase() === "mescid") {
+                runtimeState.authenticated = true;
+                localStorage.setItem('authenticated', 'true');
                 document.getElementById('login-screen').style.display = 'none';
-                navigateTo('home');
+                document.getElementById('fixed-header').style.display = 'flex';
+                document.getElementById('main-wrapper').style.display = 'flex';
+                switchApplicationPage('home');
             } else {
-                const randomMsg = WRONG_ANSWERS[Math.floor(Math.random() * WRONG_ANSWERS.length)];
-                errMsgNode.innerText = randomMsg;
+                const randomAlert = INCORRECT_PASS_POOL[Math.floor(Math.random() * INCORRECT_PASS_POOL.length)];
+                errDisplay.innerText = randomAlert;
             }
         }
-       function navigateTo(pageId) {
-            if(!currentState.isLoggedIn) return;
 
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(p => p.classList.remove('active'));
+        function switchApplicationPage(panelId) {
+            if(!runtimeState.authenticated) return;
 
-            const activePage = document.getElementById(`${pageId}-page`);
-            if(activePage) {
-                activePage.classList.add('active');
-                currentState.currentPage = pageId;
-                localStorage.setItem('currentPage', pageId);
+            const targetPages = document.querySelectorAll('.page-container');
+            targetPages.forEach(p => p.classList.remove('active'));
+
+            const activeNode = document.getElementById(`${panelId}-page`);
+            if(activeNode) {
+                activeNode.classList.add('active');
+                runtimeState.activePanel = panelId;
+                localStorage.setItem('activePanel', panelId);
             }
 
-            if(pageId === 'notes') renderNotesList();
-            if(pageId === 'mini-game') {
-                resetAndStartGame();
+            if(panelId === 'notes-board') buildNotesListInterface();
+            if(panelId === 'arcade-game') {
+                initializeArcadeLoop();
             } else {
-                stopGameLoop();
+                haltArcadeLoop();
             }
 
-            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('nav-sidebar').classList.remove('open');
+            window.scrollTo(0,0);
         }
 
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+        function toggleNavigationSidebar() {
+            document.getElementById('nav-sidebar').classList.toggle('open');
         }
 
-        function toggleSubMenu() {
-            document.getElementById('memories-submenu').classList.toggle('open');
+        function toggleSubMenuTree() {
+            document.getElementById('memories-tree').classList.toggle('open');
         }
 
-        function logout() {
-            currentState.isLoggedIn = false;
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('currentPage');
-            document.getElementById('password-input').value = "";
+        function terminateUserSession() {
+            runtimeState.authenticated = false;
+            localStorage.removeItem('authenticated');
+            localStorage.removeItem('activePanel');
+            document.getElementById('password-field').value = "";
             document.getElementById('error-message').innerText = "";
+            document.getElementById('fixed-header').style.display = 'none';
+            document.getElementById('main-wrapper').style.display = 'none';
             document.getElementById('login-screen').style.display = 'flex';
             
-            const audio = document.getElementById('bg-music');
-            audio.pause();
-            document.getElementById('spotify-play-node').innerHTML = '<i class="fa-solid fa-play"></i>';
+            const coreAudio = document.getElementById('audio-engine');
+            coreAudio.pause();
+            document.getElementById('audio-state-trigger').innerHTML = '<i class="fa-solid fa-play"></i>';
         }
 
-        function toggleMusic() {
-            const audio = document.getElementById('bg-music');
-            const playBtn = document.getElementById('spotify-play-node');
+        function toggleAudioPlayback() {
+            const coreAudio = document.getElementById('audio-engine');
+            const stateIcon = document.getElementById('audio-state-trigger');
 
-            if (audio.paused) {
-                audio.play().catch(e => console.log("Müzik izni gerekiyor."));
-                playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            if (coreAudio.paused) {
+                coreAudio.play().catch(err => console.log("Etkileşim kısıtlaması aktif."));
+                stateIcon.innerHTML = '<i class="fa-solid fa-pause"></i>';
             } else {
-                audio.pause();
-                playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                coreAudio.pause();
+                stateIcon.innerHTML = '<i class="fa-solid fa-play"></i>';
             }
         }
 
-        function updateLoveCounter() {
-            const startDate = new Date("2025-09-12T00:00:00");
-            const now = new Date();
-            const diff = now - startDate;
+        function syncChronologyCounter() {
+            const milestoneDate = new Date("2025-09-12T00:00:00");
+            const currentMoment = new Date();
+            const timeDelta = currentMoment - milestoneDate;
 
-            if(diff < 0) return;
+            if(timeDelta < 0) return;
 
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / 1000 / 60) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
+            const days = Math.floor(timeDelta / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDelta / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((timeDelta / 1000 / 60) % 60);
+            const seconds = Math.floor((timeDelta / 1000) % 60);
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            document.getElementById('box-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('box-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('box-mins').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('box-secs').innerText = String(seconds).padStart(2, '0');
         }
 
-        function openModal(text) {
-            document.getElementById('modal-text').innerText = text;
-            const modal = document.getElementById('global-modal');
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('open'), 10);
+        function presentPopupCard(messageText) {
+            document.getElementById('popup-card-text-node').innerText = messageText;
+            document.getElementById('global-popup-card').style.display = 'flex';
+        }
+function dismissPopupCard() {
+            document.getElementById('global-popup-card').style.display = 'none';
+            if(runtimeState.activePanel === 'fortune-cookie') {
+                const targetCookie = document.getElementById('interactive-cookie');
+                targetCookie.style.opacity = '1';
+                targetCookie.style.pointerEvents = 'auto';
+            }
         }
 
-        function closeModal() {
-            const modal = document.getElementById('global-modal');
-            modal.classList.remove('open');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                if(currentState.currentPage === 'fortune-cookie') {
-                    document.getElementById('main-cookie').style.opacity = '1';
-                    document.getElementById('main-cookie').style.pointerEvents = 'auto';
-                }
-            }, 300);
-        }
-
-        function initHeartsGenerator() {
-            const container = document.getElementById('love-reasons-page');
-            const colors = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
+        function generateFloatingHeartsEngine() {
+            const interfaceStage = document.getElementById('love-reasons-page');
+            const paletteOptions = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
             
             setInterval(() => {
-                if(currentState.currentPage !== 'love-reasons') return;
+                if(runtimeState.activePanel !== 'love-reasons') return;
                 
-                const element = document.createElement('div');
-                element.className = 'heart-fly';
-                element.innerHTML = '⭐';
+                const heartNode = document.createElement('div');
+                heartNode.className = 'floating-heart';
+                heartNode.innerHTML = '❤️';
                 
-                element.style.left = Math.random() * 90 + '%';
-                element.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heartNode.style.left = Math.random() * 85 + '%';
+                heartNode.style.color = paletteOptions[Math.floor(Math.random() * paletteOptions.length)];
                 
-                const duration = Math.random() * 3 + 3;
-                const drift = Math.random() * 100 - 50;
+                const processVelocity = Math.random() * 3 + 4;
+                const lateralDrift = Math.random() * 120 - 60;
                 
-                element.style.setProperty('--duration', `${duration}s`);
-                element.style.setProperty('--drift', `${drift}px`);
-                element.style.fontSize = Math.random() * 1.5 + 1.5 + 'rem';
+                heartNode.style.setProperty('--speed', `${processVelocity}s`);
+                heartNode.style.setProperty('--drift', `${lateralDrift}px`);
+                heartNode.style.fontSize = Math.random() * 1.2 + 1.8 + 'rem';
 
-                element.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    element.remove();
-                    const randomQuote = LOVE_QUOTES[Math.floor(Math.random() * LOVE_QUOTES.length)];
-                    openModal(randomQuote);
+                heartNode.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    heartNode.remove();
+                    const randomizedReason = ROMANTIC_STATEMENTS[Math.floor(Math.random() * ROMANTIC_STATEMENTS.length)];
+                    presentPopupCard(randomizedReason);
                 });
-                container.appendChild(element);
-                setTimeout(() => element.remove(), duration * 1000);
-            }, 600);
+
+                interfaceStage.appendChild(heartNode);
+                setTimeout(() => heartNode.remove(), processVelocity * 1000);
+            }, 500);
         }
 
-        function crackCookie() {
-            const cookieNode = document.getElementById('main-cookie');
-            const container = cookieNode.parentElement;
+        function triggerCookieFission() {
+            const cookieNode = document.getElementById('interactive-cookie');
+            const stageBound = cookieNode.parentElement;
             
-            for (let i = 0; i < 10; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'cookie-particle';
-                particle.innerText = '✨';
+            for (let idx = 0; idx < 10; idx++) {
+                const splinter = document.createElement('div');
+                splinter.className = 'cookie-shard';
+                splinter.innerText = '🟫';
                 
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 100 + 50;
-                const x = Math.cos(angle) * distance + 'px';
-                const y = Math.sin(angle) * distance + 'px';
+                const radialAngle = Math.random() * Math.PI * 2;
+                const radialVector = Math.random() * 120 + 60;
+                const mx = Math.cos(radialAngle) * radialVector + 'px';
+                const my = Math.sin(radialAngle) * radialVector + 'px';
                 
-                particle.style.setProperty('--x', x);
-                particle.style.setProperty('--y', y);
-                particle.style.left = '50%';
-                particle.style.top = '50%';
+                splinter.style.setProperty('--mx', mx);
+                splinter.style.setProperty('--my', my);
+                splinter.style.left = '50%';
+                splinter.style.top = '50%';
                 
-                container.appendChild(particle);
-                setTimeout(() => particle.remove(), 600);
+                stageBound.appendChild(splinter);
+                setTimeout(() => splinter.remove(), 600);
             }
 
             cookieNode.style.opacity = '0';
             cookieNode.style.pointerEvents = 'none';
 
             setTimeout(() => {
-                const randomCompliment = COOKIE_COMPLIMENTS[Math.floor(Math.random() * COOKIE_COMPLIMENTS.length)];
-                openModal(randomCompliment);
-            }, 400);
+                const selectivePraise = FORTUNE_PRAISES[Math.floor(Math.random() * FORTUNE_PRAISES.length)];
+                presentPopupCard(selectivePraise);
+            }, 450);
         }
 
-        function openSubAlbum(cityName) {
-            const titleNode = document.getElementById('sub-album-title');
-            const descNode = document.getElementById('sub-album-desc');
-            const gridNode = document.getElementById('sub-album-grid');
+        function openTargetedSubAlbum(cityCode) {
+            const displayTitle = document.getElementById('nested-album-heading');
+            const subDescription = document.getElementById('nested-album-subtext');
+            const gridMesh = document.getElementById('nested-album-grid-mesh');
             
-            gridNode.innerHTML = '';
-            let imagesArray = [];
+            gridMesh.innerHTML = '';
+            let dynamicSources = [];
             
-            if(cityName === 'isparta') {
-                titleNode.innerText = "Isparta Klasörü";
-                descNode.innerText = "Isparta lokasyonuna ait görsel listesi.";
-                for(let i=0; i<=12; i++) imagesArray.push(`isparta${i}.jpg`);
-            } else if(cityName === 'mersin') {
-                titleNode.innerText = "Mersin Klasörü";
-                descNode.innerText = "Mersin lokasyonuna ait görsel listesi.";
-                for(let i=1; i<=4; i++) imagesArray.push(`mersin${i}.jpg`);
-            } else if(cityName === 'hatay') {
-                titleNode.innerText = "Hatay Klasörü";
-                descNode.innerText = "Hatay lokasyonuna ait görsel listesi.";
-                for(let i=1; i<=4; i++) imagesArray.push(`hatay${i}.jpg`);
+            if(cityCode === 'isparta') {
+                displayTitle.innerText = "Isparta Anılarımız";
+                subDescription.innerText = "Beraber çekildiğimiz ilk fotoğraflar bu güzel şehirde";
+                for(let k=0; k<=12; k++) dynamicSources.push(`isparta${k}.jpg`);
+            } else if(cityCode === 'mersin') {
+                displayTitle.innerText = "Mersin Anılarımız";
+                subDescription.innerText = "Mersin sahilinde biriktirdiğimiz özel anlar.";
+                for(let k=1; k<=4; k++) dynamicSources.push(`mersin${k}.jpg`);
+            } else if(cityCode === 'hatay') {
+                displayTitle.innerText = "Hatay Anılarımız";
+                subDescription.innerText = "Kendi şehrimizdeki en değerli duraklar.";
+                for(let k=1; k<=4; k++) dynamicSources.push(`hatay${k}.jpg`);
             }
 
-            imagesArray.forEach(src => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.className = 'grid-img';
-                img.alt = src;
-                img.onerror = function() {
-                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%23ffeef2'/><text x='50%' y='50%' font-size='10' dominant-baseline='middle' text-anchor='middle' fill='%23ff7597'>${src}</text></svg>";
+            dynamicSources.forEach(filename => {
+                const binaryMedia = document.createElement('img');
+                binaryMedia.src = filename;
+                binaryMedia.className = 'grid-media-item';
+                binaryMedia.alt = filename;
+                binaryMedia.onerror = function() {
+                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%23ffeef2'/><text x='50%' y='50%' font-size='8' dominant-baseline='middle' text-anchor='middle' fill='%23ff7597'>${filename}</text></svg>";
                 };
-                img.onclick = () => showFullscreen(img.src);
-                gridNode.appendChild(img);
+                binaryMedia.onclick = () => maximizeTargetedViewer(binaryMedia.src);
+                gridMesh.appendChild(binaryMedia);
             });
 
-            navigateTo('sub-album');
+            switchApplicationPage('nested-album-view');
         }
 
-        function showFullscreen(src) {
-            const viewer = document.getElementById('fullscreen-viewer');
-            document.getElementById('fullscreen-img').src = src;
-            viewer.style.display = 'flex';
+        function maximizeTargetedViewer(sourceUrl) {
+            document.getElementById('maximized-media-source').src = sourceUrl;
+            document.getElementById('maximized-screen-viewer').style.display = 'flex';
         }
 
-        function closeFullscreen() {
-            document.getElementById('fullscreen-viewer').style.display = 'none';
+        function dismissMaximizedViewer() {
+            document.getElementById('maximized-screen-viewer').style.display = 'none';
         }
 
-        function renderNotesList() {
-            const listNode = document.getElementById('global-notes-list');
-            listNode.innerHTML = '';
+        function initiateVideoPlayback(embedUrl) {
+            document.getElementById('global-video-frame').src = embedUrl;
+            switchApplicationPage('video-player-surface');
+        }
+        function buildNotesListInterface() {
+            const containerNode = document.getElementById('dynamic-notes-receiver');
+            containerNode.innerHTML = '';
 
-            customNotes.forEach((note, index) => {
-                const div = document.createElement('div');
-                div.className = 'note-list-item';
-                div.innerText = note.title;
-                div.onclick = () => showNoteDetail(index);
-                listNode.appendChild(div);
+            internalNotesData.forEach((element, pos) => {
+                const itemRow = document.createElement('div');
+                itemRow.className = 'note-row-item';
+                itemRow.innerText = element.title;
+                itemRow.onclick = () => showExpandedNoteContext(pos);
+                containerNode.appendChild(itemRow);
             });
         }
 
-        function showNoteEditor() {
-            document.getElementById('note-title-input').value = '';
-            document.getElementById('note-content-input').value = '';
-            navigateTo('note-editor');
-        }
+        function persistGeneratedNote() {
+            const derivedTitle = document.getElementById('form-note-title').value.trim();
+            const derivedBody = document.getElementById('form-note-body').value.trim();
 
-        function saveNewNote() {
-            const title = document.getElementById('note-title-input').value.trim();
-            const content = document.getElementById('note-content-input').value.trim();
-
-            if(!title || !content) {
-                alert('Lütfen gerekli alanları doldurun.');
+            if(!derivedTitle || !derivedBody) {
+                alert('Eksik alan bırakamazsınız.');
                 return;
             }
 
-            customNotes.push({ title, content });
-            localStorage.setItem('customNotes', JSON.stringify(customNotes));
-            renderNotesList();
-            navigateTo('notes');
-        }
-        function showNoteDetail(index) {
-            const note = customNotes[index];
-            document.getElementById('detail-note-title').innerText = note.title;
-            document.getElementById('detail-note-content').innerText = note.content;
-            navigateTo('note-detail');
+            internalNotesData.push({ title: derivedTitle, body: derivedBody });
+            localStorage.setItem('internalNotesData', JSON.stringify(internalNotesData));
+            buildNotesListInterface();
+            switchApplicationPage('notes-board');
         }
 
-        let gameInterval = null;
-        let spawnInterval = null;
-        let gameScore = 0;
-        let isJumping = false;
-        let playerY = 0; 
-        let jumpVelocity = 0;
-        const gravityConstant = 1.8; 
+        function showExpandedNoteContext(targetIndex) {
+            const individualObject = internalNotesData[targetIndex];
+            document.getElementById('expanded-note-title').innerText = individualObject.title;
+            document.getElementById('expanded-note-body').innerText = individualObject.body;
+            switchApplicationPage('note-viewer-details');
+        }
 
-        function resetAndStartGame() {
-            stopGameLoop();
-            gameScore = 0;
-            playerY = 0;
-            isJumping = false;
-            jumpVelocity = 0;
-            document.getElementById('current-score-val').innerText = gameScore;
+        /* OYUN DEĞİŞKENLERİ VE LOOPI */
+        let continuousGameInterval = null;
+        let persistentSpawnTimer = null;
+        let internalScoreCounter = 0;
+        let activeJumpStatus = false;
+        let verticalCoordY = 0; 
+        let currentVelocityY = 0;
+        const gravityImpact = 2.2; 
+
+        function initializeArcadeLoop() {
+            haltArcadeLoop();
+            internalScoreCounter = 0;
+            verticalCoordY = 0;
+            activeJumpStatus = false;
+            currentVelocityY = 0;
+            document.getElementById('live-score-node').innerText = internalScoreCounter;
             
-            const playerNode = document.getElementById('runner-player');
-            playerNode.style.bottom = '20px';
+            const playerAsset = document.getElementById('runner-avatar');
+            playerAsset.style.bottom = '10px';
 
-            const obstacles = document.querySelectorAll('.obstacle');
-            obstacles.forEach(o => o.remove());
+            const remainingHazards = document.querySelectorAll('.game-obstacle-node');
+            remainingHazards.forEach(hz => hz.remove());
 
-            gameInterval = setInterval(updateGamePhysics, 20);
-            spawnObstaclesLoop();
+            continuousGameInterval = setInterval(refreshArcadePhysicsFrame, 16);
+            executeHazardSpawningSequence();
         }
 
-        function stopGameLoop() {
-            clearInterval(gameInterval);
-            clearTimeout(spawnInterval);
+        function haltArcadeLoop() {
+            clearInterval(continuousGameInterval);
+            clearTimeout(persistentSpawnTimer);
         }
 
-        function triggerJump() {
-            if (!isJumping) {
-                isJumping = true;
-                jumpVelocity = 22; 
+        function executeAvatarJump() {
+            if (!activeJumpStatus) {
+                activeJumpStatus = true;
+                currentVelocityY = 24; 
             }
         }
 
-        function updateGamePhysics() {
-            const playerNode = document.getElementById('runner-player');
+        function refreshArcadePhysicsFrame() {
+            const avatar = document.getElementById('runner-avatar');
             
-            if (isJumping) {
-                playerY += jumpVelocity;
-                jumpVelocity -= gravityConstant;
+            if (activeJumpStatus) {
+                verticalCoordY += currentVelocityY;
+                currentVelocityY -= gravityImpact;
 
-                if (playerY <= 0) {
-                    playerY = 0;
-                    isJumping = false;
-                    jumpVelocity = 0;
+                if (verticalCoordY <= 0) {
+                    verticalCoordY = 0;
+                    activeJumpStatus = false;
+                    currentVelocityY = 0;
                 }
             }
-            playerNode.style.bottom = (20 + playerY) + 'px';
+            avatar.style.bottom = (10 + verticalCoordY) + 'px';
 
-            const obstacles = document.querySelectorAll('.obstacle');
-            const playerRect = playerNode.getBoundingClientRect();
+            const hazards = document.querySelectorAll('.game-obstacle-node');
+            const avatarBoundaries = avatar.getBoundingClientRect();
 
-            obstacles.forEach(obs => {
-                let currentRight = parseFloat(obs.style.right);
-                currentRight += 5; 
-                obs.style.right = currentRight + 'px';
+            hazards.forEach(obstacle => {
+                let currentRightPos = parseFloat(obstacle.style.right) || 0;
+                currentRightPos += 6; 
+                obstacle.style.right = currentRightPos + 'px';
 
-                if (currentRight > 520) {
-                    obs.remove();
-                    gameScore += 10;
-                    document.getElementById('current-score-val').innerText = gameScore;
+                if (currentRightPos > 850) {
+                    obstacle.remove();
+                    internalScoreCounter += 10;
+                    document.getElementById('live-score-node').innerText = internalScoreCounter;
                 }
 
-                const obsRect = obs.getBoundingClientRect();
+                const hazardBoundaries = obstacle.getBoundingClientRect();
                 if (
-                    playerRect.left < obsRect.right &&
-                    playerRect.right > obsRect.left &&
-                    playerRect.top < obsRect.bottom &&
-                    playerRect.bottom > obsRect.top
+                    avatarBoundaries.left < hazardBoundaries.right &&
+                    avatarBoundaries.right > hazardBoundaries.left &&
+                    avatarBoundaries.top < hazardBoundaries.bottom &&
+                    avatarBoundaries.bottom > hazardBoundaries.top
                 ) {
-                    stopGameLoop();
-                    alert(`Oyun Bitti. Skorunuz: ${gameScore}.`);
-                    resetAndStartGame();
+                    haltArcadeLoop();
+                    alert(`Oyun Bitti. Skorunuz: ${internalScoreCounter}`);
+                    initializeArcadeLoop();
                 }
             });
         }
+        function executeHazardSpawningSequence() {
+            if (runtimeState.activePanel !== 'arcade-game') return;
 
-        function spawnObstaclesLoop() {
-            if (currentState.currentPage !== 'mini-game') return;
-
-            const gameZone = document.getElementById('game-zone');
-            const obs = document.createElement('div');
-            obs.className = 'obstacle';
+            const stageSurface = document.getElementById('gaming-canvas-container');
+            const hazardItem = document.createElement('div');
+            hazardItem.className = 'game-obstacle-node';
             
-            const obsEmojis = ['🌵', '🪨', '🧱'];
-            obs.innerText = obsEmojis[Math.floor(Math.random() * obsEmojis.length)];
-            obs.style.right = '-30px';
-            obs.style.bottom = '20px';
-            gameZone.appendChild(obs);
+            const visualHazards = ['🧱', '🪨', '🌵'];
+            hazardItem.innerText = visualHazards[Math.floor(Math.random() * visualHazards.length)];
+            hazardItem.style.right = '-40px';
+            stageSurface.appendChild(hazardItem);
 
-            const nextSpawnTime = Math.random() * 1000 + 1500; 
-            spawnInterval = setTimeout(spawnObstaclesLoop, nextSpawnTime);
+            const variableInterval = Math.random() * 800 + 1300; 
+            persistentSpawnTimer = setTimeout(executeHazardSpawningSequence, variableInterval);
         }
     </script>
 </body>

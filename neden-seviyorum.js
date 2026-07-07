@@ -52,9 +52,6 @@ heart.className="heart";
 
 const size=Math.random()*45+45;
 
-heart.style.width=size+"px";
-heart.style.height=size+"px";
-
 heart.style.left=Math.random()*100+"vw";
 
 heart.style.background=
@@ -65,6 +62,7 @@ heart.style.animationDuration=
 
 heart.style.animationDelay=
 (Math.random()*1)+"s";
+  heart.style.zIndex=Math.floor(Math.random()*5)+1;
 
   heart.style.setProperty("--size",size+"px");
 container.appendChild(heart);

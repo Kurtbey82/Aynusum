@@ -196,3 +196,50 @@ display:none;
 z-index:9998;
 
 }
+/* =========================
+   KALPLER
+========================= */
+
+.heart{
+
+position:absolute;
+
+bottom:-80px;
+
+user-select:none;
+
+cursor:pointer;
+
+animation-name:fly;
+
+animation-timing-function:linear;
+
+animation-fill-mode:forwards;
+
+}
+
+@keyframes fly{
+
+0%{
+
+transform:translateY(0) rotate(0deg);
+
+opacity:0;
+
+}
+
+10%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) rotate(360deg);
+
+opacity:0;
+
+}
+
+}

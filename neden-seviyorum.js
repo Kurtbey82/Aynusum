@@ -1,6 +1,6 @@
 const container=document.getElementById("heartContainer");
 
-const hearts = ["❤️","💖","💗","💓","💕","💘","💝"];
+const hearts = ["❤️","💖","🤍","🧡","💛","💚","🩵","💜","🩷","🖤","🩶"];
 
 const colors = [
 "#ff0000",

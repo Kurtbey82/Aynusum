@@ -1,917 +1,128 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aynur & Mehmet</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ==================== GLOBAL STYLES & THEME ==================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
 
-        :root {
-            --bg-color: #fff0f3;
-            --primary-color: #ff7597;
-            --primary-hover: #ff4d6d;
-            --text-color: #3a3a3a;
-            --card-bg: #ffffff;
-            --header-height: 80px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            font-size: 1.15rem; /* Yazı boyutları büyütüldü */
-        }
+<title>Aynur ❤️ Mehmet</title>
 
-        /* ==================== 1. ŞİFRE EKRANI ==================== */
-        #login-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            padding: 20px;
-        }
+<link rel="stylesheet" href="style.css">
 
-        .login-card {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 117, 151, 0.3);
-            text-align: center;
-            max-width: 480px;
-            width: 100%;
-        }
-
-        .login-card h2 {
-            margin-bottom: 20px;
-            font-weight: 700;
-            color: var(--primary-hover);
-            font-size: 1.6rem;
-        }
-
-        .login-input-group input {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #ffe5ec;
-            border-radius: 30px;
-            outline: none;
-            font-size: 1.2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            margin-bottom: 15px;
-        }
-
-        .login-input-group input:focus {
-            border-color: var(--primary-color);
-        }
-
-        .login-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 16px 35px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            transition: background 0.3s ease;
-        }
-
-        .login-btn:hover { background: var(--primary-hover); }
-        #error-message { color: #d90429; font-size: 1.05rem; margin-top: 15px; min-height: 25px; font-weight: 600; }
-
-        /* ==================== 2. SABİT ÜST BAR ==================== */
-        #fixed-header {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: var(--header-height);
-            background: var(--card-bg);
-            border-bottom: 2px solid #ffe5ec;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 25px;
-            z-index: 9999;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
-        }
-
-        .header-left, .header-right { display: flex; align-items: center; gap: 20px; }
-        .header-btn {
-            background: none; border: none; font-size: 1.6rem; color: var(--primary-color);
-            cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700;
-            text-decoration: none;
-        }
-        .header-btn span { font-size: 1.15rem; }
-        .logo-area { font-weight: 700; font-size: 1.4rem; color: var(--primary-hover); }
-        /* ==================== SOL MENÜ ==================== */
-        #nav-sidebar {
-            position: fixed;
-            top: var(--header-height); left: -300px; width: 300px; height: calc(100vh - var(--header-height));
-            background: var(--card-bg); border-right: 2px solid #ffe5ec;
-            transition: left 0.3s ease; z-index: 9998; padding: 25px 15px;
-            display: flex; flex-direction: column; gap: 12px;
-        }
-        #nav-sidebar.open { left: 0; }
-        .menu-link {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 20px; color: var(--text-color); text-decoration: none;
-            border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1.1rem; transition: all 0.2s;
-        }
-        .menu-link:hover { background: #fff5f7; color: var(--primary-hover); }
-        .menu-link i { color: var(--primary-color); width: 25px; text-align: center; }
-        
-        .sub-menu-list {
-            list-style: none; padding-left: 20px; display: none; flex-direction: column; gap: 5px;
-        }
-        .sub-menu-list.open { display: flex; }
-
-        /* ==================== ANA ALAN VE SAYFALAR ==================== */
-        #main-wrapper {
-            margin-top: var(--header-height);
-            padding: 40px 20px;
-            flex: 1;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .page-container { width: 100%; max-width: 800px; display: none; animation: pageFade 0.4s ease forwards; }
-        .page-container.active { display: block; }
-        @keyframes pageFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* ==================== ANA SAYFA TASARIMI ==================== */
-        .spotify-container {
-            width: 100%; max-width: 440px; margin: 0 auto 35px auto;
-            background: #121212; border-radius: 24px; overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column;
-        }
-        .spotify-img-box {
-            width: 100%; aspect-ratio: 1 / 1; position: relative; background: #282828;
-        }
-        .spotify-img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .spotify-controls {
-            padding: 20px 25px; display: flex; align-items: center; justify-content: space-between; background: #121212;
-        }
-        .track-details { color: white; }
-        .track-details h4 { font-size: 1.15rem; font-weight: 700; }
-        .track-details p { font-size: 0.9rem; color: #b3b3b3; }
-        .play-pause-btn {
-            background: #1ed760; border: none; width: 55px; height: 55px; border-radius: 50%;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: black;
-        }
-
-        .time-counter {
-            display: flex; justify-content: center; gap: 15px; margin-bottom: 35px; flex-wrap: wrap;
-        }
-        .time-box {
-            background: var(--card-bg); padding: 20px; border-radius: 18px;
-            min-width: 100px; text-align: center; box-shadow: 0 6px 20px rgba(255,117,151,0.08);
-        }
-        .time-box span { display: block; font-size: 2.2rem; font-weight: 700; color: var(--primary-hover); }
-        .time-box label { font-size: 0.85rem; text-transform: uppercase; color: #777; font-weight: 600; }
-
-        .main-narrative-card {
-            background: var(--card-bg); padding: 35px; border-radius: 24px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.03); line-height: 1.9; text-align: justify; color: #4a4a4a;
-            font-size: 1.15rem;
-        }
-
-        footer {
-            width: 100%; text-align: center; padding: 30px 0; font-size: 1rem; color: #777; margin-top: auto; font-weight: 600;
-        }
-
-        /* ==================== SENİ NEDEN SEVİYORUM ==================== */
-        #love-reasons-page { position: relative; min-height: 75vh; overflow: hidden; background: #fff5f7; border-radius: 24px; pointer-events: auto; }
-        .floating-heart {
-            position: absolute; bottom: -70px; cursor: pointer; user-select: none;
-            animation: moveUpwards var(--speed) linear forwards; font-size: 3rem; z-index: 500;
-            pointer-events: auto;
-        }
-        @keyframes moveUpwards {
-            0% { transform: translateY(0) translateX(0); opacity: 1; }
-            100% { transform: translateY(-85vh) translateX(var(--drift)); opacity: 0; }
-        }
-
-        /* ==================== ŞANS KURABİYESİ ==================== */
-        .cookie-arena { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; position: relative; }
-        .giant-cookie { font-size: 12rem; cursor: pointer; user-select: none; transition: transform 0.2s; text-align: center; }
-        .giant-cookie:hover { transform: scale(1.1); }
-        .cookie-shard { position: absolute; font-size: 2.5rem; pointer-events: none; animation: shardScatter 0.6s ease-out forwards; }
-        @keyframes shardScatter { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--mx), var(--my)) scale(0); opacity: 0; } }
-
-        /* ==================== NOT KARTLARI (MODAL) ==================== */
-        .popup-card-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4);
-            display: none; justify-content: center; align-items: center; z-index: 100000; padding: 20px;
-        }
-        .popup-main-card {
-            background: white; padding: 40px 30px; border-radius: 24px; max-width: 500px; width: 100%;
-            position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.15); text-align: center;
-        }
-        .popup-close-trigger { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #666; font-weight: bold; }
-        .popup-main-card p { font-size: 1.25rem; line-height: 1.7; color: #333; font-weight: 600; }
-
-        /* ==================== ANILARIMIZ & ALBÜMLER ==================== */
-        .album-cover-container { display: flex; flex-direction: column; gap: 30px; margin-top: 15px; }
-        .album-book-cover {
-            background: var(--card-bg); border-radius: 24px; padding: 20px; cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.04); text-align: center;
-        }
-        .album-book-cover h4 { margin-top: 15px; color: var(--primary-hover); font-size: 1.3rem; }
-        .album-book-cover img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 16px; }
-
-        .media-grid-layout {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; margin-top: 25px;
-        }
-        .grid-media-item { width: 100%; height: 160px; object-fit: cover; border-radius: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        
-        #maximized-screen-viewer {
-            position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95);
-            display: none; justify-content: center; align-items: center; z-index: 110000;
-        }
-        #maximized-screen-viewer img { max-width: 95%; max-height: 95%; object-fit: contain; }
-        .close-maximized { position: absolute; top: 25px; right: 25px; color: white; font-size: 3rem; cursor: pointer; }
-
-        .video-card-element { background: black; border-radius: 16px; overflow: hidden; height: 160px; position: relative; cursor: pointer; }
-        .video-card-element img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-        .video-card-element::after {
-            content: '\f144'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3rem;
-        }
-        #video-player-surface-page iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 20px; background: black; }
-        /* ==================== NOTLAR ALANI ==================== */
-        .notes-list-stack { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
-        .note-row-item {
-            background: var(--card-bg); padding: 22px 30px; border-radius: 16px; cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03); font-weight: 700; color: var(--text-color); font-size: 1.2rem;
-        }
-        .note-row-item:hover { color: var(--primary-hover); }
-        .form-row { margin-bottom: 20px; }
-        .form-row label { display: block; margin-bottom: 8px; font-weight: 700; }
-        .form-row input, .form-row textarea { width: 100%; padding: 15px; border: 2px solid #ffe5ec; border-radius: 12px; outline: none; font-size: 1.1rem; }
-        .btn-universal { background: var(--primary-color); color: white; border: none; padding: 14px 28px; border-radius: 25px; cursor: pointer; font-weight: 700; font-size: 1.1rem; }
-
-        /* ==================== MİNİ OYUN ==================== */
-        #gaming-canvas-container {
-            width: 100%; height: 280px; background: #fff5f7; border-bottom: 5px solid var(--primary-color);
-            position: relative; overflow: hidden; border-radius: 20px; margin-top: 20px;
-        }
-        /* scaleX(-1) ile adamın yönü sağa (engellere doğru) çevrildi */
-        #runner-avatar { width: 45px; height: 45px; font-size: 2.5rem; position: absolute; left: 50px; bottom: 10px; z-index: 100; line-height: 1; transform: scaleX(-1); }
-        .game-obstacle-node { width: 40px; height: 40px; font-size: 2.2rem; position: absolute; z-index: 90; bottom: 10px; line-height: 1; }
-        #game-over-box { display: none; text-align: center; margin-top: 20px; }
-    </style>
 </head>
+
 <body>
 
-    <audio id="audio-engine" src="sarki.mp3" loop></audio>
-
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>Beni ilk nerede gördün?</h2>
-            <p style="font-size: 0.95rem; color: #777; margin-bottom: 20px;">(Lütfen küçük harflerle yazın)</p>
-            <div class="login-input-group">
-                <input type="password" id="password-field">
-            </div>
-            <button class="login-btn" onclick="verifyAccessCredentials()">Sisteme Giriş Yap</button>
-            <div id="error-message"></div>
-        </div>
-    </div>
-
-    <header id="fixed-header">
-        <div class="header-left">
-            <button class="header-btn" onclick="toggleNavigationSidebar()"><i class="fa-solid fa-bars"></i></button>
-            <button class="header-btn" onclick="switchApplicationPage('home')"><i class="fa-solid fa-house"></i> <span>Ana Sayfa</span></button>
-        </div>
-        <div class="header-right">
-            <button class="header-btn" onclick="terminateUserSession()" style="color: #d90429;"><i class="fa-solid fa-right-from-bracket"></i></button>
-            <div class="logo-area">Aynur&Mehmet</div>
-        </div>
-    </header>
-
-    <nav id="nav-sidebar">
-        <a class="menu-link" onclick="switchApplicationPage('love-reasons')"><span>Seni Neden Seviyorum?</span> <i class="fa-solid fa-chevron-right"></i></a>
-        <a class="menu-link" onclick="switchApplicationPage('fortune-cookie')"><span>Şans Kurabiyesi</span> <i class="fa-solid fa-chevron-right"></i></a>
-        <a class="menu-link" onclick="toggleSubMenuTree()"><span>Anılarımız</span> <i class="fa-solid fa-chevron-down"></i></a>
-        <ul class="sub-menu-list" id="memories-tree">
-            <li><a class="menu-link" onclick="switchApplicationPage('city-memories')">Şehir Anılarımız</a></li>
-            <li><a class="menu-link" onclick="switchApplicationPage('video-gallery')">Videolarımız</a></li>
-        </ul>
-        <a class="menu-link" onclick="switchApplicationPage('notes-board')"><span>Notlar</span> <i class="fa-solid fa-chevron-right"></i></a>
-        <a class="menu-link" onclick="switchApplicationPage('arcade-game')"><span>Mini Oyun</span> <i class="fa-solid fa-chevron-right"></i></a>
-    </nav>
-
-    <main id="main-wrapper">
-
-        <div id="home-page" class="page-container">
-            <div class="spotify-container">
-                <div class="spotify-img-box">
-                    <img src="kapak.jpg" alt="Spotify Cover" id="spotify-cover-node">
-                </div>
-                <div class="spotify-controls">
-                    <div class="track-details">
-                        <h4>Özel Parça</h4>
-                        <p>sarki.mp3</p>
-                    </div>
-                    <button class="play-pause-btn" id="audio-state-trigger" onclick="toggleAudioPlayback()"><i class="fa-solid fa-play"></i></button>
-                </div>
-            </div>
-
-            <div class="time-counter">
-                <div class="time-box"><span id="box-days">00</span><label>Gün</label></div>
-                <div class="time-box"><span id="box-hours">00</span><label>Saat</label></div>
-                <div class="time-box"><span id="box-mins">00</span><label>Dakika</label></div>
-                <div class="time-box"><span id="box-secs">00</span><label>Saniye</label></div>
-            </div>
-
-            <div class="main-narrative-card">
-                Bugün senin günün sevgilim ve ben hayatımın en güzel günlerini başlatan o iyi ki doğdun anını kutlamak istedim.
-                Bu gördüğün sayfa, sadece sıradan bir internet sitesi değil; burası bizim dünyamız. Bastığımız topraklarda, iz bıraktığımız her yerde ve birbirimizin gözlerine baktığımız her anda biriktirdiğimiz anıların küçük bir dijital yuvası. Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen, seninle güzelleşen ne varsa hepsini buraya, sadece ikimize ait olan bu gizli köşeye saklaladım.
-                Seninle geçen her dakika, hayatımın en değerli zaman dilimi oldu. Bu yüzden bu sitenin kapıları herkese açık değil. Burası sadece bizim hikayemiz, sadece bizim şehrimiz ve sadece bizim anılarımız...
-            </div>
-        </div>
-
-        <div id="love-reasons-page" class="page-container"></div>
-
-        <div id="fortune-cookie-page" class="page-container">
-            <div class="cookie-arena">
-                <div class="giant-cookie" id="interactive-cookie" onclick="triggerCookieFission()">🍪</div>
-            </div>
-        </div>
-
-        <div id="city-memories-page" class="page-container">
-            <h3 style="margin-bottom: 20px; color: var(--primary-hover); font-weight:700;">Şehir Anılarımız</h3>
-            <div class="album-cover-container">
-                <div class="album-book-cover" onclick="openTargetedSubAlbum('isparta')">
-                    <img src="isparta0.jpg" alt="Isparta" id="cover-isparta">
-                    <h4>Isparta Anılarımız</h4>
-                </div>
-                <div class="album-book-cover" onclick="openTargetedSubAlbum('mersin')">
-                    <img src="mersin1.jpg" alt="Mersin" id="cover-mersin">
-                    <h4>Mersin Anılarımız</h4>
-                </div>
-                <div class="album-book-cover" onclick="openTargetedSubAlbum('hatay')">
-                    <img src="hatay1.jpg" alt="Hatay" id="cover-hatay">
-                    <h4>Hatay Anılarımız</h4>
-                </div>
-            </div>
-        </div>
-        <div id="nested-album-view-page" class="page-container">
-            <button class="btn-universal" onclick="switchApplicationPage('city-memories')" style="margin-bottom: 20px;"><i class="fa-solid fa-arrow-left"></i> Şehirlere Dön</button>
-            <h2 id="nested-album-heading" style="text-align: center; color: var(--primary-hover); font-weight:700;"></h2>
-            <p id="nested-album-subtext" style="text-align: center; color: #666; margin: 10px 0 20px 0; font-weight:600;"></p>
-            <div class="media-grid-layout" id="nested-album-grid-mesh"></div>
-        </div>
-
-        <div id="video-gallery-page" class="page-container">
-            <h3 style="margin-bottom: 20px; color: var(--primary-hover); font-weight:700;">Videolarımız</h3>
-            <div class="media-grid-layout" id="video-grid-mesh"></div>
-        </div>
-
-        <div id="video-player-surface-page" class="page-container">
-            <button class="btn-universal" onclick="switchApplicationPage('video-gallery')" style="margin-bottom:20px;"><i class="fa-solid fa-arrow-left"></i> Videolara Dön</button>
-            <div style="width:100%;">
-                <iframe id="global-video-frame" src="" allow="autoplay"></iframe>
-            </div>
-        </div>
-
-        <div id="notes-board-page" class="page-container">
-            <div style="text-align: center; margin-bottom: 25px;">
-                <button class="btn-universal" onclick="switchApplicationPage('note-creator-form')"><i class="fa-solid fa-plus"></i> Not Ekle</button>
-            </div>
-            <div class="notes-list-stack" id="dynamic-notes-receiver"></div>
-        </div>
-
-        <div id="note-creator-form-page" class="page-container">
-            <h3 style="margin-bottom:20px; font-weight:700;">Yeni Not Ekle</h3>
-            <div class="form-row">
-                <label>Not Başlığı</label>
-                <input type="text" id="form-note-title">
-            </div>
-            <div class="form-row">
-                <label>Not İçeriği</label>
-                <textarea id="form-note-body" rows="6"></textarea>
-            </div>
-            <button class="btn-universal" onclick="persistGeneratedNote()">Kaydet ve Yayınla</button>
-            <button class="btn-universal" onclick="switchApplicationPage('notes-board')" style="background:#888;">İptal</button>
-        </div>
-
-        <div id="note-viewer-details-page" class="page-container">
-            <h3 id="expanded-note-title" style="color: var(--primary-hover); margin-bottom: 15px; font-weight:700;"></h3>
-            <div class="main-narrative-card" id="expanded-note-body" style="white-space: pre-wrap;"></div>
-            <button class="btn-universal" onclick="switchApplicationPage('notes-board')" style="margin-top:20px;"><i class="fa-solid fa-arrow-left"></i> Geri Dön</button>
-        </div>
-
-        <div id="arcade-game-page" class="page-container">
-            <h3 style="text-align: center; font-weight:700; margin-bottom:10px;">Skor: <span id="live-score-node" style="color:var(--primary-hover);">0</span></h3>
-            <div id="gaming-canvas-container">
-                <div id="runner-avatar">🏃</div>
-            </div>
-            <button class="btn-universal" style="width:100%; padding:18px; margin-top:20px; font-size:1.3rem;" onclick="executeAvatarJump()"><i class="fa-solid fa-arrow-up"></i> Zıpla!</button>
-            
-            <div id="game-over-box">
-                <p style="color:#d90429; font-weight:700; font-size:1.3rem; margin-bottom:10px;">Oyun Bitti!</p>
-                <button class="btn-universal" onclick="initializeArcadeLoop()">Yeniden Başlat</button>
-            </div>
-        </div>
-
-        <footer>
-            Aynur&Mehmet Tüm hakları saklıdır.
-        </footer>
-    </main>
-
-    <div class="popup-card-overlay" id="global-popup-card">
-        <div class="popup-main-card">
-            <span class="popup-close-trigger" onclick="dismissPopupCard()">&times;</span>
-            <p id="popup-card-text-node"></p>
-        </div>
-    </div>
-
-    <div id="maximized-screen-viewer">
-        <span class="close-maximized" onclick="dismissMaximizedViewer()">&times;</span>
-        <img id="maximized-media-source" src="" alt="View">
-    </div>
-
-    <script>
-        var INCORRECT_PASS_POOL = [
-            "Haf\u0131zan\u0131 zorla sevgilim",
-            "bir de bana unutkan diyorsun",
-            "Emin misin? Bir daha d\u00fc\u015f\u00fcn a\u015fk\u0131m"
-        ];
-
-        var ROMANTIC_STATEMENTS = [
-            "Seni seviyorum \u00e7\u00fcnk\u00fc g\u00fcl\u00fc\u015f\u00fcn bana her \u015feyi unutturacak kadar b\u00fcy\u00fck bir huzur veriyor.",
-            "Seni seviyorum \u00e7\u00fcnk\u00fc en karma\u015f\u00f1k anlar\u0131mda bile sesin ruhuma dinginlik getiriyor.",
-            "Seni seviyorum \u00e7\u00fcnk\u00fc seninle kurdu\u011fumuz bu d\u00fcnya, s\u0131\u011f\u0131nd\u0131\u011f\u0131m en g\u00fcvenli liman.",
-            "Seni seviyorum \u00e7\u00fcnk\u00fc g\u00f6zlerindeki o \u0131\u015f\u0131k, gelece\u011fe ait t\u00fcm kayg\u0131lar\u0131m\u0131 yok ediyor.",
-            "Seni seviyorum \u00e7\u00fcnk\u00fc senin yan\u0131ndayken kendimin en samimi ve en iyi versiyonu olabiliyorum."
-        ];
-
-        var FORTUNE_PRAISES = [
-            "Bug\u00fcn kurabiyeden \u00e7\u0131kan mesaj: D\u00fcnyan\u0131n en zarif duru\u015funa ve g\u00fcl\u00fc\u015f\u00fcne sahipsin.",
-            "G\u00fcn\u00fcn iltifat\u0131: Varl\u0131\u011f\u0131n, etraf\u0131ndaki her \u015feye benzersiz bir zarafet kat\u0131yor.",
-            "Kurabiyenin f\u0131s\u0131lt\u0131s\u0131: Kararl\u0131l\u0131\u011f\u0131n ve i\u00e7indeki o g\u00fczel enerji her zorlu\u011fu a\u015fman\u0131 sa\u011flayacak."
-        ];
-
-        var runtimeState = {
-            authenticated: false,
-            activePanel: 'home'
-        };
-
-        var internalNotesData = [
-            { title: "Sistem Notu", body: "Bu alan ortak dijital haf\u0131zam\u0131z i\u00e7in tasarlanm\u0131\u015ft\u0131r." }
-        ];
-
-        window.addEventListener('load', function() {
-            setupFallbackImages();
-            setupVideoGrid();
-
-            if(localStorage.getItem('internalNotesData')) {
-                internalNotesData = JSON.parse(localStorage.getItem('internalNotesData'));
-            }
-            // ÇIKIŞ DURUMU KONTROLÜ: Sekme kapandıysa sessionStorage silinir, giriş sıfırlanır.
-            if(sessionStorage.getItem('sessionActive') === 'true' && localStorage.getItem('authenticated') === 'true') {
-                runtimeState.authenticated = true;
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('fixed-header').style.display = 'flex';
-                document.getElementById('main-wrapper').style.display = 'flex';
-                
-                if(localStorage.getItem('activePanel')) {
-                    runtimeState.activePanel = localStorage.getItem('activePanel');
-                }
-                switchApplicationPage(runtimeState.activePanel);
-            } else {
-                // Eğer sekme yeni açıldıysa doğrulamayı temizle, şifre zorunlu olsun.
-                terminateUserSession();
-            }
-            
-            setInterval(syncChronologyCounter, 1000);
-            generateFloatingHeartsEngine();
-        });
-
-        function setupFallbackImages() {
-            var handleErr = function() {
-                this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><rect width='100%' height='100%' fill='%23282828'/></svg>";
-            };
-            document.getElementById('spotify-cover-node').onerror = handleErr;
-            document.getElementById('cover-isparta').onerror = handleErr;
-            document.getElementById('cover-mersin').onerror = handleErr;
-            document.getElementById('cover-hatay').onerror = handleErr;
-        }
-
-        function setupVideoGrid() {
-            var vGrid = document.getElementById('video-grid-mesh');
-            if(!vGrid) return;
-            vGrid.innerHTML = '';
-
-            var vLinks = [
-                'https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/preview',
-                'https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/preview',
-                'https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/preview'
-            ];
-
-            vLinks.forEach(function(url) {
-                var box = document.createElement('div');
-                box.className = 'video-card-element';
-                box.onclick = function() { initiateVideoPlayback(url); };
-                
-                var dummyImg = document.createElement('img');
-                dummyImg.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100%' height='100%' fill='%23333'/></svg>";
-                
-                box.appendChild(dummyImg);
-                vGrid.appendChild(box);
-            });
-        }
-
-        function verifyAccessCredentials() {
-            var rawInput = document.getElementById('password-field').value.trim();
-            var errDisplay = document.getElementById('error-message');
-
-            if(rawInput.toLowerCase() === "mescid") {
-                runtimeState.authenticated = true;
-                localStorage.setItem('authenticated', 'true');
-                sessionStorage.setItem('sessionActive', 'true'); // Geçici oturum kilidi
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('fixed-header').style.display = 'flex';
-                document.getElementById('main-wrapper').style.display = 'flex';
-                switchApplicationPage('home');
-            } else {
-                var randomAlert = INCORRECT_PASS_POOL[Math.floor(Math.random() * INCORRECT_PASS_POOL.length)];
-                errDisplay.innerText = randomAlert;
-            }
-        }
-
-        function switchApplicationPage(panelId) {
-            if(!runtimeState.authenticated) return;
-
-            var targetPages = document.querySelectorAll('.page-container');
-            targetPages.forEach(function(p) { p.classList.remove('active'); });
-
-            var activeNode = document.getElementById(panelId + '-page');
-            if(activeNode) {
-                activeNode.classList.add('active');
-                runtimeState.activePanel = panelId;
-                localStorage.setItem('activePanel', panelId);
-            }
-
-            if(panelId === 'notes-board') buildNotesListInterface();
-            if(panelId === 'arcade-game') {
-                initializeArcadeLoop();
-            } else {
-                haltArcadeLoop();
-            }
-
-            document.getElementById('nav-sidebar').classList.remove('open');
-            window.scrollTo(0,0);
-        }
-
-        function toggleNavigationSidebar() {
-            document.getElementById('nav-sidebar').classList.toggle('open');
-        }
-
-        function toggleSubMenuTree() {
-            document.getElementById('memories-tree').classList.toggle('open');
-        }
-        function terminateUserSession() {
-            runtimeState.authenticated = false;
-            localStorage.removeItem('authenticated');
-            localStorage.removeItem('activePanel');
-            sessionStorage.removeItem('sessionActive');
-            document.getElementById('password-field').value = "";
-            document.getElementById('error-message').innerText = "";
-            document.getElementById('fixed-header').style.display = 'none';
-            document.getElementById('main-wrapper').style.display = 'none';
-            document.getElementById('login-screen').style.display = 'flex';
-            
-            var coreAudio = document.getElementById('audio-engine');
-            coreAudio.pause();
-            document.getElementById('audio-state-trigger').innerHTML = '<i class="fa-solid fa-play"></i>';
-            haltArcadeLoop();
-        }
-
-        function toggleAudioPlayback() {
-            var coreAudio = document.getElementById('audio-engine');
-            var stateIcon = document.getElementById('audio-state-trigger');
-
-            if (coreAudio.paused) {
-                coreAudio.play().catch(function(e) { console.log("Müzik tetiklenemedi."); });
-                stateIcon.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            } else {
-                coreAudio.pause();
-                stateIcon.innerHTML = '<i class="fa-solid fa-play"></i>';
-            }
-        }
-
-        function syncChronologyCounter() {
-            var milestoneDate = new Date("2025-09-12T00:00:00");
-            var currentMoment = new Date();
-            var timeDelta = currentMoment - milestoneDate;
-
-            if(timeDelta < 0) return;
-
-            var days = Math.floor(timeDelta / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((timeDelta / (1000 * 60 * 60)) % 24);
-            var minutes = Math.floor((timeDelta / 1000 / 60) % 60);
-            var seconds = Math.floor((timeDelta / 1000) % 60);
-
-            document.getElementById('box-days').innerText = String(days).padStart(2, '0');
-            document.getElementById('box-hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('box-mins').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('box-secs').innerText = String(seconds).padStart(2, '0');
-        }
-
-        function presentPopupCard(messageText) {
-            document.getElementById('popup-card-text-node').innerText = messageText;
-            document.getElementById('global-popup-card').style.display = 'flex';
-        }
-
-        function dismissPopupCard() {
-            document.getElementById('global-popup-card').style.display = 'none';
-            if(runtimeState.activePanel === 'fortune-cookie') {
-                var targetCookie = document.getElementById('interactive-cookie');
-                targetCookie.style.opacity = '1';
-                targetCookie.style.pointerEvents = 'auto';
-            }
-        }
-
-        function generateFloatingHeartsEngine() {
-            var interfaceStage = document.getElementById('love-reasons-page');
-            var paletteOptions = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
-            
-            setInterval(function() {
-                if(runtimeState.activePanel !== 'love-reasons') return;
-                
-                var heartNode = document.createElement('div');
-                heartNode.className = 'floating-heart';
-                heartNode.innerHTML = '❤️';
-                
-                heartNode.style.left = Math.random() * 85 + '%';
-                heartNode.style.color = paletteOptions[Math.floor(Math.random() * paletteOptions.length)];
-                
-                var processVelocity = Math.random() * 3 + 4;
-                var lateralDrift = Math.random() * 120 - 60;
-                
-                heartNode.style.setProperty('--speed', processVelocity + 's');
-                heartNode.style.setProperty('--drift', lateralDrift + 'px');
-                heartNode.style.fontSize = Math.random() * 1.2 + 2 + 'rem';
-
-                // TIKLAMA HASSASİYETİ DÜZELTİLDİ
-                heartNode.addEventListener('mousedown', function(ev) {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    heartNode.remove();
-                    var randomizedReason = ROMANTIC_STATEMENTS[Math.floor(Math.random() * ROMANTIC_STATEMENTS.length)];
-                    presentPopupCard(randomizedReason);
-                });
-
-                heartNode.addEventListener('touchstart', function(ev) {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    heartNode.remove();
-                    var randomizedReason = ROMANTIC_STATEMENTS[Math.floor(Math.random() * ROMANTIC_STATEMENTS.length)];
-                    presentPopupCard(randomizedReason);
-                });
-
-                interfaceStage.appendChild(heartNode);
-                setTimeout(function() { if(heartNode.parentNode) heartNode.remove(); }, processVelocity * 1000);
-            }, 400);
-        }
-        function triggerCookieFission() {
-            var cookieNode = document.getElementById('interactive-cookie');
-            var stageBound = cookieNode.parentElement;
-            
-            for (var idx = 0; idx < 10; idx++) {
-                var splinter = document.createElement('div');
-                splinter.className = 'cookie-shard';
-                splinter.innerText = '\uD83D\uDFEB';
-                
-                var radialAngle = Math.random() * Math.PI * 2;
-                var radialVector = Math.random() * 150 + 80;
-                var mx = Math.cos(radialAngle) * radialVector + 'px';
-                var my = Math.sin(radialAngle) * radialVector + 'px';
-                
-                splinter.style.setProperty('--mx', mx);
-                splinter.style.setProperty('--my', my);
-                splinter.style.left = '50%';
-                splinter.style.top = '50%';
-                
-                stageBound.appendChild(splinter);
-                removeSplinterDelayed(splinter);
-            }
-
-            cookieNode.style.opacity = '0';
-            cookieNode.style.pointerEvents = 'none';
-
-            setTimeout(function() {
-                var selectivePraise = FORTUNE_PRAISES[Math.floor(Math.random() * FORTUNE_PRAISES.length)];
-                presentPopupCard(selectivePraise);
-            }, 450);
-        }
-
-        function removeSplinterDelayed(node) {
-            setTimeout(function() { node.remove(); }, 600);
-        }
-
-        function openTargetedSubAlbum(cityCode) {
-            var displayTitle = document.getElementById('nested-album-heading');
-            var subDescription = document.getElementById('nested-album-subtext');
-            var gridMesh = document.getElementById('nested-album-grid-mesh');
-            
-            gridMesh.innerHTML = '';
-            var dynamicSources = [];
-            var k;
-            
-            if(cityCode === 'isparta') {
-                displayTitle.innerText = "Isparta An\u0131lar\u0131m\u0131z";
-                subDescription.innerText = "Beraber \u00e7ekildi\u011fimiz ilk foto\u011fraflar bu g\u00fczel \u015fehirde";
-                for(k=0; k<=12; k++) dynamicSources.push('isparta' + k + '.jpg');
-            } else if(cityCode === 'mersin') {
-                displayTitle.innerText = "Mersin An\u0131lar\u0131m\u0131z";
-                subDescription.innerText = "Mersin sahilinde biriktirdi\u011fimiz \u00f6zel anlar.";
-                for(k=1; k<=4; k++) dynamicSources.push('mersin' + k + '.jpg');
-            } else if(cityCode === 'hatay') {
-                displayTitle.innerText = "Hatay An\u0131lar\u0131m\u0131z";
-                subDescription.innerText = "Kendi \u015fehrimizdeki en de\u011ferli duraklar.";
-                for(k=1; k<=4; k++) dynamicSources.push('hatay' + k + '.jpg');
-            }
-
-            dynamicSources.forEach(function(filename) {
-                var binaryMedia = document.createElement('img');
-                binaryMedia.src = filename;
-                binaryMedia.className = 'grid-media-item';
-                binaryMedia.alt = filename;
-                binaryMedia.onerror = function() {
-                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'></svg>";
-                };
-                binaryMedia.onclick = function() { maximizeTargetedViewer(binaryMedia.src); };
-                gridMesh.appendChild(binaryMedia);
-            });
-
-            switchApplicationPage('nested-album-view');
-        }
-
-        function maximizeTargetedViewer(sourceUrl) {
-            document.getElementById('maximized-media-source').src = sourceUrl;
-            document.getElementById('maximized-screen-viewer').style.display = 'flex';
-        }
-
-        function dismissMaximizedViewer() {
-            document.getElementById('maximized-screen-viewer').style.display = 'none';
-        }
-
-        function initiateVideoPlayback(embedUrl) {
-            document.getElementById('global-video-frame').src = embedUrl;
-            switchApplicationPage('video-player-surface');
-        }
-
-        function buildNotesListInterface() {
-            var containerNode = document.getElementById('dynamic-notes-receiver');
-            containerNode.innerHTML = '';
-
-            internalNotesData.forEach(function(element, pos) {
-                var itemRow = document.createElement('div');
-                itemRow.className = 'note-row-item';
-                itemRow.innerText = element.title;
-                itemRow.onclick = function() { showExpandedNoteContext(pos); };
-                containerNode.appendChild(itemRow);
-            });
-        }
-
-        function persistGeneratedNote() {
-            var derivedTitle = document.getElementById('form-note-title').value.trim();
-            var derivedBody = document.getElementById('form-note-body').value.trim();
-
-            if(!derivedTitle || !derivedBody) {
-                alert('Eksik alan b\u0131rakamazs\u0131n\u0131z.');
-                return;
-            }
-
-            internalNotesData.push({ title: derivedTitle, body: derivedBody });
-            localStorage.setItem('internalNotesData', JSON.stringify(internalNotesData));
-            buildNotesListInterface();
-            switchApplicationPage('notes-board');
-        }
-
-        function showExpandedNoteContext(targetIndex) {
-            var individualObject = internalNotesData[targetIndex];
-            document.getElementById('expanded-note-title').innerText = individualObject.title;
-            document.getElementById('expanded-note-body').innerText = individualObject.body;
-            switchApplicationPage('note-viewer-details');
-        }
-        /* OYUN MOTORU GÜNCELLEMELERİ */
-        var continuousGameInterval = null;
-        var persistentSpawnTimer = null;
-        var internalScoreCounter = 0;
-        var activeJumpStatus = false;
-        var verticalCoordY = 0; 
-        var currentVelocityY = 0;
-        var gravityImpact = 2.4; 
-
-        function initializeArcadeLoop() {
-            haltArcadeLoop();
-            internalScoreCounter = 0;
-            verticalCoordY = 0;
-            activeJumpStatus = false;
-            currentVelocityY = 0;
-            document.getElementById('live-score-node').innerText = internalScoreCounter;
-            document.getElementById('game-over-box').style.display = 'none';
-            
-            var playerAsset = document.getElementById('runner-avatar');
-            playerAsset.style.bottom = '10px';
-
-            var remainingHazards = document.querySelectorAll('.game-obstacle-node');
-            remainingHazards.forEach(function(hz) { hz.remove(); });
-
-            continuousGameInterval = setInterval(refreshArcadePhysicsFrame, 16);
-            executeHazardSpawningSequence();
-        }
-
-        function haltArcadeLoop() {
-            clearInterval(continuousGameInterval);
-            clearTimeout(persistentSpawnTimer);
-        }
-
-        function executeAvatarJump() {
-            if (!activeJumpStatus && runtimeState.activePanel === 'arcade-game') {
-                activeJumpStatus = true;
-                currentVelocityY = 26; 
-            }
-        }
-
-        function refreshArcadePhysicsFrame() {
-            var avatar = document.getElementById('runner-avatar');
-            
-            if (activeJumpStatus) {
-                verticalCoordY += currentVelocityY;
-                currentVelocityY -= gravityImpact;
-
-                if (verticalCoordY <= 0) {
-                    verticalCoordY = 0;
-                    activeJumpStatus = false;
-                    currentVelocityY = 0;
-                }
-            }
-            avatar.style.bottom = (10 + verticalCoordY) + 'px';
-
-            var hazards = document.querySelectorAll('.game-obstacle-node');
-            var avatarBoundaries = avatar.getBoundingClientRect();
-
-            hazards.forEach(function(obstacle) {
-                var currentRightPos = parseFloat(obstacle.style.right) || 0;
-                currentRightPos += 6; 
-                obstacle.style.right = currentRightPos + 'px';
-
-                if (currentRightPos > 850) {
-                    obstacle.remove();
-                    internalScoreCounter += 10;
-                    document.getElementById('live-score-node').innerText = internalScoreCounter;
-                }
-
-                var hazardBoundaries = obstacle.getBoundingClientRect();
-                if (
-                    avatarBoundaries.left < hazardBoundaries.right &&
-                    avatarBoundaries.right > hazardBoundaries.left &&
-                    avatarBoundaries.top < hazardBoundaries.bottom &&
-                    avatarBoundaries.bottom > hazardBoundaries.top
-                ) {
-                    haltArcadeLoop();
-                    // Kendi kendine başlama döngüsü kırıldı, buton görünür yapıldı
-                    document.getElementById('game-over-box').style.display = 'block';
-                }
-            });
-        }
-
-        function executeHazardSpawningSequence() {
-            if (runtimeState.activePanel !== 'arcade-game') return;
-
-            var stageSurface = document.getElementById('gaming-canvas-container');
-            var hazardItem = document.createElement('div');
-            hazardItem.className = 'game-obstacle-node';
-            
-            var visualHazards = ['\u25A0', '\u25B2', '\u25CF'];
-            hazardItem.innerText = visualHazards[Math.floor(Math.random() * visualHazards.length)];
-            hazardItem.style.right = '-40px';
-            stageSurface.appendChild(hazardItem);
-
-            var variableInterval = Math.random() * 800 + 1300; 
-            persistentSpawnTimer = setTimeout(executeHazardSpawningSequence, variableInterval);
-        }
-    </script>
+<!-- Giriş -->
+
+<div id="loginPage">
+
+<div class="loginBox">
+
+<h1>❤️ Aynur & Mehmet ❤️</h1>
+
+<p>
+
+Beni ilk nerede gördüğünü yaz.<br>
+
+(Küçük harflerle yaz.)
+
+</p>
+
+<input
+id="password"
+type="password"
+placeholder="Şifre">
+
+<button onclick="login()">
+
+Giriş Yap
+
+</button>
+
+<p id="error"></p>
+
+</div>
+
+</div>
+
+<!-- Ana Sayfa -->
+
+<div id="homePage">
+
+<header>
+
+<div class="left">
+
+<button>☰</button>
+
+<button>Ana Sayfa</button>
+
+</div>
+
+<div class="right">
+
+<button>Güvenli Çıkış</button>
+
+<b>Aynur&Mehmet</b>
+
+</div>
+
+</header>
+
+<div class="content">
+
+<div class="musicCard">
+
+<img src="kapak.jpg">
+
+<h2>Bizim Şarkımız</h2>
+
+<audio id="music">
+
+<source src="sarki.mp3">
+
+</audio>
+
+<button onclick="playMusic()">
+
+▶️ / ⏸️
+
+</button>
+
+</div>
+
+<h2 id="counter"></h2>
+
+<div class="note">
+
+<h2>Bugün senin günün sevgilim ❤️</h2>
+
+<p>
+
+Bugün senin günün sevgilim ve ben hayatımın en güzel günlerini başlatan o iyi ki doğdun anını kutlamak istedim.
+
+Bu gördüğün sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız.
+
+Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen ne varsa burada saklı.
+
+Sadece ikimize ait...
+
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+Aynur&Mehmet © Tüm Hakları Saklıdır
+
+</footer>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>

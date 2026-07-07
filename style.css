@@ -243,3 +243,93 @@ opacity:0;
 }
 
 }
+/* ===== CSS KALPLERİ ===== */
+
+.heart{
+
+position:absolute;
+
+bottom:-120px;
+
+width:55px;
+
+height:55px;
+
+transform:rotate(-45deg);
+
+animation:heartFly linear forwards;
+
+cursor:pointer;
+
+opacity:.95;
+
+box-shadow:0 0 18px rgba(255,255,255,.45);
+
+transition:.25s;
+
+}
+
+.heart:hover{
+
+transform:rotate(-45deg) scale(1.15);
+
+}
+
+.heart::before,
+.heart::after{
+
+content:"";
+
+position:absolute;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+background:inherit;
+
+}
+
+.heart::before{
+
+top:-27px;
+
+left:0;
+
+}
+
+.heart::after{
+
+left:27px;
+
+top:0;
+
+}
+
+@keyframes heartFly{
+
+0%{
+
+transform:translateY(0) rotate(-45deg) scale(.7);
+
+opacity:0;
+
+}
+
+10%{
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-130vh) rotate(-45deg) scale(1.15);
+
+opacity:0;
+
+}
+
+}

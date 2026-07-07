@@ -1,22 +1,24 @@
 const container=document.getElementById("heartContainer");
 
-const hearts = ["❤️","💖","🤍","🧡","💛","💚","🩵","💜","🩷","🖤","🩶"];
+const colors=[
 
-const colors = [
-"#ff0000",
+"#ff0055",
 "#ff1493",
+"#ff4fa3",
+"#ff5e7e",
+"#ff6ec7",
+"#ff8fab",
+"#ff3d68",
+"#ff1744",
 "#ff69b4",
-"#ff00ff",
-"#ff8c00",
-"#ffd700",
-"#7fff00",
-"#00fa9a",
-"#00ced1",
-"#1e90ff",
-"#4169e1",
-"#8a2be2",
-"#ff6347",
-"#ffb6c1"
+"#ff7f50",
+"#ffb703",
+"#ffd166",
+"#06d6a0",
+"#00c2ff",
+"#4d96ff",
+"#7b2cbf"
+
 ];
 
 function createHeart(){
@@ -25,30 +27,30 @@ const heart=document.createElement("div");
 
 heart.className="heart";
 
-// Rastgele kalp emojisi
-heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+const size=Math.random()*45+45;
 
-// Boyut (50px - 100px)
-const size = Math.random()*50 + 50;
+heart.style.width=size+"px";
+heart.style.height=size+"px";
 
-heart.style.fontSize = size + "px";
+heart.style.left=Math.random()*100+"vw";
 
-// Rastgele konum
-heart.style.left = Math.random()*100 + "vw";
+heart.style.background=
+colors[Math.floor(Math.random()*colors.length)];
 
-// Rastgele renk
-heart.style.color = colors[Math.floor(Math.random()*colors.length)];
+heart.style.animationDuration=
+(Math.random()*5+6)+"s";
 
-// Rastgele hız
-const duration = Math.random()*5 + 6;
-heart.style.animationDuration = duration + "s";
+heart.style.animationDelay=
+(Math.random()*1)+"s";
 
 container.appendChild(heart);
 
-heart.addEventListener("animationend",()=>{
-    heart.remove();
-});
+setTimeout(()=>{
+
+heart.remove();
+
+},12000);
 
 }
 
-setInterval(createHeart,250);
+setInterval(createHeart,180);

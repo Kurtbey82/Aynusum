@@ -1,19 +1,22 @@
 const container=document.getElementById("heartContainer");
 
-const colors=[
+const hearts = ["❤️","💖","💗","💓","💕","💘","💝"];
 
-"#ff3b7f",
-
-"#ff6ba8",
-
-"#ff8fb8",
-
-"#ff4d6d",
-
-"#ff99cc",
-
-"#ff5e95"
-
+const colors = [
+"#ff0000",
+"#ff1493",
+"#ff69b4",
+"#ff00ff",
+"#ff8c00",
+"#ffd700",
+"#7fff00",
+"#00fa9a",
+"#00ced1",
+"#1e90ff",
+"#4169e1",
+"#8a2be2",
+"#ff6347",
+"#ffb6c1"
 ];
 
 function createHeart(){

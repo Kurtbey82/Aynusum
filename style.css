@@ -251,10 +251,10 @@ position:absolute;
 
 bottom:-120px;
 
-width:55px;
-
-height:55px;
-
+width:var(--size);
+   
+height:var(--size);
+   
 transform:rotate(-45deg);
 
 animation:heartFly linear forwards;
@@ -294,7 +294,7 @@ background:inherit;
 
 .heart::before{
 
-top:-27px;
+top:calc(var(--size)/-2);
 
 left:0;
 
@@ -302,7 +302,7 @@ left:0;
 
 .heart::after{
 
-left:27px;
+left:calc(var(--size)/2);
 
 top:0;
 

@@ -119,7 +119,6 @@
         }
         .header-btn span { font-size: 1rem; }
         .logo-area { font-weight: 600; font-size: 1.2rem; color: var(--primary-hover); }
-
         /* ==================== SOL MENÜ ==================== */
         #nav-sidebar {
             position: fixed;
@@ -244,7 +243,7 @@
             position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95);
             display: none; justify-content: center; align-items: center; z-index: 110000;
         }
-        #maximized-screen-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
+#maximized-screen-viewer img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .close-maximized { position: absolute; top: 20px; right: 20px; color: white; font-size: 2.5rem; cursor: pointer; }
 
         .video-card-element { background: black; border-radius: 12px; overflow: hidden; height: 140px; position: relative; cursor: pointer; }
@@ -254,6 +253,7 @@
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 2.5rem;
         }
         #video-player-surface-page iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 16px; background: black; }
+
         /* ==================== NOTLAR ALANI ==================== */
         .notes-list-stack { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
         .note-row-item {
@@ -324,7 +324,7 @@
         <div id="home-page" class="page-container">
             <div class="spotify-container">
                 <div class="spotify-img-box">
-                    <img src="kapak.jpg" alt="Spotify Cover" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23282828\'/><text x=\'50%\' y=\'50%\' font-size=\'20\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'white\'>kapak.jpg bulunamadı</text></svg>';">
+                    <img src="kapak.jpg" alt="Spotify Cover" id="spotify-cover-node">
                 </div>
                 <div class="spotify-controls">
                     <div class="track-details">
@@ -358,21 +358,20 @@
                 <div class="giant-cookie" id="interactive-cookie" onclick="triggerCookieFission()">🍪</div>
             </div>
         </div>
-
         <!-- ŞEHİR ANILARI LİSTESİ -->
         <div id="city-memories-page" class="page-container">
             <h3 style="margin-bottom: 20px; color: var(--primary-hover);">Şehir Anılarımız</h3>
             <div class="album-cover-container">
                 <div class="album-book-cover" onclick="openTargetedSubAlbum('isparta')">
-                    <img src="isparta0.jpg" alt="Isparta" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffeef2\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff7597\'>isparta0.jpg</text></svg>';">
+                    <img src="isparta0.jpg" alt="Isparta" id="cover-isparta">
                     <h4>Isparta Anılarımız</h4>
                 </div>
                 <div class="album-book-cover" onclick="openTargetedSubAlbum('mersin')">
-                    <img src="mersin1.jpg" alt="Mersin" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffeef2\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff7597\'>mersin1.jpg</text></svg>';">
+                    <img src="mersin1.jpg" alt="Mersin" id="cover-mersin">
                     <h4>Mersin Anılarımız</h4>
                 </div>
                 <div class="album-book-cover" onclick="openTargetedSubAlbum('hatay')">
-                    <img src="hatay1.jpg" alt="Hatay" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffeef2\'/><text x=\'50%\' y=\'50%\' fill=\'%23ff7597\'>hatay1.jpg</text></svg>';">
+                    <img src="hatay1.jpg" alt="Hatay" id="cover-hatay">
                     <h4>Hatay Anılarımız</h4>
                 </div>
             </div>
@@ -385,20 +384,11 @@
             <p id="nested-album-subtext" style="text-align: center; color: #888; margin: 10px 0 20px 0;"></p>
             <div class="media-grid-layout" id="nested-album-grid-mesh"></div>
         </div>
+
         <!-- VİDEOLARIMIZ LİSTESİ -->
         <div id="video-gallery-page" class="page-container">
             <h3 style="margin-bottom: 20px; color: var(--primary-hover);">Videolarımız</h3>
-            <div class="media-grid-layout">
-                <div class="video-card-element" onclick="initiateVideoPlayback('https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/preview')">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/></svg>">
-                </div>
-                <div class="video-card-element" onclick="initiateVideoPlayback('https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/preview')">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/></svg>">
-                </div>
-                <div class="video-card-element" onclick="initiateVideoPlayback('https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/preview')">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\'><rect width=\'100%\' height=\'100%\' fill=\'%23333\'/></svg>">
-                </div>
-            </div>
+            <div class="media-grid-layout" id="video-grid-mesh"></div>
         </div>
 
         <!-- VİDEO OYNATMA SAYFASI -->
@@ -469,39 +459,44 @@
 
     <!-- SISTEM KOD MOTORU -->
     <script>
-        const INCORRECT_PASS_POOL = [
-            "Hafızanı zorla sevgilim",
+        // Jekyll derleyici hatasını önlemek için array elemanları düz metin formatında tutulmuştur.
+        var INCORRECT_PASS_POOL = [
+            "Haf\u0131zan\u0131 zorla sevgilim",
             "bir de bana unutkan diyorsun",
-            "Emin misin? Bir daha düşün aşkım"
+            "Emin misin? Bir daha d\u00fc\u015f\u00fcn a\u015fk\u0131m"
         ];
 
-        const ROMANTIC_STATEMENTS = [
-            "Seni seviyorum çünkü gülüşün bana her şeyi unutturacak kadar büyük bir huzur veriyor.",
-            "Seni seviyorum çünkü en karmaşık anlarımda bile sesin ruhuma dinginlik getiriyor.",
-            "Seni seviyorum çünkü seninle kurduğumuz bu dünya, sığındığım en güvenli liman.",
-            "Seni seviyorum çünkü gözlerindeki o ışık, geleceğe ait tüm kaygılarımı yok ediyor.",
-            "Seni seviyorum çünkü senin yanındayken kendimin en samimi ve en iyi versiyonu olabiliyorum."
+        var ROMANTIC_STATEMENTS = [
+            "Seni seviyorum \u00e7\u00fcnk\u00fc g\u00fcl\u00fc\u015f\u00fcn bana her \u015feyi unutturacak kadar b\u00fcy\u00fck bir huzur veriyor.",
+            "Seni seviyorum \u00e7\u00fcnk\u00fc en karma\u015f\u00f1k anlar\u0131mda bile sesin ruhuma dinginlik getiriyor.",
+            "Seni seviyorum \u00e7\u00fcnk\u00fc seninle kurdu\u011fumuz bu d\u00fcnya, s\u0131\u011f\u0131nd\u0131\u011f\u0131m en g\u00fcvenli liman.",
+            "Seni seviyorum \u00e7\u00fcnk\u00fc g\u00f6zlerindeki o \u0131\u015f\u0131k, gelece\u011fe ait t\u00fcm kayg\u0131lar\u0131m\u0131 yok ediyor.",
+            "Seni seviyorum \u00e7\u00fcnk\u00fc senin yan\u0131ndayken kendimin en samimi ve en iyi versiyonu olabiliyorum."
+        ];
+        var FORTUNE_PRAISES = [
+            "Bug\u00fcn kurabiyeden \u00e7\u0131kan mesaj: D\u00fcnyan\u0131n en zarif duru\u015funa ve g\u00fcl\u00fc\u015f\u00fcne sahipsin.",
+            "G\u00fcn\u00fcn iltifat\u0131: Varl\u0131\u011f\u0131n, etraf\u0131ndaki her \u015feye benzersiz bir zarafet kat\u0131yor.",
+            "Kurabiyenin f\u0131s\u0131lt\u0131s\u0131: Kararl\u0131l\u0131\u011f\u0131n ve i\u00e7indeki o g\u00fczel enerji her zorlu\u011fu a\u015fman\u0131 sa\u011flayacak."
         ];
 
-        const FORTUNE_PRAISES = [
-            "Bugün kurabiyeden çıkan mesaj: Dünyanın en zarif duruşuna ve gülüşüne sahipsin.",
-            "Günün iltifatı: Varlığın, etrafındaki her şeye benzersiz bir zarafet katıyor.",
-            "Kurabiyenin fısıltısı: Kararlılığın ve içindeki o güzel enerji her zorluğu aşmanı sağlayacak."
-        ];
-
-        let runtimeState = {
+        var runtimeState = {
             authenticated: false,
             activePanel: 'home'
         };
 
-        let internalNotesData = [
-            { title: "Sistem Açılış Bildirisi", body: "Bu alan ortak dijital hafızamız için tasarlanmıştır. İstediğiniz notu ekleyebilirsiniz." }
+        var internalNotesData = [
+            { title: "Sistem Notu", body: "Bu alan ortak dijital haf\u0131zam\u0131z i\u00e7in tasarlanm\u0131\u015ft\u0131r." }
         ];
 
-        window.addEventListener('load', () => {
+        window.addEventListener('load', function() {
+            // Hata veren yedek görsel atamaları JS tarafına taşındı
+            setupFallbackImages();
+            setupVideoGrid();
+
             if(localStorage.getItem('internalNotesData')) {
                 internalNotesData = JSON.parse(localStorage.getItem('internalNotesData'));
             }
+
             if(localStorage.getItem('authenticated') === 'true') {
                 runtimeState.authenticated = true;
                 document.getElementById('login-screen').style.display = 'none';
@@ -518,9 +513,43 @@
             generateFloatingHeartsEngine();
         });
 
+        function setupFallbackImages() {
+            var handleErr = function() {
+                this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><rect width='100%' height='100%' fill='%23282828'/></svg>";
+            };
+            document.getElementById('spotify-cover-node').onerror = handleErr;
+            document.getElementById('cover-isparta').onerror = handleErr;
+            document.getElementById('cover-mersin').onerror = handleErr;
+            document.getElementById('cover-hatay').onerror = handleErr;
+        }
+
+        function setupVideoGrid() {
+            var vGrid = document.getElementById('video-grid-mesh');
+            if(!vGrid) return;
+            vGrid.innerHTML = '';
+
+            var vLinks = [
+                'https://drive.google.com/file/d/1SnM-OBrv0nezvAuzFwNsTIBCA2fCEjly/preview',
+                'https://drive.google.com/file/d/19AAZ4kIfj1jVTwSUrJGgScQcdsaFfdTm/preview',
+                'https://drive.google.com/file/d/1_zSrWWeNYIr6pciknZwP2-Gg3393gL8k/preview'
+            ];
+
+            vLinks.forEach(function(url) {
+                var box = document.createElement('div');
+                box.className = 'video-card-element';
+                box.onclick = function() { initiateVideoPlayback(url); };
+                
+                var dummyImg = document.createElement('img');
+                dummyImg.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100%' height='100%' fill='%23333'/></svg>";
+                
+                box.appendChild(dummyImg);
+                vGrid.appendChild(box);
+            });
+        }
+
         function verifyAccessCredentials() {
-            const rawInput = document.getElementById('password-field').value.trim();
-            const errDisplay = document.getElementById('error-message');
+            var rawInput = document.getElementById('password-field').value.trim();
+            var errDisplay = document.getElementById('error-message');
 
             if(rawInput.toLowerCase() === "mescid") {
                 runtimeState.authenticated = true;
@@ -530,7 +559,7 @@
                 document.getElementById('main-wrapper').style.display = 'flex';
                 switchApplicationPage('home');
             } else {
-                const randomAlert = INCORRECT_PASS_POOL[Math.floor(Math.random() * INCORRECT_PASS_POOL.length)];
+                var randomAlert = INCORRECT_PASS_POOL[Math.floor(Math.random() * INCORRECT_PASS_POOL.length)];
                 errDisplay.innerText = randomAlert;
             }
         }
@@ -538,10 +567,10 @@
         function switchApplicationPage(panelId) {
             if(!runtimeState.authenticated) return;
 
-            const targetPages = document.querySelectorAll('.page-container');
-            targetPages.forEach(p => p.classList.remove('active'));
+            var targetPages = document.querySelectorAll('.page-container');
+            targetPages.forEach(function(p) { p.classList.remove('active'); });
 
-            const activeNode = document.getElementById(`${panelId}-page`);
+            var activeNode = document.getElementById(panelId + '-page');
             if(activeNode) {
                 activeNode.classList.add('active');
                 runtimeState.activePanel = panelId;
@@ -554,7 +583,6 @@
             } else {
                 haltArcadeLoop();
             }
-
             document.getElementById('nav-sidebar').classList.remove('open');
             window.scrollTo(0,0);
         }
@@ -577,17 +605,17 @@
             document.getElementById('main-wrapper').style.display = 'none';
             document.getElementById('login-screen').style.display = 'flex';
             
-            const coreAudio = document.getElementById('audio-engine');
+            var coreAudio = document.getElementById('audio-engine');
             coreAudio.pause();
             document.getElementById('audio-state-trigger').innerHTML = '<i class="fa-solid fa-play"></i>';
         }
 
         function toggleAudioPlayback() {
-            const coreAudio = document.getElementById('audio-engine');
-            const stateIcon = document.getElementById('audio-state-trigger');
+            var coreAudio = document.getElementById('audio-engine');
+            var stateIcon = document.getElementById('audio-state-trigger');
 
             if (coreAudio.paused) {
-                coreAudio.play().catch(err => console.log("Etkileşim kısıtlaması aktif."));
+                coreAudio.play().catch(function(e) { console.log("Müzik tetiklenemedi."); });
                 stateIcon.innerHTML = '<i class="fa-solid fa-pause"></i>';
             } else {
                 coreAudio.pause();
@@ -596,16 +624,16 @@
         }
 
         function syncChronologyCounter() {
-            const milestoneDate = new Date("2025-09-12T00:00:00");
-            const currentMoment = new Date();
-            const timeDelta = currentMoment - milestoneDate;
+            var milestoneDate = new Date("2025-09-12T00:00:00");
+            var currentMoment = new Date();
+            var timeDelta = currentMoment - milestoneDate;
 
             if(timeDelta < 0) return;
 
-            const days = Math.floor(timeDelta / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDelta / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((timeDelta / 1000 / 60) % 60);
-            const seconds = Math.floor((timeDelta / 1000) % 60);
+            var days = Math.floor(timeDelta / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDelta / (1000 * 60 * 60)) % 24);
+            var minutes = Math.floor((timeDelta / 1000 / 60) % 60);
+            var seconds = Math.floor((timeDelta / 1000) % 60);
 
             document.getElementById('box-days').innerText = String(days).padStart(2, '0');
             document.getElementById('box-hours').innerText = String(hours).padStart(2, '0');
@@ -617,61 +645,61 @@
             document.getElementById('popup-card-text-node').innerText = messageText;
             document.getElementById('global-popup-card').style.display = 'flex';
         }
-function dismissPopupCard() {
+
+        function dismissPopupCard() {
             document.getElementById('global-popup-card').style.display = 'none';
             if(runtimeState.activePanel === 'fortune-cookie') {
-                const targetCookie = document.getElementById('interactive-cookie');
+                var targetCookie = document.getElementById('interactive-cookie');
                 targetCookie.style.opacity = '1';
                 targetCookie.style.pointerEvents = 'auto';
             }
         }
 
         function generateFloatingHeartsEngine() {
-            const interfaceStage = document.getElementById('love-reasons-page');
-            const paletteOptions = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
+            var interfaceStage = document.getElementById('love-reasons-page');
+            var paletteOptions = ['#ff7597', '#ff4d6d', '#ff8fa3', '#ffccd5', '#ff477e'];
             
-            setInterval(() => {
+            setInterval(function() {
                 if(runtimeState.activePanel !== 'love-reasons') return;
                 
-                const heartNode = document.createElement('div');
+                var heartNode = document.createElement('div');
                 heartNode.className = 'floating-heart';
                 heartNode.innerHTML = '❤️';
                 
                 heartNode.style.left = Math.random() * 85 + '%';
                 heartNode.style.color = paletteOptions[Math.floor(Math.random() * paletteOptions.length)];
                 
-                const processVelocity = Math.random() * 3 + 4;
-                const lateralDrift = Math.random() * 120 - 60;
+                var processVelocity = Math.random() * 3 + 4;
+                var lateralDrift = Math.random() * 120 - 60;
                 
-                heartNode.style.setProperty('--speed', `${processVelocity}s`);
-                heartNode.style.setProperty('--drift', `${lateralDrift}px`);
+                heartNode.style.setProperty('--speed', processVelocity + 's');
+                heartNode.style.setProperty('--drift', lateralDrift + 'px');
                 heartNode.style.fontSize = Math.random() * 1.2 + 1.8 + 'rem';
 
-                heartNode.addEventListener('click', (ev) => {
+                heartNode.addEventListener('click', function(ev) {
                     ev.stopPropagation();
                     heartNode.remove();
-                    const randomizedReason = ROMANTIC_STATEMENTS[Math.floor(Math.random() * ROMANTIC_STATEMENTS.length)];
+                    var randomizedReason = ROMANTIC_STATEMENTS[Math.floor(Math.random() * ROMANTIC_STATEMENTS.length)];
                     presentPopupCard(randomizedReason);
                 });
 
                 interfaceStage.appendChild(heartNode);
-                setTimeout(() => heartNode.remove(), processVelocity * 1000);
+                setTimeout(function() { heartNode.remove(); }, processVelocity * 1000);
             }, 500);
         }
-
         function triggerCookieFission() {
-            const cookieNode = document.getElementById('interactive-cookie');
-            const stageBound = cookieNode.parentElement;
+            var cookieNode = document.getElementById('interactive-cookie');
+            var stageBound = cookieNode.parentElement;
             
-            for (let idx = 0; idx < 10; idx++) {
-                const splinter = document.createElement('div');
+            for (var idx = 0; idx < 10; idx++) {
+                var splinter = document.createElement('div');
                 splinter.className = 'cookie-shard';
                 splinter.innerText = '🟫';
                 
-                const radialAngle = Math.random() * Math.PI * 2;
-                const radialVector = Math.random() * 120 + 60;
-                const mx = Math.cos(radialAngle) * radialVector + 'px';
-                const my = Math.sin(radialAngle) * radialVector + 'px';
+                var radialAngle = Math.random() * Math.PI * 2;
+                var radialVector = Math.random() * 120 + 60;
+                var mx = Math.cos(radialAngle) * radialVector + 'px';
+                var my = Math.sin(radialAngle) * radialVector + 'px';
                 
                 splinter.style.setProperty('--mx', mx);
                 splinter.style.setProperty('--my', my);
@@ -679,49 +707,54 @@ function dismissPopupCard() {
                 splinter.style.top = '50%';
                 
                 stageBound.appendChild(splinter);
-                setTimeout(() => splinter.remove(), 600);
+                removeSplinterDelayed(splinter);
             }
 
             cookieNode.style.opacity = '0';
             cookieNode.style.pointerEvents = 'none';
 
-            setTimeout(() => {
-                const selectivePraise = FORTUNE_PRAISES[Math.floor(Math.random() * FORTUNE_PRAISES.length)];
+            setTimeout(function() {
+                var selectivePraise = FORTUNE_PRAISES[Math.floor(Math.random() * FORTUNE_PRAISES.length)];
                 presentPopupCard(selectivePraise);
             }, 450);
         }
 
+        function removeSplinterDelayed(node) {
+            setTimeout(function() { node.remove(); }, 600);
+        }
+
         function openTargetedSubAlbum(cityCode) {
-            const displayTitle = document.getElementById('nested-album-heading');
-            const subDescription = document.getElementById('nested-album-subtext');
-            const gridMesh = document.getElementById('nested-album-grid-mesh');
+            var displayTitle = document.getElementById('nested-album-heading');
+            var subDescription = document.getElementById('nested-album-subtext');
+            var gridMesh = document.getElementById('nested-album-grid-mesh');
             
             gridMesh.innerHTML = '';
-            let dynamicSources = [];
+            var dynamicSources = [];
+            var k;
             
             if(cityCode === 'isparta') {
-                displayTitle.innerText = "Isparta Anılarımız";
-                subDescription.innerText = "Beraber çekildiğimiz ilk fotoğraflar bu güzel şehirde";
-                for(let k=0; k<=12; k++) dynamicSources.push(`isparta${k}.jpg`);
+                displayTitle.innerText = "Isparta An\u0131lar\u0131m\u0131z";
+                subDescription.innerText = "Beraber \u00e7ekildi\u011fimiz ilk foto\u011fraflar bu g\u00fczel \u015fehirde";
+                for(k=0; k<=12; k++) dynamicSources.push('isparta' + k + '.jpg');
             } else if(cityCode === 'mersin') {
-                displayTitle.innerText = "Mersin Anılarımız";
-                subDescription.innerText = "Mersin sahilinde biriktirdiğimiz özel anlar.";
-                for(let k=1; k<=4; k++) dynamicSources.push(`mersin${k}.jpg`);
+                displayTitle.innerText = "Mersin An\u0131lar\u0131m\u0131z";
+                subDescription.innerText = "Mersin sahilinde biriktirdi\u011fimiz \u00f6zel anlar.";
+                for(k=1; k<=4; k++) dynamicSources.push('mersin' + k + '.jpg');
             } else if(cityCode === 'hatay') {
-                displayTitle.innerText = "Hatay Anılarımız";
-                subDescription.innerText = "Kendi şehrimizdeki en değerli duraklar.";
-                for(let k=1; k<=4; k++) dynamicSources.push(`hatay${k}.jpg`);
+                displayTitle.innerText = "Hatay An\u0131lar\u0131m\u0131z";
+                subDescription.innerText = "Kendi \u015fehrimizdeki en de\u011ferli duraklar.";
+                for(k=1; k<=4; k++) dynamicSources.push('hatay' + k + '.jpg');
             }
 
-            dynamicSources.forEach(filename => {
-                const binaryMedia = document.createElement('img');
+            dynamicSources.forEach(function(filename) {
+                var binaryMedia = document.createElement('img');
                 binaryMedia.src = filename;
                 binaryMedia.className = 'grid-media-item';
                 binaryMedia.alt = filename;
                 binaryMedia.onerror = function() {
-                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%23ffeef2'/><text x='50%' y='50%' font-size='8' dominant-baseline='middle' text-anchor='middle' fill='%23ff7597'>${filename}</text></svg>";
+                    this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'></svg>";
                 };
-                binaryMedia.onclick = () => maximizeTargetedViewer(binaryMedia.src);
+                binaryMedia.onclick = function() { maximizeTargetedViewer(binaryMedia.src); };
                 gridMesh.appendChild(binaryMedia);
             });
 
@@ -741,25 +774,25 @@ function dismissPopupCard() {
             document.getElementById('global-video-frame').src = embedUrl;
             switchApplicationPage('video-player-surface');
         }
+
         function buildNotesListInterface() {
-            const containerNode = document.getElementById('dynamic-notes-receiver');
+            var containerNode = document.getElementById('dynamic-notes-receiver');
             containerNode.innerHTML = '';
 
-            internalNotesData.forEach((element, pos) => {
-                const itemRow = document.createElement('div');
+            internalNotesData.forEach(function(element, pos) {
+                var itemRow = document.createElement('div');
                 itemRow.className = 'note-row-item';
                 itemRow.innerText = element.title;
-                itemRow.onclick = () => showExpandedNoteContext(pos);
+                itemRow.onclick = function() { showExpandedNoteContext(pos); };
                 containerNode.appendChild(itemRow);
             });
         }
-
         function persistGeneratedNote() {
-            const derivedTitle = document.getElementById('form-note-title').value.trim();
-            const derivedBody = document.getElementById('form-note-body').value.trim();
+            var derivedTitle = document.getElementById('form-note-title').value.trim();
+            var derivedBody = document.getElementById('form-note-body').value.trim();
 
             if(!derivedTitle || !derivedBody) {
-                alert('Eksik alan bırakamazsınız.');
+                alert('Eksik alan b\u0131rakamazs\u0131n\u0131z.');
                 return;
             }
 
@@ -770,20 +803,20 @@ function dismissPopupCard() {
         }
 
         function showExpandedNoteContext(targetIndex) {
-            const individualObject = internalNotesData[targetIndex];
+            var individualObject = internalNotesData[targetIndex];
             document.getElementById('expanded-note-title').innerText = individualObject.title;
             document.getElementById('expanded-note-body').innerText = individualObject.body;
             switchApplicationPage('note-viewer-details');
         }
 
-        /* OYUN DEĞİŞKENLERİ VE LOOPI */
-        let continuousGameInterval = null;
-        let persistentSpawnTimer = null;
-        let internalScoreCounter = 0;
-        let activeJumpStatus = false;
-        let verticalCoordY = 0; 
-        let currentVelocityY = 0;
-        const gravityImpact = 2.2; 
+        /* OYUN MOTORU */
+        var continuousGameInterval = null;
+        var persistentSpawnTimer = null;
+        var internalScoreCounter = 0;
+        var activeJumpStatus = false;
+        var verticalCoordY = 0; 
+        var currentVelocityY = 0;
+        var gravityImpact = 2.2; 
 
         function initializeArcadeLoop() {
             haltArcadeLoop();
@@ -793,16 +826,15 @@ function dismissPopupCard() {
             currentVelocityY = 0;
             document.getElementById('live-score-node').innerText = internalScoreCounter;
             
-            const playerAsset = document.getElementById('runner-avatar');
+            var playerAsset = document.getElementById('runner-avatar');
             playerAsset.style.bottom = '10px';
 
-            const remainingHazards = document.querySelectorAll('.game-obstacle-node');
-            remainingHazards.forEach(hz => hz.remove());
+            var remainingHazards = document.querySelectorAll('.game-obstacle-node');
+            remainingHazards.forEach(function(hz) { hz.remove(); });
 
             continuousGameInterval = setInterval(refreshArcadePhysicsFrame, 16);
             executeHazardSpawningSequence();
         }
-
         function haltArcadeLoop() {
             clearInterval(continuousGameInterval);
             clearTimeout(persistentSpawnTimer);
@@ -816,7 +848,7 @@ function dismissPopupCard() {
         }
 
         function refreshArcadePhysicsFrame() {
-            const avatar = document.getElementById('runner-avatar');
+            var avatar = document.getElementById('runner-avatar');
             
             if (activeJumpStatus) {
                 verticalCoordY += currentVelocityY;
@@ -830,10 +862,10 @@ function dismissPopupCard() {
             }
             avatar.style.bottom = (10 + verticalCoordY) + 'px';
 
-            const hazards = document.querySelectorAll('.game-obstacle-node');
-            const avatarBoundaries = avatar.getBoundingClientRect();
+            var hazards = document.querySelectorAll('.game-obstacle-node');
+            var avatarBoundaries = avatar.getBoundingClientRect();
 
-            hazards.forEach(obstacle => {
+            hazards.forEach(function(obstacle) {
                 let currentRightPos = parseFloat(obstacle.style.right) || 0;
                 currentRightPos += 6; 
                 obstacle.style.right = currentRightPos + 'px';
@@ -844,7 +876,7 @@ function dismissPopupCard() {
                     document.getElementById('live-score-node').innerText = internalScoreCounter;
                 }
 
-                const hazardBoundaries = obstacle.getBoundingClientRect();
+                var hazardBoundaries = obstacle.getBoundingClientRect();
                 if (
                     avatarBoundaries.left < hazardBoundaries.right &&
                     avatarBoundaries.right > hazardBoundaries.left &&
@@ -852,24 +884,25 @@ function dismissPopupCard() {
                     avatarBoundaries.bottom > hazardBoundaries.top
                 ) {
                     haltArcadeLoop();
-                    alert(`Oyun Bitti. Skorunuz: ${internalScoreCounter}`);
+                    alert('Oyun Bitti. Skorunuz: ' + internalScoreCounter);
                     initializeArcadeLoop();
                 }
             });
         }
+
         function executeHazardSpawningSequence() {
             if (runtimeState.activePanel !== 'arcade-game') return;
 
-            const stageSurface = document.getElementById('gaming-canvas-container');
-            const hazardItem = document.createElement('div');
+            var stageSurface = document.getElementById('gaming-canvas-container');
+            var hazardItem = document.createElement('div');
             hazardItem.className = 'game-obstacle-node';
             
-            const visualHazards = ['🧱', '🪨', '🌵'];
+            var visualHazards = ['\u25A0', '\u25B2', '\u25CF'];
             hazardItem.innerText = visualHazards[Math.floor(Math.random() * visualHazards.length)];
             hazardItem.style.right = '-40px';
             stageSurface.appendChild(hazardItem);
 
-            const variableInterval = Math.random() * 800 + 1300; 
+            var variableInterval = Math.random() * 800 + 1300; 
             persistentSpawnTimer = setTimeout(executeHazardSpawningSequence, variableInterval);
         }
     </script>

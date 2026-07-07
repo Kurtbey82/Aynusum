@@ -59,6 +59,7 @@ colors[Math.floor(Math.random()*colors.length)];
 
 heart.style.animationDuration=
 (Math.random()*5+6)+"s";
+  heart.style.animationTimingFunction="ease-in-out";
 
 heart.style.animationDelay=
 (Math.random()*1)+"s";

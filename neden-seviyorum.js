@@ -43,6 +43,7 @@ heart.style.animationDuration=
 heart.style.animationDelay=
 (Math.random()*1)+"s";
 
+  heart.style.setProperty("--size",size+"px");
 container.appendChild(heart);
 
 setTimeout(()=>{

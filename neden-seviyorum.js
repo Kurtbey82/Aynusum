@@ -95,8 +95,19 @@ reasonText.textContent=reasons[Math.floor(Math.random()*reasons.length)];
 
 card.style.display="block";
 
-e.target.remove();
+const rect=e.target.getBoundingClientRect();
 
+explodeHeart(
+
+rect.left+rect.width/2,
+
+rect.top+rect.height/2,
+
+e.target.style.background
+
+);
+
+e.target.remove();
 });
 function explodeHeart(x,y,color){
 

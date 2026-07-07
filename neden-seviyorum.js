@@ -98,3 +98,41 @@ card.style.display="block";
 e.target.remove();
 
 });
+function explodeHeart(x,y,color){
+
+for(let i=0;i<24;i++){
+
+const p=document.createElement("div");
+
+p.className="particle";
+
+p.style.left=x+"px";
+
+p.style.top=y+"px";
+
+p.style.background=color;
+
+const angle=Math.random()*360;
+
+const distance=Math.random()*120+40;
+
+const dx=Math.cos(angle*Math.PI/180)*distance;
+
+const dy=Math.sin(angle*Math.PI/180)*distance;
+
+p.style.setProperty("--x",dx+"px");
+p.style.setProperty("--y",dy+"px");
+
+p.style.animation="explode .8s ease-out forwards";
+
+document.body.appendChild(p);
+
+setTimeout(()=>{
+
+p.remove();
+
+},800);
+
+}
+
+}

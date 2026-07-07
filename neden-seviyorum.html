@@ -4,84 +4,55 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Seni Neden Seviyorum?</title>
 
-<link rel="stylesheet" href="style.css">
-
-<style>
-
-body{
-    margin:0;
-    overflow:hidden;
-    background:linear-gradient(180deg,#ffe4ef,#fff0f6);
-}
-
-.pageTitle{
-
-    position:fixed;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-
-    font-size:32px;
-    font-weight:bold;
-
-    color:#ff4f87;
-
-    z-index:1000;
-}
-
-.backButton{
-
-    position:fixed;
-    top:20px;
-    left:20px;
-
-    background:white;
-    border:none;
-
-    padding:12px 18px;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
-
-    z-index:1000;
-}
-
-#heartContainer{
-
-    width:100vw;
-    height:100vh;
-
-    position:relative;
-}
-
-</style>
+<link rel="stylesheet" href="neden-seviyorum.css">
 
 </head>
 
 <body>
 
-<button
-class="backButton"
-onclick="window.location.href='index.html'">
+<div id="backgroundGlow"></div>
 
-← Geri
+<div id="heartContainer"></div>
+
+<div class="topBar">
+
+<button class="backButton"
+onclick="location.href='index.html'">
+
+← Ana Sayfa
 
 </button>
 
-<div class="pageTitle">
+<h1>
 
 ❤️ Seni Neden Seviyorum? ❤️
 
+</h1>
+
 </div>
 
-<div id="heartContainer">
+<div id="messageCard">
+
+<div id="closeCard">
+
+✕
+
+</div>
+
+<h2>
+
+❤️ Çünkü...
+
+</h2>
+
+<p id="reasonText">
+
+</p>
 
 </div>
 

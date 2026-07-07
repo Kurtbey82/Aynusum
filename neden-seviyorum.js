@@ -1,3 +1,26 @@
+const reasons=[
+
+"Gülüşün bütün kötü günlerimi unutturuyor.",
+
+"Yanında kendim olabiliyorum.",
+
+"Sesini duyunca içim huzur doluyor.",
+
+"Kalbin dünyanın en güzel yeri.",
+
+"Bakışların bana güven veriyor.",
+
+"Benim en güzel tesadüfümsün.",
+
+"Her günümü güzelleştiriyorsun.",
+
+"Seninle her anım daha anlamlı.",
+
+"İyi ki varsın.",
+
+"Çünkü sen... sensin ❤️"
+
+];
 const container=document.getElementById("heartContainer");
 
 const colors=[
@@ -55,3 +78,24 @@ heart.remove();
 }
 
 setInterval(createHeart,180);
+const card=document.getElementById("messageCard");
+
+const reasonText=document.getElementById("reasonText");
+
+document.getElementById("closeCard").onclick=()=>{
+
+card.style.display="none";
+
+};
+
+document.addEventListener("click",(e)=>{
+
+if(!e.target.classList.contains("heart")) return;
+
+reasonText.textContent=reasons[Math.floor(Math.random()*reasons.length)];
+
+card.style.display="block";
+
+e.target.remove();
+
+});

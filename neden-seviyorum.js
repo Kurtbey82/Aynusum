@@ -123,7 +123,11 @@ cardOpen = false;
 document.getElementById("overlay").style.display="none";
 
 };
-if(cardOpen) return;document.addEventListener("click",(e)=>{
+document.addEventListener("click",(e)=>{
+
+    if(cardOpen) return;
+
+    if(!e.target.classList.contains("heart")) return;
 
 if(!e.target.classList.contains("heart")) return;
 

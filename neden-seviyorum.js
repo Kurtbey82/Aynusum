@@ -137,8 +137,17 @@ e.target.remove();
 
 setTimeout(()=>{
 
-reasonText.textContent =
-reasons[Math.floor(Math.random()*reasons.length)];
+let random;
+
+do{
+
+random = Math.floor(Math.random()*reasons.length);
+
+}while(random === lastReason);
+
+lastReason = random;
+
+reasonText.textContent = reasons[random];
 
 card.style.display="block";
 

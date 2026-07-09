@@ -19,6 +19,36 @@ const reasons=[
 "İyi ki varsın.",
 
 "Çünkü sen... sensin ❤️"
+  "Çünkü gözlerinin içi gülüyor.",
+"Yanımdayken dünyadaki bütün karmaşa duruyor.",
+"Sesini duyduğum an yüzüm gülüyor.",
+"Bana kendimi değerli hissettiriyorsun.",
+"En sıradan günü bile güzelleştiriyorsun.",
+"Gülüşün içimi ısıtıyor.",
+"Beni ben olduğum için seviyorsun.",
+"Birlikte sessiz kalmak bile güzel.",
+"Küçük şeylerden mutlu olabiliyorsun.",
+"İçten ve samimisin.",
+"Kalbin çok güzel.",
+"Merhametin beni sana hayran bırakıyor.",
+"Bana güç veriyorsun.",
+"Yanında kendimi evimde hissediyorum.",
+"Hayatıma huzur kattın.",
+"Bir mesajın bile bütün günümü güzelleştiriyor.",
+"Bana umut oluyorsun.",
+"Kokunu özlüyorum.",
+"Seninle gelecek hayali kurabiliyorum.",
+"Benim en güzel alışkanlığımsın.",
+"İyi ki yollarımız kesişmiş.",
+"Her halinle güzelsin.",
+"Beni her gün yeniden kendine âşık ediyorsun.",
+"Kahkahan dünyadaki en güzel seslerden biri.",
+"Yanındayken zaman çok hızlı geçiyor.",
+"Seninle yaşlanmak istiyorum.",
+"İçimdeki çocuğu ortaya çıkarıyorsun.",
+"Gözlerinin içine bakmayı seviyorum.",
+"Kalbime iyi geliyorsun.",
+"İyi ki benim Aynuşumsun. ❤️"
 
 ];
 const container=document.getElementById("heartContainer");

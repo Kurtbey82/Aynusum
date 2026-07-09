@@ -1,3 +1,4 @@
+let cardOpen = false;
 const reasons=[
 
 "Gülüşün bütün kötü günlerimi unutturuyor.",
@@ -117,7 +118,7 @@ card.style.display="none";
 
 };
 
-document.addEventListener("click",(e)=>{
+if(cardOpen) return;document.addEventListener("click",(e)=>{
 
 if(!e.target.classList.contains("heart")) return;
 

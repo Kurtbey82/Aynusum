@@ -19,7 +19,7 @@ const reasons=[
 
 "İyi ki varsın.",
 
-"Çünkü sen... sensin ❤️"
+"Çünkü sen... sensin ❤️",
   "Çünkü gözlerinin içi gülüyor.",
 "Yanımdayken dünyadaki bütün karmaşa duruyor.",
 "Sesini duyduğum an yüzüm gülüyor.",

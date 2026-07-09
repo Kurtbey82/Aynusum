@@ -111,13 +111,18 @@ setInterval(createHeart,180);
 const card=document.getElementById("messageCard");
 
 const reasonText=document.getElementById("reasonText");
+let lastReason = -1;
+let cardOpen = false;
 
 document.getElementById("closeCard").onclick=()=>{
 
 card.style.display="none";
 
-};
+cardOpen = false;
 
+document.getElementById("overlay").style.display="none";
+
+};
 if(cardOpen) return;document.addEventListener("click",(e)=>{
 
 if(!e.target.classList.contains("heart")) return;
@@ -151,6 +156,9 @@ lastReason = random;
 reasonText.textContent = reasons[random];
 
 card.style.display="block";
+  cardOpen = true;
+
+document.getElementById("overlay").style.display="block";
 
 },700);
 });

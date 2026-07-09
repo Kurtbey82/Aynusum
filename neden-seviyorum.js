@@ -91,10 +91,6 @@ document.addEventListener("click",(e)=>{
 
 if(!e.target.classList.contains("heart")) return;
 
-reasonText.textContent=reasons[Math.floor(Math.random()*reasons.length)];
-
-card.style.display="block";
-
 const rect=e.target.getBoundingClientRect();
 
 explodeHeart(
@@ -108,6 +104,15 @@ e.target.style.background
 );
 
 e.target.remove();
+
+setTimeout(()=>{
+
+reasonText.textContent =
+reasons[Math.floor(Math.random()*reasons.length)];
+
+card.style.display="block";
+
+},700);
 });
 function explodeHeart(x,y,color){
 

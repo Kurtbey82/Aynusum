@@ -122,7 +122,9 @@ cardOpen = false;
 document.getElementById("overlay").style.display="none";
 
 };
+document.addEventListener("click",(e)=>{
 
+    if(cardOpen) return;
 if(!e.target.classList.contains("heart")) return;
 
 const rect=e.target.getBoundingClientRect();

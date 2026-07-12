@@ -57,14 +57,24 @@ function renderNotes(){
 
 function addNoteCard(note){
 
+    const index = notes.indexOf(note);
+
     notesList.innerHTML += `
     <div class="noteCard">
+
+        <button class="deleteBtn" onclick="deleteNote(${index})">
+            🗑️
+        </button>
+
         <h3>${note.title}</h3>
+
         <p>${note.content}</p>
-        <small>
-        ❤️ ${note.author}<br>
-        📅 ${note.date}
-        </small>
+
+        <div class="noteInfo">
+            <span>❤️ ${note.author}</span>
+            <span>📅 ${note.date}</span>
+        </div>
+
     </div>
     `;
 
@@ -98,3 +108,16 @@ saveBtn.onclick = () => {
 };
 
 renderNotes();
+function deleteNote(index){
+
+    if(confirm("Bu not silinsin mi?")){
+
+        notes.splice(index,1);
+
+        localStorage.setItem("notes",JSON.stringify(notes));
+
+        renderNotes();
+
+    }
+
+}

@@ -14,6 +14,7 @@ setTimeout(()=>{
 
 cookie.classList.remove("shake");
 
-},550);
+cookie.classList.add("crack");
 
+},550);
 });

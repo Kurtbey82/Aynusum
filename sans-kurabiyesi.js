@@ -18,3 +18,8 @@ cookie.classList.add("crack");
 
 },550);
 });
+setTimeout(()=>{
+
+cookie.style.display="none";
+
+},950);

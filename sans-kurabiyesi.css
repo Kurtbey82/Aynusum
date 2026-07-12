@@ -251,3 +251,56 @@ opacity:0;
 }
 
 }
+#cookie{
+
+position:fixed;
+
+left:50%;
+
+top:50%;
+
+transform:translate(-50%,-50%);
+
+font-size:220px;
+
+cursor:pointer;
+
+user-select:none;
+
+z-index:100;
+
+}
+
+.cookiePiece{
+
+position:fixed;
+
+font-size:70px;
+
+pointer-events:none;
+
+animation:pieceFly .9s ease-out forwards;
+
+}
+
+@keyframes pieceFly{
+
+0%{
+
+opacity:1;
+
+transform:translate(0,0) rotate(0deg) scale(1);
+
+}
+
+100%{
+
+opacity:0;
+
+transform:translate(var(--x),var(--y))
+rotate(720deg)
+scale(.25);
+
+}
+
+}

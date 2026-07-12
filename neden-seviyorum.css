@@ -493,3 +493,16 @@ backdrop-filter:blur(6px);
 z-index:9000;
 
 }
+#signature{
+
+margin-top:30px;
+
+text-align:right;
+
+font-size:18px;
+
+font-style:italic;
+
+color:#ff4b92;
+
+}

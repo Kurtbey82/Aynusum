@@ -178,7 +178,9 @@ padding:25px;
 
 border-radius:20px;
 
-box-shadow:0 10px 40px rgba(0,0,0,.25);
+box-shadow:
+0 0 30px rgba(255,80,150,.45),
+0 20px 60px rgba(0,0,0,.22);
 
 z-index:9999;
 
@@ -239,7 +241,14 @@ font-size:18px;
 cursor:pointer;
 
 }
+transition:.25s;
+#closeCard:hover{
 
+transform:scale(1.15);
+
+background:#ff2d75;
+
+}
 @keyframes popup{
 
 0%{
@@ -478,6 +487,8 @@ width:100%;
 height:100%;
 
 background:rgba(0,0,0,.35);
+
+backdrop-filter:blur(6px);
 
 z-index:9000;
 

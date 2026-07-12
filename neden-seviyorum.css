@@ -506,3 +506,40 @@ font-style:italic;
 color:#ff4b92;
 
 }
+#cardEmoji{
+
+font-size:64px;
+
+text-align:center;
+
+margin-bottom:15px;
+
+animation:emojiPop .4s ease;
+
+}
+
+@keyframes emojiPop{
+
+0%{
+
+transform:scale(.3);
+
+opacity:0;
+
+}
+
+70%{
+
+transform:scale(1.2);
+
+}
+
+100%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}

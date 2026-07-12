@@ -222,3 +222,32 @@ transform:translate(-50%,-50%) rotate(0deg);
 animation:shake .55s ease;
 
 }
+.crack{
+
+animation:crack .45s forwards;
+
+}
+
+@keyframes crack{
+
+0%{
+
+transform:translate(-50%,-50%) scale(1);
+
+}
+
+40%{
+
+transform:translate(-50%,-50%) scale(1.12) rotate(-6deg);
+
+}
+
+100%{
+
+transform:translate(-50%,-50%) scale(.15) rotate(18deg);
+
+opacity:0;
+
+}
+
+}

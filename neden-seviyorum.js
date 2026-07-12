@@ -86,6 +86,7 @@ const reasons = [
 const container = document.getElementById("heartContainer");
 const card = document.getElementById("messageCard");
 const reasonText = document.getElementById("reasonText");
+const cardEmoji = document.getElementById("cardEmoji");
 const overlay = document.getElementById("overlay");
 
 let lastReason = -1;
@@ -109,6 +110,23 @@ const colors = [
 "#00c2ff",
 "#4d96ff",
 "#7b2cbf"
+
+];
+const emojis=[
+
+"❤️",
+"💖",
+"💕",
+"💗",
+"💘",
+"💝",
+"💞",
+"🥰",
+"😍",
+"😘",
+"🌹",
+"🩷",
+"✨"
 
 ];
 
@@ -166,7 +184,11 @@ document.addEventListener("click",function(e){
         e.target.style.background
 
     );
+if(navigator.vibrate){
 
+    navigator.vibrate([25,40,25]);
+
+}
     e.target.remove();
 
     setTimeout(function(){
@@ -182,6 +204,8 @@ document.addEventListener("click",function(e){
         lastReason=random;
 
         reasonText.textContent=reasons[random];
+        cardEmoji.textContent =
+emojis[Math.floor(Math.random()*emojis.length)];
 
         card.style.display="block";
 

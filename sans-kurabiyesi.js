@@ -1,25 +1,27 @@
-const cookie=document.getElementById("cookie");
+const cookie = document.getElementById("cookie");
 
 cookie.addEventListener("click",()=>{
 
-if(navigator.vibrate){
+    if(navigator.vibrate){
 
-navigator.vibrate(40);
+        navigator.vibrate(40);
 
-}
+    }
 
-cookie.classList.add("shake");
+    cookie.classList.add("shake");
 
-setTimeout(()=>{
+    setTimeout(()=>{
 
-cookie.classList.remove("shake");
+        cookie.classList.remove("shake");
 
-cookie.classList.add("crack");
+        cookie.classList.add("crack");
 
-},550);
+    },550);
+
+    setTimeout(()=>{
+
+        cookie.style.display="none";
+
+    },950);
+
 });
-setTimeout(()=>{
-
-cookie.style.display="none";
-
-},950);

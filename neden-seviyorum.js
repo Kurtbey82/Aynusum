@@ -1,25 +1,16 @@
-const reasons=[
+const reasons = [
 
 "Gülüşün bütün kötü günlerimi unutturuyor.",
-
 "Yanında kendim olabiliyorum.",
-
 "Sesini duyunca içim huzur doluyor.",
-
 "Kalbin dünyanın en güzel yeri.",
-
 "Bakışların bana güven veriyor.",
-
 "Benim en güzel tesadüfümsün.",
-
 "Her günümü güzelleştiriyorsun.",
-
 "Seninle her anım daha anlamlı.",
-
 "İyi ki varsın.",
-
 "Çünkü sen... sensin ❤️",
-  "Çünkü gözlerinin içi gülüyor.",
+"Çünkü gözlerinin içi gülüyor.",
 "Yanımdayken dünyadaki bütün karmaşa duruyor.",
 "Sesini duyduğum an yüzüm gülüyor.",
 "Bana kendimi değerli hissettiriyorsun.",
@@ -51,9 +42,16 @@ const reasons=[
 "İyi ki benim Aynuşumsun. ❤️"
 
 ];
-const container=document.getElementById("heartContainer");
 
-const colors=[
+const container = document.getElementById("heartContainer");
+const card = document.getElementById("messageCard");
+const reasonText = document.getElementById("reasonText");
+const overlay = document.getElementById("overlay");
+
+let lastReason = -1;
+let cardOpen = false;
+
+const colors = [
 
 "#ff0055",
 "#ff1493",
@@ -76,26 +74,20 @@ const colors=[
 
 function createHeart(){
 
-const heart=document.createElement("div");
+const heart = document.createElement("div");
 
-heart.className="heart";
+heart.className = "heart";
 
-const size=Math.random()*45+45;
+const size = Math.random()*45+45;
 
-heart.style.left=Math.random()*100+"vw";
+heart.style.left = Math.random()*100+"vw";
+heart.style.background = colors[Math.floor(Math.random()*colors.length)];
+heart.style.setProperty("--size",size+"px");
 
-heart.style.background=
-colors[Math.floor(Math.random()*colors.length)];
+heart.style.animationDuration=(Math.random()*5+6)+"s";
+heart.style.animationDelay=(Math.random()*1)+"s";
+heart.style.animationTimingFunction="ease-in-out";
 
-heart.style.animationDuration=
-(Math.random()*5+6)+"s";
-  heart.style.animationTimingFunction="ease-in-out";
-
-heart.style.animationDelay=
-(Math.random()*1)+"s";
-  heart.style.zIndex=Math.floor(Math.random()*5)+1;
-
-  heart.style.setProperty("--size",size+"px");
 container.appendChild(heart);
 
 setTimeout(()=>{
@@ -107,96 +99,102 @@ heart.remove();
 }
 
 setInterval(createHeart,180);
-const card=document.getElementById("messageCard");
 
-const reasonText=document.getElementById("reasonText");
-let lastReason = -1;
-let cardOpen = false;
-
-document.getElementById("closeCard").onclick=()=>{
+document.getElementById("closeCard").onclick=function(){
 
 card.style.display="none";
 
-cardOpen = false;
+overlay.style.display="none";
 
-document.getElementById("overlay").style.display="none";
+cardOpen=false;
 
 };
-document.addEventListener("click",(e)=>{
+document.addEventListener("click",function(e){
 
     if(cardOpen) return;
-if(!e.target.classList.contains("heart")) return;
 
-const rect=e.target.getBoundingClientRect();
+    if(!e.target.classList.contains("heart")) return;
 
-explodeHeart(
+    const rect = e.target.getBoundingClientRect();
 
-rect.left+rect.width/2,
+    explodeHeart(
 
-rect.top+rect.height/2,
+        rect.left + rect.width/2,
 
-e.target.style.background
+        rect.top + rect.height/2,
 
-);
+        e.target.style.background
 
-e.target.remove();
+    );
 
-setTimeout(()=>{
+    e.target.remove();
 
-let random;
+    setTimeout(function(){
 
-do{
+        let random;
 
-random = Math.floor(Math.random()*reasons.length);
+        do{
 
-}while(random === lastReason);
+            random = Math.floor(Math.random()*reasons.length);
 
-lastReason = random;
+        }while(random===lastReason);
 
-reasonText.textContent = reasons[random];
+        lastReason=random;
 
-card.style.display="block";
-  cardOpen = true;
+        reasonText.textContent=reasons[random];
 
-document.getElementById("overlay").style.display="block";
+        card.style.display="block";
 
-},700);
+        overlay.style.display="block";
+
+        cardOpen=true;
+
+    },700);
+
 });
+
 function explodeHeart(x,y,color){
 
-for(let i=0;i<24;i++){
+    for(let i=0;i<24;i++){
 
-const p=document.createElement("div");
+        const p=document.createElement("div");
 
-p.className="particle";
+        p.className="particle";
 
-p.style.left=x+"px";
+        p.style.left=x+"px";
 
-p.style.top=y+"px";
+        p.style.top=y+"px";
 
-p.style.background=color;
+        p.style.background=color;
 
-const angle=Math.random()*360;
+        const angle=Math.random()*Math.PI*2;
 
-const distance=Math.random()*120+40;
+        const distance=Math.random()*120+40;
 
-const dx=Math.cos(angle*Math.PI/180)*distance;
+        const dx=Math.cos(angle)*distance;
 
-const dy=Math.sin(angle*Math.PI/180)*distance;
+        const dy=Math.sin(angle)*distance;
 
-p.style.setProperty("--x",dx+"px");
-p.style.setProperty("--y",dy+"px");
+        p.style.setProperty("--x",dx+"px");
+        p.style.setProperty("--y",dy+"px");
 
-p.style.animation="explode .8s ease-out forwards";
+        p.style.animation="explode .8s ease-out forwards";
 
-document.body.appendChild(p);
+        document.body.appendChild(p);
 
-setTimeout(()=>{
+        setTimeout(function(){
 
-p.remove();
+            p.remove();
 
-},800);
+        },800);
+
+    }
 
 }
+
+// Sayfa açılır açılmaz birkaç kalp oluştur
+for(let i=0;i<12;i++){
+
+    setTimeout(createHeart,i*120);
 
 }

@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notlarımız</title>
+
+<link rel="stylesheet" href="notlar.css">
+
+</head>
+
+<body>
+
+<header class="topBar">
+
+<button class="backButton"
+onclick="location.href='index.html'">
+
+← Ana Sayfa
+
+</button>
+
+<h1>📝 Notlarımız</h1>
+
+</header>
+
+<div class="container">
+
+<button id="addNoteBtn">
+
+➕ Not Ekle
+
+</button>
+
+<div id="notesList">
+
+</div>
+
+</div>
+
+<div id="noteModal">
+
+<div class="modalCard">
+
+<button id="closeModal">
+
+✕
+
+</button>
+
+<input
+type="text"
+id="noteTitle"
+placeholder="Başlık">
+
+<textarea
+id="noteContent"
+placeholder="Buraya notunu yaz..."></textarea>
+
+<button id="saveNote">
+
+💾 Kaydet
+
+</button>
+
+</div>
+
+</div>
+
+<script src="notlar.js"></script>
+
+</body>
+
+</html>

@@ -1,4 +1,31 @@
 const cookie = document.getElementById("cookie");
+const card=document.getElementById("messageCard");
+const message=document.getElementById("cookieMessage");
+const close=document.getElementById("closeCard");
+
+const compliments=[
+
+"Sen gülünce dünya daha güzel bir yer oluyor. ❤️",
+
+"İyi ki benim hayatımdasın.",
+
+"Bugünkü en büyük şansım sensin.",
+
+"Gözlerin huzurun tanımı gibi.",
+
+"Kalbin dünyanın en güzel yeri.",
+
+"Senin gülüşün bütün yorgunluğumu alıyor.",
+
+"İyi ki seni sevmişim.",
+
+"Her gün sana yeniden âşık oluyorum.",
+
+"Bir ömür aynı kurabiyeyi seninle paylaşmak isterim. 🍪❤️",
+
+"Şans kurabiyem bana hep seni gösteriyor."
+
+];
 
 cookie.addEventListener("click",()=>{
 
@@ -22,6 +49,15 @@ cookie.addEventListener("click",()=>{
     setTimeout(()=>{
 
         cookie.style.display="none";
+        setTimeout(()=>{
+
+const random=Math.floor(Math.random()*compliments.length);
+
+message.textContent=compliments[random];
+
+card.style.display="block";
+
+},300);
 
     },950);
 
@@ -63,5 +99,14 @@ piece.remove();
 },900);
 
 }
+
+}
+close.onclick=()=>{
+
+card.style.display="none";
+
+cookie.style.display="block";
+
+cookie.classList.remove("crack");
 
 }

@@ -1,3 +1,4 @@
+alert("JS çalıştı");
 window.addEventListener("load", () => {
 
     const map = document.getElementById("turkiyeMap");

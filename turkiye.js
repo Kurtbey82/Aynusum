@@ -43,3 +43,58 @@ window.onload = function () {
     }
 
 };
+function openCity(city){
+
+    const popup=document.getElementById("cityPopup");
+
+    const title=document.getElementById("popupTitle");
+
+    const date=document.getElementById("popupDate");
+
+    const text=document.getElementById("popupText");
+
+    if(city==="hatay"){
+
+        title.innerHTML="❤️ Hatay";
+
+        date.innerHTML="📅 16.05.2026";
+
+        text.innerHTML="Birlikte geçirdiğimiz güzel anılar burada başladı.";
+
+    }
+
+    if(city==="mersin"){
+
+        title.innerHTML="❤️ Mersin";
+
+        date.innerHTML="📅 16.05.2026";
+
+        text.innerHTML="Deniz, kahkahalar ve unutulmaz anılar...";
+
+    }
+
+    if(city==="isparta"){
+
+        title.innerHTML="❤️ Isparta";
+
+        date.innerHTML="📅 04.10.2025";
+
+        text.innerHTML="İlk güzel yolculuklarımızdan biri.";
+
+    }
+
+    popup.style.display="flex";
+
+    setTimeout(()=>{
+
+        location.href=city+".html";
+
+    },1000);
+
+}
+
+document.getElementById("cityPopup").onclick=function(){
+
+    this.style.display="none";
+
+}

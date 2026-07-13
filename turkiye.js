@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
     map.addEventListener("load", () => {
 
         const svg = map.contentDocument;
+        alert(svg.getElementById("hatay") ? "Hatay bulundu" : "Hatay bulunamadı");
 
         ["hatay","mersin","isparta"].forEach(id => {
 

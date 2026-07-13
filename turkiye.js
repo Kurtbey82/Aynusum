@@ -1,34 +1,50 @@
-window.onload = function () {
+window.addEventListener("load", () => {
 
-    const svgObject = document.getElementById("turkiyeMap");
+    const map = document.getElementById("turkiyeMap");
 
-    svgObject.addEventListener("load", function () {
+    map.addEventListener("load", () => {
 
-        const svg = svgObject.contentDocument;
+        const svg = map.contentDocument;
 
-        const hatay = svg.getElementById("hatay");
-        const mersin = svg.getElementById("mersin");
-        const isparta = svg.getElementById("isparta");
+        if (!svg) {
+            alert("SVG yüklenemedi.");
+            return;
+        }
 
-        [hatay, mersin, isparta].forEach(sehir => {
-            if(sehir){
-                sehir.style.fill = "#ff4d8d";
-                sehir.style.cursor = "pointer";
+        const cities = [
+            { id: "hatay", page: "hatay.html" },
+            { id: "mersin", page: "mersin.html" },
+            { id: "isparta", page: "isparta.html" }
+        ];
+
+        cities.forEach(city => {
+
+            const il = svg.getElementById(city.id);
+
+            if (il) {
+
+                il.style.fill = "#ff4d8d";
+                il.style.cursor = "pointer";
+                il.style.transition = "0.3s";
+
+                il.addEventListener("mouseenter", () => {
+                    il.style.fill = "#ff7cab";
+                });
+
+                il.addEventListener("mouseleave", () => {
+                    il.style.fill = "#ff4d8d";
+                });
+
+                il.addEventListener("click", () => {
+                    window.location.href = city.page;
+                });
+
+            } else {
+                console.log(city.id + " bulunamadı.");
             }
+
         });
-
-        if(hatay){
-            hatay.onclick = () => window.location.href = "hatay.html";
-        }
-
-        if(mersin){
-            mersin.onclick = () => window.location.href = "mersin.html";
-        }
-
-        if(isparta){
-            isparta.onclick = () => window.location.href = "isparta.html";
-        }
 
     });
 
-};
+});

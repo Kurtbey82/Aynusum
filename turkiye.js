@@ -1,35 +1,45 @@
 alert("JS çalıştı");
-window.addEventListener("load", () => {
 
-    const map = document.getElementById("turkiyeMap");
+window.onload = function () {
 
-    map.addEventListener("load", () => {
+    const svgObject = document.getElementById("turkiyeMap");
 
-        const svg = map.contentDocument;
-        alert(svg.getElementById("hatay") ? "Hatay bulundu" : "Hatay bulunamadı");
+    function haritayiHazirla() {
 
-        ["hatay","mersin","isparta"].forEach(id => {
+        const svg = svgObject.contentDocument;
+
+        if (!svg) {
+            alert("SVG okunamadı");
+            return;
+        }
+
+        ["hatay", "mersin", "isparta"].forEach(id => {
 
             const city = svg.getElementById(id);
 
-            if(city){
+            if (city) {
 
-                const path = city.querySelector("path");
+                city.setAttribute("fill", "#ff4d8d");
 
-                if(path){
-                    path.setAttribute("style","fill:#ff4d8d;");
-                }
-
+                city.style.fill = "#ff4d8d";
                 city.style.cursor = "pointer";
 
-                city.addEventListener("click", () => {
-                    window.location.href = id + ".html";
-                });
+                city.onclick = () => {
+                    location.href = id + ".html";
+                };
 
+            } else {
+                alert(id + " bulunamadı");
             }
 
         });
 
-    });
+    }
 
-});
+    if (svgObject.contentDocument) {
+        haritayiHazirla();
+    } else {
+        svgObject.onload = haritayiHazirla;
+    }
+
+};

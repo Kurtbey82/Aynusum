@@ -51,7 +51,8 @@ body{
 }
 #turkiyeMap{
     width:100%;
-    height:80vh;
+    max-width:900px;
     display:block;
-    margin:20px auto;
+    margin:40px auto;
+    height:auto;
 }

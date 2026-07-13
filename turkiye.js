@@ -15,7 +15,7 @@ window.addEventListener("load", () => {
                 const path = city.querySelector("path");
 
                 if(path){
-                    path.style.fill = "#ff4d8d";
+                    path.setAttribute("style","fill:#ff4d8d;");
                 }
 
                 city.style.cursor = "pointer";

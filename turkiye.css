@@ -41,6 +41,7 @@ body{
 .container{
     width:95%;
     margin:110px auto 40px;
+    position:relative;
 }
 
 .map{

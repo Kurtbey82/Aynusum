@@ -9,7 +9,7 @@ body{
     background:linear-gradient(180deg,#ffdce9,#fff8fb);
 }
 
-.header{
+.topBar{
     position:fixed;
     top:0;
     left:0;
@@ -21,12 +21,12 @@ body{
     z-index:1000;
 }
 
-.header h1{
+.topBar h1{
     color:#ff3d81;
     font-size:30px;
 }
 
-.backBtn{
+.backButton{
     position:absolute;
     left:20px;
     top:18px;

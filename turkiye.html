@@ -28,23 +28,33 @@
     data="turkey.svg"
     type="image/svg+xml">
   </object>
-<div class="cityLabel hatay">
-    ❤️<br>
-    📍 Hatay<br>
-    📅 16.05.2026
+<div class="heart hatay" onclick="openCity('hatay')">
+    ❤️
+    <span>Hatay</span>
 </div>
 
-<div class="cityLabel mersin">
-    ❤️<br>
-    📍 Mersin<br>
-    📅 16.05.2026
+<div class="heart mersin" onclick="openCity('mersin')">
+    ❤️
+    <span>Mersin</span>
 </div>
 
-<div class="cityLabel isparta">
-    ❤️<br>
-    📍 Isparta<br>
-    📅 04.10.2025
+<div class="heart isparta" onclick="openCity('isparta')">
+    ❤️
+    <span>Isparta</span>
 </div>
+
+<div id="cityPopup" class="popup">
+
+    <div class="popupCard">
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupDate"></p>
+
+        <p id="popupText"></p>
+
+    </div>
+
 </div>
 
 <script src="turkiye.js"></script>

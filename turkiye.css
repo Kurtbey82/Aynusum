@@ -56,3 +56,68 @@ body{
     margin:40px auto;
     height:auto;
 }
+.cityLabel{
+
+    position:absolute;
+
+    background:white;
+
+    padding:8px 12px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+    text-align:center;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    color:#ff3d81;
+
+    animation:float 3s ease-in-out infinite;
+
+    z-index:50;
+
+}
+
+.hatay{
+
+    left:74%;
+
+    top:73%;
+
+}
+
+.mersin{
+
+    left:58%;
+
+    top:66%;
+
+}
+
+.isparta{
+
+    left:54%;
+
+    top:57%;
+
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-6px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}

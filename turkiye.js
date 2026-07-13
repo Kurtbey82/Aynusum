@@ -6,41 +6,24 @@ window.addEventListener("load", () => {
 
         const svg = map.contentDocument;
 
-        if (!svg) {
-            alert("SVG yüklenemedi.");
-            return;
-        }
+        ["hatay","mersin","isparta"].forEach(id => {
 
-        const cities = [
-            { id: "hatay", page: "hatay.html" },
-            { id: "mersin", page: "mersin.html" },
-            { id: "isparta", page: "isparta.html" }
-        ];
+            const city = svg.getElementById(id);
 
-        cities.forEach(city => {
+            if(city){
 
-            const il = svg.getElementById(city.id);
+                const path = city.querySelector("path");
 
-            if (il) {
+                if(path){
+                    path.style.fill = "#ff4d8d";
+                }
 
-                il.style.fill = "#ff4d8d";
-                il.style.cursor = "pointer";
-                il.style.transition = "0.3s";
+                city.style.cursor = "pointer";
 
-                il.addEventListener("mouseenter", () => {
-                    il.style.fill = "#ff7cab";
+                city.addEventListener("click", () => {
+                    window.location.href = id + ".html";
                 });
 
-                il.addEventListener("mouseleave", () => {
-                    il.style.fill = "#ff4d8d";
-                });
-
-                il.addEventListener("click", () => {
-                    window.location.href = city.page;
-                });
-
-            } else {
-                console.log(city.id + " bulunamadı.");
             }
 
         });

@@ -11,37 +11,36 @@ window.onload = function () {
             return;
         }
 
-        // Hatay
-        let hatay =
-            svg.getElementById("Hatay") ||
-            svg.getElementById("hatay");
-
-        // Mersin
-        let mersin =
-            svg.getElementById("Mersin") ||
-            svg.getElementById("mersin") ||
-            svg.getElementById("İçel") ||
-            svg.getElementById("Icel");
-
-        // Isparta
-        let isparta =
-            svg.getElementById("Isparta") ||
-            svg.getElementById("ISPARTA") ||
-            svg.getElementById("isparta");
+        // Şehirleri class adına göre bul
+        const hatay = svg.querySelector(".Hatay");
+        const mersin = svg.querySelector(".Mersin");
+        const isparta = svg.querySelector(".Isparta");
 
         if (hatay) {
             hatay.style.cursor = "pointer";
-            hatay.onclick = () => alert("❤️ Hatay Anımız");
+            hatay.addEventListener("click", function () {
+                alert("❤️ Hatay Anımız");
+            });
+        } else {
+            console.log("Hatay bulunamadı");
         }
 
         if (mersin) {
             mersin.style.cursor = "pointer";
-            mersin.onclick = () => alert("❤️ Mersin Anımız");
+            mersin.addEventListener("click", function () {
+                alert("❤️ Mersin Anımız");
+            });
+        } else {
+            console.log("Mersin bulunamadı");
         }
 
         if (isparta) {
             isparta.style.cursor = "pointer";
-            isparta.onclick = () => alert("❤️ Isparta Anımız");
+            isparta.addEventListener("click", function () {
+                alert("❤️ Isparta Anımız");
+            });
+        } else {
+            console.log("Isparta bulunamadı");
         }
 
     });

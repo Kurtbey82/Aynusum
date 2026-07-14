@@ -5,6 +5,11 @@ window.onload = function () {
     object.addEventListener("load", function () {
 
         const svg = object.contentDocument;
+        const paths = svg.querySelectorAll("path");
+
+paths.forEach(path => {
+    console.log(path.id);
+});
 
         const hatay = svg.getElementById("TR31");
         const mersin = svg.getElementById("TR33");

@@ -1,4 +1,4 @@
-window.onload = function () {
+window.addEventListener("load", function () {
 
     const map = document.getElementById("turkiyeMap");
 
@@ -11,38 +11,64 @@ window.onload = function () {
             return;
         }
 
-        // Şehirleri class adına göre bul
-        const hatay = svg.querySelector(".Hatay");
-        const mersin = svg.querySelector(".Mersin");
-        const isparta = svg.querySelector(".Isparta");
+        // Şehir isimlerini kontrol et
+        console.log("Hatay:", svg.getElementById("Hatay"));
+        console.log("Mersin:", svg.getElementById("Mersin"));
+        console.log("Isparta:", svg.getElementById("Isparta"));
 
-        if (hatay) {
-            hatay.style.cursor = "pointer";
-            hatay.addEventListener("click", function () {
-                alert("❤️ Hatay Anımız");
-            });
-        } else {
-            console.log("Hatay bulunamadı");
-        }
+        const cities = [
+            {
+                id: "Hatay",
+                title: "Hatay ❤️",
+                date: "11 Eylül 2025",
+                text: "İlk tanıştığımız şehir."
+            },
+            {
+                id: "Mersin",
+                title: "Mersin ❤️",
+                date: "İlk Tatilimiz",
+                text: "Birlikte geçirdiğimiz en güzel günlerden biri."
+            },
+            {
+                id: "Isparta",
+                title: "Isparta ❤️",
+                date: "Anılarımız",
+                text: "Seni her zaman hatırlayacağım şehir."
+            }
+        ];
 
-        if (mersin) {
-            mersin.style.cursor = "pointer";
-            mersin.addEventListener("click", function () {
-                alert("❤️ Mersin Anımız");
-            });
-        } else {
-            console.log("Mersin bulunamadı");
-        }
+        cities.forEach(city => {
 
-        if (isparta) {
-            isparta.style.cursor = "pointer";
-            isparta.addEventListener("click", function () {
-                alert("❤️ Isparta Anımız");
+            const element = svg.getElementById(city.id);
+
+            if (!element) {
+                console.log(city.id + " bulunamadı.");
+                return;
+            }
+
+            element.style.cursor = "pointer";
+            element.style.fill = "#ff5fa2";
+
+            element.addEventListener("click", function () {
+
+                document.getElementById("popupTitle").innerText = city.title;
+                document.getElementById("popupDate").innerText = city.date;
+                document.getElementById("popupText").innerText = city.text;
+
+                document.getElementById("cityPopup").style.display = "flex";
+
             });
-        } else {
-            console.log("Isparta bulunamadı");
-        }
+
+        });
 
     });
 
-};
+});
+
+document.addEventListener("click", function (e) {
+
+    if (e.target.id === "cityPopup") {
+        document.getElementById("cityPopup").style.display = "none";
+    }
+
+});

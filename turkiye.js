@@ -1,100 +1,49 @@
-alert("JS çalıştı");
-
 window.onload = function () {
 
-    const svgObject = document.getElementById("turkiyeMap");
+    const map = document.getElementById("turkiyeMap");
 
-    function haritayiHazirla() {
+    map.addEventListener("load", function () {
 
-        const svg = svgObject.contentDocument;
+        const svg = map.contentDocument;
 
         if (!svg) {
-            alert("SVG okunamadı");
+            alert("SVG yüklenemedi.");
             return;
         }
 
-        ["hatay", "mersin", "isparta"].forEach(id => {
+        // Hatay
+        let hatay =
+            svg.getElementById("Hatay") ||
+            svg.getElementById("hatay");
 
-            const city = svg.getElementById(id);
+        // Mersin
+        let mersin =
+            svg.getElementById("Mersin") ||
+            svg.getElementById("mersin") ||
+            svg.getElementById("İçel") ||
+            svg.getElementById("Icel");
 
-            if (city) {
+        // Isparta
+        let isparta =
+            svg.getElementById("Isparta") ||
+            svg.getElementById("ISPARTA") ||
+            svg.getElementById("isparta");
 
-                city.setAttribute("fill", "#ff4d8d");
+        if (hatay) {
+            hatay.style.cursor = "pointer";
+            hatay.onclick = () => alert("❤️ Hatay Anımız");
+        }
 
-                city.style.fill = "#ff4d8d";
-                city.style.cursor = "pointer";
+        if (mersin) {
+            mersin.style.cursor = "pointer";
+            mersin.onclick = () => alert("❤️ Mersin Anımız");
+        }
 
-                city.onclick = () => {
-                    location.href = id + ".html";
-                };
+        if (isparta) {
+            isparta.style.cursor = "pointer";
+            isparta.onclick = () => alert("❤️ Isparta Anımız");
+        }
 
-            } else {
-                alert(id + " bulunamadı");
-            }
-
-        });
-
-    }
-
-    if (svgObject.contentDocument) {
-        haritayiHazirla();
-    } else {
-        svgObject.onload = haritayiHazirla;
-    }
+    });
 
 };
-function openCity(city){
-
-    const popup=document.getElementById("cityPopup");
-
-    const title=document.getElementById("popupTitle");
-
-    const date=document.getElementById("popupDate");
-
-    const text=document.getElementById("popupText");
-
-    if(city==="hatay"){
-
-        title.innerHTML="❤️ Hatay";
-
-        date.innerHTML="📅 16.05.2026";
-
-        text.innerHTML="Birlikte geçirdiğimiz güzel anılar burada başladı.";
-
-    }
-
-    if(city==="mersin"){
-
-        title.innerHTML="❤️ Mersin";
-
-        date.innerHTML="📅 16.05.2026";
-
-        text.innerHTML="Deniz, kahkahalar ve unutulmaz anılar...";
-
-    }
-
-    if(city==="isparta"){
-
-        title.innerHTML="❤️ Isparta";
-
-        date.innerHTML="📅 04.10.2025";
-
-        text.innerHTML="İlk güzel yolculuklarımızdan biri.";
-
-    }
-
-    popup.style.display="flex";
-
-    setTimeout(()=>{
-
-        location.href=city+".html";
-
-    },1000);
-
-}
-
-document.getElementById("cityPopup").onclick=function(){
-
-    this.style.display="none";
-
-}

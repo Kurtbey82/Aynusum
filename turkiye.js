@@ -1,74 +1,43 @@
-window.addEventListener("load", function () {
+window.onload = function () {
 
-    const map = document.getElementById("turkiyeMap");
+    const object = document.getElementById("turkiyeMap");
 
-    map.addEventListener("load", function () {
+    object.addEventListener("load", function () {
 
-        const svg = map.contentDocument;
+        const svg = object.contentDocument;
 
-        if (!svg) {
-            alert("SVG yüklenemedi.");
-            return;
-        }
+        const hatay = svg.getElementById("TR31");
+        const mersin = svg.getElementById("TR33");
+        const isparta = svg.getElementById("TR32");
 
-        // Şehir isimlerini kontrol et
-        console.log("Hatay:", svg.getElementById("Hatay"));
-        console.log("Mersin:", svg.getElementById("Mersin"));
-        console.log("Isparta:", svg.getElementById("Isparta"));
-
-        const cities = [
-            {
-                id: "Hatay",
-                title: "Hatay ❤️",
-                date: "11 Eylül 2025",
-                text: "İlk tanıştığımız şehir."
-            },
-            {
-                id: "Mersin",
-                title: "Mersin ❤️",
-                date: "İlk Tatilimiz",
-                text: "Birlikte geçirdiğimiz en güzel günlerden biri."
-            },
-            {
-                id: "Isparta",
-                title: "Isparta ❤️",
-                date: "Anılarımız",
-                text: "Seni her zaman hatırlayacağım şehir."
-            }
-        ];
-
-        cities.forEach(city => {
-
-            const element = svg.getElementById(city.id);
-
-            if (!element) {
-                console.log(city.id + " bulunamadı.");
-                return;
-            }
-
-            element.style.cursor = "pointer";
-            element.style.fill = "#ff5fa2";
-
-            element.addEventListener("click", function () {
-
-                document.getElementById("popupTitle").innerText = city.title;
-                document.getElementById("popupDate").innerText = city.date;
-                document.getElementById("popupText").innerText = city.text;
-
-                document.getElementById("cityPopup").style.display = "flex";
-
-            });
-
-        });
+        setupCity(hatay, "Hatay ❤️");
+        setupCity(mersin, "Mersin ❤️");
+        setupCity(isparta, "Isparta ❤️");
 
     });
 
-});
+};
 
-document.addEventListener("click", function (e) {
+function setupCity(city, message){
 
-    if (e.target.id === "cityPopup") {
-        document.getElementById("cityPopup").style.display = "none";
+    if(!city){
+        console.log("Şehir bulunamadı");
+        return;
     }
 
-});
+    city.style.cursor="pointer";
+    city.style.fill="#ff4f8b";
+
+    city.addEventListener("click",function(){
+        alert(message);
+    });
+
+    city.addEventListener("mouseover",function(){
+        city.style.fill="#ff0055";
+    });
+
+    city.addEventListener("mouseout",function(){
+        city.style.fill="#ff4f8b";
+    });
+
+}

@@ -8,7 +8,6 @@ window.onload = function () {
 
         const hatay = svg.getElementById("TR31");
 
-        hatay.style.fill = "red";
         hatay.style.cursor = "pointer";
 
         hatay.addEventListener("click", function () {

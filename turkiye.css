@@ -40,6 +40,7 @@ body{
 
 .container{
     width:95%;
+    max-width:900px;
     margin:110px auto 40px;
     position:relative;
 }
@@ -51,11 +52,11 @@ body{
     box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 #turkiyeMap{
+    display:block;
     width:100%;
     max-width:900px;
-    display:block;
+    aspect-ratio: 1000 / 565; /* SVG oranına göre */
     margin:40px auto;
-    height:auto;
 }
 .cityLabel{
 

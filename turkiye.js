@@ -1,17 +1,31 @@
 window.onload = function () {
 
-    alert("window.onload çalıştı");
+    alert("1");
 
     const object = document.getElementById("turkiyeMap");
 
-    object.onload = function () {
+    setTimeout(function () {
 
-        alert("SVG yüklendi");
+        alert("2");
 
         const svg = object.contentDocument;
 
-        alert(svg);
+        if (!svg) {
+            alert("contentDocument = null");
+            return;
+        }
 
-    };
+        alert("SVG bulundu");
+
+        const hatay = svg.getElementById("TR31");
+
+        if (!hatay) {
+            alert("TR31 bulunamadı");
+        } else {
+            alert("TR31 bulundu");
+            hatay.style.fill = "red";
+        }
+
+    }, 1000);
 
 };

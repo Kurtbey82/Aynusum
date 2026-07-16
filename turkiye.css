@@ -54,9 +54,8 @@ body{
 #turkiyeMap{
     display:block;
     width:100%;
-    max-width:900px;
-    aspect-ratio: 1000 / 565; /* SVG oranına göre */
-    margin:40px auto;
+    height:70vh;
+    margin:0 auto;
 }
 .cityLabel{
 

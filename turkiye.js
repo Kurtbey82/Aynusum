@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom/dist/panzoom.min.js"></script>
+<script src="turkiye.js"></script>
 window.onload = function () {
 
     const object = document.getElementById("turkiyeMap");

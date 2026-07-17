@@ -45,7 +45,6 @@ body{
     justify-content:center;
     align-items:center;
     position:relative;
-    overflow:hidden;
 }
 
 .map{
@@ -55,9 +54,11 @@ body{
     box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 #turkiyeMap{
-    width:95vw;
-    height:80vh;
     display:block;
+    width:90vw;
+    height:auto;
+    max-height:75vh;
+    margin:auto;
 }
 .cityLabel{
 

@@ -55,9 +55,9 @@ body{
 }
 #turkiyeMap{
     display:block;
-    width:90vw;
+    width:95%;
     height:auto;
-    max-height:75vh;
+    max-height:80vh;
     margin:auto;
 }
 .cityLabel{

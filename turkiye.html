@@ -3,86 +3,105 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>🗺️ Türkiye Haritamız ❤️</title>
+<title>Türkiye Haritamız ❤️</title>
 
-    <link rel="stylesheet" href="turkiye.css">
+<link rel="stylesheet" href="turkiye.css">
 
 </head>
 
 <body>
 
-    <!-- Üst Menü -->
+<header class="topBar">
 
-    <header class="topBar">
+    <button class="backButton"
+            onclick="location.href='index.html'">
 
-        <button class="backButton"
-                onclick="location.href='index.html'">
+        ←
 
-            ← Ana Sayfa
+    </button>
+
+    <h1>🗺️ Türkiye Haritamız ❤️</h1>
+
+</header>
+
+
+<main class="container">
+
+    <div class="mapWrapper">
+
+        <object
+            id="turkiyeMap"
+            data="turkey.svg"
+            type="image/svg+xml">
+        </object>
+
+    </div>
+
+</main>
+
+
+<!-- Popup -->
+
+<div id="cityPopup" class="popup">
+
+    <div class="popupCard">
+
+        <button id="closePopup"
+                class="closeButton">
+
+            ✕
 
         </button>
 
-        <h1>🗺️ Türkiye Haritamız ❤️</h1>
+        <h2 id="popupTitle"></h2>
 
-    </header>
+        <p class="popupDate"
+           id="popupDate"></p>
 
-
-    <!-- Harita -->
-
-    <main class="container">
-
-        <div id="mapWrapper" class="mapWrapper">
-
-            <object id="turkiyeMap"
-                    data="turkey.svg"
-                    type="image/svg+xml">
-            </object>
-
-        </div>
-
-    </main>
+        <p class="popupText"
+           id="popupText"></p>
 
 
-    <!-- Popup -->
+        <!-- Spotify -->
 
-    <div id="cityPopup" class="popup">
+        <div id="spotifyCard"
+             class="spotifyCard">
 
-        <div class="popupCard">
+            <img id="spotifyCover"
+                 src=""
+                 alt="Kapak">
 
-            <button id="closePopup"
-                    class="closeButton">
+            <div class="spotifyInfo">
 
-                ✕
+                <h3 id="songTitle"></h3>
 
-            </button>
-
-            <h2 id="popupTitle"></h2>
-
-            <p id="popupDate"></p>
-
-            <p id="popupText"></p>
-
-            <div id="popupGallery"
-                 class="popupGallery">
+                <p id="songArtist"></p>
 
             </div>
 
         </div>
 
+
+        <!-- Fotoğraflar -->
+
+        <div id="popupGallery"
+             class="gallery">
+
+        </div>
+
     </div>
 
+</div>
 
-    <!-- Panzoom -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom/dist/panzoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@panzoom/panzoom/dist/panzoom.min.js"></script>
 
-    <!-- Javascript -->
-
-    <script src="turkiye.js"></script>
+<script src="turkiye.js"></script>
 
 </body>
 

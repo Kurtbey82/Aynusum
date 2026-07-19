@@ -341,4 +341,28 @@
   <circle class="Gümüshane" cx="698.7" cy="135" id="TR29">
   </circle>
  </g>
+    <g id="memoryHearts">
+
+    <text id="heart-hatay"
+          x="546"
+          y="371"
+          font-size="22"
+          text-anchor="middle"
+          cursor="pointer">❤️</text>
+
+    <text id="heart-mersin"
+          x="433"
+          y="354"
+          font-size="22"
+          text-anchor="middle"
+          cursor="pointer">❤️</text>
+
+    <text id="heart-isparta"
+          x="299"
+          y="277"
+          font-size="22"
+          text-anchor="middle"
+          cursor="pointer">❤️</text>
+
+</g>
 </svg>

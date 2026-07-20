@@ -2,55 +2,34 @@ window.onload = function () {
 
     const object = document.getElementById("turkiyeMap");
 
-    setTimeout(function () {
+    object.addEventListener("load", function () {
 
         const svg = object.contentDocument;
 
-        // Şehirler
-        const hatay = svg.getElementById("TR31");
-        const mersin = svg.getElementById("TR33");
-        const isparta = svg.getElementById("TR32");
+        const cities = {
 
-        // Kalpler
-        const heartHatay = svg.getElementById("heart-hatay");
-        const heartMersin = svg.getElementById("heart-mersin");
-        const heartIsparta = svg.getElementById("heart-isparta");
+            TR31: "hatay",
+            TR33: "mersin",
+            TR32: "isparta"
 
-        // Şehir renkleri
-        setupCity(hatay);
-        setupCity(mersin);
-        setupCity(isparta);
+        };
 
-        // Kalplere tıklama
-        heartHatay.addEventListener("click", () => openCity("hatay"));
-        heartMersin.addEventListener("click", () => openCity("mersin"));
-        heartIsparta.addEventListener("click", () => openCity("isparta"));
+        for (const id in cities) {
 
-    }, 1000);
+            const city = svg.getElementById(id);
+
+            if (!city) continue;
+
+            city.style.cursor = "pointer";
+
+            city.addEventListener("click", function () {
+
+                location.href = "memory.html?city=" + cities[id];
+
+            });
+
+        }
+
+    });
 
 };
-
-function setupCity(city){
-
-    if(!city) return;
-
-    city.style.cursor = "pointer";
-    city.style.fill = "#ff4f8b";
-
-}
-
-function openCity(city){
-
-    if(city==="hatay"){
-        window.location.href="memory.html?id=hatay";
-    }
-
-    if(city==="mersin"){
-        window.location.href="memory.html?id=mersin";
-    }
-
-    if(city==="isparta"){
-        window.location.href="memory.html?id=isparta";
-    }
-
-}

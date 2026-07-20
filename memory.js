@@ -6,7 +6,11 @@ const memories = {
 
         date:"11 Eylül 2025",
 
-        text:"Buraya Hatay anınızı yazacağız."
+        text:"Buraya Hatay anınızı yazacağız.",
+
+        photo:"img/hatay.jpg",
+
+        spotify:"https://open.spotify.com/embed/track/SPOTIFY_TRACK_ID"
 
     },
 
@@ -16,7 +20,11 @@ const memories = {
 
         date:"",
 
-        text:""
+        text:"",
+
+        photo:"img/mersin.jpg",
+
+        spotify:""
 
     },
 
@@ -26,7 +34,11 @@ const memories = {
 
         date:"",
 
-        text:""
+        text:"",
+
+        photo:"img/isparta.jpg",
+
+        spotify:""
 
     }
 

@@ -2,14 +2,25 @@ window.onload = function () {
 
     const object = document.getElementById("turkiyeMap");
 
-    object.addEventListener("load", function () {
+    function initMap() {
 
         const svg = object.contentDocument;
 
-        alert(svg ? "SVG yüklendi" : "SVG yüklenmedi");
+        if (!svg) {
+            alert("SVG henüz hazır değil");
+            return;
+        }
+
+        alert("SVG hazır");
 
         alert(svg.getElementById("TR31"));
+    }
 
-    });
+    // SVG zaten yüklüyse
+    if (object.contentDocument) {
+        initMap();
+    } else {
+        object.onload = initMap;
+    }
 
 };

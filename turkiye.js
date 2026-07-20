@@ -1,32 +1,17 @@
-const object = document.getElementById("turkiyeMap");
+window.onload = () => {
 
-object.addEventListener("load", () => {
+    const object = document.getElementById("turkiyeMap");
 
-    const svg = object.contentDocument;
+    object.onload = () => {
 
-    const cities = {
-        TR31: "hatay",
-        TR33: "mersin",
-        TR32: "isparta"
+        const svgDoc = object.contentDocument;
+
+        console.log(svgDoc);
+
+        console.log(svgDoc.getElementById("TR31"));
+        console.log(svgDoc.getElementById("TR32"));
+        console.log(svgDoc.getElementById("TR33"));
+
     };
 
-    Object.keys(cities).forEach(id => {
-
-        const city = svg.getElementById(id);
-
-        if (!city) {
-            console.log(id + " bulunamadı");
-            return;
-        }
-
-        city.style.cursor = "pointer";
-
-        city.addEventListener("click", () => {
-
-            window.location.href = "memory.html?city=" + cities[id];
-
-        });
-
-    });
-
-});
+};

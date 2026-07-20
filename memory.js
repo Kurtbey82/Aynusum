@@ -58,4 +58,8 @@ if(memory){
 
     document.getElementById("text").textContent = memory.text;
 
+    document.getElementById("photo").src = memory.photo;
+
+    document.getElementById("spotify").src = memory.spotify;
+
 }

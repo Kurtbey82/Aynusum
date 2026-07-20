@@ -13,7 +13,13 @@ window.onload = function () {
 
         alert("SVG hazır");
 
-        alert(svg.getElementById("TR31"));
+        const hatay = svg.getElementById("TR31");
+
+hatay.style.fill = "red";
+
+hatay.addEventListener("click", function () {
+    alert("Hatay tıklandı");
+});
     }
 
     // SVG zaten yüklüyse

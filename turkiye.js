@@ -42,15 +42,15 @@ function setupCity(city){
 function openCity(city){
 
     if(city==="hatay"){
-        alert("Hatay ❤️");
+        window.location.href="memory.html?id=hatay";
     }
 
     if(city==="mersin"){
-        alert("Mersin ❤️");
+        window.location.href="memory.html?id=mersin";
     }
 
     if(city==="isparta"){
-        alert("Isparta ❤️");
+        window.location.href="memory.html?id=isparta";
     }
 
 }

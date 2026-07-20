@@ -6,23 +6,32 @@ window.onload = function () {
 
         const svg = object.contentDocument;
 
-        if (!svg) {
-            alert("SVG henüz hazır değil");
-            return;
-        }
+        if (!svg) return;
 
-        alert("SVG hazır");
+        const cities = {
+            TR31: "hatay",
+            TR33: "mersin",
+            TR32: "isparta"
+        };
 
-        const hatay = svg.getElementById("TR31");
+        Object.keys(cities).forEach(function(id){
 
-hatay.style.fill = "red";
+            const city = svg.getElementById(id);
 
-hatay.addEventListener("click", function () {
-    alert("Hatay tıklandı");
-});
+            if(!city) return;
+
+            city.style.cursor = "pointer";
+
+            city.addEventListener("click", function(){
+
+                window.location.href = "memory.html?city=" + cities[id];
+
+            });
+
+        });
+
     }
 
-    // SVG zaten yüklüyse
     if (object.contentDocument) {
         initMap();
     } else {

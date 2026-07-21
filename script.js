@@ -50,21 +50,28 @@ document.getElementById("homePage").style.display="block";
 
 function playMusic(){
 
-let music=document.getElementById("music");
+    const music = document.getElementById("music");
+    const button = document.getElementById("playBtn");
 
-if(music.paused){
+    if(music.paused){
 
-music.play();
+        music.play();
+        button.innerHTML = "⏸";
+
+    }else{
+
+        music.pause();
+        button.innerHTML = "▶";
+
+    }
 
 }
 
-else{
+document.getElementById("music").addEventListener("ended", function(){
 
-music.pause();
+    document.getElementById("playBtn").innerHTML = "▶";
 
-}
-
-}
+});
 
 function logout(){
 

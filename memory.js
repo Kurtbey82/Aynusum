@@ -21,7 +21,7 @@ const memories = {
 
         date: "BUGÜN TEST",
 
-        text: "Eğer bunu görüyorsan memory.js çalışıyor."
+        text: "Eğer bunu görüyorsan memory.js çalışıyor.",
 
         photo: "mersin1.jpg",
 

@@ -100,3 +100,22 @@ iframe{
     border:none;
 
 }
+.gallery{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:12px;
+}
+
+.gallery img{
+
+    width:100%;
+    flex:0 0 100%;
+    border-radius:25px;
+    scroll-snap-align:center;
+
+}
+
+.gallery::-webkit-scrollbar{
+    display:none;
+}

@@ -49,23 +49,88 @@ text-align:center;
 }
 
 .musicCard{
+
     width:90%;
     max-width:360px;
+
     background:#121212;
+
     border-radius:24px;
+
     overflow:hidden;
+
     margin:30px auto;
+
     box-shadow:0 15px 35px rgba(0,0,0,.35);
+
 }
 
 .musicCard img{
+
     width:100%;
+
     aspect-ratio:1/1;
+
     object-fit:cover;
+
+    display:block;
+
 }
 
 .musicInfo{
-    padding:18px;
+
+    padding:22px;
+
+    text-align:center;
+
+}
+
+.musicInfo h2{
+
+    color:white;
+
+    font-size:22px;
+
+    margin-bottom:8px;
+
+}
+
+.musicInfo p{
+
+    color:#b3b3b3;
+
+    font-size:16px;
+
+    margin-bottom:22px;
+
+}
+
+.musicInfo button{
+
+    width:70px;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1DB954;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.musicInfo button:hover{
+
+    transform:scale(1.08);
+
 }
 
 .note{

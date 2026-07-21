@@ -50,8 +50,8 @@ text-align:center;
 
 .musicCard{
 
-    width:90%;
-    max-width:380px;
+    width:95%;
+    max-width:400px;
 
     background:#121212;
 
@@ -59,7 +59,7 @@ text-align:center;
 
     margin:35px auto;
 
-    padding:22px;
+    padding:18px;
 
     color:white;
 
@@ -107,20 +107,16 @@ text-align:center;
 
     width:100%;
 
-    margin:20px 0;
+    margin:12px 0;
 
 }
 
 .controls{
-
+    margin-top:8px;
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:30px;
-
 }
 
 .icon{

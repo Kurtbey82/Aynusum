@@ -92,21 +92,23 @@ Giriş Yap
 
 <div class="musicCard">
 
-<img src="img/kapak.jpg">
+    <img src="img/kapak.jpg" alt="Albüm Kapağı">
 
-<h2>Bizim Şarkımız</h2>
+    <div class="musicInfo">
 
-<audio id="music">
+        <h2>Taki Seni Görene Kadar</h2>
 
-<source src="ses/sarki.mp3">
+        <p>Toygar Işıklı</p>
 
-</audio>
+        <button id="playBtn" onclick="playMusic()">
+            ▶
+        </button>
 
-<button onclick="playMusic()">
+    </div>
 
-▶️ / ⏸️
-
-</button>
+    <audio id="music">
+        <source src="ses/sarki.mp3" type="audio/mpeg">
+    </audio>
 
 </div>
 

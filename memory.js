@@ -1,3 +1,4 @@
+alert("memory.js çalıştı");
 const memories = {
 
     hatay: {

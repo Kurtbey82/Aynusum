@@ -5,11 +5,11 @@ const memories = {
 
         title: "❤️ Hatay",
 
-        date: "11 Eylül 2025",
+        date: "16 Mayıs 2026",
 
         text: "Buraya Hatay anınızı yazacağız.",
 
-        photo: "hatay1.jpg",
+        photo: "img/hatay1.jpg",
 
         spotify: ""
 
@@ -23,7 +23,7 @@ const memories = {
 
         text: "Eğer bunu görüyorsan memory.js çalışıyor.",
 
-        photo: "mersin1.jpg",
+        photo: "img/mersin1.jpg",
 
         spotify: ""
 
@@ -37,7 +37,7 @@ const memories = {
 
         text: "Buraya Isparta anınızı yazacağız.",
 
-        photo: "isparta1.jpg",
+        photo: "img/isparta1.jpg",
 
         spotify: ""
 

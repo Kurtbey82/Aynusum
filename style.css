@@ -50,25 +50,28 @@ text-align:center;
 
 .musicCard{
 
-width:330px;
+    width:90%;
+    max-width:350px;
 
-margin:auto;
+    margin:30px auto;
 
-background:#111;
+    background:#111;
 
-color:white;
+    color:white;
 
-border-radius:20px;
+    border-radius:20px;
 
-padding:20px;
+    padding:20px;
 
 }
 
 .musicCard img{
 
-width:100%;
-
-border-radius:15px;
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:15px;
+    display:block;
 
 }
 

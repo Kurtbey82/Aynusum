@@ -9,9 +9,12 @@ const memories = {
 
         text: "Buraya Hatay anınızı yazacağız.",
 
-        photo: "img/hatay1.jpg",
-
-        spotify: ""
+        photos: [
+    "img/hatay1.jpg",
+    "img/hatay2.jpg",
+    "img/hatay3.jpg",
+    "img/hatay4.jpg"
+],
 
     },
 
@@ -23,9 +26,12 @@ const memories = {
 
         text: "Eğer bunu görüyorsan memory.js çalışıyor.",
 
-        photo: "img/mersin1.jpg",
-
-        spotify: ""
+        photos: [
+    "img/mersin1.jpg",
+    "img/mersin2.jpg",
+    "img/mersin3.jpg",
+    "img/mersin4.jpg"
+],
 
     },
 
@@ -37,9 +43,21 @@ const memories = {
 
         text: "Buraya Isparta anınızı yazacağız.",
 
-        photo: "img/isparta1.jpg",
-
-        spotify: ""
+        photos: [
+    "img/isparta0.jpg",
+    "img/isparta1.jpg",
+    "img/isparta2.jpg",
+    "img/isparta3.jpg",
+    "img/isparta4.jpg",
+    "img/isparta5.jpg",
+    "img/isparta6.jpg",
+    "img/isparta7.jpg",
+    "img/isparta8.jpg",
+    "img/isparta9.jpg",
+    "img/isparta10.jpg",
+    "img/isparta11.jpg",
+    "img/isparta12.jpg"
+],
 
     }
 
@@ -59,6 +77,18 @@ if (data) {
 
     document.getElementById("text").innerText = data.text;
 
-    document.getElementById("photo").src = data.photo;
+    const gallery = document.getElementById("gallery");
+
+gallery.innerHTML = "";
+
+data.photos.forEach(function(photo){
+
+    const img = document.createElement("img");
+
+    img.src = photo;
+
+    gallery.appendChild(img);
+
+});
 
 }

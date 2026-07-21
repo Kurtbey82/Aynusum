@@ -92,23 +92,30 @@ Giriş Yap
 
 <div class="musicCard">
 
-    <img src="img/kapak.jpg" alt="Albüm Kapağı">
+    <img class="cover" src="img/kapak.jpg" alt="Kapak">
 
-    <div class="musicInfo">
-
-        <h2>Taki Seni Görene Kadar</h2>
-
-        <p>Toygar Işıklı</p>
-
-        <button id="playBtn" onclick="playMusic()">
-            ▶
-        </button>
-
+    <div class="songInfo">
+        <h2>Gökyüzünü Tutamam</h2>
+        <p>Aynur &amp; Mehmet</p>
     </div>
 
     <audio id="music">
         <source src="ses/sarki.mp3" type="audio/mpeg">
     </audio>
+
+    <input id="progress" type="range" value="0" min="0" max="100">
+
+    <div class="controls">
+
+        <button class="icon">⏮</button>
+
+        <button id="playBtn" class="playButton" onclick="playMusic()">
+            ▶
+        </button>
+
+        <button class="icon">⏭</button>
+
+    </div>
 
 </div>
 

@@ -16,11 +16,11 @@ const memories = {
 
     mersin: {
 
-        title: "❤️ Mersin",
+        title: "💚 MERSİN TESTİ",
 
-        date: "12 Ekim 2025",
+        date: "BUGÜN TEST",
 
-        text: "Buraya Mersin anınızı yazacağız.",
+        text: "Eğer bunu görüyorsan memory.js çalışıyor."
 
         photo: "mersin1.jpg",
 

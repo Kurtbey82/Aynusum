@@ -24,26 +24,19 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:8px 12px;
+    padding:8px 18px;
     box-shadow:0 3px 12px rgba(0,0,0,.12);
     z-index:999;
 }
-.left,
+.left{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
 .right{
     display:flex;
     align-items:center;
-    gap:10px;
-}
-.left,
-.right{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-.right b{
-    font-size:26px;
-    color:#ff4f87;
-    white-space:nowrap;
+    gap:16px;
 }
 
 .content{
@@ -181,8 +174,8 @@ width:250px;
 }
 
 button{
-    padding:8px 12px;
-    font-size:15px;
+    padding:6px 10px;
+    font-size:14px;
     border:none;
     border-radius:12px;
     background:#fff;

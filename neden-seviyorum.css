@@ -66,35 +66,41 @@ overflow:hidden;
     position:fixed;
     top:0;
     left:0;
-    width:100%;
+    right:0;
     height:80px;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:transparent;
-    z-index:100;
+    z-index:999;
 }
 
 .topBar h1{
-    color:#ff3d81;
-    font-size:26px;
+
+    margin:0;
+
+    font-size:34px;
+
+    color:#ff4f87;
+
     text-align:center;
-    width:100%;
-    padding:0 120px;
-    line-height:1.2;
 }
 
 .backButton{
     position:absolute;
-    left:20px;
+    left:18px;
     top:50%;
     transform:translateY(-50%);
-    padding:12px 24px;
+
+    padding:12px 18px;
+
+    font-size:16px;
+
     border:none;
-    border-radius:18px;
-    background:white;
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
-    cursor:pointer;
+    border-radius:16px;
+
+    background:#fff;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
 #messageCard{

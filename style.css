@@ -464,3 +464,24 @@ header button{
     font-size:18px;
     white-space:nowrap;
 }
+.homeBtn{
+    padding:6px 12px !important;
+    font-size:14px !important;
+    min-width:80px;
+    margin-left:10px;
+}
+
+.logoutBtn{
+    padding:6px 12px !important;
+    font-size:14px !important;
+    min-width:95px;
+    margin-right:12px;
+}
+
+.left{
+    gap:18px;
+}
+
+.right{
+    gap:18px;
+}

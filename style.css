@@ -157,37 +157,36 @@ text-align:center;
 }
 
 .songInfo{
-    padding:18px 20px 8px;
+    padding:10px 16px 4px;
     background:#121212;
 }
 
 .songInfo h2{
     margin:0;
     color:#fff;
-    font-size:26px;
-    font-weight:bold;
+    font-size:22px;
+    font-weight:700;
+    line-height:1.2;
 }
 
 .songInfo p{
-    margin:6px 0 0;
+    margin:2px 0 0;
     color:#b3b3b3;
-    font-size:18px;
+    font-size:15px;
 }
 
 #progress{
-
     width:100%;
-
-    margin:8px 0;
-
+    margin:6px 0;
 }
 
 .controls{
-    margin-top:8px;
+    margin-top:2px;
+    padding-bottom:8px;
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:30px;
+    gap:22px;
 }
 
 .icon{
@@ -198,30 +197,20 @@ text-align:center;
 
     color:white;
 
-    font-size:28px;
+    font-size:24px;
 
     cursor:pointer;
 
 }
 
 .playButton{
-
-    width:72px;
-
-    height:72px;
-
+    width:58px;
+    height:58px;
     border-radius:50%;
-
     border:none;
-
     background:white;
-
     color:black;
-
-    font-size:30px;
-
-    cursor:pointer;
-
+    font-size:24px;
 }
 .note{
 

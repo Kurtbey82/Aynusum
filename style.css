@@ -31,12 +31,15 @@ header{
 .left{
     display:flex;
     align-items:center;
-    gap:16px;
+    gap:10px;
+    flex:1;
 }
+
 .right{
     display:flex;
     align-items:center;
-    gap:16px;
+    gap:12px;
+    margin-left:auto;
 }
 
 .content{
@@ -444,4 +447,20 @@ header button{
     font-size:18px;
     line-height:1.8;
     color:#555;
+}
+.left button:nth-child(2){
+    padding:8px 14px;
+    font-size:15px;
+    min-width:90px;
+}
+
+.right button{
+    padding:8px 14px;
+    font-size:15px;
+    min-width:105px;
+}
+
+.right b{
+    font-size:18px;
+    white-space:nowrap;
 }

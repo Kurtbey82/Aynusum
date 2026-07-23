@@ -12,7 +12,7 @@ const messages=[
 
 ];
 
-if(localStorage.getItem("login")=="true"){
+if(sessionStorage.getItem("login")=="true"){
 
 showHome();
 
@@ -24,7 +24,7 @@ let p=document.getElementById("password").value;
 
 if(p==password){
 
-localStorage.setItem("login","true");
+sessionStorage.setItem("login","true");
 
 showHome();
 
@@ -75,7 +75,7 @@ document.getElementById("music").addEventListener("ended", function(){
 
 function logout(){
 
-localStorage.removeItem("login");
+sessionStorage.removeItem("login");
 
 location.reload();
 

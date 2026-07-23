@@ -40,17 +40,16 @@ body{
 }
 
 .topBar h1{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
-    color:#ff3d81;
+    margin: 0;
 
-    font-size:24px;
+    font-size: 26px;
+    color: #ff3d81;
 
-    font-weight:bold;
-
-    text-align:center;
-
-    padding:0 60px;
-
+    white-space: nowrap;
 }
 
 /* =======================
@@ -59,8 +58,8 @@ body{
 
 .backButton{
     position:absolute;
-    left:20px;
-    top:20px;
+    left:12px;
+    top:16px;
 
     display:flex;
     align-items:center;

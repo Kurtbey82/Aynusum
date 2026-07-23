@@ -123,3 +123,13 @@ document.getElementById("sideMenu").style.left="-300px";
 document.getElementById("overlay").style.display="none";
 
 }
+// Ana sayfada geri tuşuna basılınca çıkmak yerine sayfayı yenile
+history.pushState(null, null, location.href);
+
+window.addEventListener("popstate", function () {
+
+    history.pushState(null, null, location.href);
+
+    location.reload();
+
+});

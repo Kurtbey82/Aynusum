@@ -52,30 +52,22 @@ body{
 
 .backButton{
     position:absolute;
-    left:18px;
+    left:12px;          /* Biraz daha sola */
     top:18px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:150px;
-    height:52px;
-
-    white-space:nowrap;
-
-    font-size:16px;
-    font-weight:600;
+    padding:10px 16px;  /* Daha küçük */
+    font-size:15px;     /* Yazıyı küçült */
 
     border:none;
-    border-radius:28px;
+    border-radius:18px;
 
     background:#fff;
-    box-shadow:0 8px 22px rgba(0,0,0,.12);
+    color:#333;
 
-    z-index:1000;
+    box-shadow:0 6px 16px rgba(0,0,0,.12);
+
+    z-index:1001;
 }
-
 .backButton:hover{
 
     transform:scale(1.08);

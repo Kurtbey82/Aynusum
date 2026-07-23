@@ -73,6 +73,10 @@ body{
     transform:scale(1.08);
 
 }
+.backButton span{
+    font-size:15px;
+    font-weight:600;
+}
 
 /* =======================
    HARİTA

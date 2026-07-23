@@ -58,29 +58,28 @@ body{
 ======================= */
 
 .backButton{
-
     position:absolute;
+    left:20px;
+    top:20px;
 
-    left:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
 
-    width:46px;
-
-    height:46px;
+    width:180px;
+    height:52px;
 
     border:none;
+    border-radius:26px;
 
-    border-radius:50%;
+    background:#fff;
+    color:#333;
+    font-size:18px;
+    font-weight:600;
+    text-decoration:none;
 
-    background:white;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.15);
-
-    transition:.25s;
-
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
 .backButton:hover{

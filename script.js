@@ -117,3 +117,14 @@ if(window.location.pathname.endsWith("home.html")){
     });
 
 }
+function showPage(id){
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+    document.getElementById(id).classList.add("active");
+
+}

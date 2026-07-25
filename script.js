@@ -133,3 +133,14 @@ window.addEventListener("popstate", function () {
     location.reload();
 
 });
+function goPage(page){
+
+    closeMenu();
+
+    setTimeout(function(){
+
+        location.replace(page);
+
+    },200);
+
+}

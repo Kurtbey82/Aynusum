@@ -255,3 +255,14 @@ cookie.classList.remove("crack");
 
 }
 }
+function showPage(id){
+
+    document.querySelectorAll(".page").forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+    document.getElementById(id).classList.add("active");
+
+}

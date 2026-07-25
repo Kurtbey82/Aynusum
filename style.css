@@ -9,9 +9,7 @@ background:#ffe6ef;
 }
 
 #homePage{
-
-display:none;
-
+    display:block;
 }
 
 .topBar{

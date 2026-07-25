@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Aynur ❤️ Mehmet</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div id="overlay" onclick="closeMenu()"></div>
+
+<div id="sideMenu">
+
+<h2>❤️ Menümüz</h2>
+
+<a href="#" onclick="goPage('neden-seviyorum.html')">❤️ Seni Neden Seviyorum?</a>
+
+<a href="#" onclick="goPage('sans-kurabiyesi.html')">🍪 Şans Kurabiyesi</a>
+
+<a href="#" onclick="goPage('anilarimiz.html')">📸 Anılarımız</a>
+
+<a href="#" onclick="goPage('turkiye.html')">📍 Kalbimizin Durakları</a>
+
+<a href="#" onclick="goPage('notlar.html')">📝 Notlar</a>
+
+<a href="#" onclick="goPage('oyun.html')">🎮 Mini Oyun</a>
+</div>
+
+<!-- Giriş -->
+
+<div id="loginPage">
+
+<div class="loginBox">
+
+<h1>❤️ Aynur & Mehmet ❤️</h1>
+
+<p>
+
+Beni ilk nerede gördüğünü yaz.<br>
+
+(Küçük harflerle yaz.)
+
+</p>
+
+<input
+id="password"
+type="password"
+placeholder="Şifre">
+
+<button onclick="login()">
+
+Giriş Yap
+
+</button>
+
+<p id="error"></p>
+
+</div>
+
+</div>
+
+<!-- Ana Sayfa -->
+
+<div id="homePage">
+
+<header class="topBar">
+
+    <button class="menuBtn" onclick="openMenu()">☰</button>
+
+    <button class="navBtn">Ana Sayfa</button>
+
+    <div class="headerSpacer"></div>
+
+    <button class="logoutBtn" onclick="logout()">
+    Güvenli Çıkış
+    </button>
+
+    <div class="logo">M&A ❤️</div>
+
+</header>
+
+<div class="content">
+
+<div class="musicCard">
+
+    <img class="cover" src="img/kapak.jpg" alt="Kapak">
+
+    <div class="songInfo">
+        <h2>Ta ki seni görene kadar </h2>
+        <p>Aynur &amp; Mehmet</p>
+    </div>
+
+    <audio id="music">
+        <source src="ses/sarki.mp3" type="audio/mpeg">
+    </audio>
+
+    <input id="progress" type="range" value="0" min="0" max="100">
+
+    <div class="controls">
+
+        <button class="icon">⏮</button>
+
+        <button id="playBtn" class="playButton" onclick="playMusic()">
+            ▶
+        </button>
+
+        <button class="icon">⏭</button>
+
+    </div>
+
+</div>
+<div class="welcomeCard">
+    <h1>Hoş Geldin Aynuşum ❤️</h1>
+
+    <p>
+        Burası sadece bir internet sitesi değil...
+        İkimizin anılarının, hayallerinin ve sevgimizin saklandığı küçük dünyamız.
+
+        Ne zaman özlersen, ne zaman gülümsemek istersen,
+        buraya geldiğinde bizi hatırlaman için hazırladım.
+
+        Seni çok seviyorum. ❤️
+    </p>
+</div>
+<h2 id="counter"></h2>
+
+<div class="note">
+
+<h2>Bugün senin günün sevgilim ❤️</h2>
+
+<p>
+
+Bugün senin günün sevgilim ve ben hayatımın en güzel günlerini başlatan o iyi ki doğdun anını kutlamak istedim.
+
+Bu gördüğün sayfa sadece sıradan bir internet sitesi değil; burası bizim dünyamız.
+
+Tanıştığımız ilk günden bugüne kadar kalbimde büyüyen ne varsa burada saklı.
+
+Sadece ikimize ait...
+
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+Aynur&Mehmet © Tüm Hakları Saklıdır
+
+</footer>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

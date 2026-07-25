@@ -53,11 +53,13 @@ function playMusic(){
 
 }
 
-document.getElementById("music").addEventListener("ended", function(){
+const music = document.getElementById("music");
 
-    document.getElementById("playBtn").innerHTML = "▶";
-
-});
+if (music) {
+    music.addEventListener("ended", function () {
+        document.getElementById("playBtn").innerHTML = "▶";
+    });
+}
 
 function logout(){
 
@@ -65,32 +67,25 @@ function logout(){
 
     window.location.replace("index.html");
 
-}
-setInterval(function(){
+}setInterval(function(){
 
-let start=new Date("2025-09-12");
+    const counter = document.getElementById("counter");
+    if(!counter) return;
 
-let now=new Date();
+    let start = new Date("2025-09-12");
+    let now = new Date();
+    let diff = now - start;
 
-let diff=now-start;
+    let gun = Math.floor(diff/86400000);
+    let saat = Math.floor(diff/3600000)%24;
+    let dakika = Math.floor(diff/60000)%60;
+    let saniye = Math.floor(diff/1000)%60;
 
-let gun=Math.floor(diff/86400000);
-
-let saat=Math.floor(diff/3600000)%24;
-
-let dakika=Math.floor(diff/60000)%60;
-
-let saniye=Math.floor(diff/1000)%60;
-
-document.getElementById("counter").innerHTML=
-
-gun+" Gün "
-
-+saat+" Saat "
-
-+dakika+" Dakika "
-
-+saniye+" Saniye";
+    counter.innerHTML =
+        gun+" Gün "
+        + saat+" Saat "
+        + dakika+" Dakika "
+        + saniye+" Saniye";
 
 },1000);
 function openMenu(){

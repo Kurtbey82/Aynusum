@@ -12,12 +12,6 @@ const messages=[
 
 ];
 
-if(sessionStorage.getItem("login")=="true"){
-
-showHome();
-
-}
-
 function login(){
 
 let p=document.getElementById("password").value;
@@ -26,7 +20,7 @@ if(p==password){
 
 sessionStorage.setItem("login","true");
 
-showHome();
+window.location.replace("home.html");
 
 }
 
@@ -37,14 +31,6 @@ let r=Math.floor(Math.random()*messages.length);
 document.getElementById("error").innerHTML=messages[r];
 
 }
-
-}
-
-function showHome(){
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("homePage").style.display="block";
 
 }
 

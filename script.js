@@ -61,12 +61,11 @@ document.getElementById("music").addEventListener("ended", function(){
 
 function logout(){
 
-sessionStorage.removeItem("login");
+    sessionStorage.removeItem("login");
 
-location.reload();
+    window.location.replace("index.html");
 
 }
-
 setInterval(function(){
 
 let start=new Date("2025-09-12");

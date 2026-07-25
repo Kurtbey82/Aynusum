@@ -140,9 +140,12 @@ function openCookie(){
 
 }
 const cookie = document.getElementById("cookie");
-const card=document.getElementById("messageCard");
-const message=document.getElementById("cookieMessage");
-const close=document.getElementById("closeCard");
+
+if(cookie){
+
+const card = document.getElementById("messageCard");
+const message = document.getElementById("cookieMessage");
+const close = document.getElementById("closeCard");
 
 const compliments=[
 
@@ -250,8 +253,4 @@ cookie.style.display="block";
 
 cookie.classList.remove("crack");
 
-}
-const cookie = document.getElementById("cookie");
-
-if(cookie){
 }

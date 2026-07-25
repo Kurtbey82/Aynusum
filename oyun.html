@@ -1,1 +1,7 @@
+<script>
+history.pushState(null, "", location.href);
 
+window.addEventListener("popstate", function () {
+    window.location.replace("home.html");
+});
+</script>

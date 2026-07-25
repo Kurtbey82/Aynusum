@@ -254,3 +254,4 @@ cookie.style.display="block";
 cookie.classList.remove("crack");
 
 }
+}

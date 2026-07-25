@@ -123,7 +123,7 @@ function goPage(page){
 
     setTimeout(function(){
 
-        location.replace(page);
+        window.location.href = page;
 
     },200);
 

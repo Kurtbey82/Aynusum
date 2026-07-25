@@ -128,3 +128,14 @@ function showPage(id){
     document.getElementById(id).classList.add("active");
 
 }
+function openCookie(){
+
+    closeMenu();
+
+    setTimeout(function(){
+
+        showPage("cookieSection");
+
+    },200);
+
+}

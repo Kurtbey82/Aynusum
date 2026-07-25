@@ -109,15 +109,19 @@ document.getElementById("overlay").style.display="none";
 
 }
 // Ana sayfada geri tuşuna basılınca çıkmak yerine sayfayı yenile
-history.pushState(null, null, location.href);
-
-window.addEventListener("popstate", function () {
+if(window.location.pathname.endsWith("home.html")){
 
     history.pushState(null, null, location.href);
 
-    location.reload();
+    window.addEventListener("popstate", function(){
 
-});
+        history.pushState(null, null, location.href);
+
+        location.reload();
+
+    });
+
+}
 function goPage(page){
 
     closeMenu();

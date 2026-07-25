@@ -117,14 +117,3 @@ if(window.location.pathname.endsWith("home.html")){
     });
 
 }
-function goPage(page){
-
-    closeMenu();
-
-    setTimeout(function(){
-
-        window.location.href = page;
-
-    },200);
-
-}

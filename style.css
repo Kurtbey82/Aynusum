@@ -579,25 +579,21 @@ header button{
 
 #cookieSection .topBar{
 
-    position:relative;
-
-    top:auto;
-    left:auto;
-    right:auto;
-
-    box-shadow:none;
-
-    background:transparent;
-
-    height:auto;
-
     display:flex;
-
-    justify-content:space-between;
 
     align-items:center;
 
-    padding:10px 20px;
+    justify-content:space-between;
+
+    margin-top:10px;
+
+    margin-bottom:20px;
+
+    background:transparent;
+
+    box-shadow:none;
+
+    padding:0 20px;
 
 }
 
@@ -633,13 +629,13 @@ header button{
 
 .container{
 
-    margin-top:35px;
-
     display:flex;
 
     justify-content:center;
 
     align-items:center;
+
+    margin-top:40px;
 
 }
 #cookie{

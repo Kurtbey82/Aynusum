@@ -121,11 +121,15 @@ function showPage(id){
 
     document.querySelectorAll(".page").forEach(function(page){
 
+        page.style.display = "none";
         page.classList.remove("active");
 
     });
 
-    document.getElementById(id).classList.add("active");
+    const target = document.getElementById(id);
+
+    target.style.display = "block";
+    target.classList.add("active");
 
 }
 function openCookie(){
@@ -255,30 +259,3 @@ cookie.classList.remove("crack");
 
 }
 }
-function showPage(id){
-
-    document.querySelectorAll(".page").forEach(function(page){
-
-        page.classList.remove("active");
-
-    });
-
-    document.getElementById(id).classList.add("active");
-
-}
-function openCookie(){
-
-    closeMenu();
-
-    setTimeout(function(){
-
-        showPage("cookieSection");
-
-    },200);
-
-}
-document.addEventListener("DOMContentLoaded", function () {
-
-    console.log("cookieSection:", document.getElementById("cookieSection"));
-
-});

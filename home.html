@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-  <script>
+
+<script>
 if(sessionStorage.getItem("login")!="true"){
     window.location.replace("index.html");
 }
-  </script>
+</script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -17,7 +19,8 @@ if(sessionStorage.getItem("login")!="true"){
 </head>
 
 <body>
-  <div id="overlay" onclick="closeMenu()"></div>
+
+<div id="overlay" onclick="closeMenu()"></div>
 
 <div id="sideMenu">
 
@@ -25,9 +28,8 @@ if(sessionStorage.getItem("login")!="true"){
 
 <a href="neden-seviyorum.html">❤️ Seni Neden Seviyorum?</a>
 
-<a href="#" onclick="alert('Tıklandı'); openCookie(); return false;">
-    🍪 Şans Kurabiyesi
-</a>
+<a href="#" onclick="openCookie();return false;">🍪 Şans Kurabiyesi</a>
+
 <a href="anilarimiz.html">📸 Anılarımız</a>
 
 <a href="turkiye.html">📍 Kalbimizin Durakları</a>
@@ -35,71 +37,82 @@ if(sessionStorage.getItem("login")!="true"){
 <a href="notlar.html">📝 Notlar</a>
 
 <a href="oyun.html">🎮 Mini Oyun</a>
-</div>
 
-<!-- Ana Sayfa -->
+</div>
 
 <div id="homePage">
 
 <header class="topBar">
 
-    <button class="menuBtn" onclick="openMenu()">☰</button>
+<button class="menuBtn" onclick="openMenu()">☰</button>
 
-    <button class="navBtn">Ana Sayfa</button>
+<button class="navBtn">Ana Sayfa</button>
 
-    <div class="headerSpacer"></div>
+<div class="headerSpacer"></div>
 
-    <button class="logoutBtn" onclick="logout()">
-    Güvenli Çıkış
-    </button>
+<button class="logoutBtn" onclick="logout()">
+Güvenli Çıkış
+</button>
 
-    <div class="logo">M&A ❤️</div>
+<div class="logo">M&A ❤️</div>
 
 </header>
 
 <div class="content">
+
 <div id="homeSection" class="page active">
+
 <div class="musicCard">
 
-    <img class="cover" src="img/kapak.jpg" alt="Kapak">
+<img class="cover" src="img/kapak.jpg" alt="Kapak">
 
-    <div class="songInfo">
-        <h2>Ta ki seni görene kadar </h2>
-        <p>Aynur &amp; Mehmet</p>
-    </div>
+<div class="songInfo">
 
-    <audio id="music">
-        <source src="ses/sarki.mp3" type="audio/mpeg">
-    </audio>
+<h2>Ta ki seni görene kadar</h2>
 
-    <input id="progress" type="range" value="0" min="0" max="100">
+<p>Aynur &amp; Mehmet</p>
 
-    <div class="controls">
+</div>
 
-        <button class="icon">⏮</button>
+<audio id="music">
 
-        <button id="playBtn" class="playButton" onclick="playMusic()">
-            ▶
-        </button>
+<source src="ses/sarki.mp3" type="audio/mpeg">
 
-        <button class="icon">⏭</button>
+</audio>
 
-    </div>
+<input id="progress" type="range" value="0" min="0" max="100">
+
+<div class="controls">
+
+<button class="icon">⏮</button>
+
+<button id="playBtn" class="playButton" onclick="playMusic()">
+▶
+</button>
+
+<button class="icon">⏭</button>
+
+</div>
 
 </div>
 <div class="welcomeCard">
-    <h1>Hoş Geldin Aynuşum ❤️</h1>
 
-    <p>
-        Burası sadece bir internet sitesi değil...
-        İkimizin anılarının, hayallerinin ve sevgimizin saklandığı küçük dünyamız.
+<h1>Hoş Geldin Aynuşum ❤️</h1>
 
-        Ne zaman özlersen, ne zaman gülümsemek istersen,
-        buraya geldiğinde bizi hatırlaman için hazırladım.
+<p>
 
-        Seni çok seviyorum. ❤️
-    </p>
+Burası sadece bir internet sitesi değil...
+İkimizin anılarının, hayallerinin ve sevgimizin saklandığı küçük dünyamız.
+
+Ne zaman özlersen, ne zaman gülümsemek istersen,
+buraya geldiğinde bizi hatırlaman için hazırladım.
+
+Seni çok seviyorum. ❤️
+
+</p>
+
 </div>
+
 <h2 id="counter"></h2>
 
 <div class="note">
@@ -121,53 +134,56 @@ Sadece ikimize ait...
 </div>
 
 </div>
-  <!-- homeSection -->
-  <div id="cookieSection" class="page">
+<div id="cookieSection" class="page">
 
-<div class="topBar">
+<header class="topBar">
 
-    <button class="backButton" onclick="showPage('homeSection')">
-        ← Ana Sayfa
-    </button>
+<button class="backButton" onclick="showPage('homeSection')">
+← Ana Sayfa
+</button>
 
-    <h1>🍪 Şans Kurabiyesi</h1>
+<h1>🍪 Şans Kurabiyesi</h1>
 
-</div>
+</header>
 
 <div class="container">
 
-    <div id="cookie">
+<div id="cookie">
 
-        🍪
+🍪
 
-        <div id="cookiePieces"></div>
+<div id="cookiePieces"></div>
 
-    </div>
+</div>
 
 </div>
 
 <div id="messageCard">
 
-    <button id="closeCard">✕</button>
+<button id="closeCard">✕</button>
 
-    <h2>💌 Aynuşuma Bir Mesaj</h2>
+<h2>💌 Aynuşuma Bir Mesaj</h2>
 
-    <p id="cookieMessage"></p>
+<p id="cookieMessage"></p>
 
 </div>
-  </div>
-  </div>
+
+</div>
+</div> <!-- content -->
+
 <footer>
 
 Aynur&Mehmet © Tüm Hakları Saklıdır
 
 </footer>
-</div>
+
+</div> <!-- homePage -->
+
 <script src="script.js"></script>
-  <script>
 
+<script>
 showPage("homeSection");
+</script>
 
-  </script>
 </body>
 </html>

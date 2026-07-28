@@ -736,32 +736,35 @@ header button{
 }
 
 #messageCard{
+#messageCard{
 
     display:none;
 
     position:fixed;
 
+    top:50%;
+
     left:50%;
 
-    bottom:40px;
-
-    transform:translateX(-50%);
+    transform:translate(-50%,-50%);
 
     width:90%;
 
-    max-width:430px;
+    max-width:420px;
 
     background:#202020;
 
     color:white;
 
-    border-radius:28px;
+    border-radius:25px;
 
-    padding:28px;
+    padding:25px;
 
-    box-shadow:0 15px 45px rgba(0,0,0,.35);
+    text-align:center;
 
-    z-index:9999;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+    z-index:999999;
 
 }
 #messageCard h2{

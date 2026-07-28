@@ -257,6 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
             message.textContent = compliments[random];
 
             card.style.display = "block";
+            card.style.zIndex="999999";
 
         }, 950);
 

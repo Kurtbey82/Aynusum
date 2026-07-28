@@ -1,7 +1,14 @@
-const cookie = document.getElementById("cookie");
+document.addEventListener("DOMContentLoaded",function(){
+
+const cookie=document.getElementById("cookie");
+
 const card=document.getElementById("messageCard");
+
 const message=document.getElementById("cookieMessage");
+
 const close=document.getElementById("closeCard");
+
+if(!cookie) return;
 
 const compliments=[
 
@@ -110,3 +117,4 @@ cookie.style.display="block";
 cookie.classList.remove("crack");
 
 }
+});

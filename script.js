@@ -1,6 +1,6 @@
-const password="mescid";
+const password = "mescid";
 
-const messages=[
+const messages = [
 
 "Hafızanı zorla sevgilim ❤️",
 
@@ -12,32 +12,45 @@ const messages=[
 
 ];
 
+// GİRİŞ
+
 function login(){
 
-let p=document.getElementById("password").value;
+    const p = document.getElementById("password").value;
 
-if(p==password){
+    if(p === password){
 
-sessionStorage.setItem("login","true");
+        sessionStorage.setItem("login","true");
 
-window.location.replace("home.html");
+        window.location.replace("home.html");
 
-}
+    }else{
 
-else{
+        const r = Math.floor(Math.random()*messages.length);
 
-let r=Math.floor(Math.random()*messages.length);
+        document.getElementById("error").innerHTML = messages[r];
 
-document.getElementById("error").innerHTML=messages[r];
-
-}
+    }
 
 }
+
+// ÇIKIŞ
+
+function logout(){
+
+    sessionStorage.removeItem("login");
+
+    window.location.replace("index.html");
+
+}
+// MÜZİK
 
 function playMusic(){
 
     const music = document.getElementById("music");
     const button = document.getElementById("playBtn");
+
+    if(!music || !button) return;
 
     if(music.paused){
 
@@ -53,70 +66,87 @@ function playMusic(){
 
 }
 
-const music = document.getElementById("music");
+document.addEventListener("DOMContentLoaded", function(){
 
-if (music) {
-    music.addEventListener("ended", function () {
-        document.getElementById("playBtn").innerHTML = "▶";
-    });
-}
+    const music = document.getElementById("music");
 
-function logout(){
+    if(music){
 
-    sessionStorage.removeItem("login");
+        music.addEventListener("ended", function(){
 
-    window.location.replace("index.html");
+            const btn = document.getElementById("playBtn");
 
-}setInterval(function(){
+            if(btn){
+
+                btn.innerHTML = "▶";
+
+            }
+
+        });
+
+    }
+
+});
+
+// SAYAÇ
+
+setInterval(function(){
 
     const counter = document.getElementById("counter");
+
     if(!counter) return;
 
-    let start = new Date("2025-09-12");
-    let now = new Date();
-    let diff = now - start;
+    const start = new Date("2025-09-12");
 
-    let gun = Math.floor(diff/86400000);
-    let saat = Math.floor(diff/3600000)%24;
-    let dakika = Math.floor(diff/60000)%60;
-    let saniye = Math.floor(diff/1000)%60;
+    const now = new Date();
+
+    const diff = now - start;
+
+    const gun = Math.floor(diff/86400000);
+
+    const saat = Math.floor(diff/3600000)%24;
+
+    const dakika = Math.floor(diff/60000)%60;
+
+    const saniye = Math.floor(diff/1000)%60;
 
     counter.innerHTML =
+
         gun+" Gün "
+
         + saat+" Saat "
+
         + dakika+" Dakika "
+
         + saniye+" Saniye";
 
 },1000);
+// MENÜ
+
 function openMenu(){
 
-document.getElementById("sideMenu").style.left="0";
+    const menu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
 
-document.getElementById("overlay").style.display="block";
+    if(menu) menu.style.left = "0";
+
+    if(overlay) overlay.style.display = "block";
 
 }
 
 function closeMenu(){
 
-document.getElementById("sideMenu").style.left="-300px";
+    const menu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
 
-document.getElementById("overlay").style.display="none";
+    if(menu) menu.style.left = "-300px";
 
-}
-// Ana sayfada geri tuşuna basılınca çıkmak yerine sayfayı yenile
-if(window.location.pathname.endsWith("home.html")){
-
-    history.pushState(null, null, location.href);
-
-    window.addEventListener("popstate", function(){
-
-        history.pushState(null, null, location.href);
-
-        location.reload();
-
-    });
+    if(overlay) overlay.style.display = "none";
 
 }
+
+// SPA SAYFA GEÇİŞLERİ
+
 function showPage(id){
 
     document.querySelectorAll(".page").forEach(function(page){
@@ -128,10 +158,15 @@ function showPage(id){
 
     const target = document.getElementById(id);
 
-    target.style.display = "block";
-    target.classList.add("active");
+    if(target){
+
+        target.style.display = "block";
+        target.classList.add("active");
+
+    }
 
 }
+
 function openCookie(){
 
     closeMenu();
@@ -143,119 +178,172 @@ function openCookie(){
     },200);
 
 }
-const cookie = document.getElementById("cookie");
 
-if(cookie){
+// Home ilk açılış
 
-const card = document.getElementById("messageCard");
-const message = document.getElementById("cookieMessage");
-const close = document.getElementById("closeCard");
+document.addEventListener("DOMContentLoaded",function(){
 
-const compliments=[
+    if(document.getElementById("homeSection")){
 
-"Sen gülünce dünya daha güzel bir yer oluyor. ❤️",
-
-"İyi ki benim hayatımdasın.",
-
-"Bugünkü en büyük şansım sensin.",
-
-"Gözlerin huzurun tanımı gibi.",
-
-"Kalbin dünyanın en güzel yeri.",
-
-"Senin gülüşün bütün yorgunluğumu alıyor.",
-
-"İyi ki seni sevmişim.",
-
-"Her gün sana yeniden âşık oluyorum.",
-
-"Bir ömür aynı kurabiyeyi seninle paylaşmak isterim. 🍪❤️",
-
-"Şans kurabiyem bana hep seni gösteriyor."
-
-];
-
-cookie.addEventListener("click",()=>{
-
-    if(navigator.vibrate){
-
-        navigator.vibrate(40);
+        showPage("homeSection");
 
     }
 
-    cookie.classList.add("shake");
+});
+// =========================
+// ŞANS KURABİYESİ
+// =========================
 
-    setTimeout(()=>{
+document.addEventListener("DOMContentLoaded", function () {
 
-        cookie.classList.remove("shake");
+    const cookie = document.getElementById("cookie");
 
-        cookie.classList.add("crack");
-        explodeCookie();
+    if (!cookie) return;
 
-    },550);
+    const card = document.getElementById("messageCard");
+    const message = document.getElementById("cookieMessage");
+    const close = document.getElementById("closeCard");
 
-    setTimeout(()=>{
+    const compliments = [
 
-        cookie.style.display="none";
-        setTimeout(()=>{
+        "Sen gülünce dünya daha güzel bir yer oluyor. ❤️",
 
-const random=Math.floor(Math.random()*compliments.length);
+        "İyi ki benim hayatımdasın.",
 
-message.textContent=compliments[random];
+        "Bugünkü en büyük şansım sensin.",
 
-card.style.display="block";
+        "Gözlerin huzurun tanımı gibi.",
 
-},300);
+        "Kalbin dünyanın en güzel yeri.",
 
-    },950);
+        "Senin gülüşün bütün yorgunluğumu alıyor.",
+
+        "İyi ki seni sevmişim.",
+
+        "Her gün sana yeniden âşık oluyorum.",
+
+        "Bir ömür aynı kurabiyeyi seninle paylaşmak isterim. 🍪❤️",
+
+        "Şans kurabiyem bana hep seni gösteriyor."
+
+    ];
+
+    cookie.addEventListener("click", function () {
+
+        if (navigator.vibrate) {
+
+            navigator.vibrate(40);
+
+        }
+
+        cookie.classList.add("shake");
+
+        setTimeout(function () {
+
+            cookie.classList.remove("shake");
+
+            cookie.classList.add("crack");
+
+            explodeCookie();
+
+        }, 550);
+
+        setTimeout(function () {
+
+            cookie.style.display = "none";
+
+            const random = Math.floor(Math.random() * compliments.length);
+
+            message.textContent = compliments[random];
+
+            card.style.display = "block";
+
+        }, 950);
+
+    });
+        function explodeCookie(){
+
+        const rect = cookie.getBoundingClientRect();
+
+        for(let i=0;i<10;i++){
+
+            const piece = document.createElement("div");
+
+            piece.className = "cookiePiece";
+
+            piece.textContent = "🍪";
+
+            piece.style.left = (rect.left + rect.width/2) + "px";
+
+            piece.style.top = (rect.top + rect.height/2) + "px";
+
+            const angle = Math.random() * 360;
+
+            const distance = 150 + Math.random() * 180;
+
+            const x = Math.cos(angle * Math.PI / 180) * distance;
+
+            const y = Math.sin(angle * Math.PI / 180) * distance;
+
+            piece.style.setProperty("--x", x + "px");
+
+            piece.style.setProperty("--y", y + "px");
+
+            document.body.appendChild(piece);
+
+            setTimeout(function(){
+
+                piece.remove();
+
+            },900);
+
+        }
+
+    }
+
+    close.onclick = function(){
+
+        card.style.display = "none";
+
+        cookie.style.display = "block";
+
+        cookie.classList.remove("crack");
+
+    };
 
 });
-function explodeCookie(){
+// =========================
+// GERİ TUŞU KORUMASI
+// =========================
 
-const rect=cookie.getBoundingClientRect();
+if(window.location.pathname.endsWith("home.html")){
 
-for(let i=0;i<10;i++){
+    history.pushState(null,null,location.href);
 
-const piece=document.createElement("div");
+    window.addEventListener("popstate",function(){
 
-piece.className="cookiePiece";
+        history.pushState(null,null,location.href);
 
-piece.textContent="🍪";
-
-piece.style.left=(rect.left+rect.width/2)+"px";
-
-piece.style.top=(rect.top+rect.height/2)+"px";
-
-const angle=Math.random()*360;
-
-const distance=150+Math.random()*180;
-
-const x=Math.cos(angle*Math.PI/180)*distance;
-
-const y=Math.sin(angle*Math.PI/180)*distance;
-
-piece.style.setProperty("--x",x+"px");
-
-piece.style.setProperty("--y",y+"px");
-
-document.body.appendChild(piece);
-
-setTimeout(()=>{
-
-piece.remove();
-
-},900);
+    });
 
 }
 
-}
-close.onclick=()=>{
+// =========================
+// İLK AÇILIŞ
+// =========================
 
-card.style.display="none";
+document.addEventListener("DOMContentLoaded",function(){
 
-cookie.style.display="block";
+    if(document.getElementById("homeSection")){
 
-cookie.classList.remove("crack");
+        showPage("homeSection");
 
-}
-}
+    }
+
+});
+
+// =========================
+// DEBUG
+// =========================
+
+console.log("script.js başarıyla yüklendi");

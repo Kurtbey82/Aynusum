@@ -746,7 +746,7 @@ header button{
 
     transform:translate(-50%,-50%);
 
-    width:90%;
+    width:85%;
 
     max-width:420px;
 
@@ -754,9 +754,9 @@ header button{
 
     color:white;
 
-    border-radius:25px;
+    border-radius:30px;
 
-    padding:25px;
+    padding:28px;
 
     text-align:center;
 

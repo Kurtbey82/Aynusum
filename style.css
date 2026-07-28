@@ -563,3 +563,291 @@ header button{
     opacity:1;
     transform:translateX(0);
 }
+/* ===========================
+   ŞANS KURABİYESİ
+=========================== */
+
+#cookieSection{
+
+    min-height:100vh;
+
+    padding-top:90px;
+
+    text-align:center;
+
+}
+
+#cookieSection .topBar{
+
+    position:relative;
+
+    top:auto;
+    left:auto;
+    right:auto;
+
+    box-shadow:none;
+
+    background:transparent;
+
+    height:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:10px 20px;
+
+}
+
+.backButton{
+
+    background:white;
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:12px 18px;
+
+    font-size:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+#cookieSection h1{
+
+    flex:1;
+
+    text-align:center;
+
+    margin:0;
+
+    font-size:48px;
+
+    color:#222;
+
+}
+
+.container{
+
+    margin-top:35px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+#cookie{
+
+    font-size:140px;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:.35s;
+
+    position:relative;
+
+    display:inline-block;
+
+}
+
+#cookie:hover{
+
+    transform:scale(1.08);
+
+}
+
+#cookie.shake{
+
+    animation:cookieShake .55s;
+
+}
+
+#cookie.crack{
+
+    transform:scale(.92) rotate(10deg);
+
+    opacity:.15;
+
+}
+
+@keyframes cookieShake{
+
+0%{transform:rotate(0deg);}
+
+15%{transform:rotate(-12deg);}
+
+30%{transform:rotate(12deg);}
+
+45%{transform:rotate(-10deg);}
+
+60%{transform:rotate(10deg);}
+
+75%{transform:rotate(-6deg);}
+
+100%{transform:rotate(0deg);}
+
+}
+
+#cookiePieces{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+}
+.cookiePiece{
+
+    position:fixed;
+
+    font-size:42px;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    animation:cookieFly .9s ease-out forwards;
+
+}
+
+@keyframes cookieFly{
+
+0%{
+
+    transform:translate(0,0) rotate(0deg);
+
+    opacity:1;
+
+}
+
+100%{
+
+    transform:translate(var(--x),var(--y)) rotate(720deg);
+
+    opacity:0;
+
+}
+
+}
+
+#messageCard{
+
+    display:none;
+
+    position:fixed;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:88%;
+
+    max-width:420px;
+
+    background:#fff;
+
+    border-radius:28px;
+
+    padding:28px;
+
+    text-align:center;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.22);
+
+    z-index:99999;
+
+}
+
+#messageCard h2{
+
+    margin-top:10px;
+
+    color:#ff4f87;
+
+}
+
+#cookieMessage{
+
+    margin-top:18px;
+
+    font-size:22px;
+
+    line-height:1.8;
+
+    color:#444;
+
+}
+#closeCard{
+
+    position:absolute;
+
+    top:14px;
+
+    right:14px;
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#ff4f87;
+
+    color:#fff;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 15px rgba(255,79,135,.35);
+
+}
+
+#closeCard:hover{
+
+    transform:scale(1.08);
+
+}
+
+@media(max-width:600px){
+
+#cookie{
+
+    font-size:110px;
+
+}
+
+#cookieSection h1{
+
+    font-size:30px;
+
+}
+
+#messageCard{
+
+    width:92%;
+
+    padding:22px;
+
+}
+
+#cookieMessage{
+
+    font-size:19px;
+
+}
+
+}

@@ -709,7 +709,7 @@ header button{
 
     width:100%;
 
-    min-height:calc(100vh - 100px);
+    height:calc(100vh - 90px);
 
     display:flex;
 
@@ -776,5 +776,38 @@ header button{
 80%{transform:rotate(10deg);}
 
 100%{transform:rotate(0deg);}
+
+}
+.cookiePiece{
+
+    position:fixed;
+
+    font-size:42px;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    animation:cookieFly .9s ease-out forwards;
+
+}
+
+@keyframes cookieFly{
+
+0%{
+
+    transform:translate(0,0) rotate(0deg);
+
+    opacity:1;
+
+}
+
+100%{
+
+    transform:translate(var(--x),var(--y)) rotate(720deg);
+
+    opacity:0;
+
+}
 
 }

@@ -277,3 +277,8 @@ function openCookie(){
     },200);
 
 }
+document.addEventListener("DOMContentLoaded", function () {
+
+    console.log("cookieSection:", document.getElementById("cookieSection"));
+
+});

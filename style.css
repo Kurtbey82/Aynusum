@@ -743,28 +743,27 @@ header button{
 
     left:50%;
 
-    top:50%;
+    bottom:40px;
 
-    transform:translate(-50%,-50%);
+    transform:translateX(-50%);
 
-    width:88%;
+    width:90%;
 
-    max-width:420px;
+    max-width:430px;
 
-    background:#fff;
+    background:#202020;
+
+    color:white;
 
     border-radius:28px;
 
     padding:28px;
 
-    text-align:center;
+    box-shadow:0 15px 45px rgba(0,0,0,.35);
 
-    box-shadow:0 20px 45px rgba(0,0,0,.22);
-
-    z-index:99999;
+    z-index:9999;
 
 }
-
 #messageCard h2{
 
     margin-top:10px;

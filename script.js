@@ -38,7 +38,9 @@ function login(){
 
 function logout(){
 
-    sessionStorage.removeItem("login");
+    sessionStorage.clear();
+
+    history.replaceState(null, null, "index.html");
 
     window.location.replace("index.html");
 

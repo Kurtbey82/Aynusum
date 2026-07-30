@@ -12,6 +12,13 @@
 </head>
 
 <body>
+  <script>
+history.pushState(null, null, location.href);
+
+window.addEventListener("popstate", function () {
+    history.pushState(null, null, location.href);
+});
+  </script>
   <div id="overlay" onclick="closeMenu()"></div>
 
 <div id="sideMenu">

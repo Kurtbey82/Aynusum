@@ -42,7 +42,13 @@ function logout(){
 
     sessionStorage.clear();
 
-    location.replace("index.html");
+    window.location.href = "index.html";
+
+    setTimeout(function(){
+
+        history.pushState(null,null,"index.html");
+
+    },50);
 
 }
 // MÜZİK

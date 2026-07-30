@@ -4,28 +4,17 @@
 <head>
 
 <script>
-function checkLogin(){
-
-    if(sessionStorage.getItem("login")!="true"){
-
-        window.location.replace("index.html");
-
+function checkLogin() {
+    if (sessionStorage.getItem("login") !== "true") {
+        location.replace("index.html");
     }
-
 }
 
 checkLogin();
 
-window.addEventListener("pageshow",function(e){
-
-    if(e.persisted){
-
-        checkLogin();
-
-    }
-
+window.addEventListener("pageshow", function (event) {
+    checkLogin();
 });
-</script>
 </script>
 
 <meta charset="UTF-8">

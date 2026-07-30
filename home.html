@@ -4,16 +4,18 @@
 <head>
 
 <script>
-function checkLogin() {
-    if (sessionStorage.getItem("login") !== "true") {
-        location.replace("index.html");
-    }
+if(sessionStorage.getItem("login")!=="true"){
+    location.replace("index.html");
 }
 
-checkLogin();
+window.addEventListener("pageshow",function(){
 
-window.addEventListener("pageshow", function (event) {
-    checkLogin();
+    if(sessionStorage.getItem("login")!=="true"){
+
+        location.replace("index.html");
+
+    }
+
 });
 </script>
 
@@ -179,9 +181,6 @@ Aynur&Mehmet © Tüm Hakları Saklıdır
 
 <script src="script.js"></script>
 <script src="sans-kurabiyesi.js"></script>
-<script>
-showPage("homeSection");
-</script>
 
 </body>
 </html>

@@ -673,3 +673,54 @@ header button{
 
 }
 }
+#messageCard{
+
+    display:none;
+
+    position:fixed !important;
+
+    top:50% !important;
+    left:50% !important;
+
+    transform:translate(-50%,-50%) !important;
+
+    width:90%;
+    max-width:420px;
+
+    background:#202020;
+
+    color:#fff;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    text-align:center;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+    z-index:999999;
+}
+
+#messageCard h2{
+    color:#ff4f87;
+}
+
+#closeCard{
+
+    position:absolute;
+
+    top:15px;
+    right:15px;
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    border:none;
+
+    cursor:pointer;
+
+    font-size:28px;
+}

@@ -40,9 +40,7 @@ function logout(){
 
     sessionStorage.clear();
 
-    history.replaceState(null, null, "index.html");
-
-    window.location.replace("index.html");
+    location.replace("index.html");
 
 }
 // MÜZİK

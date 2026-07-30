@@ -1,30 +1,25 @@
 const password = "mescid";
 
 const messages = [
-
-"Hafızanı zorla sevgilim ❤️",
-
-"Bir de bana unutkan diyorsun 😅",
-
-"Emin misin? Bir daha düşün aşkım 💕",
-
-"Olmadı... tekrar dene ❤️"
-
+    "Hafızanı zorla sevgilim ❤️",
+    "Bir de bana unutkan diyorsun 😅",
+    "Emin misin? Bir daha düşün aşkım 💕",
+    "Olmadı... tekrar dene ❤️"
 ];
 
+// =====================
 // GİRİŞ
+// =====================
 
 function login(){
 
     const p = document.getElementById("password").value;
 
-    if(p==password){
+    if(p === password){
 
-    sessionStorage.setItem("login","true");
+        sessionStorage.setItem("login","true");
 
-    history.replaceState(null,null,"index.html");
-
-    location.replace("home.html");
+        location.replace("home.html");
 
     }else{
 
@@ -36,139 +31,58 @@ function login(){
 
 }
 
+// =====================
 // ÇIKIŞ
+// =====================
 
 function logout(){
 
     sessionStorage.clear();
 
-    window.location.href = "index.html";
-
-    setTimeout(function(){
-
-        history.pushState(null,null,"index.html");
-
-    },50);
-
-}
-// MÜZİK
-
-function playMusic(){
-
-    const music = document.getElementById("music");
-    const button = document.getElementById("playBtn");
-
-    if(!music || !button) return;
-
-    if(music.paused){
-
-        music.play();
-        button.innerHTML = "⏸";
-
-    }else{
-
-        music.pause();
-        button.innerHTML = "▶";
-
-    }
+    location.replace("index.html");
 
 }
 
-document.addEventListener("DOMContentLoaded", function(){
-
-    const music = document.getElementById("music");
-
-    if(music){
-
-        music.addEventListener("ended", function(){
-
-            const btn = document.getElementById("playBtn");
-
-            if(btn){
-
-                btn.innerHTML = "▶";
-
-            }
-
-        });
-
-    }
-
-});
-
-// SAYAÇ
-
-setInterval(function(){
-
-    const counter = document.getElementById("counter");
-
-    if(!counter) return;
-
-    const start = new Date("2025-09-12");
-
-    const now = new Date();
-
-    const diff = now - start;
-
-    const gun = Math.floor(diff/86400000);
-
-    const saat = Math.floor(diff/3600000)%24;
-
-    const dakika = Math.floor(diff/60000)%60;
-
-    const saniye = Math.floor(diff/1000)%60;
-
-    counter.innerHTML =
-
-        gun+" Gün "
-
-        + saat+" Saat "
-
-        + dakika+" Dakika "
-
-        + saniye+" Saniye";
-
-},1000);
+// =====================
 // MENÜ
+// =====================
 
 function openMenu(){
 
-    const menu = document.getElementById("sideMenu");
-    const overlay = document.getElementById("overlay");
+    document.getElementById("sideMenu").style.left="0";
 
-    if(menu) menu.style.left = "0";
-
-    if(overlay) overlay.style.display = "block";
+    document.getElementById("overlay").style.display="block";
 
 }
 
 function closeMenu(){
 
-    const menu = document.getElementById("sideMenu");
-    const overlay = document.getElementById("overlay");
+    document.getElementById("sideMenu").style.left="-300px";
 
-    if(menu) menu.style.left = "-300px";
-
-    if(overlay) overlay.style.display = "none";
+    document.getElementById("overlay").style.display="none";
 
 }
 
-// SPA SAYFA GEÇİŞLERİ
+// =====================
+// SAYFA GEÇİŞLERİ
+// =====================
 
 function showPage(id){
 
     document.querySelectorAll(".page").forEach(function(page){
 
-        page.style.display = "none";
+        page.style.display="none";
+
         page.classList.remove("active");
 
     });
 
-    const target = document.getElementById(id);
+    const target=document.getElementById(id);
 
     if(target){
 
-        target.style.display = "block";
+        target.style.display="block";
+
         target.classList.add("active");
 
     }
@@ -186,27 +100,99 @@ function openCookie(){
     },200);
 
 }
+// =====================
+// MÜZİK ÇALAR
+// =====================
 
-// Home ilk açılış
+function playMusic(){
+
+    const music = document.getElementById("music");
+    const button = document.getElementById("playBtn");
+
+    if(!music || !button) return;
+
+    if(music.paused){
+
+        music.play();
+
+        button.innerHTML = "⏸";
+
+    }else{
+
+        music.pause();
+
+        button.innerHTML = "▶";
+
+    }
+
+}
 
 document.addEventListener("DOMContentLoaded",function(){
 
-    if(document.getElementById("homeSection")){
+    const music=document.getElementById("music");
 
-        showPage("homeSection");
+    const playBtn=document.getElementById("playBtn");
+
+    if(music && playBtn){
+
+        music.addEventListener("ended",function(){
+
+            playBtn.innerHTML="▶";
+
+        });
 
     }
 
 });
-// =========================
+
+// =====================
+// İLİŞKİ SAYACI
+// =====================
+
+function updateCounter(){
+
+    const counter=document.getElementById("counter");
+
+    if(!counter) return;
+
+    const start=new Date("2025-09-12");
+
+    const now=new Date();
+
+    const diff=now-start;
+
+    const gun=Math.floor(diff/86400000);
+
+    const saat=Math.floor(diff/3600000)%24;
+
+    const dakika=Math.floor(diff/60000)%60;
+
+    const saniye=Math.floor(diff/1000)%60;
+
+    counter.innerHTML=
+
+        gun+" Gün "
+
+        +saat+" Saat "
+
+        +dakika+" Dakika "
+
+        +saniye+" Saniye";
+
+}
+
+setInterval(updateCounter,1000);
+
+document.addEventListener("DOMContentLoaded",updateCounter);
+// =====================
 // ŞANS KURABİYESİ
-// =========================
+// =====================
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const cookie = document.getElementById("cookie");
 
-    if (!cookie) return;
+    if(!cookie) return;
 
     const card = document.getElementById("messageCard");
     const message = document.getElementById("cookieMessage");
@@ -238,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     cookie.addEventListener("click", function () {
 
-        if (navigator.vibrate) {
+        if(navigator.vibrate){
 
             navigator.vibrate(40);
 
@@ -246,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cookie.classList.add("shake");
 
-        setTimeout(function () {
+        setTimeout(function(){
 
             cookie.classList.remove("shake");
 
@@ -254,105 +240,128 @@ document.addEventListener("DOMContentLoaded", function () {
 
             explodeCookie();
 
-        }, 550);
+        },550);
 
-        setTimeout(function () {
+        setTimeout(function(){
 
-            cookie.style.display = "none";
+            cookie.style.display="none";
 
-            const random = Math.floor(Math.random() * compliments.length);
+            const random=Math.floor(Math.random()*compliments.length);
 
-            message.textContent = compliments[random];
+            message.innerHTML=compliments[random];
 
-            card.style.display = "block";
-            card.style.zIndex="999999";
+            card.style.display="block";
 
-        }, 950);
+        },900);
 
     });
-        function explodeCookie(){
 
-        const rect = cookie.getBoundingClientRect();
+    close.addEventListener("click",function(){
 
-        for(let i=0;i<10;i++){
+        card.style.display="none";
 
-            const piece = document.createElement("div");
+        cookie.style.display="block";
 
-            piece.className = "cookiePiece";
+        cookie.classList.remove("crack");
 
-            piece.textContent = "🍪";
+    });
 
-            piece.style.left = (rect.left + rect.width/2) + "px";
+});
+// =====================
+// KURABİYE PARÇALANMA
+// =====================
 
-            piece.style.top = (rect.top + rect.height/2) + "px";
+function explodeCookie(){
 
-            const angle = Math.random() * 360;
+    const cookie=document.getElementById("cookie");
 
-            const distance = 150 + Math.random() * 180;
+    if(!cookie) return;
 
-            const x = Math.cos(angle * Math.PI / 180) * distance;
+    const rect=cookie.getBoundingClientRect();
 
-            const y = Math.sin(angle * Math.PI / 180) * distance;
+    for(let i=0;i<10;i++){
 
-            piece.style.setProperty("--x", x + "px");
+        const piece=document.createElement("div");
 
-            piece.style.setProperty("--y", y + "px");
+        piece.className="cookiePiece";
 
-            document.body.appendChild(piece);
+        piece.textContent="🍪";
 
-            setTimeout(function(){
+        piece.style.left=(rect.left+rect.width/2)+"px";
 
-                piece.remove();
+        piece.style.top=(rect.top+rect.height/2)+"px";
 
-            },900);
+        const angle=Math.random()*360;
+
+        const distance=150+Math.random()*180;
+
+        const x=Math.cos(angle*Math.PI/180)*distance;
+
+        const y=Math.sin(angle*Math.PI/180)*distance;
+
+        piece.style.setProperty("--x",x+"px");
+
+        piece.style.setProperty("--y",y+"px");
+
+        document.body.appendChild(piece);
+
+        setTimeout(function(){
+
+            piece.remove();
+
+        },900);
+
+    }
+
+}
+// =====================
+// GİRİŞ KONTROLÜ
+// =====================
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    if(location.pathname.endsWith("home.html")){
+
+        if(sessionStorage.getItem("login")!=="true"){
+
+            location.replace("index.html");
+
+            return;
 
         }
 
     }
 
-    close.onclick = function(){
-
-        card.style.display = "none";
-
-        cookie.style.display = "block";
-
-        cookie.classList.remove("crack");
-
-    };
-
 });
-// =========================
-// GERİ TUŞU KORUMASI
-// =========================
 
-if(window.location.pathname.endsWith("home.html")){
+// =====================
+// GÜVENLİ GERİ TUŞU
+// =====================
 
-    history.pushState(null,null,location.href);
+window.addEventListener("pageshow",function(){
 
-    window.addEventListener("popstate",function(){
+    if(location.pathname.endsWith("home.html")){
 
-        history.pushState(null,null,location.href);
+        if(sessionStorage.getItem("login")!=="true"){
 
-    });
+            location.replace("index.html");
 
-}
-
-// =========================
-// İLK AÇILIŞ
-// =========================
-
-document.addEventListener("DOMContentLoaded",function(){
-
-    if(document.getElementById("homeSection")){
-
-        showPage("homeSection");
+        }
 
     }
 
 });
 
-// =========================
-// DEBUG
-// =========================
+// =====================
+// SAYFA KAPANIRKEN
+// =====================
 
-console.log("script.js başarıyla yüklendi");
+window.addEventListener("pagehide",function(){
+
+    if(location.pathname.endsWith("index.html")){
+
+        sessionStorage.removeItem("login");
+
+    }
+
+});

@@ -80,6 +80,15 @@ window.addEventListener("popstate", function () {
 });
 </script>
 <script src="script.js"></script>
+  if(p==password){
+
+    sessionStorage.setItem("login","true");
+
+    history.replaceState(null,null,"index.html");
+
+    location.replace("home.html");
+
+}
 
 </body>
 </html>

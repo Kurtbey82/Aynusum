@@ -142,17 +142,6 @@ text-align:center;
     display:block;
     border-radius:18px;
 }
-.cover{
-
-    width:100%;
-
-    aspect-ratio:1/1;
-
-    object-fit:cover;
-
-    border-radius:18px;
-
-}
 
 .songInfo{
     padding:10px 16px 4px;
@@ -338,53 +327,7 @@ display:none;
 z-index:9998;
 
 }
-/* =========================
-   KALPLER
-========================= */
 
-.heart{
-
-position:absolute;
-
-bottom:-80px;
-
-user-select:none;
-
-cursor:pointer;
-
-animation-name:fly;
-
-animation-timing-function:linear;
-
-animation-fill-mode:forwards;
-
-}
-
-@keyframes fly{
-
-0%{
-
-transform:translateY(0) rotate(0deg);
-
-opacity:0;
-
-}
-
-10%{
-
-opacity:1;
-
-}
-
-100%{
-
-transform:translateY(-120vh) rotate(360deg);
-
-opacity:0;
-
-}
-
-}
 /* ===== CSS KALPLERİ ===== */
 
 .heart{
@@ -475,16 +418,6 @@ opacity:0;
 }
 
 }
-header button{
-    background:#fff;
-    color:#333;
-}
-
-.right b{
-    font-size:22px;
-    color:#ff4f87;
-    font-weight:700;
-}
 .welcomeCard{
     width:90%;
     max-width:700px;
@@ -512,28 +445,6 @@ header button{
     line-height:1.8;
     color:#555;
 }
-.left button:nth-child(2){
-    padding:8px 14px;
-    font-size:15px;
-    min-width:90px;
-}
-
-.right button{
-    padding:8px 14px;
-    font-size:15px;
-    min-width:105px;
-}
-
-.right b{
-    font-size:18px;
-    white-space:nowrap;
-}
-.homeBtn{
-    padding:6px 12px !important;
-    font-size:14px !important;
-    min-width:80px;
-    margin-left:10px;
-}
 
 .logoutBtn{
     padding:6px 12px !important;
@@ -542,13 +453,6 @@ header button{
     margin-right:12px;
 }
 
-.left{
-    gap:18px;
-}
-
-.right{
-    gap:18px;
-}
 .page{
     display:none;
     opacity:0;

@@ -351,17 +351,3 @@ window.addEventListener("pageshow",function(){
     }
 
 });
-
-// =====================
-// SAYFA KAPANIRKEN
-// =====================
-
-window.addEventListener("pagehide",function(){
-
-    if(location.pathname.endsWith("index.html")){
-
-        sessionStorage.removeItem("login");
-
-    }
-
-});

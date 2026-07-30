@@ -18,11 +18,13 @@ function login(){
 
     const p = document.getElementById("password").value;
 
-    if(p === password){
+    if(p==password){
 
-        sessionStorage.setItem("login","true");
+    sessionStorage.setItem("login","true");
 
-        window.location.replace("home.html");
+    history.replaceState(null,null,"index.html");
+
+    location.replace("home.html");
 
     }else{
 

@@ -118,7 +118,7 @@ overflow:hidden;
 
     position:absolute;
 
-    left:75%;
+    left:65%;
 
     transform:translateX(-50%);
 
@@ -130,7 +130,7 @@ overflow:hidden;
 
     line-height:1.15;
 
-    font-size:30px;
+    font-size:24px;
 
     font-weight:800;
 

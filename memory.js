@@ -1,13 +1,12 @@
-alert("memory.js çalıştı");
 const memories = {
 
     hatay: {
 
         title: "❤️ Hatay",
 
-        date: "16 Mayıs 2026",
+        date: "16.05.2026",
 
-        text: "Buraya Hatay anınızı yazacağız.",
+        text: "Seninle ilk defa burada aynı evin içinde uyuduk:)",
 
         photos: [
     "img/hatay1.jpg",
@@ -20,11 +19,11 @@ const memories = {
 
     mersin: {
 
-        title: "💚 MERSİN TESTİ",
+        title: "💚 Mersin",
 
-        date: "BUGÜN TEST",
+        date: "16.05.2026",
 
-        text: "Eğer bunu görüyorsan memory.js çalışıyor.",
+        text: "Sahilde seninle yürümek çok güzeldi ♥️",
 
         photos: [
     "img/mersin1.jpg",
@@ -39,9 +38,9 @@ const memories = {
 
         title: "❤️ Isparta",
 
-        date: "4 Ekim 2025",
+        date: "04.10.2025",
 
-        text: "Buraya Isparta anınızı yazacağız.",
+        text: "Hikâyemizin başladığı şehir. ilk heyecanlarımızı yaşadığımız, ilklerimizin şehri ✨",
 
         photos: [
     "img/isparta0.jpg",

@@ -93,6 +93,8 @@ function openCookie(){
 
     closeMenu();
 
+    history.pushState({page:"cookie"}, "", "#cookie");
+
     setTimeout(function(){
 
         showPage("cookieSection");
@@ -347,6 +349,18 @@ window.addEventListener("pageshow",function(){
             location.replace("index.html");
 
         }
+
+    }
+
+});
+window.addEventListener("popstate", function () {
+
+    if(document.getElementById("cookieSection") &&
+       document.getElementById("cookieSection").classList.contains("active")){
+
+        showPage("homeSection");
+
+        history.pushState(null, "", location.href);
 
     }
 

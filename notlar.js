@@ -57,29 +57,21 @@ function renderNotes(){
 
 function addNoteCard(note){
 
-    const index = notes.indexOf(note);
+const index=notes.indexOf(note);
 
-    notesList.innerHTML += `
-    <div class="noteCard">
+notesList.innerHTML+=`
 
-        <button class="deleteBtn" onclick="deleteNote(${index})">
-            🗑️
-        </button>
+<div class="noteCard" onclick="openNote(${index})">
 
-        <h3>${note.title}</h3>
+<h3>${note.title}</h3>
 
-        <p>${note.content}</p>
+<small>📅 ${note.date}</small>
 
-        <div class="noteInfo">
-            <span>❤️ ${note.author}</span>
-            <span>📅 ${note.date}</span>
-        </div>
+</div>
 
-    </div>
-    `;
+`;
 
 }
-
 saveBtn.onclick = () => {
 
     if(titleInput.value.trim()==="" || contentInput.value.trim()===""){

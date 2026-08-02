@@ -57,19 +57,21 @@ function renderNotes(){
 
 function addNoteCard(note){
 
-const index=notes.indexOf(note);
+    const index = notes.indexOf(note);
 
-notesList.innerHTML+=`
+    notesList.innerHTML += `
 
-<div class="noteCard" onclick="openNote(${index})">
+    <div class="noteCard"
 
-<h3>${note.title}</h3>
+         onclick="location.href='not-detay.html?id=${index}'">
 
-<small>📅 ${note.date}</small>
+        <h3>${note.title}</h3>
 
-</div>
+        <small>📅 ${note.date}</small>
 
-`;
+    </div>
+
+    `;
 
 }
 saveBtn.onclick = () => {

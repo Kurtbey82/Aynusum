@@ -113,3 +113,55 @@ function deleteNote(index){
     }
 
 }
+let currentIndex = -1;
+
+function openNote(index){
+
+currentIndex = index;
+
+const note = notes[index];
+
+document.getElementById("notesList").style.display = "none";
+
+document.getElementById("noteDetail").style.display = "block";
+
+document.getElementById("detailTitle").textContent = note.title;
+
+document.getElementById("detailDate").textContent =
+"📅 " + note.date + "   ❤️ " + note.author;
+
+document.getElementById("detailContent").textContent =
+note.content;
+
+}
+document.getElementById("backListBtn").onclick = function(){
+
+document.getElementById("noteDetail").style.display="none";
+
+document.getElementById("notesList").style.display="block";
+
+};
+document.getElementById("deleteCurrent").onclick = function(){
+
+if(currentIndex==-1) return;
+
+if(confirm("Bu not silinsin mi?")){
+
+notes.splice(currentIndex,1);
+
+localStorage.setItem("notes",JSON.stringify(notes));
+
+document.getElementById("noteDetail").style.display="none";
+
+document.getElementById("notesList").style.display="block";
+
+renderNotes();
+
+}
+
+};
+document.getElementById("editNote").onclick = function(){
+
+alert("Bir sonraki adımda düzenleme ekranını yapacağız 😊");
+
+};

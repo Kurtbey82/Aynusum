@@ -40,6 +40,6 @@ document.getElementById("deleteBtn").onclick = function(){
 
 document.getElementById("editBtn").onclick = function(){
 
-    alert("Düzenleme ekranını bir sonraki adımda yapacağız 😊");
+    location.href = "not-duzenle.html?id=" + index;
 
 };

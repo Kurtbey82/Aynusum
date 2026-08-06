@@ -46,9 +46,9 @@ z-index:1000;
 
 position:absolute;
 
-left:20px;
+left:12px;
 
-padding:12px 18px;
+padding:8px 15px;
 
 border:none;
 
@@ -64,9 +64,10 @@ box-shadow:0 4px 12px rgba(0,0,0,.12);
 
 .topBar h1{
 
-font-size:34px;
+font-size:32px;
 
 color:#ff3d81;
+ margin-left:60px;
 
 }
 

@@ -27,13 +27,14 @@ z-index:1000;
 
 .topBar h1{
 color:#ff3d81;
-font-size:30px;
+font-size:26px;
+margin-left:60px
 }
 
 .backButton{
 position:absolute;
-left:20px;
-padding:10px 18px;
+left:10px;
+padding:8px 15px;
 border:none;
 border-radius:15px;
 background:white;
@@ -51,7 +52,7 @@ padding-right:20px;
 
 .headerText h2{
 color:#ff3d81;
-font-size:30px;
+font-size:24px;
 margin-bottom:15px;
 }
 

@@ -46,7 +46,7 @@ z-index:1000;
 
 .topBar h1{
     color:#ff3d81;
-    font-size:34px;
+    font-size:26px;
     margin-left:60px;
 }
 
@@ -54,7 +54,7 @@ z-index:1000;
 
 position:absolute;
 
-left:14px;
+left:10px;
 
 padding:8px 15px;
 
@@ -112,7 +112,7 @@ transform:translateY(-10px);
 
 .menuCard{
 
-font-size:28px;
+font-size:20px;
 
 }
 

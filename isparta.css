@@ -28,6 +28,7 @@ z-index:1000;
 .topBar h1{
 color:#ff3d81;
 font-size:30px;
+margin-left:60px
 }
 
 .backButton{
@@ -51,7 +52,7 @@ padding-right:20px;
 
 .headerText h2{
 color:#ff3d81;
-font-size:30px;
+font-size:24px;
 margin-bottom:15px;
 }
 

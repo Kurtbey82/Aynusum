@@ -45,11 +45,9 @@ z-index:1000;
 }
 
 .topBar h1{
-
-color:#ff3d81;
-
-font-size:34px;
-
+    color:#ff3d81;
+    font-size:34px;
+    margin-left:60px;
 }
 
 .backButton{

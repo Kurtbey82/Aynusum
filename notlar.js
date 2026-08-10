@@ -34,25 +34,16 @@ function renderNotes(){
 
     notesList.innerHTML = "";
 
-    const mehmetNotes = notes.filter(n => n.author === "Mehmet");
-    const aynurNotes = notes.filter(n => n.author === "Aynur");
-
-    if(mehmetNotes.length){
-
-        notesList.innerHTML += "<h2 class='sectionTitle'>❤️ Mehmet'in Notları</h2>";
-
-        mehmetNotes.forEach(addNoteCard);
-
+    if(notes.length === 0){
+        notesList.innerHTML = `
+            <p style="text-align:center; font-size:20px;">
+                Henüz kaydedilmiş bir not yok. ❤️
+            </p>
+        `;
+        return;
     }
 
-    if(aynurNotes.length){
-
-        notesList.innerHTML += "<h2 class='sectionTitle'>❤️ Aynur'un Notları</h2>";
-
-        aynurNotes.forEach(addNoteCard);
-
-    }
-
+    notes.forEach(addNoteCard);
 }
 
 function addNoteCard(note){

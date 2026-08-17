@@ -1,7 +1,193 @@
-<script>
-history.pushState(null, "", location.href);
+<!DOCTYPE html>
+<html lang="tr">
 
-window.addEventListener("popstate", function () {
-    window.location.replace("home.html");
-});
-</script>
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>❤️ Mehmet & Aynur — Aşk Oyunu</title>
+
+    <link rel="stylesheet" href="oyun.css">
+</head>
+
+<body>
+
+    <!-- ÜST BAR -->
+    <header class="gameTopBar">
+
+        <button class="backButton"
+                onclick="location.href='home.html'">
+            ← Ana Sayfa
+        </button>
+
+        <h1>❤️ Sana Doğru</h1>
+
+        <div class="distanceBox">
+            <span>Mesafe</span>
+            <strong id="distance">0 m</strong>
+        </div>
+
+    </header>
+
+
+    <!-- OYUN ALANI -->
+    <main class="gameContainer">
+
+
+        <!-- BAŞLANGIÇ EKRANI -->
+        <section id="startScreen"
+                 class="gameScreen">
+
+            <div class="startCard">
+
+                <div class="gameHeart">
+                    ❤️
+                </div>
+
+                <h2>Aynur'a Doğru</h2>
+
+                <p>
+                    Önündeki engelleri aş,<br>
+                    zıpla, eğil ve Aynur'a ulaş. ❤️
+                </p>
+
+                <button id="startButton"
+                        class="gameButton">
+                    🏃 Oyuna Başla
+                </button>
+
+                <p class="controlsInfo">
+                    ⬆️ Zıpla &nbsp;&nbsp; ⬇️ Eğil
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ASIL OYUN EKRANI -->
+        <section id="gameScreen"
+                 class="gameScreen hidden">
+
+
+            <div id="gameArea"
+                 class="gameArea">
+
+
+                <!-- GÖKYÜZÜ -->
+                <div class="sky">
+
+                    <div class="cloud cloud1"></div>
+
+                    <div class="cloud cloud2"></div>
+
+                </div>
+
+
+
+                <!-- ZEMİN -->
+                <div class="ground"></div>
+
+
+
+                <!-- MEHMET -->
+                <div id="player"
+                     class="character playerCharacter">
+
+                    🧑🏻‍💼
+
+                </div>
+
+
+
+                <!-- AYNUR -->
+                <!-- Oyun sonunda görünecek -->
+                <div id="aynur"
+                     class="character aynurCharacter">
+
+                    👩🏻‍❤️‍👨🏻
+
+                </div>
+
+
+
+                <!-- ENGELLER -->
+                <!-- Engeller JavaScript ile eklenecek -->
+                <div id="obstacles"></div>
+
+
+
+                <!-- FİNAL MESAJI -->
+                <div id="finalMessage"
+                     class="finalMessage hidden">
+
+                    <div class="finalHeart">
+                        ❤️
+                    </div>
+
+                    <h2>
+                        Aynur'a Ulaştın!
+                    </h2>
+
+                    <p>
+                        Bütün engelleri aştım.<br>
+                        Çünkü sonunda sana ulaşacağımı biliyordum.
+                    </p>
+
+                    <div class="couple">
+                        🧑🏻‍💼 ❤️ 👩🏻
+                    </div>
+
+                    <button id="restartButton"
+                            class="gameButton">
+
+                        🔄 Tekrar Oyna
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- MOBİL KONTROLLER -->
+            <div class="mobileControls">
+
+                <button id="jumpButton"
+                        class="controlButton">
+
+                    ⬆️
+                    <span>Zıpla</span>
+
+                </button>
+
+
+                <button id="duckButton"
+                        class="controlButton">
+
+                    ⬇️
+                    <span>Eğil</span>
+
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- OYUN JAVASCRIPT -->
+    <script src="oyun.js"></script>
+
+</body>
+
+</html>

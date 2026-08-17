@@ -1,0 +1,738 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(180deg, #ffdbe8, #fff7fb);
+    overflow: hidden;
+    color: #333;
+}
+
+
+/* =========================
+   ÜST BAR
+========================= */
+
+.gameTopBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    z-index: 1000;
+}
+
+.gameTopBar h1 {
+    color: #ff3d81;
+    font-size: 28px;
+}
+
+
+/* =========================
+   ANA SAYFA BUTONU
+========================= */
+
+.backButton {
+    position: absolute;
+    left: 15px;
+
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: white;
+
+    color: #555;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.backButton:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================
+   MESAFE
+========================= */
+
+.distanceBox {
+    position: absolute;
+    right: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.distanceBox span {
+    font-size: 12px;
+    color: #999;
+}
+
+.distanceBox strong {
+    font-size: 18px;
+    color: #ff3d81;
+}
+
+
+/* =========================
+   OYUN CONTAINER
+========================= */
+
+.gameContainer {
+    width: 100%;
+    height: 100vh;
+
+    padding-top: 75px;
+}
+
+
+/* =========================
+   EKRANLAR
+========================= */
+
+.gameScreen {
+    width: 100%;
+    height: calc(100vh - 75px);
+
+    position: relative;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   BAŞLANGIÇ EKRANI
+========================= */
+
+#startScreen {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.startCard {
+    width: min(90%, 450px);
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.gameHeart {
+    font-size: 75px;
+
+    margin-bottom: 15px;
+
+    animation: heartBeat 1.5s infinite;
+}
+
+.startCard h2 {
+    color: #ff3d81;
+
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
+.startCard p {
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #666;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   BUTONLAR
+========================= */
+
+.gameButton {
+    border: none;
+
+    padding: 16px 30px;
+
+    border-radius: 20px;
+
+    background: #ff4d8d;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(255, 77, 141, 0.3);
+
+    transition: 0.2s;
+}
+
+.gameButton:hover {
+    transform: translateY(-2px);
+}
+
+.gameButton:active {
+    transform: scale(0.95);
+}
+
+.controlsInfo {
+    margin-top: 25px !important;
+
+    margin-bottom: 0 !important;
+
+    font-size: 15px !important;
+
+    color: #999 !important;
+}
+
+
+/* =========================
+   OYUN ALANI
+========================= */
+
+.gameArea {
+    position: relative;
+
+    width: 100%;
+
+    height: calc(100vh - 150px);
+
+    min-height: 300px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #bdeaff 0%,
+            #eaf9ff 65%,
+            #fff 100%
+        );
+}
+
+
+/* =========================
+   GÖKYÜZÜ
+========================= */
+
+.sky {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 65%;
+
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+
+    width: 90px;
+    height: 30px;
+
+    background: white;
+
+    border-radius: 30px;
+
+    opacity: 0.75;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+
+    position: absolute;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 40px;
+    height: 40px;
+
+    left: 15px;
+    bottom: 8px;
+}
+
+.cloud::after {
+    width: 55px;
+    height: 55px;
+
+    right: 12px;
+    bottom: 5px;
+}
+
+.cloud1 {
+    top: 70px;
+    left: 12%;
+}
+
+.cloud2 {
+    top: 150px;
+    right: 15%;
+
+    transform: scale(0.75);
+}
+
+
+/* =========================
+   ZEMİN
+========================= */
+
+.ground {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 55px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #79b85a 0px,
+            #79b85a 30px,
+            #6fa84f 30px,
+            #6fa84f 60px
+        );
+
+    border-top: 5px solid #5d963f;
+}
+
+
+/* =========================
+   KARAKTERLER
+========================= */
+
+.character {
+    position: absolute;
+
+    z-index: 20;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    font-size: 65px;
+
+    line-height: 1;
+
+    transform-origin: bottom center;
+}
+
+
+/* Mehmet */
+
+.playerCharacter {
+    left: 12%;
+
+    bottom: 48px;
+}
+
+
+/* Eğilme */
+
+.playerCharacter.duck {
+    transform:
+        scaleY(0.6)
+        translateY(25px);
+}
+
+
+/* Zıplama */
+
+.playerCharacter.jump {
+    animation: jumpAnimation 0.65s ease-out;
+}
+
+
+/* Aynur */
+
+.aynurCharacter {
+    right: -150px;
+
+    bottom: 48px;
+
+    font-size: 70px;
+
+    opacity: 0;
+
+    transition:
+        right 2s ease,
+        opacity 1s ease;
+}
+
+.aynurCharacter.show {
+    right: 15%;
+
+    opacity: 1;
+}
+
+
+/* =========================
+   ENGELLER
+========================= */
+
+#obstacles {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.obstacle {
+    position: absolute;
+
+    z-index: 15;
+
+    bottom: 48px;
+
+    font-size: 55px;
+
+    line-height: 1;
+
+    user-select: none;
+}
+
+.obstacle.low {
+    font-size: 55px;
+}
+
+.obstacle.high {
+    bottom: 145px;
+
+    font-size: 55px;
+}
+
+
+/* =========================
+   FİNAL
+========================= */
+
+.finalMessage {
+    position: absolute;
+
+    z-index: 100;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(90%, 500px);
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.finalHeart {
+    font-size: 65px;
+
+    margin-bottom: 10px;
+
+    animation: heartBeat 1.5s infinite;
+}
+
+.finalMessage h2 {
+    color: #ff3d81;
+
+    font-size: 30px;
+
+    margin-bottom: 15px;
+}
+
+.finalMessage p {
+    font-size: 19px;
+
+    line-height: 1.7;
+
+    color: #555;
+
+    margin-bottom: 20px;
+}
+
+.couple {
+    font-size: 50px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   MOBİL KONTROLLER
+========================= */
+
+.mobileControls {
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 75px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    padding: 10px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 -4px 15px rgba(0, 0, 0, 0.1);
+
+    z-index: 500;
+}
+
+.controlButton {
+    width: 130px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #ff4d8d;
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+.controlButton span {
+    font-size: 16px;
+}
+
+.controlButton:active {
+    transform: scale(0.94);
+}
+
+
+/* =========================
+   ANİMASYONLAR
+========================= */
+
+@keyframes jumpAnimation {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    45% {
+        transform: translateY(-170px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes heartBeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.15);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.12);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================
+   TELEFON
+========================= */
+
+@media (max-width: 600px) {
+
+    .gameTopBar {
+        height: 65px;
+    }
+
+    .gameTopBar h1 {
+        font-size: 20px;
+    }
+
+    .backButton {
+        left: 8px;
+
+        padding: 8px 10px;
+
+        font-size: 13px;
+    }
+
+    .distanceBox {
+        right: 8px;
+    }
+
+    .distanceBox strong {
+        font-size: 15px;
+    }
+
+    .gameContainer {
+        padding-top: 65px;
+    }
+
+    .gameScreen {
+        height: calc(100vh - 65px);
+    }
+
+    .gameArea {
+        height: calc(100vh - 140px);
+    }
+
+    .startCard {
+        padding: 35px 20px;
+    }
+
+    .gameHeart {
+        font-size: 60px;
+    }
+
+    .startCard h2 {
+        font-size: 27px;
+    }
+
+    .startCard p {
+        font-size: 16px;
+    }
+
+    .character {
+        font-size: 52px;
+    }
+
+    .playerCharacter {
+        left: 8%;
+    }
+
+    .aynurCharacter {
+        font-size: 58px;
+    }
+
+    .obstacle {
+        font-size: 45px;
+    }
+
+    .obstacle.high {
+        font-size: 45px;
+
+        bottom: 120px;
+    }
+
+    .finalMessage {
+        padding: 28px 18px;
+    }
+
+    .finalMessage h2 {
+        font-size: 25px;
+    }
+
+    .finalMessage p {
+        font-size: 17px;
+    }
+
+    .couple {
+        font-size: 40px;
+    }
+
+    .mobileControls {
+        height: 75px;
+
+        gap: 10px;
+    }
+
+    .controlButton {
+        width: 42%;
+
+        font-size: 20px;
+    }
+
+}

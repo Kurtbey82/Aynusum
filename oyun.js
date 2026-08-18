@@ -579,18 +579,16 @@ function gameLoop() {
         */
 
         const minimum =
-            Math.max(
-                45,
-                100 - distance / 35
-            );
+    Math.max(
+        80,
+        150 - distance / 25
+    );
 
-
-        const maximum =
-            Math.max(
-                75,
-                150 - distance / 25
-            );
-
+const maximum =
+    Math.max(
+        120,
+        220 - distance / 20
+    );
 
         obstacleTimer =
             minimum +

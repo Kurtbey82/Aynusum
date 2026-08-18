@@ -436,7 +436,7 @@ body {
 
     z-index: 15;
 
-    bottom: 48px;
+    bottom: 60px;
 
     font-size: 55px;
 
@@ -450,7 +450,7 @@ body {
 }
 
 .obstacle.high {
-    bottom: 145px;
+    bottom: 155px;
 
     font-size: 55px;
 }

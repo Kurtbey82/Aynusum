@@ -289,7 +289,7 @@ function createObstacle() {
 
         obstacle.classList.add("high");
 
-        obstacle.textContent = "🌳";
+        obstacle.textContent = "🐦‍🔥";
 
         obstacle.dataset.type = "high";
 
@@ -523,7 +523,7 @@ function reachAynur() {
 
         finalMessage.classList.remove("hidden");
 
-    }, 2200);
+    }, 1000);
 
 }
 
@@ -605,8 +605,8 @@ function gameLoop() {
     */
 
     gameSpeed =
-        6 +
-        distance / 500;
+        3.5 +
+        distance / 800;
 
 
     /*

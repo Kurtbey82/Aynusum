@@ -26,7 +26,7 @@ const finalMessage = document.getElementById("finalMessage");
    OYUN AYARLARI
 ===================================================== */
 
-const TARGET_DISTANCE = 2000;
+const TARGET_DISTANCE = 1000;
 
 let distance = 0;
 

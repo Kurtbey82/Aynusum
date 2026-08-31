@@ -11,7 +11,8 @@ window.onload = function () {
         const cities = {
             TR31: "hatay",
             TR33: "mersin",
-            TR32: "isparta"
+            TR32: "isparta",
+            TR15: "burdur"
         };
 
         Object.keys(cities).forEach(function(id){

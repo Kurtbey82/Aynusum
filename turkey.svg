@@ -364,5 +364,13 @@
           text-anchor="middle"
           pointer-events="none">❤️</text>
 
+    <text id="heart-burdur"
+          x="247"
+          y="305"
+          font-size="22"
+          text-anchor="middle"
+          pointer-events="none">❤️</text>
+         
+
 </g>
 </svg>

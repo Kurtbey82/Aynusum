@@ -58,6 +58,20 @@ const memories = {
     "img/isparta12.jpg"
 ],
 
+    },
+
+    burdur: {
+
+        title: "❤️ Burdur",
+
+        date: "22.08.2026",
+
+        text: "Birlikte keşfettiğimiz yeni bir şehir ve hikâyemize eklenen güzel bir anı. ❤️",
+
+        photos: [
+            "img/burdur1.jpg"
+        ]
+
     }
 
 };

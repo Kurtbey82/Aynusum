@@ -55,7 +55,9 @@ const memories = {
     "img/isparta9.jpg",
     "img/isparta10.jpg",
     "img/isparta11.jpg",
-    "img/isparta12.jpg"
+    "img/isparta12.jpg",
+    "img/isparta13.jpg",
+    "img/isparta14.jpg"        
 ],
 
     },
@@ -69,7 +71,8 @@ const memories = {
         text: "Birlikte keşfettiğimiz yeni bir şehir ve hikâyemize eklenen güzel bir anı. ❤️",
 
         photos: [
-            "img/burdur1.jpg"
+            "img/burdur1.jpg",
+            "img/burdur2.jpg"
         ]
 
     }

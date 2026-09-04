@@ -4,7 +4,9 @@ const messages = [
     "Hafızanı zorla sevgilim ❤️",
     "Bir de bana unutkan diyorsun 😅",
     "Emin misin? Bir daha düşün aşkım 💕",
-    "Olmadı... tekrar dene ❤️"
+    "Olmadı... tekrar dene ❤️",
+    "ipucu: kelimenin doğru yapılışına bak!",
+    "İpucu: kapalı bir alandı beni ilk gördüğün yer"
 ];
 
 // =====================

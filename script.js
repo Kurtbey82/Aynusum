@@ -1,4 +1,4 @@
-const password = "mescid";
+const password = "mescit";
 
 const messages = [
     "Hafızanı zorla sevgilim ❤️",

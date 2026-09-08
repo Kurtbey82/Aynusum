@@ -5,7 +5,8 @@ const messages = [
     "Bir de bana unutkan diyorsun 😅",
     "Emin misin? Bir daha düşün aşkım 💕",
     "Olmadı... tekrar dene ❤️",
-    "ipucu: kelimenin doğru yapılışına bak!",
+    "ipucu: kelimenin doğru yazılışına bak!",
+    "ipucu: tek kelime",
     "İpucu: kapalı bir alandı beni ilk gördüğün yer"
 ];
 

@@ -368,3 +368,15 @@ window.addEventListener("popstate", function () {
     }
 
 });
+// Sayfa yenilendiğinde hangi bölüm açık ise onu koru
+document.addEventListener("DOMContentLoaded", function () {
+
+    if (!document.getElementById("homeSection")) return;
+
+    if (location.hash === "#cookie") {
+        showPage("cookieSection");
+    } else {
+        showPage("homeSection");
+    }
+
+});

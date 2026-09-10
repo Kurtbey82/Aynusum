@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #fff0f6;
+    font-family: Arial, sans-serif;
+}
+
+.surprisePage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #fff;
+    color: #c2185b;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.surprisePage h1 {
+    color: #c2185b;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.surpriseVideo {
+    width: min(900px, 95vw);
+    max-height: 75vh;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}

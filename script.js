@@ -383,4 +383,3 @@ document.addEventListener("DOMContentLoaded", function () {
 function openSurprise() {
     window.location.href = "surpriz.html";
 }
-});

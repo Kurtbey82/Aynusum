@@ -628,3 +628,24 @@ opacity:0;
 
     font-size:28px;
 }
+.surpriseButtonArea {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.surpriseButton {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #d63384;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.surpriseButton:hover {
+    transform: scale(1.05);
+}

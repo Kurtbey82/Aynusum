@@ -112,45 +112,61 @@ function openCookie(){
 
 }
 // =====================
-// MÜZİK ÇALAR
+// MÜZİK SİSTEMİ
 // =====================
 
-function playMusic(){
+const siteMusic = document.getElementById("siteMusic");
 
-    const music = document.getElementById("music");
-    const button = document.getElementById("playBtn");
+function playSiteMusic(){
 
-    if(!music || !button) return;
+    if(!siteMusic) return;
 
-    if(music.paused){
+    siteMusic.play().catch(function(error){
+        console.log("Müzik başlatılamadı:", error);
+    });
 
-        music.play();
+}
 
-        button.innerHTML = "⏸";
+function pauseSiteMusic(){
+
+    if(!siteMusic) return;
+
+    siteMusic.pause();
+
+}
+
+function toggleSiteMusic(){
+
+    if(!siteMusic) return;
+
+    if(siteMusic.paused){
+
+        playSiteMusic();
 
     }else{
 
-        music.pause();
-
-        button.innerHTML = "▶";
+        pauseSiteMusic();
 
     }
 
 }
 
-document.addEventListener("DOMContentLoaded",function(){
 
-    const music=document.getElementById("music");
+// iframe'deki sayfalardan gelen komutlar
 
-    const playBtn=document.getElementById("playBtn");
+window.addEventListener("message", function(event){
 
-    if(music && playBtn){
+    if(!event.data) return;
 
-        music.addEventListener("ended",function(){
+    if(event.data.type === "PLAY_MUSIC"){
 
-            playBtn.innerHTML="▶";
+        playSiteMusic();
 
-        });
+    }
+
+    if(event.data.type === "PAUSE_MUSIC"){
+
+        pauseSiteMusic();
 
     }
 

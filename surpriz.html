@@ -8,6 +8,15 @@
 </head>
 
 <body>
+    <script>
+if(window.parent && window.parent !== window){
+
+    window.parent.postMessage({
+        type:"PAUSE_MUSIC"
+    },"*");
+
+}
+    </script>
 
     <div class="surprisePage">
 

@@ -13,6 +13,15 @@
 </head>
 
 <body>
+    <script>
+if(window.parent && window.parent !== window){
+
+    window.parent.postMessage({
+        type:"PAUSE_MUSIC"
+    },"*");
+
+}
+    </script>
 
     <!-- ÜST BAR -->
     <header class="gameTopBar">

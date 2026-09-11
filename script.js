@@ -22,7 +22,13 @@ function login(){
 
         sessionStorage.setItem("login","true");
 
-        location.replace("home.html");
+        document.getElementById("loginPage").style.display="none";
+
+        const frame = document.getElementById("siteFrame");
+
+        frame.style.display="block";
+
+        frame.src="home.html";
 
     }else{
 

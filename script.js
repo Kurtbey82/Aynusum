@@ -117,39 +117,43 @@ function openCookie(){
 
 const siteMusic = document.getElementById("siteMusic");
 
-function playSiteMusic(){
+window.siteMusic = siteMusic;
+
+window.playSiteMusic = function(){
 
     if(!siteMusic) return;
 
     siteMusic.play().catch(function(error){
+
         console.log("Müzik başlatılamadı:", error);
+
     });
 
-}
+};
 
-function pauseSiteMusic(){
+window.pauseSiteMusic = function(){
 
     if(!siteMusic) return;
 
     siteMusic.pause();
 
-}
+};
 
-function toggleSiteMusic(){
+window.toggleSiteMusic = function(){
 
     if(!siteMusic) return;
 
     if(siteMusic.paused){
 
-        playSiteMusic();
+        window.playSiteMusic();
 
     }else{
 
-        pauseSiteMusic();
+        window.pauseSiteMusic();
 
     }
 
-}
+};
 
 
 // iframe'deki sayfalardan gelen komutlar
@@ -404,4 +408,31 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 function openSurprise() {
     window.location.href = "surpriz.html";
+}
+function playMusic(){
+
+    if(window.parent !== window){
+
+        const music = window.parent.siteMusic;
+
+        const button = document.getElementById("playBtn");
+
+        if(!music || !button) return;
+
+        if(music.paused){
+
+            window.parent.playSiteMusic();
+
+            button.innerHTML = "⏸";
+
+        }else{
+
+            window.parent.pauseSiteMusic();
+
+            button.innerHTML = "▶";
+
+        }
+
+    }
+
 }

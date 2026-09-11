@@ -9,60 +9,67 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+#siteFrame{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:none;
+    z-index:1;
+}
+
+#siteMusic{
+    display:none;
+}
+</style>
+
 </head>
+
 <body>
-  
-  <div id="overlay" onclick="closeMenu()"></div>
 
-<div id="sideMenu">
-
-<h2>❤️ Menümüz</h2>
-
-<a href="#" onclick="goPage('neden-seviyorum.html')">❤️ Seni Neden Seviyorum?</a>
-
-<a href="#" onclick="goPage('sans-kurabiyesi.html')">🍪 Şans Kurabiyesi</a>
-
-<a href="#" onclick="goPage('anilarimiz.html')">📸 Anılarımız</a>
-
-<a href="#" onclick="goPage('turkiye.html')">📍 Kalbimizin Durakları</a>
-
-<a href="#" onclick="goPage('notlar.html')">📝 Notlar</a>
-
-<a href="#" onclick="goPage('oyun.html')">🎮 Mini Oyun</a>
-</div>
-
-<!-- Giriş -->
+<!-- GİRİŞ -->
 
 <div id="loginPage">
 
-<div class="loginBox">
+    <div class="loginBox">
 
-<h1>❤️ Aynur & Mehmet ❤️</h1>
+        <h1>❤️ Aynur & Mehmet ❤️</h1>
 
-<p>
+        <p>
+            Beni ilk nerede gördüğünü yaz.<br>
+            (Küçük harflerle yaz.)
+        </p>
 
-Beni ilk nerede gördüğünü yaz.<br>
+        <input
+            id="password"
+            type="password"
+            placeholder="Şifre">
 
-(Küçük harflerle yaz.)
+        <button onclick="login()">
+            Giriş Yap
+        </button>
 
-</p>
+        <p id="error"></p>
 
-<input
-id="password"
-type="password"
-placeholder="Şifre">
-
-<button onclick="login()">
-
-Giriş Yap
-
-</button>
-
-<p id="error"></p>
+    </div>
 
 </div>
 
-</div>
+
+<!-- MÜZİK -->
+
+<audio id="siteMusic">
+    <source src="ses/sarki.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- SİTENİN SAYFALARI -->
+
+<iframe id="siteFrame"></iframe>
+
 
 <script src="script.js"></script>
 

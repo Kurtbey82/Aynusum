@@ -48,7 +48,15 @@ function logout(){
 
     sessionStorage.clear();
 
-    location.replace("index.html");
+    if(window.parent !== window){
+
+        window.top.location.replace("index.html");
+
+    }else{
+
+        location.replace("index.html");
+
+    }
 
 }
 
@@ -436,3 +444,36 @@ function playMusic(){
     }
 
 }
+// =====================
+// SAYFA YENİLENİNCE GİRİŞİ KORU
+// =====================
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    if(location.pathname.endsWith("index.html") ||
+       location.pathname.endsWith("/")){
+
+        if(sessionStorage.getItem("login") === "true"){
+
+            const loginPage = document.getElementById("loginPage");
+            const frame = document.getElementById("siteFrame");
+
+            if(loginPage) loginPage.style.display = "none";
+
+            if(frame){
+
+                frame.style.display = "block";
+
+                if(!frame.src || frame.src === window.location.href){
+
+                    frame.src = "home.html";
+
+                }
+
+            }
+
+        }
+
+    }
+
+});

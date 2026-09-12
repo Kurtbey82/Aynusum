@@ -1,0 +1,293 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #fff4f8,
+        #f5eafa
+    );
+
+    color: #54243f;
+}
+
+
+/* =========================
+   ÜST BAR
+========================= */
+
+.topBar {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 16px 20px;
+
+    background: rgba(255, 255, 255, 0.82);
+
+    box-shadow:
+        0 3px 14px rgba(90, 35, 70, 0.12);
+}
+
+.topBar h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+
+/* =========================
+   BUTONLAR
+========================= */
+
+.backButton,
+#shuffleBtn,
+.successCard button {
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 11px 16px;
+
+    background: #8f3d67;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.backButton:hover,
+#shuffleBtn:hover,
+.successCard button:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   PUZZLE ALANI
+========================= */
+
+.puzzlePage {
+
+    width: min(1050px, 94vw);
+
+    margin: 25px auto 40px;
+
+    text-align: center;
+}
+
+.puzzlePage > h2 {
+
+    font-size: 20px;
+
+    margin:
+        10px
+        0
+        18px;
+}
+
+
+/* =========================
+   BİLGİ ALANI
+========================= */
+
+.infoBar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   PUZZLE TAHTASI
+========================= */
+
+#puzzleBoard {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    max-height: 78vh;
+
+    margin: auto;
+
+    border:
+        5px solid
+        #8f3d67;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background: #ead5df;
+
+    box-shadow:
+        0 12px 35px
+        rgba(80, 25, 55, 0.18);
+
+    touch-action: none;
+}
+
+
+/* =========================
+   PUZZLE PARÇALARI
+========================= */
+
+.piece {
+
+    position: absolute;
+
+    background-image:
+        url("img/puzzle.jpg");
+
+    background-repeat: no-repeat;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.7);
+
+    cursor: grab;
+
+    user-select: none;
+
+    touch-action: none;
+
+    transition:
+        box-shadow 0.12s;
+}
+
+
+.piece.dragging {
+
+    cursor: grabbing;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 10px 22px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.piece.locked {
+
+    cursor: default;
+
+    box-shadow: none;
+}
+
+
+/* =========================
+   TAMAMLANDI EKRANI
+========================= */
+
+.success {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    place-items: center;
+
+    background:
+        rgba(70, 20, 50, 0.55);
+
+    padding: 20px;
+
+    z-index: 2000;
+}
+
+
+.success.show {
+    display: grid;
+}
+
+
+.successCard {
+
+    width: min(420px, 92vw);
+
+    padding: 30px 24px;
+
+    border-radius: 25px;
+
+    background: #fff7fa;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.bigHeart {
+    font-size: 55px;
+}
+
+
+.successCard p {
+
+    line-height: 1.5;
+}
+
+
+.successCard strong {
+
+    display: block;
+
+    font-size: 24px;
+
+    margin: 12px;
+}
+
+
+/* =========================
+   TELEFON
+========================= */
+
+@media (max-width: 650px) {
+
+    .topBar {
+        padding: 12px;
+    }
+
+    .topBar h1 {
+        font-size: 21px;
+    }
+
+    .backButton {
+        padding: 9px 11px;
+    }
+
+    .puzzlePage > h2 {
+        font-size: 17px;
+    }
+
+    .infoBar {
+        font-size: 14px;
+    }
+
+    #shuffleBtn {
+        padding: 9px 11px;
+    }
+}

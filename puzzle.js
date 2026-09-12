@@ -1,5 +1,5 @@
 const ROWS = 6;
-const COLS = 8;
+const COLS = 4;
 const TOTAL = ROWS * COLS;
 
 const board = document.getElementById("puzzleBoard");

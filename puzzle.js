@@ -7,379 +7,435 @@ const countEl = document.getElementById("pieceCount");
 const shuffleBtn = document.getElementById("shuffleBtn");
 const success = document.getElementById("success");
 
-let pieces = [];
-let lockedCount = 0;
+let puzzleOrder = [];
 
 
 // =========================
-// KARIŞTIRMA
-// =========================
-
-function shuffle(array) {
-
-    for (let i = array.length - 1; i > 0; i--) {
-
-        const j =
-            Math.floor(Math.random() * (i + 1));
-
-        [array[i], array[j]] =
-            [array[j], array[i]];
-    }
-
-    return array;
-}
-
-
-// =========================
-// PUZZLE OLUŞTUR
+// PUZZLE'YI OLUŞTUR
 // =========================
 
 function createPuzzle() {
 
     board.innerHTML = "";
 
-    pieces = [];
-
-    lockedCount = 0;
-
     success.classList.remove("show");
 
-    countEl.textContent =
-        `0 / ${TOTAL} parça`;
+    puzzleOrder = [];
+
+    // 0 - 47 arasındaki parçalar
+
+    for (let i = 0; i < TOTAL; i++) {
+        puzzleOrder.push(i);
+    }
+
+    // Parçaları karıştır
+
+    shuffle(puzzleOrder);
 
 
-    const boardWidth =
-        board.clientWidth;
+    // 48 kutucuğu oluştur
 
-    const boardHeight =
-        board.clientHeight;
+    for (let slotIndex = 0; slotIndex < TOTAL; slotIndex++) {
 
-
-    const pieceWidth =
-        boardWidth / COLS;
-
-    const pieceHeight =
-        boardHeight / ROWS;
-
-
-    // Başlangıç pozisyonları
-
-    const positions = [];
-
-
-    for (let row = 0; row < ROWS; row++) {
-
-        for (let col = 0; col < COLS; col++) {
-
-            positions.push({
-
-                x:
-                    Math.random() *
-                    Math.max(
-                        0,
-                        boardWidth - pieceWidth
-                    ),
-
-                y:
-                    Math.random() *
-                    Math.max(
-                        0,
-                        boardHeight - pieceHeight
-                    )
-            });
-        }
+        createSlot(
+            slotIndex,
+            puzzleOrder[slotIndex]
+        );
     }
 
 
-    // Parçaları oluştur
-
-    for (let row = 0; row < ROWS; row++) {
-
-        for (let col = 0; col < COLS; col++) {
-
-            const index =
-                row * COLS + col;
-
-
-            const piece =
-                document.createElement("div");
-
-
-            piece.className =
-                "piece";
-
-
-            piece.dataset.row =
-                row;
-
-            piece.dataset.col =
-                col;
-
-
-            piece.style.width =
-                pieceWidth + "px";
-
-            piece.style.height =
-                pieceHeight + "px";
-
-
-            // Fotoğrafı parçaya böl
-
-            piece.style.backgroundSize =
-                boardWidth + "px " +
-                boardHeight + "px";
-
-
-            piece.style.backgroundPosition =
-                (-col * pieceWidth) + "px " +
-                (-row * pieceHeight) + "px";
-
-
-            // Rastgele başlangıç konumu
-
-            piece.style.left =
-                positions[index].x + "px";
-
-            piece.style.top =
-                positions[index].y + "px";
-
-
-            makeDraggable(piece);
-
-
-            board.appendChild(piece);
-
-            pieces.push(piece);
-        }
-    }
+    updateCounter();
 }
 
 
 // =========================
-// SÜRÜKLEME
+// KARIŞTIR
 // =========================
 
-function makeDraggable(piece) {
+function shuffle(array) {
 
-    let startX = 0;
-    let startY = 0;
+    do {
 
-    let originalX = 0;
-    let originalY = 0;
+        for (
+            let i = array.length - 1;
+            i > 0;
+            i--
+        ) {
 
-
-    piece.addEventListener(
-        "pointerdown",
-        function (event) {
-
-            if (
-                piece.classList.contains(
-                    "locked"
-                )
-            ) {
-                return;
-            }
-
-
-            piece.setPointerCapture(
-                event.pointerId
-            );
-
-
-            piece.classList.add(
-                "dragging"
-            );
-
-
-            startX =
-                event.clientX;
-
-            startY =
-                event.clientY;
-
-
-            originalX =
-                parseFloat(
-                    piece.style.left
+            const j =
+                Math.floor(
+                    Math.random() * (i + 1)
                 );
 
-            originalY =
-                parseFloat(
-                    piece.style.top
-                );
+            [
+                array[i],
+                array[j]
+            ] = [
+                array[j],
+                array[i]
+            ];
         }
-    );
 
-
-    piece.addEventListener(
-        "pointermove",
-        function (event) {
-
-            if (
-                !piece.classList.contains(
-                    "dragging"
-                )
-            ) {
-                return;
-            }
-
-
-            const newX =
-                originalX +
-                (
-                    event.clientX -
-                    startX
-                );
-
-
-            const newY =
-                originalY +
-                (
-                    event.clientY -
-                    startY
-                );
-
-
-            piece.style.left =
-                newX + "px";
-
-            piece.style.top =
-                newY + "px";
-        }
-    );
-
-
-    piece.addEventListener(
-        "pointerup",
-        function () {
-
-            if (
-                !piece.classList.contains(
-                    "dragging"
-                )
-            ) {
-                return;
-            }
-
-
-            piece.classList.remove(
-                "dragging"
-            );
-
-
-            checkPiece(piece);
-        }
-    );
-
-
-    piece.addEventListener(
-        "pointercancel",
-        function () {
-
-            piece.classList.remove(
-                "dragging"
-            );
-        }
-    );
+    } while (isSolved(array));
 }
 
 
 // =========================
-// DOĞRU YER KONTROLÜ
+// KUTUCUK OLUŞTUR
 // =========================
 
-function checkPiece(piece) {
+function createSlot(
+    slotIndex,
+    pieceIndex
+) {
+
+    const slot =
+        document.createElement("div");
+
+    slot.className =
+        "puzzleSlot";
+
+
+    slot.dataset.slot =
+        slotIndex;
+
+
+    const piece =
+        document.createElement("img");
+
+    piece.className =
+        "puzzlePiece";
+
+
+    piece.src =
+        createPieceImage(pieceIndex);
+
+
+    piece.alt =
+        "Puzzle parçası";
+
+
+    piece.draggable =
+        false;
+
+
+    slot.appendChild(piece);
+
+
+    // Dokunmatik / mouse
+
+    slot.addEventListener(
+        "click",
+        function () {
+
+            selectSlot(slot);
+        }
+    );
+
+
+    board.appendChild(slot);
+}
+
+
+// =========================
+// FOTOĞRAF PARÇASI
+// =========================
+
+function createPieceImage(index) {
 
     const row =
-        Number(piece.dataset.row);
+        Math.floor(index / COLS);
 
     const col =
-        Number(piece.dataset.col);
+        index % COLS;
 
 
-    const pieceWidth =
-        board.clientWidth /
-        COLS;
-
-    const pieceHeight =
-        board.clientHeight /
-        ROWS;
+    const canvas =
+        document.createElement("canvas");
 
 
-    const targetX =
-        col * pieceWidth;
-
-    const targetY =
-        row * pieceHeight;
+    const image =
+        new Image();
 
 
-    const currentX =
-        parseFloat(
-            piece.style.left
+    /*
+       Parçaları doğrudan CSS background
+       yerine canvas ile oluşturuyoruz.
+    */
+
+    canvas.width = 100;
+    canvas.height = 100;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    image.src =
+        "img/puzzle.jpg";
+
+
+    image.onload = function () {
+
+        ctx.drawImage(
+            image,
+
+            col *
+            image.naturalWidth /
+            COLS,
+
+            row *
+            image.naturalHeight /
+            ROWS,
+
+            image.naturalWidth /
+            COLS,
+
+            image.naturalHeight /
+            ROWS,
+
+            0,
+            0,
+            100,
+            100
+        );
+    };
+
+
+    return canvas.toDataURL();
+}
+
+
+// =========================
+// SEÇİM
+// =========================
+
+let selectedSlot = null;
+
+
+function selectSlot(slot) {
+
+    if (!selectedSlot) {
+
+        selectedSlot =
+            slot;
+
+        slot.classList.add(
+            "selected"
         );
 
-    const currentY =
-        parseFloat(
-            piece.style.top
-        );
-
-
-    const tolerance =
-        Math.min(
-            pieceWidth,
-            pieceHeight
-        ) * 0.28;
+        return;
+    }
 
 
     if (
-
-        Math.abs(
-            currentX - targetX
-        ) < tolerance &&
-
-        Math.abs(
-            currentY - targetY
-        ) < tolerance
-
+        selectedSlot === slot
     ) {
 
-        piece.style.left =
-            targetX + "px";
+        slot.classList.remove(
+            "selected"
+        );
 
-        piece.style.top =
-            targetY + "px";
+        selectedSlot = null;
+
+        return;
+    }
 
 
-        piece.classList.add(
-            "locked"
+    swapPieces(
+        selectedSlot,
+        slot
+    );
+
+
+    selectedSlot.classList.remove(
+        "selected"
+    );
+
+    selectedSlot = null;
+}
+
+
+// =========================
+// PARÇALARI DEĞİŞTİR
+// =========================
+
+function swapPieces(
+    slotA,
+    slotB
+) {
+
+    const indexA =
+        Number(
+            slotA.dataset.slot
+        );
+
+    const indexB =
+        Number(
+            slotB.dataset.slot
         );
 
 
-        lockedCount++;
+    [
+        puzzleOrder[indexA],
+        puzzleOrder[indexB]
+
+    ] = [
+
+        puzzleOrder[indexB],
+        puzzleOrder[indexA]
+    ];
 
 
-        countEl.textContent =
-            `${lockedCount} / ${TOTAL} parça`;
+    refreshBoard();
+
+    checkPuzzle();
+}
 
 
-        // Puzzle tamamlandı
+// =========================
+// TAHTAYI YENİLE
+// =========================
 
-        if (
-            lockedCount === TOTAL
+function refreshBoard() {
+
+    const slots =
+        document.querySelectorAll(
+            ".puzzleSlot"
+        );
+
+
+    slots.forEach(
+        function (
+            slot,
+            index
         ) {
 
-            setTimeout(
-                function () {
+            const pieceIndex =
+                puzzleOrder[index];
 
-                    success.classList.add(
-                        "show"
-                    );
 
-                },
-                400
-            );
+            const piece =
+                slot.querySelector(
+                    ".puzzlePiece"
+                );
+
+
+            piece.src =
+                createPieceImage(
+                    pieceIndex
+                );
         }
+    );
+
+
+    updateCounter();
+}
+
+
+// =========================
+// DOĞRU PARÇA SAYISI
+// =========================
+
+function updateCounter() {
+
+    let correct = 0;
+
+
+    puzzleOrder.forEach(
+        function (
+            pieceIndex,
+            slotIndex
+        ) {
+
+            if (
+                pieceIndex ===
+                slotIndex
+            ) {
+
+                correct++;
+            }
+        }
+    );
+
+
+    countEl.textContent =
+        `${correct} / ${TOTAL} parça`;
+
+
+    // Doğru parçaları işaretle
+
+    const slots =
+        document.querySelectorAll(
+            ".puzzleSlot"
+        );
+
+
+    slots.forEach(
+        function (
+            slot,
+            index
+        ) {
+
+            if (
+                puzzleOrder[index] ===
+                index
+            ) {
+
+                slot.classList.add(
+                    "correct"
+                );
+
+            } else {
+
+                slot.classList.remove(
+                    "correct"
+                );
+            }
+        }
+    );
+}
+
+
+// =========================
+// PUZZLE TAMAMLANDI MI?
+// =========================
+
+function checkPuzzle() {
+
+    if (
+        isSolved(puzzleOrder)
+    ) {
+
+        setTimeout(
+            function () {
+
+                success.classList.add(
+                    "show"
+                );
+
+            },
+            500
+        );
     }
+}
+
+
+// =========================
+// ÇÖZÜLMÜŞ MÜ?
+// =========================
+
+function isSolved(array) {
+
+    return array.every(
+        function (
+            value,
+            index
+        ) {
+
+            return value === index;
+        }
+    );
 }
 
 
@@ -389,17 +445,10 @@ function checkPiece(piece) {
 
 shuffleBtn.addEventListener(
     "click",
-    createPuzzle
-);
+    function () {
 
-
-// =========================
-// EKRAN BOYUTU DEĞİŞİNCE
-// =========================
-
-window.addEventListener(
-    "resize",
-    createPuzzle
+        createPuzzle();
+    }
 );
 
 

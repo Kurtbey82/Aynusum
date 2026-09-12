@@ -136,9 +136,9 @@ body {
 
     margin: auto;
 
-    padding: 4px;
+    padding: 0;
 
-    gap: 3px;
+    gap: 0;
 
     background: #8f3d67;
 
@@ -206,9 +206,14 @@ body {
     height: 100%;
 
     background-repeat: no-repeat;
+
+    /*
+       4 sütun × 6 satır
+    */
     background-size: 400% 600%;
 
     user-select: none;
+
     pointer-events: none;
 }
 

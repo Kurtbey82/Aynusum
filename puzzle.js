@@ -12,7 +12,7 @@ let selectedSlot = null;
 
 
 // =========================
-// PUZZLE BAŞLAT
+// PUZZLE OLUŞTUR
 // =========================
 
 function createPuzzle() {
@@ -22,8 +22,6 @@ function createPuzzle() {
     selectedSlot = null;
 
     success.classList.remove("show");
-
-    // Parça numaraları
 
     for (let i = 0; i < TOTAL; i++) {
         puzzleOrder.push(i);
@@ -48,17 +46,10 @@ function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
 
             const j =
-                Math.floor(
-                    Math.random() * (i + 1)
-                );
+                Math.floor(Math.random() * (i + 1));
 
-            [
-                array[i],
-                array[j]
-            ] = [
-                array[j],
-                array[i]
-            ];
+            [array[i], array[j]] =
+            [array[j], array[i]];
         }
 
     } while (isSolved(array));
@@ -66,27 +57,23 @@ function shuffle(array) {
 
 
 // =========================
-// TAHTAYI OLUŞTUR
+// TAHTA
 // =========================
 
 function createBoard() {
 
     for (let slotIndex = 0; slotIndex < TOTAL; slotIndex++) {
 
-        const slot =
-            document.createElement("div");
+        const slot = document.createElement("div");
 
         slot.className = "puzzleSlot";
 
-        slot.dataset.slot =
-            slotIndex;
+        slot.dataset.slot = slotIndex;
 
 
-        const piece =
-            document.createElement("div");
+        const piece = document.createElement("div");
 
-        piece.className =
-            "puzzlePiece";
+        piece.className = "puzzlePiece";
 
 
         setPieceImage(
@@ -97,13 +84,10 @@ function createBoard() {
 
         slot.appendChild(piece);
 
-
         slot.addEventListener(
             "click",
             function () {
-
                 handleSlotClick(slot);
-
             }
         );
 
@@ -117,15 +101,10 @@ function createBoard() {
 // FOTOĞRAF PARÇASI
 // =========================
 
-function setPieceImage(
-    piece,
-    pieceIndex
-) {
+function setPieceImage(piece, pieceIndex) {
 
     const row =
-        Math.floor(
-            pieceIndex / COLS
-        );
+        Math.floor(pieceIndex / COLS);
 
     const col =
         pieceIndex % COLS;
@@ -136,22 +115,37 @@ function setPieceImage(
 
 
     /*
-       Fotoğrafın tamamını kutucuğa
-       göre ölçekliyoruz.
+       Fotoğrafı 4 sütun × 6 satıra bölüyoruz.
     */
 
     piece.style.backgroundSize =
         `${COLS * 100}% ${ROWS * 100}%`;
 
 
+    /*
+       Her parçanın doğru konumunu
+       yüzde olarak hesapla.
+    */
+
+    const x =
+        COLS === 1
+        ? 0
+        : (col / (COLS - 1)) * 100;
+
+
+    const y =
+        ROWS === 1
+        ? 0
+        : (row / (ROWS - 1)) * 100;
+
+
     piece.style.backgroundPosition =
-        `${(col * 100) / (COLS - 1)}% ` +
-        `${(row * 100) / (ROWS - 1)}%`;
+        `${x}% ${y}%`;
 }
 
 
 // =========================
-// KUTUCUĞA TIKLAMA
+// KUTUCUK SEÇ
 // =========================
 
 function handleSlotClick(slot) {
@@ -160,21 +154,15 @@ function handleSlotClick(slot) {
 
         selectedSlot = slot;
 
-        slot.classList.add(
-            "selected"
-        );
+        slot.classList.add("selected");
 
         return;
     }
 
 
-    // Aynı kutuya tekrar tıklandı
-
     if (selectedSlot === slot) {
 
-        selectedSlot.classList.remove(
-            "selected"
-        );
+        slot.classList.remove("selected");
 
         selectedSlot = null;
 
@@ -182,20 +170,15 @@ function handleSlotClick(slot) {
     }
 
 
-    // İki parçayı değiştir
-
     swapPieces(
         selectedSlot,
         slot
     );
 
 
-    selectedSlot.classList.remove(
-        "selected"
-    );
+    selectedSlot.classList.remove("selected");
 
     selectedSlot = null;
-
 
     updateCounter();
 
@@ -207,20 +190,13 @@ function handleSlotClick(slot) {
 // PARÇALARI DEĞİŞTİR
 // =========================
 
-function swapPieces(
-    slotA,
-    slotB
-) {
+function swapPieces(slotA, slotB) {
 
     const indexA =
-        Number(
-            slotA.dataset.slot
-        );
+        Number(slotA.dataset.slot);
 
     const indexB =
-        Number(
-            slotB.dataset.slot
-        );
+        Number(slotB.dataset.slot);
 
 
     [
@@ -239,6 +215,7 @@ function swapPieces(
         puzzleOrder[indexA]
     );
 
+
     updatePiece(
         slotB,
         puzzleOrder[indexB]
@@ -247,19 +224,13 @@ function swapPieces(
 
 
 // =========================
-// TEK PARÇAYI GÜNCELLE
+// PARÇAYI GÜNCELLE
 // =========================
 
-function updatePiece(
-    slot,
-    pieceIndex
-) {
+function updatePiece(slot, pieceIndex) {
 
     const piece =
-        slot.querySelector(
-            ".puzzlePiece"
-        );
-
+        slot.querySelector(".puzzlePiece");
 
     setPieceImage(
         piece,
@@ -269,42 +240,31 @@ function updatePiece(
 
 
 // =========================
-// DOĞRU PARÇA SAYISI
+// SAYACI GÜNCELLE
 // =========================
 
 function updateCounter() {
 
     let correct = 0;
 
-
     const slots =
-        document.querySelectorAll(
-            ".puzzleSlot"
-        );
+        document.querySelectorAll(".puzzleSlot");
 
 
     slots.forEach(
-        function (
-            slot,
-            index
-        ) {
+        function (slot, index) {
 
             if (
-                puzzleOrder[index] ===
-                index
+                puzzleOrder[index] === index
             ) {
 
                 correct++;
 
-                slot.classList.add(
-                    "correct"
-                );
+                slot.classList.add("correct");
 
             } else {
 
-                slot.classList.remove(
-                    "correct"
-                );
+                slot.classList.remove("correct");
             }
         }
     );
@@ -316,21 +276,17 @@ function updateCounter() {
 
 
 // =========================
-// TAMAMLANDI MI?
+// KONTROL
 // =========================
 
 function checkPuzzle() {
 
-    if (
-        isSolved(puzzleOrder)
-    ) {
+    if (isSolved(puzzleOrder)) {
 
         setTimeout(
             function () {
 
-                success.classList.add(
-                    "show"
-                );
+                success.classList.add("show");
 
             },
             500
@@ -346,13 +302,9 @@ function checkPuzzle() {
 function isSolved(array) {
 
     return array.every(
-        function (
-            value,
-            index
-        ) {
+        function (value, index) {
 
             return value === index;
-
         }
     );
 }
@@ -364,11 +316,7 @@ function isSolved(array) {
 
 shuffleBtn.addEventListener(
     "click",
-    function () {
-
-        createPuzzle();
-
-    }
+    createPuzzle
 );
 
 

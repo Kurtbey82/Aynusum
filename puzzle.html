@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Puzzle ❤️</title>
+
+    <link rel="stylesheet" href="puzzle.css">
+</head>
+
+<body>
+
+<header class="topBar">
+
+    <button class="backButton"
+            onclick="location.href='home.html'">
+        ← Ana Sayfa
+    </button>
+
+    <h1>🧩 Puzzle ❤️</h1>
+
+</header>
+
+
+<main class="puzzlePage">
+
+    <h2>
+        Birlikte tamamladığımız her parça, daha güzel... ❤️
+    </h2>
+
+
+    <div class="infoBar">
+
+        <span id="pieceCount">
+            0 / 48 parça
+        </span>
+
+        <button id="shuffleBtn">
+            🔀 Yeniden Karıştır
+        </button>
+
+    </div>
+
+
+    <div id="puzzleBoard"></div>
+
+
+    <!-- Puzzle tamamlandığında açılacak -->
+
+    <div id="success" class="success">
+
+        <div class="successCard">
+
+            <div class="bigHeart">
+                ❤️
+            </div>
+
+            <h2>
+                Hepsi yerine oturdu! 🥰
+            </h2>
+
+            <p>
+                Bütün parçalar birleşince ortaya çıkan şey kadar
+                güzel olan bir şey var:
+            </p>
+
+            <strong>
+                Biz. ❤️
+            </strong>
+
+            <button onclick="location.href='home.html'">
+                ← Ana Sayfa
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="puzzle.js"></script>
+
+</body>
+</html>

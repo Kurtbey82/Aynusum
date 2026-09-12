@@ -8,41 +8,30 @@ const shuffleBtn = document.getElementById("shuffleBtn");
 const success = document.getElementById("success");
 
 let puzzleOrder = [];
+let selectedSlot = null;
 
 
 // =========================
-// PUZZLE'YI OLUŞTUR
+// PUZZLE BAŞLAT
 // =========================
 
 function createPuzzle() {
 
     board.innerHTML = "";
+    puzzleOrder = [];
+    selectedSlot = null;
 
     success.classList.remove("show");
 
-    puzzleOrder = [];
-
-    // 0 - 47 arasındaki parçalar
+    // Parça numaraları
 
     for (let i = 0; i < TOTAL; i++) {
         puzzleOrder.push(i);
     }
 
-    // Parçaları karıştır
-
     shuffle(puzzleOrder);
 
-
-    // 48 kutucuğu oluştur
-
-    for (let slotIndex = 0; slotIndex < TOTAL; slotIndex++) {
-
-        createSlot(
-            slotIndex,
-            puzzleOrder[slotIndex]
-        );
-    }
-
+    createBoard();
 
     updateCounter();
 }
@@ -56,11 +45,7 @@ function shuffle(array) {
 
     do {
 
-        for (
-            let i = array.length - 1;
-            i > 0;
-            i--
-        ) {
+        for (let i = array.length - 1; i > 0; i--) {
 
             const j =
                 Math.floor(
@@ -81,59 +66,50 @@ function shuffle(array) {
 
 
 // =========================
-// KUTUCUK OLUŞTUR
+// TAHTAYI OLUŞTUR
 // =========================
 
-function createSlot(
-    slotIndex,
-    pieceIndex
-) {
+function createBoard() {
 
-    const slot =
-        document.createElement("div");
+    for (let slotIndex = 0; slotIndex < TOTAL; slotIndex++) {
 
-    slot.className =
-        "puzzleSlot";
+        const slot =
+            document.createElement("div");
 
+        slot.className = "puzzleSlot";
 
-    slot.dataset.slot =
-        slotIndex;
+        slot.dataset.slot =
+            slotIndex;
 
 
-    const piece =
-        document.createElement("img");
+        const piece =
+            document.createElement("div");
 
-    piece.className =
-        "puzzlePiece";
-
-
-    piece.src =
-        createPieceImage(pieceIndex);
+        piece.className =
+            "puzzlePiece";
 
 
-    piece.alt =
-        "Puzzle parçası";
+        setPieceImage(
+            piece,
+            puzzleOrder[slotIndex]
+        );
 
 
-    piece.draggable =
-        false;
+        slot.appendChild(piece);
 
 
-    slot.appendChild(piece);
+        slot.addEventListener(
+            "click",
+            function () {
+
+                handleSlotClick(slot);
+
+            }
+        );
 
 
-    // Dokunmatik / mouse
-
-    slot.addEventListener(
-        "click",
-        function () {
-
-            selectSlot(slot);
-        }
-    );
-
-
-    board.appendChild(slot);
+        board.appendChild(slot);
+    }
 }
 
 
@@ -141,84 +117,48 @@ function createSlot(
 // FOTOĞRAF PARÇASI
 // =========================
 
-function createPieceImage(index) {
+function setPieceImage(
+    piece,
+    pieceIndex
+) {
 
     const row =
-        Math.floor(index / COLS);
+        Math.floor(
+            pieceIndex / COLS
+        );
 
     const col =
-        index % COLS;
+        pieceIndex % COLS;
 
 
-    const canvas =
-        document.createElement("canvas");
-
-
-    const image =
-        new Image();
+    piece.style.backgroundImage =
+        'url("img/puzzle.jpg")';
 
 
     /*
-       Parçaları doğrudan CSS background
-       yerine canvas ile oluşturuyoruz.
+       Fotoğrafın tamamını kutucuğa
+       göre ölçekliyoruz.
     */
 
-    canvas.width = 100;
-    canvas.height = 100;
+    piece.style.backgroundSize =
+        `${COLS * 100}% ${ROWS * 100}%`;
 
 
-    const ctx =
-        canvas.getContext("2d");
-
-
-    image.src =
-        "img/puzzle.jpg";
-
-
-    image.onload = function () {
-
-        ctx.drawImage(
-            image,
-
-            col *
-            image.naturalWidth /
-            COLS,
-
-            row *
-            image.naturalHeight /
-            ROWS,
-
-            image.naturalWidth /
-            COLS,
-
-            image.naturalHeight /
-            ROWS,
-
-            0,
-            0,
-            100,
-            100
-        );
-    };
-
-
-    return canvas.toDataURL();
+    piece.style.backgroundPosition =
+        `${(col * 100) / (COLS - 1)}% ` +
+        `${(row * 100) / (ROWS - 1)}%`;
 }
 
 
 // =========================
-// SEÇİM
+// KUTUCUĞA TIKLAMA
 // =========================
 
-let selectedSlot = null;
-
-
-function selectSlot(slot) {
+function handleSlotClick(slot) {
 
     if (!selectedSlot) {
 
-        selectedSlot =
-            slot;
+        selectedSlot = slot;
 
         slot.classList.add(
             "selected"
@@ -228,11 +168,11 @@ function selectSlot(slot) {
     }
 
 
-    if (
-        selectedSlot === slot
-    ) {
+    // Aynı kutuya tekrar tıklandı
 
-        slot.classList.remove(
+    if (selectedSlot === slot) {
+
+        selectedSlot.classList.remove(
             "selected"
         );
 
@@ -241,6 +181,8 @@ function selectSlot(slot) {
         return;
     }
 
+
+    // İki parçayı değiştir
 
     swapPieces(
         selectedSlot,
@@ -253,6 +195,11 @@ function selectSlot(slot) {
     );
 
     selectedSlot = null;
+
+
+    updateCounter();
+
+    checkPuzzle();
 }
 
 
@@ -287,49 +234,37 @@ function swapPieces(
     ];
 
 
-    refreshBoard();
+    updatePiece(
+        slotA,
+        puzzleOrder[indexA]
+    );
 
-    checkPuzzle();
+    updatePiece(
+        slotB,
+        puzzleOrder[indexB]
+    );
 }
 
 
 // =========================
-// TAHTAYI YENİLE
+// TEK PARÇAYI GÜNCELLE
 // =========================
 
-function refreshBoard() {
+function updatePiece(
+    slot,
+    pieceIndex
+) {
 
-    const slots =
-        document.querySelectorAll(
-            ".puzzleSlot"
+    const piece =
+        slot.querySelector(
+            ".puzzlePiece"
         );
 
 
-    slots.forEach(
-        function (
-            slot,
-            index
-        ) {
-
-            const pieceIndex =
-                puzzleOrder[index];
-
-
-            const piece =
-                slot.querySelector(
-                    ".puzzlePiece"
-                );
-
-
-            piece.src =
-                createPieceImage(
-                    pieceIndex
-                );
-        }
+    setPieceImage(
+        piece,
+        pieceIndex
     );
-
-
-    updateCounter();
 }
 
 
@@ -341,29 +276,6 @@ function updateCounter() {
 
     let correct = 0;
 
-
-    puzzleOrder.forEach(
-        function (
-            pieceIndex,
-            slotIndex
-        ) {
-
-            if (
-                pieceIndex ===
-                slotIndex
-            ) {
-
-                correct++;
-            }
-        }
-    );
-
-
-    countEl.textContent =
-        `${correct} / ${TOTAL} parça`;
-
-
-    // Doğru parçaları işaretle
 
     const slots =
         document.querySelectorAll(
@@ -382,6 +294,8 @@ function updateCounter() {
                 index
             ) {
 
+                correct++;
+
                 slot.classList.add(
                     "correct"
                 );
@@ -394,11 +308,15 @@ function updateCounter() {
             }
         }
     );
+
+
+    countEl.textContent =
+        `${correct} / ${TOTAL} parça`;
 }
 
 
 // =========================
-// PUZZLE TAMAMLANDI MI?
+// TAMAMLANDI MI?
 // =========================
 
 function checkPuzzle() {
@@ -422,7 +340,7 @@ function checkPuzzle() {
 
 
 // =========================
-// ÇÖZÜLMÜŞ MÜ?
+// ÇÖZÜLDÜ MÜ?
 // =========================
 
 function isSolved(array) {
@@ -434,6 +352,7 @@ function isSolved(array) {
         ) {
 
             return value === index;
+
         }
     );
 }
@@ -448,6 +367,7 @@ shuffleBtn.addEventListener(
     function () {
 
         createPuzzle();
+
     }
 );
 

@@ -12,49 +12,34 @@ const confettiLayer = document.getElementById("confettiLayer");
    PASTAYA TIKLAMA
 ========================= */
 
-document.addEventListener("click", function (event) {
+cakeArea.addEventListener("click", function () {
 
     if (celebrationStarted) return;
-
-    if (!cakeArea || !cakeArea.contains(event.target)) {
-        return;
-    }
 
     clickCount++;
 
     clickCounter.textContent = clickCount + " / 3";
 
-
-    /* Tıklama animasyonu */
-
+    /* Küçük tıklama animasyonu */
     cakeArea.animate(
         [
-            {
-                transform: "scale(1)"
-            },
-            {
-                transform: "scale(1.04)"
-            },
-            {
-                transform: "scale(1)"
-            }
+            { transform: "scale(1)" },
+            { transform: "scale(1.04)" },
+            { transform: "scale(1)" }
         ],
         {
-            duration: 220,
+            duration: 200,
             easing: "ease-out"
         }
     );
 
-
     /* 3. tıklama */
-
-    if (clickCount >= 3) {
+    if (clickCount === 3) {
 
         celebrationStarted = true;
 
         startCelebration();
     }
-
 });
 
 
@@ -69,25 +54,18 @@ function startCelebration() {
 
     clickCounter.style.display = "none";
 
-
     /* Konfeti */
-
     createConfetti(250);
 
-
-    /* Pasta müziği */
-
+    /* Pasta şarkısı */
     playCakeMusic();
 
-
     /* Yazı */
-
     setTimeout(function () {
 
         birthdayText.classList.add("show");
 
-    }, 450);
-
+    }, 400);
 }
 
 
@@ -106,60 +84,47 @@ function createConfetti(amount) {
         "#ff9f43"
     ];
 
-
     for (let i = 0; i < amount; i++) {
 
         const confetti = document.createElement("div");
 
         confetti.className = "confetti";
 
-
         confetti.style.left =
             Math.random() * 100 + "%";
-
 
         confetti.style.background =
             colors[
                 Math.floor(Math.random() * colors.length)
             ];
 
-
         confetti.style.setProperty(
             "--drift",
             (Math.random() * 300 - 150) + "px"
         );
-
 
         confetti.style.setProperty(
             "--spin",
             (Math.random() * 1440 - 720) + "deg"
         );
 
-
         confetti.style.animationDuration =
             (2.5 + Math.random() * 1.5) + "s";
 
-
         confetti.style.animationDelay =
-            Math.random() * 0.45 + "s";
-
+            Math.random() * 0.4 + "s";
 
         confettiLayer.appendChild(confetti);
 
-
         setTimeout(function () {
-
             confetti.remove();
-
         }, 4500);
-
     }
-
 }
 
 
 /* =========================
-   PASTA MÜZİĞİ
+   PASTA ŞARKISI
 ========================= */
 
 function playCakeMusic() {
@@ -177,7 +142,6 @@ function playCakeMusic() {
         );
 
     });
-
 }
 
 

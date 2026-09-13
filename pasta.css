@@ -11,66 +11,67 @@ body {
 
 body {
     overflow: hidden;
-    font-family: Georgia, "Times New Roman", serif;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     background:
         radial-gradient(
             circle at 50% 35%,
-            #ffdbea 0%,
-            #d889b2 45%,
-            #542044 100%
+            #ffd8e8 0%,
+            #d875a4 35%,
+            #7d285d 70%,
+            #35132f 100%
         );
 
     color: white;
 }
 
 
-/* =========================
-   KAPATMA BUTONU
-========================= */
+/* =================================
+   ROMANTİK ARKA PLAN
+================================= */
 
-.closeButton {
+body::before {
+    content: "";
+
     position: fixed;
 
-    top: 12px;
-    right: 15px;
+    inset: 0;
 
-    width: 48px;
-    height: 48px;
-
-    z-index: 1000;
-
-    border: none;
-    border-radius: 50%;
-
-    background: rgba(70, 20, 60, 0.5);
-
-    color: white;
-
-    font-size: 38px;
-    line-height: 42px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 4px 18px rgba(0, 0, 0, 0.25);
-
-    transition: 0.2s;
-}
-
-.closeButton:hover {
-    transform: scale(1.1);
+    pointer-events: none;
 
     background:
-        rgba(70, 20, 60, 0.75);
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.35),
+            transparent 18%
+        ),
+
+        radial-gradient(
+            circle at 85% 18%,
+            rgba(255,220,120,.30),
+            transparent 20%
+        ),
+
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(255,100,170,.18),
+            transparent 35%
+        );
+
+    z-index: 0;
 }
 
 
-/* =========================
+/* =================================
    ANA SAYFA
-========================= */
+================================= */
 
 .cakePage {
+
     position: relative;
 
     width: 100%;
@@ -79,164 +80,298 @@ body {
     display: flex;
 
     justify-content: center;
+
+    z-index: 2;
 }
 
 
-/* =========================
-   ÜST TALİMAT
-========================= */
+/* =================================
+   ÇARPI
+================================= */
 
-.instruction {
-    position: relative;
+.closeButton {
 
-    z-index: 20;
+    position: fixed;
 
-    margin-top: 5vh;
+    top: 18px;
+    right: 20px;
 
-    padding: 14px 25px;
+    width: 55px;
+    height: 55px;
 
-    border-radius: 50px;
+    z-index: 1000;
+
+    border: 2px solid
+        rgba(255,180,220,.7);
+
+    border-radius: 50%;
 
     background:
-        rgba(80, 22, 68, 0.5);
+        rgba(70,10,50,.65);
 
-    border:
-        1px solid rgba(255, 255, 255, 0.25);
+    color: white;
+
+    font-size: 42px;
+
+    line-height: 45px;
+
+    cursor: pointer;
 
     box-shadow:
-        0 8px 30px rgba(50, 10, 40, 0.3);
 
-    font-size:
-        clamp(18px, 3vw, 29px);
+        0 0 15px
+        rgba(255,100,190,.5),
+
+        inset 0 0 15px
+        rgba(255,255,255,.12);
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.closeButton:hover {
+
+    transform:
+        scale(1.1);
+
+    background:
+        rgba(110,20,75,.85);
+}
+
+
+/* =================================
+   ÜST TALİMAT
+================================= */
+
+.instruction {
+
+    position: absolute;
+
+    top: 30px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 100;
+
+    width: min(650px, 78vw);
+
+    padding:
+        15px 30px;
 
     text-align: center;
 
+    border-radius: 50px;
+
+    border:
+        2px solid
+        rgba(255,120,190,.75);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(110,25,75,.85),
+            rgba(65,10,50,.75)
+        );
+
+    box-shadow:
+
+        0 0 18px
+        rgba(255,80,180,.35),
+
+        inset 0 0 20px
+        rgba(255,255,255,.06);
+
+    font-size:
+        clamp(19px, 3vw, 30px);
+
     text-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.35);
+        0 2px 6px rgba(0,0,0,.5);
 }
 
 .instruction strong {
-    color: #ffe39a;
+
+    color: #ffd75e;
+
+    text-shadow:
+        0 0 8px
+        rgba(255,210,70,.7);
 }
 
 
-/* =========================
-   TIKLAMA SAYACI
-========================= */
+/* =================================
+   SAYAÇ
+================================= */
 
 .clickCounter {
+
     position: absolute;
 
-    top: calc(5vh + 65px);
+    top: 105px;
 
-    z-index: 20;
+    left: 50%;
 
-    font-size: 14px;
+    transform:
+        translateX(-50%);
 
-    opacity: 0.8;
+    z-index: 100;
+
+    padding:
+        8px 30px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(80,15,60,.7);
+
+    border:
+        1px solid
+        rgba(255,150,210,.6);
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 0 15px
+        rgba(255,100,180,.25);
 }
 
 
-/* =========================
+/* =================================
    PASTA ALANI
-========================= */
+================================= */
 
 .cakeArea {
+
     position: absolute;
 
     left: 50%;
-    top: 55%;
+
+    top: 57%;
 
     transform:
         translate(-50%, -50%);
 
     width:
-        min(90vw, 700px);
+        min(94vw, 1050px);
 
     height:
-        min(68vh, 600px);
+        78vh;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     cursor: pointer;
 
     outline: none;
 
+    z-index: 10;
+
     -webkit-tap-highlight-color:
         transparent;
 }
 
 
-/* =========================
-   PASTA GLOW
-========================= */
+/* =================================
+   IŞIK PARLAMASI
+================================= */
 
 .cakeGlow {
+
     position: absolute;
 
-    width: 70%;
-    height: 55%;
+    width: 75%;
+
+    height: 65%;
 
     border-radius: 50%;
 
     background:
-        rgba(255, 215, 235, 0.65);
+        radial-gradient(
+            circle,
+            rgba(255,225,240,.65),
+            rgba(255,120,190,.18),
+            transparent 70%
+        );
 
-    filter: blur(45px);
+    filter:
+        blur(35px);
 
-    opacity: 0.8;
+    pointer-events: none;
+
+    z-index: 1;
 }
 
 
-/* =========================
+/* =================================
    PASTA FOTOĞRAFI
-========================= */
+================================= */
 
 .cakeImage {
+
     position: relative;
 
-    z-index: 3;
+    z-index: 5;
 
     display: block;
 
-    width: 100%;
+    width:
+        min(94vw, 1000px);
 
-    max-height: 58vh;
+    max-width: 100%;
+
+    max-height:
+        72vh;
 
     object-fit: contain;
+
+    border-radius: 18px;
 
     user-select: none;
 
     -webkit-user-drag: none;
 
     filter:
+
         drop-shadow(
-            0 25px 22px
-            rgba(50, 10, 35, 0.4)
+            0 25px 30px
+            rgba(35,5,25,.55)
+        )
+
+        drop-shadow(
+            0 0 25px
+            rgba(255,180,220,.18)
         );
 
     animation:
-        cakeFloat 3.5s ease-in-out infinite;
+        cakeFloat 4s ease-in-out infinite;
 }
 
 
-/* =========================
+/* =================================
    MUMlar
-========================= */
+================================= */
 
 .candles {
+
     position: absolute;
 
-    z-index: 7;
+    z-index: 20;
 
-    top: 7%;
+    top: 19%;
+
     left: 50%;
 
-    width: 48%;
-    height: 24%;
+    width: 43%;
+
+    height: 20%;
 
     transform:
         translateX(-50%);
@@ -246,12 +381,14 @@ body {
 
 
 .candle {
+
     position: absolute;
 
-    bottom: 10%;
+    bottom: 0;
 
     width: 17px;
-    height: 72px;
+
+    height: 65px;
 
     border-radius:
         8px 8px 4px 4px;
@@ -260,33 +397,36 @@ body {
         repeating-linear-gradient(
             -25deg,
 
-            white 0 9px,
+            #fff 0 8px,
 
-            #d99a42 9px 16px
+            #d89a43 8px 15px
         );
 
     box-shadow:
 
-        inset 3px 0 4px
-        rgba(255, 255, 255, 0.7),
+        inset 3px 0 5px
+        rgba(255,255,255,.75),
 
         inset -4px 0 5px
-        rgba(100, 40, 10, 0.25),
+        rgba(80,30,10,.25),
 
-        0 4px 7px
-        rgba(0, 0, 0, 0.25);
+        0 4px 8px
+        rgba(0,0,0,.35);
 }
 
 
 .candle::before {
+
     content: "";
 
     position: absolute;
 
     left: 50%;
+
     top: -8px;
 
     width: 2px;
+
     height: 10px;
 
     transform:
@@ -298,49 +438,47 @@ body {
 
 .candle1 {
     left: 3%;
-
-    transform:
-        rotate(-8deg);
+    transform: rotate(-8deg);
 }
 
 .candle2 {
-    left: 23%;
-
-    height: 78px;
+    left: 24%;
+    height: 72px;
+    transform: rotate(-3deg);
 }
 
 .candle3 {
-    left: 43%;
-
-    height: 88px;
+    left: 44%;
+    height: 82px;
 }
 
 .candle4 {
-    left: 63%;
-
-    height: 78px;
+    left: 64%;
+    height: 72px;
+    transform: rotate(3deg);
 }
 
 .candle5 {
-    left: 83%;
-
-    transform:
-        rotate(8deg);
+    left: 84%;
+    transform: rotate(8deg);
 }
 
 
-/* =========================
-   MUM ALEVİ
-========================= */
+/* =================================
+   MUM ALEVLİ
+================================= */
 
 .flame {
+
     position: absolute;
 
     left: 50%;
-    top: -30px;
 
-    width: 18px;
-    height: 30px;
+    top: -31px;
+
+    width: 19px;
+
+    height: 31px;
 
     transform:
         translateX(-50%);
@@ -352,115 +490,140 @@ body {
         radial-gradient(
             circle at 50% 70%,
 
-            white 0 20%,
+            #fff 0 18%,
 
-            #ffd23d 40%,
+            #fff19a 25%,
 
-            #ff8200 72%,
+            #ffd21e 45%,
+
+            #ff7800 70%,
 
             transparent 74%
         );
 
     filter:
+
         drop-shadow(
-            0 0 8px #ffd34e
+            0 0 7px #ffd34d
+        )
+
+        drop-shadow(
+            0 0 15px #ff9d00
         );
 
     animation:
-        flame 0.6s ease-in-out
+        flame .55s
+        ease-in-out
         infinite alternate;
 }
 
 
-/* =========================
+/* =================================
    MAYTAB / VOLKAN
-========================= */
+================================= */
 
 .sparkler {
+
     position: absolute;
 
-    z-index: 8;
+    z-index: 25;
 
-    top: 6%;
-    right: 15%;
+    top: 16%;
 
-    width: 40px;
-    height: 100px;
+    right: 20%;
+
+    width: 55px;
+
+    height: 120px;
 
     pointer-events: none;
 }
 
 
 .sparklerCore {
+
     position: absolute;
 
     left: 50%;
+
     bottom: 0;
 
     width: 7px;
-    height: 65px;
+
+    height: 75px;
 
     transform:
         translateX(-50%)
-        rotate(12deg);
+        rotate(10deg);
 
-    border-radius: 4px;
+    border-radius: 5px;
 
     background:
         linear-gradient(
-            #777,
+            #555,
             #ddd,
-            #555
+            #666
         );
 }
 
 
 .sparkler::after {
+
     content: "";
 
     position: absolute;
 
     left: 50%;
-    top: 8px;
 
-    width: 18px;
-    height: 18px;
+    top: 5px;
+
+    width: 22px;
+
+    height: 22px;
 
     transform:
         translateX(-50%);
 
     border-radius: 50%;
 
-    background: #fff4a0;
+    background:
+        #fff6ad;
 
     box-shadow:
+
         0 0 10px white,
-        0 0 25px #ffae00;
+
+        0 0 25px #ffd000,
+
+        0 0 45px #ff8c00;
 
     animation:
-        sparkGlow 0.45s
+        sparkGlow .4s
         alternate infinite;
 }
 
 
 .sparklerSpark {
+
     position: absolute;
 
     left: 50%;
+
     top: 15px;
 
     width: 3px;
-    height: 35px;
+
+    height: 45px;
+
+    transform-origin:
+        50% 0;
 
     background:
         linear-gradient(
             white,
-            #ffc400,
+            #ffd000,
             transparent
         );
-
-    transform-origin:
-        50% 0;
 }
 
 
@@ -501,62 +664,76 @@ body {
 }
 
 
-/* =========================
-   DOĞUM GÜNÜ YAZISI
-========================= */
+/* =================================
+   İYİ DOĞDUN PRENSESİM
+================================= */
 
 .birthdayText {
+
     position: absolute;
 
-    z-index: 15;
+    z-index: 40;
 
     left: 50%;
-    bottom: 3%;
 
-    width: 92%;
+    bottom: 1%;
+
+    width: 95%;
 
     transform:
-        translate(-50%, 20px)
-        scale(0.75);
+        translate(-50%, 30px)
+        scale(.7);
 
     opacity: 0;
 
     text-align: center;
 
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     font-weight: 900;
 
     font-size:
-        clamp(22px, 5vw, 46px);
+        clamp(25px, 5vw, 62px);
 
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 
-    color: #ffd86b;
+    color:
+        #ffd65c;
 
     text-shadow:
 
-        0 2px #8d5000,
+        0 2px 0 #8a4d00,
 
-        0 4px 9px
-        rgba(0, 0, 0, 0.55),
+        0 4px 10px
+        rgba(0,0,0,.7),
 
-        0 0 14px
-        rgba(255, 211, 77, 0.9);
+        0 0 12px
+        #ffd65c,
+
+        0 0 28px
+        rgba(255,190,40,.8);
 }
 
 
 .birthdayText.show {
+
     animation:
         birthdayReveal
-        0.9s
+        1s
+        cubic-bezier(.2,.9,.25,1.2)
         forwards;
 }
 
 
-/* =========================
+/* =================================
    KONFETİ
-========================= */
+================================= */
 
 .confettiLayer {
+
     position: fixed;
 
     inset: 0;
@@ -570,12 +747,14 @@ body {
 
 
 .confetti {
+
     position: absolute;
 
-    top: -25px;
+    top: -30px;
 
-    width: 9px;
-    height: 17px;
+    width: 10px;
+
+    height: 18px;
 
     border-radius: 2px;
 
@@ -587,9 +766,9 @@ body {
 }
 
 
-/* =========================
+/* =================================
    ANİMASYONLAR
-========================= */
+================================= */
 
 @keyframes cakeFloat {
 
@@ -601,7 +780,7 @@ body {
 
     50% {
         transform:
-            translateY(-9px);
+            translateY(-10px);
     }
 }
 
@@ -611,14 +790,14 @@ body {
     from {
         transform:
             translateX(-50%)
-            scale(0.85)
+            scale(.85)
             rotate(-5deg);
     }
 
     to {
         transform:
             translateX(-50%)
-            scale(1.1)
+            scale(1.15)
             rotate(5deg);
     }
 }
@@ -629,13 +808,17 @@ body {
     from {
         transform:
             translateX(-50%)
-            scale(0.75);
+            scale(.7);
+
+        opacity: .7;
     }
 
     to {
         transform:
             translateX(-50%)
-            scale(1.3);
+            scale(1.35);
+
+        opacity: 1;
     }
 }
 
@@ -643,26 +826,29 @@ body {
 @keyframes birthdayReveal {
 
     0% {
+
         opacity: 0;
 
         transform:
-            translate(-50%, 20px)
-            scale(0.75);
+            translate(-50%,30px)
+            scale(.7);
     }
 
-    70% {
+    65% {
+
         opacity: 1;
 
         transform:
-            translate(-50%, -4px)
+            translate(-50%,-5px)
             scale(1.08);
     }
 
     100% {
+
         opacity: 1;
 
         transform:
-            translate(-50%, 0)
+            translate(-50%,0)
             scale(1);
     }
 }
@@ -671,83 +857,148 @@ body {
 @keyframes confettiFall {
 
     0% {
+
         transform:
-            translate(0, -30px)
+            translate(0,-30px)
             rotate(0deg);
 
         opacity: 1;
     }
 
     100% {
+
         transform:
-            translate(var(--drift), 110vh)
+            translate(
+                var(--drift),
+                110vh
+            )
             rotate(var(--spin));
 
-        opacity: 0.95;
+        opacity: .95;
     }
 }
 
 
-/* =========================
+/* =================================
    TELEFON
-========================= */
+================================= */
 
 @media (max-width: 600px) {
 
     .closeButton {
-        top: 8px;
+
+        top: 9px;
         right: 9px;
 
-        width: 42px;
-        height: 42px;
+        width: 43px;
+        height: 43px;
 
         font-size: 32px;
     }
 
 
     .instruction {
-        margin-top: 30px;
 
-        max-width: 88vw;
+        top: 24px;
+
+        width: 82vw;
 
         padding:
-            11px 17px;
+            11px 15px;
+
+        font-size: 18px;
+    }
+
+
+    .clickCounter {
+
+        top: 91px;
+
+        font-size: 16px;
+
+        padding:
+            6px 22px;
     }
 
 
     .cakeArea {
-        width: 97vw;
+
+        top: 57%;
+
+        width: 100vw;
+
+        height: 76vh;
+    }
+
+
+    .cakeImage {
+
+        width: 98vw;
+
+        max-height: 70vh;
+
+        border-radius: 12px;
+    }
+
+
+    .candles {
+
+        top: 21%;
+
+        width: 43%;
     }
 
 
     .candle {
+
         width: 11px;
-        height: 49px;
+
+        height: 47px;
     }
 
 
     .candle2,
     .candle4 {
-        height: 54px;
+
+        height: 53px;
     }
 
 
     .candle3 {
-        height: 62px;
+
+        height: 60px;
     }
 
 
     .flame {
+
         width: 13px;
+
         height: 23px;
 
         top: -23px;
     }
 
 
+    .sparkler {
+
+        top: 18%;
+
+        right: 14%;
+
+        transform:
+            scale(.75);
+    }
+
+
     .birthdayText {
+
+        bottom: 2%;
+
+        width: 98%;
+
         font-size:
-            clamp(19px, 6vw, 30px);
+            clamp(20px, 6vw, 34px);
 
         letter-spacing: 1px;
     }

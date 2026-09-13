@@ -12,19 +12,30 @@ const confettiLayer = document.getElementById("confettiLayer");
    PASTAYA TIKLAMA
 ========================= */
 
-cakeArea.addEventListener("click", function () {
+document.addEventListener("click", function (event) {
 
     if (celebrationStarted) {
         return;
     }
 
+    /*
+       Sadece pasta alanına tıklanırsa
+       işlem yap.
+    */
+
+    if (!cakeArea || !cakeArea.contains(event.target)) {
+        return;
+    }
+
+
     clickCount++;
+
 
     clickCounter.textContent =
         clickCount + " / 3";
 
 
-    /* Küçük tıklama efekti */
+    /* Küçük tıklama animasyonu */
 
     cakeArea.animate(
         [
@@ -32,15 +43,18 @@ cakeArea.addEventListener("click", function () {
                 transform:
                     "translate(-50%, -50%) scale(1)"
             },
+
             {
                 transform:
                     "translate(-50%, -50%) scale(1.04)"
             },
+
             {
                 transform:
                     "translate(-50%, -50%) scale(1)"
             }
         ],
+
         {
             duration: 180,
             easing: "ease-out"
@@ -48,9 +62,11 @@ cakeArea.addEventListener("click", function () {
     );
 
 
-    /* 3. tıklama */
+    /* =========================
+       3. TIKLAMA
+    ========================= */
 
-    if (clickCount === 3) {
+    if (clickCount >= 3) {
 
         celebrationStarted = true;
 
@@ -67,30 +83,39 @@ cakeArea.addEventListener("click", function () {
 
 function startCelebration() {
 
-    /* Üst yazıyı değiştir */
+    /*
+       Üstteki yazıyı değiştir
+    */
 
     instruction.innerHTML =
         "🎉 <strong>İYİ Kİ DOĞDUN PRENSESİM!</strong> 🎉";
 
 
-    /* Sayaç gizle */
+    /*
+       Sayaç gizle
+    */
 
-    clickCounter.style.display = "none";
+    clickCounter.style.display =
+        "none";
 
 
-    /* ANINDA KONFETİ */
+    /*
+       KONFETİ
+    */
 
     createConfetti(220);
 
 
-    /* KONFETİ SESİ */
+    /*
+       PASTA MÜZİĞİ
+    */
 
-    playConfettiSound();
+    playCakeMusic();
 
 
     /*
        Konfeti devam ederken
-       doğum günü yazısı gelsin.
+       altın yazı ortaya çıksın.
     */
 
     setTimeout(function () {
@@ -132,31 +157,43 @@ function createConfetti(amount) {
             "confetti";
 
 
-        /* Rastgele başlangıç noktası */
+        /*
+           Rastgele başlangıç noktası
+        */
 
         piece.style.left =
             Math.random() * 100 + "%";
 
 
-        /* Rastgele renk */
+        /*
+           Rastgele renk
+        */
 
         piece.style.background =
             colors[
                 Math.floor(
-                    Math.random() * colors.length
+                    Math.random() *
+                    colors.length
                 )
             ];
 
 
-        /* Sağa / sola savrulma */
+        /*
+           Sağa / sola savrulma
+        */
 
         piece.style.setProperty(
             "--drift",
-            ((Math.random() - 0.5) * 280) + "px"
+            (
+                (Math.random() - 0.5) *
+                280
+            ) + "px"
         );
 
 
-        /* Dönme */
+        /*
+           Dönme miktarı
+        */
 
         piece.style.setProperty(
             "--spin",
@@ -167,24 +204,30 @@ function createConfetti(amount) {
         );
 
 
-        /* Düşme süresi */
+        /*
+           Düşme süresi
+        */
 
         piece.style.animationDuration =
             (2.5 + Math.random()) + "s";
 
 
-        /* Hafif gecikme */
+        /*
+           Hafif başlangıç gecikmesi
+        */
 
         piece.style.animationDelay =
             Math.random() * 0.45 + "s";
 
 
-        confettiLayer.appendChild(piece);
+        confettiLayer.appendChild(
+            piece
+        );
 
 
         /*
            Animasyon bittikten sonra
-           parçayı DOM'dan kaldır.
+           parçayı temizle.
         */
 
         setTimeout(function () {
@@ -199,10 +242,31 @@ function createConfetti(amount) {
 
 
 /* =========================
-   KONFETİ SESİ
+   PASTA MÜZİĞİ
 ========================= */
 
-function playCakeMusic();
+function playCakeMusic() {
+
+    const music =
+        new Audio(
+            "ses/pasta-muzik.mp3"
+        );
+
+
+    music.volume = 1.0;
+
+
+    music.play().catch(function (error) {
+
+        console.log(
+            "Pasta müziği başlatılamadı:",
+            error
+        );
+
+    });
+
+}
+
 
 /* =========================
    ANA SAYFAYA DÖN
@@ -212,27 +276,5 @@ function goHome() {
 
     location.href =
         "home.html";
-
-}
-/* =========================
-   PASTA MÜZİĞİ
-========================= */
-
-function playCakeMusic() {
-
-    const music = new Audio(
-        "ses/pasta-muzik.mp3"
-    );
-
-    music.volume = 1.0;
-
-    music.play().catch(function(error) {
-
-        console.log(
-            "Pasta müziği başlatılamadı:",
-            error
-        );
-
-    });
 
 }

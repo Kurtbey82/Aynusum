@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>İyi Doğdun Prensesim ❤️</title>
+
+    <link rel="stylesheet" href="pasta.css">
+</head>
+
+<body>
+
+    <!-- Sağ üst kapatma butonu -->
+    <button class="closeButton" onclick="goHome()">×</button>
+
+
+    <!-- PASTA SAYFASI -->
+    <main class="cakePage">
+
+        <!-- Üst yazı -->
+        <div class="instruction" id="instruction">
+            Pastanın üzerine <strong>3 kez tıkla</strong> 🎂
+        </div>
+
+        <!-- Tıklama sayacı -->
+        <div class="clickCounter" id="clickCounter">
+            0 / 3
+        </div>
+
+
+        <!-- PASTA -->
+        <div class="cakeArea" id="cakeArea">
+
+            <div class="cakeGlow"></div>
+
+            <!-- img klasöründeki pasta fotoğrafı -->
+            <img
+                src="img/pasta.jpg"
+                class="cakeImage"
+                alt="Doğum günü pastası"
+            >
+
+
+            <!-- MUMlar -->
+            <div class="candles">
+
+                <div class="candle candle1">
+                    <span class="flame"></span>
+                </div>
+
+                <div class="candle candle2">
+                    <span class="flame"></span>
+                </div>
+
+                <div class="candle candle3">
+                    <span class="flame"></span>
+                </div>
+
+                <div class="candle candle4">
+                    <span class="flame"></span>
+                </div>
+
+                <div class="candle candle5">
+                    <span class="flame"></span>
+                </div>
+
+            </div>
+
+
+            <!-- PASTA VOLKANI / MAYTAB -->
+            <div class="sparkler">
+
+                <div class="sparklerCore"></div>
+
+                <div class="sparklerSpark s1"></div>
+                <div class="sparklerSpark s2"></div>
+                <div class="sparklerSpark s3"></div>
+                <div class="sparklerSpark s4"></div>
+                <div class="sparklerSpark s5"></div>
+                <div class="sparklerSpark s6"></div>
+
+            </div>
+
+
+            <!-- Doğum günü yazısı -->
+            <div class="birthdayText" id="birthdayText">
+                İYİ DOĞDUN PRENSESİM
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- KONFETİLER -->
+    <div
+        class="confettiLayer"
+        id="confettiLayer">
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="pasta.js"></script>
+
+</body>
+
+</html>

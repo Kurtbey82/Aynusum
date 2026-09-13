@@ -28,7 +28,7 @@ function login(){
 
         frame.style.display="block";
 
-        frame.src="home.html";
+        frame.src="pasta.html";
 
     }else{
 

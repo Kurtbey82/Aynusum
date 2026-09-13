@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İyi ki Doğdun Prensesim ❤️</title>
+
+    <title>İyi Ki Doğdun Prensesim ❤️</title>
 
     <link rel="stylesheet" href="pasta.css">
 </head>
 
 <body>
 
-    <!-- Kapat -->
+    <!-- Kapatma butonu -->
     <button class="closeButton" onclick="goHome()">×</button>
 
-    <!-- Üst başlık -->
+
+    <!-- Üst yazı -->
     <div class="instruction" id="instruction">
         🎂 Pastanın üzerine <strong>3 kez tıkla</strong> 🎂
     </div>
@@ -23,106 +26,95 @@
     </div>
 
 
-    <!-- PASTA -->
+    <!-- PASTA ALANI -->
     <div class="cakeArea" id="cakeArea">
 
-        <!-- Pasta -->
-        <div class="cake">
+        <!-- GERÇEK PASTA FOTOĞRAFI -->
+        <img
+            src="img/pasta.jpg"
+            class="realCake"
+            alt="Doğum günü pastası"
+        >
 
-            <!-- Pasta üstü -->
-            <div class="cakeTop">
 
-                <!-- Aynur'un fotoğrafı -->
-                <div class="photoOnCake">
-                    <img src="img/aynur-pasta.jpg" alt="Aynur">
-                </div>
+        <!-- AYNUR'UN FOTOĞRAFI -->
+        <div class="photoOnCake">
 
-                <!-- Güller -->
-                <div class="rose rose1">🌹</div>
-                <div class="rose rose2">🌹</div>
-                <div class="rose rose3">🌹</div>
+            <img
+                src="img/aynur-pasta.jpg"
+                alt="Aynur"
+            >
 
-                <!-- Kalpler -->
-                <div class="heart heart1">❤️</div>
-                <div class="heart heart2">❤️</div>
-                <div class="heart heart3">❤️</div>
+        </div>
 
-                <!-- Mumlar -->
-                <div class="candle candle1">
-                    <span class="flame"></span>
-                </div>
 
-                <div class="candle candle2">
-                    <span class="flame"></span>
-                </div>
+        <!-- MUMLAR -->
 
-                <div class="candle candle3">
-                    <span class="flame"></span>
-                </div>
+        <div class="candle candle1">
+            <span class="flame"></span>
+        </div>
 
-                <div class="candle candle4">
-                    <span class="flame"></span>
-                </div>
+        <div class="candle candle2">
+            <span class="flame"></span>
+        </div>
 
-                <div class="candle candle5">
-                    <span class="flame"></span>
-                </div>
+        <div class="candle candle3">
+            <span class="flame"></span>
+        </div>
 
-                <!-- Maytap -->
-                <div class="sparkler">
-                    <div class="sparklerCore"></div>
+        <div class="candle candle4">
+            <span class="flame"></span>
+        </div>
 
-                    <span class="spark s1"></span>
-                    <span class="spark s2"></span>
-                    <span class="spark s3"></span>
-                    <span class="spark s4"></span>
-                    <span class="spark s5"></span>
-                    <span class="spark s6"></span>
-                    <span class="spark s7"></span>
-                    <span class="spark s8"></span>
-                </div>
+        <div class="candle candle5">
+            <span class="flame"></span>
+        </div>
 
-            </div>
 
-            <!-- Pasta gövdesi -->
-            <div class="cakeBody">
+        <!-- MAYTAP -->
 
-                <div class="cakeDecoration">
-                    ❤️ &nbsp; ❤️ &nbsp; ❤️ &nbsp; ❤️ &nbsp; ❤️
-                </div>
+        <div class="sparkler">
 
-                <div class="cakeMessage">
-                    İyi ki doğdun<br>
-                    <span>Aynur ❤️</span>
-                </div>
+            <div class="sparklerCore"></div>
 
-            </div>
-
-            <!-- Pasta alt süsü -->
-            <div class="cakeBottom">
-                👑
-            </div>
+            <span class="spark s1"></span>
+            <span class="spark s2"></span>
+            <span class="spark s3"></span>
+            <span class="spark s4"></span>
+            <span class="spark s5"></span>
+            <span class="spark s6"></span>
+            <span class="spark s7"></span>
+            <span class="spark s8"></span>
 
         </div>
 
     </div>
 
 
-    <!-- Kutlama yazısı -->
-    <div class="birthdayText" id="birthdayText">
+    <!-- DOĞUM GÜNÜ YAZISI -->
+
+    <div
+        class="birthdayText"
+        id="birthdayText"
+    >
         👑
         <br>
+
         İYİ DOĞDUN PRENSESİM
+
         <br>
-        <span>❤️</span>
+
+        ❤️
     </div>
 
 
-    <!-- Konfeti -->
+    <!-- KONFETİ -->
+
     <div id="confettiLayer"></div>
 
 
     <script src="pasta.js"></script>
 
 </body>
+
 </html>

@@ -14,64 +14,45 @@ const confettiLayer = document.getElementById("confettiLayer");
 
 document.addEventListener("click", function (event) {
 
-    if (celebrationStarted) {
-        return;
-    }
-
-    /*
-       Sadece pasta alanına tıklanırsa
-       işlem yap.
-    */
+    if (celebrationStarted) return;
 
     if (!cakeArea || !cakeArea.contains(event.target)) {
         return;
     }
 
-
     clickCount++;
 
-
-    clickCounter.textContent =
-        clickCount + " / 3";
+    clickCounter.textContent = clickCount + " / 3";
 
 
-    /* Küçük tıklama animasyonu */
+    /* Tıklama animasyonu */
 
     cakeArea.animate(
         [
             {
-                transform:
-                    "translate(-50%, -50%) scale(1)"
+                transform: "scale(1)"
             },
-
             {
-                transform:
-                    "translate(-50%, -50%) scale(1.04)"
+                transform: "scale(1.04)"
             },
-
             {
-                transform:
-                    "translate(-50%, -50%) scale(1)"
+                transform: "scale(1)"
             }
         ],
-
         {
-            duration: 180,
+            duration: 220,
             easing: "ease-out"
         }
     );
 
 
-    /* =========================
-       3. TIKLAMA
-    ========================= */
+    /* 3. tıklama */
 
     if (clickCount >= 3) {
 
         celebrationStarted = true;
 
         startCelebration();
-
     }
 
 });
@@ -83,40 +64,23 @@ document.addEventListener("click", function (event) {
 
 function startCelebration() {
 
-    /*
-       Üstteki yazıyı değiştir
-    */
-
     instruction.innerHTML =
         "🎉 <strong>İYİ Kİ DOĞDUN PRENSESİM!</strong> 🎉";
 
-
-    /*
-       Sayaç gizle
-    */
-
-    clickCounter.style.display =
-        "none";
+    clickCounter.style.display = "none";
 
 
-    /*
-       KONFETİ
-    */
+    /* Konfeti */
 
-    createConfetti(220);
+    createConfetti(250);
 
 
-    /*
-       PASTA MÜZİĞİ
-    */
+    /* Pasta müziği */
 
     playCakeMusic();
 
 
-    /*
-       Konfeti devam ederken
-       altın yazı ortaya çıksın.
-    */
+    /* Yazı */
 
     setTimeout(function () {
 
@@ -128,113 +92,66 @@ function startCelebration() {
 
 
 /* =========================
-   KONFETİ OLUŞTUR
+   KONFETİ
 ========================= */
 
 function createConfetti(amount) {
 
     const colors = [
-
-        "#ffd700",
-        "#ff4f81",
+        "#ff4fa3",
+        "#ffd84d",
         "#ffffff",
-        "#7b61ff",
-        "#42d9a3",
-        "#ff8a00",
-        "#58a6ff",
-        "#f3c4ff"
-
+        "#ff75c8",
+        "#c86cff",
+        "#ff9f43"
     ];
 
 
     for (let i = 0; i < amount; i++) {
 
-        const piece =
-            document.createElement("span");
+        const confetti = document.createElement("div");
+
+        confetti.className = "confetti";
 
 
-        piece.className =
-            "confetti";
-
-
-        /*
-           Rastgele başlangıç noktası
-        */
-
-        piece.style.left =
+        confetti.style.left =
             Math.random() * 100 + "%";
 
 
-        /*
-           Rastgele renk
-        */
-
-        piece.style.background =
+        confetti.style.background =
             colors[
-                Math.floor(
-                    Math.random() *
-                    colors.length
-                )
+                Math.floor(Math.random() * colors.length)
             ];
 
 
-        /*
-           Sağa / sola savrulma
-        */
-
-        piece.style.setProperty(
+        confetti.style.setProperty(
             "--drift",
-            (
-                (Math.random() - 0.5) *
-                280
-            ) + "px"
+            (Math.random() * 300 - 150) + "px"
         );
 
 
-        /*
-           Dönme miktarı
-        */
-
-        piece.style.setProperty(
+        confetti.style.setProperty(
             "--spin",
-            (
-                (Math.random() > 0.5 ? 1 : -1) *
-                (360 + Math.random() * 1080)
-            ) + "deg"
+            (Math.random() * 1440 - 720) + "deg"
         );
 
 
-        /*
-           Düşme süresi
-        */
-
-        piece.style.animationDuration =
-            (2.5 + Math.random()) + "s";
+        confetti.style.animationDuration =
+            (2.5 + Math.random() * 1.5) + "s";
 
 
-        /*
-           Hafif başlangıç gecikmesi
-        */
-
-        piece.style.animationDelay =
+        confetti.style.animationDelay =
             Math.random() * 0.45 + "s";
 
 
-        confettiLayer.appendChild(
-            piece
-        );
+        confettiLayer.appendChild(confetti);
 
-
-        /*
-           Animasyon bittikten sonra
-           parçayı temizle.
-        */
 
         setTimeout(function () {
 
-            piece.remove();
+            confetti.remove();
 
-        }, 4000);
+        }, 4500);
 
     }
 
@@ -248,13 +165,9 @@ function createConfetti(amount) {
 function playCakeMusic() {
 
     const music =
-        new Audio(
-            "ses/pasta-muzik.mp3"
-        );
-
+        new Audio("ses/pasta-muzik.mp3");
 
     music.volume = 1.0;
-
 
     music.play().catch(function (error) {
 
@@ -274,7 +187,6 @@ function playCakeMusic() {
 
 function goHome() {
 
-    location.href =
-        "home.html";
+    location.href = "home.html";
 
 }

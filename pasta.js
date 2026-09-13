@@ -214,3 +214,25 @@ function goHome() {
         "home.html";
 
 }
+/* =========================
+   PASTA MÜZİĞİ
+========================= */
+
+function playCakeMusic() {
+
+    const music = new Audio(
+        "ses/pasta-muzik.mp3"
+    );
+
+    music.volume = 1.0;
+
+    music.play().catch(function(error) {
+
+        console.log(
+            "Pasta müziği başlatılamadı:",
+            error
+        );
+
+    });
+
+}

@@ -1,0 +1,754 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #ffdbea 0%,
+            #d889b2 45%,
+            #542044 100%
+        );
+
+    color: white;
+}
+
+
+/* =========================
+   KAPATMA BUTONU
+========================= */
+
+.closeButton {
+    position: fixed;
+
+    top: 12px;
+    right: 15px;
+
+    width: 48px;
+    height: 48px;
+
+    z-index: 1000;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(70, 20, 60, 0.5);
+
+    color: white;
+
+    font-size: 38px;
+    line-height: 42px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.25);
+
+    transition: 0.2s;
+}
+
+.closeButton:hover {
+    transform: scale(1.1);
+
+    background:
+        rgba(70, 20, 60, 0.75);
+}
+
+
+/* =========================
+   ANA SAYFA
+========================= */
+
+.cakePage {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+/* =========================
+   ÜST TALİMAT
+========================= */
+
+.instruction {
+    position: relative;
+
+    z-index: 20;
+
+    margin-top: 5vh;
+
+    padding: 14px 25px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(80, 22, 68, 0.5);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.25);
+
+    box-shadow:
+        0 8px 30px rgba(50, 10, 40, 0.3);
+
+    font-size:
+        clamp(18px, 3vw, 29px);
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.instruction strong {
+    color: #ffe39a;
+}
+
+
+/* =========================
+   TIKLAMA SAYACI
+========================= */
+
+.clickCounter {
+    position: absolute;
+
+    top: calc(5vh + 65px);
+
+    z-index: 20;
+
+    font-size: 14px;
+
+    opacity: 0.8;
+}
+
+
+/* =========================
+   PASTA ALANI
+========================= */
+
+.cakeArea {
+    position: absolute;
+
+    left: 50%;
+    top: 55%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width:
+        min(90vw, 700px);
+
+    height:
+        min(68vh, 600px);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    outline: none;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
+/* =========================
+   PASTA GLOW
+========================= */
+
+.cakeGlow {
+    position: absolute;
+
+    width: 70%;
+    height: 55%;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 215, 235, 0.65);
+
+    filter: blur(45px);
+
+    opacity: 0.8;
+}
+
+
+/* =========================
+   PASTA FOTOĞRAFI
+========================= */
+
+.cakeImage {
+    position: relative;
+
+    z-index: 3;
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 58vh;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 25px 22px
+            rgba(50, 10, 35, 0.4)
+        );
+
+    animation:
+        cakeFloat 3.5s ease-in-out infinite;
+}
+
+
+/* =========================
+   MUMlar
+========================= */
+
+.candles {
+    position: absolute;
+
+    z-index: 7;
+
+    top: 7%;
+    left: 50%;
+
+    width: 48%;
+    height: 24%;
+
+    transform:
+        translateX(-50%);
+
+    pointer-events: none;
+}
+
+
+.candle {
+    position: absolute;
+
+    bottom: 10%;
+
+    width: 17px;
+    height: 72px;
+
+    border-radius:
+        8px 8px 4px 4px;
+
+    background:
+        repeating-linear-gradient(
+            -25deg,
+
+            white 0 9px,
+
+            #d99a42 9px 16px
+        );
+
+    box-shadow:
+
+        inset 3px 0 4px
+        rgba(255, 255, 255, 0.7),
+
+        inset -4px 0 5px
+        rgba(100, 40, 10, 0.25),
+
+        0 4px 7px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.candle::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: -8px;
+
+    width: 2px;
+    height: 10px;
+
+    transform:
+        translateX(-50%);
+
+    background: #333;
+}
+
+
+.candle1 {
+    left: 3%;
+
+    transform:
+        rotate(-8deg);
+}
+
+.candle2 {
+    left: 23%;
+
+    height: 78px;
+}
+
+.candle3 {
+    left: 43%;
+
+    height: 88px;
+}
+
+.candle4 {
+    left: 63%;
+
+    height: 78px;
+}
+
+.candle5 {
+    left: 83%;
+
+    transform:
+        rotate(8deg);
+}
+
+
+/* =========================
+   MUM ALEVİ
+========================= */
+
+.flame {
+    position: absolute;
+
+    left: 50%;
+    top: -30px;
+
+    width: 18px;
+    height: 30px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        55% 45% 55% 45%;
+
+    background:
+        radial-gradient(
+            circle at 50% 70%,
+
+            white 0 20%,
+
+            #ffd23d 40%,
+
+            #ff8200 72%,
+
+            transparent 74%
+        );
+
+    filter:
+        drop-shadow(
+            0 0 8px #ffd34e
+        );
+
+    animation:
+        flame 0.6s ease-in-out
+        infinite alternate;
+}
+
+
+/* =========================
+   MAYTAB / VOLKAN
+========================= */
+
+.sparkler {
+    position: absolute;
+
+    z-index: 8;
+
+    top: 6%;
+    right: 15%;
+
+    width: 40px;
+    height: 100px;
+
+    pointer-events: none;
+}
+
+
+.sparklerCore {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 7px;
+    height: 65px;
+
+    transform:
+        translateX(-50%)
+        rotate(12deg);
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            #777,
+            #ddd,
+            #555
+        );
+}
+
+
+.sparkler::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 8px;
+
+    width: 18px;
+    height: 18px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background: #fff4a0;
+
+    box-shadow:
+        0 0 10px white,
+        0 0 25px #ffae00;
+
+    animation:
+        sparkGlow 0.45s
+        alternate infinite;
+}
+
+
+.sparklerSpark {
+    position: absolute;
+
+    left: 50%;
+    top: 15px;
+
+    width: 3px;
+    height: 35px;
+
+    background:
+        linear-gradient(
+            white,
+            #ffc400,
+            transparent
+        );
+
+    transform-origin:
+        50% 0;
+}
+
+
+.s1 {
+    transform:
+        translateX(-50%)
+        rotate(0deg);
+}
+
+.s2 {
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+.s3 {
+    transform:
+        translateX(-50%)
+        rotate(90deg);
+}
+
+.s4 {
+    transform:
+        translateX(-50%)
+        rotate(135deg);
+}
+
+.s5 {
+    transform:
+        translateX(-50%)
+        rotate(-45deg);
+}
+
+.s6 {
+    transform:
+        translateX(-50%)
+        rotate(-90deg);
+}
+
+
+/* =========================
+   DOĞUM GÜNÜ YAZISI
+========================= */
+
+.birthdayText {
+    position: absolute;
+
+    z-index: 15;
+
+    left: 50%;
+    bottom: 3%;
+
+    width: 92%;
+
+    transform:
+        translate(-50%, 20px)
+        scale(0.75);
+
+    opacity: 0;
+
+    text-align: center;
+
+    font-weight: 900;
+
+    font-size:
+        clamp(22px, 5vw, 46px);
+
+    letter-spacing: 2px;
+
+    color: #ffd86b;
+
+    text-shadow:
+
+        0 2px #8d5000,
+
+        0 4px 9px
+        rgba(0, 0, 0, 0.55),
+
+        0 0 14px
+        rgba(255, 211, 77, 0.9);
+}
+
+
+.birthdayText.show {
+    animation:
+        birthdayReveal
+        0.9s
+        forwards;
+}
+
+
+/* =========================
+   KONFETİ
+========================= */
+
+.confettiLayer {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 500;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+
+.confetti {
+    position: absolute;
+
+    top: -25px;
+
+    width: 9px;
+    height: 17px;
+
+    border-radius: 2px;
+
+    animation:
+        confettiFall
+        3s
+        linear
+        forwards;
+}
+
+
+/* =========================
+   ANİMASYONLAR
+========================= */
+
+@keyframes cakeFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-9px);
+    }
+}
+
+
+@keyframes flame {
+
+    from {
+        transform:
+            translateX(-50%)
+            scale(0.85)
+            rotate(-5deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.1)
+            rotate(5deg);
+    }
+}
+
+
+@keyframes sparkGlow {
+
+    from {
+        transform:
+            translateX(-50%)
+            scale(0.75);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.3);
+    }
+}
+
+
+@keyframes birthdayReveal {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, 20px)
+            scale(0.75);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -4px)
+            scale(1.08);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, 0)
+            scale(1);
+    }
+}
+
+
+@keyframes confettiFall {
+
+    0% {
+        transform:
+            translate(0, -30px)
+            rotate(0deg);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(var(--drift), 110vh)
+            rotate(var(--spin));
+
+        opacity: 0.95;
+    }
+}
+
+
+/* =========================
+   TELEFON
+========================= */
+
+@media (max-width: 600px) {
+
+    .closeButton {
+        top: 8px;
+        right: 9px;
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 32px;
+    }
+
+
+    .instruction {
+        margin-top: 30px;
+
+        max-width: 88vw;
+
+        padding:
+            11px 17px;
+    }
+
+
+    .cakeArea {
+        width: 97vw;
+    }
+
+
+    .candle {
+        width: 11px;
+        height: 49px;
+    }
+
+
+    .candle2,
+    .candle4 {
+        height: 54px;
+    }
+
+
+    .candle3 {
+        height: 62px;
+    }
+
+
+    .flame {
+        width: 13px;
+        height: 23px;
+
+        top: -23px;
+    }
+
+
+    .birthdayText {
+        font-size:
+            clamp(19px, 6vw, 30px);
+
+        letter-spacing: 1px;
+    }
+}

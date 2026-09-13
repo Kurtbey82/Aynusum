@@ -103,41 +103,28 @@ function createBoard() {
 
 function setPieceImage(piece, pieceIndex) {
 
-    const row =
-        Math.floor(pieceIndex / COLS);
-
-    const col =
-        pieceIndex % COLS;
-
+    const row = Math.floor(pieceIndex / COLS);
+    const col = pieceIndex % COLS;
 
     piece.style.backgroundImage =
         'url("img/puzzle.jpg")';
 
-
     /*
-       Fotoğrafı 4 sütun × 6 satıra bölüyoruz.
+       Fotoğrafın tamamını 4 × 6 bölüyoruz.
     */
 
     piece.style.backgroundSize =
         `${COLS * 100}% ${ROWS * 100}%`;
 
-
     /*
-       Her parçanın doğru konumunu
-       yüzde olarak hesapla.
+       Parçanın fotoğraftaki gerçek konumu
     */
 
     const x =
-        COLS === 1
-        ? 0
-        : (col / (COLS - 1)) * 100;
-
+        (col / (COLS - 1)) * 100;
 
     const y =
-        ROWS === 1
-        ? 0
-        : (row / (ROWS - 1)) * 100;
-
+        (row / (ROWS - 1)) * 100;
 
     piece.style.backgroundPosition =
         `${x}% ${y}%`;

@@ -545,13 +545,18 @@ async function setupNotifications() {
 
         if (token) {
 
-            console.log("FCM TOKEN:");
-            console.log(token);
+    console.log("FCM TOKEN:");
+    console.log(token);
 
-            localStorage.setItem(
-                "fcmToken",
-                token
-            );
+    localStorage.setItem(
+        "fcmToken",
+        token
+    );
+
+    alert(
+        "FCM TOKEN:\n\n" +
+        token
+    );
 
         } else {
 

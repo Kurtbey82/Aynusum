@@ -18,19 +18,24 @@ function login(){
 
     const p = document.getElementById("password").value;
 
-    if(p === password){
+if(p === password){
 
-        sessionStorage.setItem("login","true");
+    sessionStorage.setItem("login","true");
 
-        document.getElementById("loginPage").style.display="none";
+    document.getElementById("loginPage").style.display="none";
 
-        const frame = document.getElementById("siteFrame");
+    const frame = document.getElementById("siteFrame");
 
-        frame.style.display="block";
+    frame.style.display="block";
 
-        frame.src = "home.html";
+    frame.src = "home.html";
 
-    }else{
+    // Bildirim izni ve FCM bağlantısı
+    if (typeof setupNotifications === "function") {
+        setupNotifications();
+    }
+
+     }else{
 
         const r = Math.floor(Math.random()*messages.length);
 
@@ -477,3 +482,92 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
 });
+// =====================
+// FIREBASE BİLDİRİMLERİ
+// =====================
+
+async function setupNotifications() {
+
+    try {
+
+        if (!("Notification" in window)) {
+            console.log("Bu tarayıcı bildirimleri desteklemiyor.");
+            return;
+        }
+
+        if (!("serviceWorker" in navigator)) {
+            console.log("Service Worker desteklenmiyor.");
+            return;
+        }
+
+        const { initializeApp } =
+            await import(
+                "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"
+            );
+
+        const { getMessaging, getToken } =
+            await import(
+                "https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging.js"
+            );
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBqJDZ--lgsPpoTC_YpK9Pq6kRUdQ8NTBs",
+            authDomain: "aynusum-db174.firebaseapp.com",
+            projectId: "aynusum-db174",
+            storageBucket: "aynusum-db174.firebasestorage.app",
+            messagingSenderId: "6069166136",
+            appId: "1:6069166136:web:adedbfe362c690c88b46cd",
+            measurementId: "G-NSB0ED77SS"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const messaging = getMessaging(app);
+
+        const permission =
+            await Notification.requestPermission();
+
+        if (permission !== "granted") {
+            console.log("Bildirim izni verilmedi.");
+            return;
+        }
+
+        const registration =
+            await navigator.serviceWorker.register(
+                "/Aynusum/firebase-messaging-sw.js"
+            );
+
+        const token = await getToken(messaging, {
+            vapidKey:
+                "BIfQJDbRN_N-hEqtRnppyPwHZgc5c71AQ0-JRnVNCegG_nf7L-M69aWb9YCq149ffMbEL5rwQcg6SCdDK6SMbQc",
+            serviceWorkerRegistration: registration
+        });
+
+        if (token) {
+
+            console.log("FCM TOKEN:");
+            console.log(token);
+
+            localStorage.setItem(
+                "fcmToken",
+                token
+            );
+
+        } else {
+
+            console.log(
+                "FCM token alınamadı."
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Bildirim sistemi hatası:",
+            error
+        );
+
+    }
+
+}
